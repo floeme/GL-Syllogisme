@@ -1,12 +1,11 @@
-import React from "react";
 import Navigation from "../elements/Navigation";
 
-const Syllogismes = () => {
+export const Syllogismes = () => {
   return (
     <div className="Syllogism">
       <Navigation />
       <div className="content">
-        {/* Todo */}
+        <h1>coucou etienne cest maman !</h1>
       </div>
     </div>
   );

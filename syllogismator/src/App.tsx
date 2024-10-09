@@ -1,6 +1,8 @@
 import './styles/pages/_home.scss'
-import { Home } from './components/pages/Home'
+import { Home } from './components/pages/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Syllogismes } from './components/pages/Syllogismes';
+import { Polysyllogismes } from './components/pages/Polysyllogismes';
 
 function App() {
   return (
@@ -12,11 +14,8 @@ function App() {
           {/* si c'est une url qui mene a rien cela ramene a la page home */}
           <Route path="*" element={<Home></Home>} />
 
-          {/* <Route path="/syllogismes" element={<Syllogismes></Syllogismes>} /> */}
-          {/* <Route */}
-            {/* path="/polysyllogismes" */}
-            {/* element={<Polysyllogismes></Polysyllogismes>} */}
-          {/* /> */}
+          <Route path="/syllogismes" element={<Syllogismes></Syllogismes>} />
+          <Route path="/polysyllogismes" element={<Polysyllogismes></Polysyllogismes>} />
         </Routes>
       </BrowserRouter>
    </div>

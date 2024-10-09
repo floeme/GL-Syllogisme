@@ -1,10 +1,10 @@
-import React from "react";
 import Navigation from "../elements/Navigation";
 
-const Polysyllogismes = () => {
+export const Polysyllogismes = () => {
   return (
     <div>
       <Navigation />
+      <h1>eerdfgyhujioklkjkgfytdesretdryguhijokl</h1>
     </div>
   );
 };
