@@ -34,7 +34,7 @@ Simple react snippets
 Reactjs code snippets
 Mithril Emmet
 
-Dans settings.json, rajouter:
+Dans settings.json, rajouter (ctrl + shift + P puis preference opensettings ):
 
 "emmet.includeLanguages":
 {
