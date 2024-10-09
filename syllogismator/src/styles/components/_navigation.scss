@@ -1,0 +1,71 @@
+@mixin verticalCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Ajout pour centrer également verticalement */
+  }
+  
+  .name {
+    font-family: $font-1;
+  }
+  
+  .container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 5vh;
+    padding: 0 10vw; 
+  }
+  
+  .navigation {
+    @include verticalCenter;
+    min-height: 10vh;
+  
+    ul {
+      display: flex;
+      margin: 0; 
+      padding: 0;
+      
+      a {
+        text-decoration: none;
+        padding: 10px;
+        font-size: 1.5rem;
+  
+        li {
+          color: $color-1;
+          transition: color 0.2s ease;
+          cursor: pointer;
+  
+          &:hover {
+            color: $color-2;
+          }
+        }
+      }
+  
+      .nav-active {
+        position: relative;
+  
+        &::after {
+          content: "";
+          height: 4px;
+          width: 0;
+          background: $color-1;
+          position: absolute;
+          border-radius: 10px;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          animation: anim 0.6s ease forwards;
+  
+          @keyframes anim {
+            to {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }

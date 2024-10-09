@@ -1,8 +1,5 @@
 import './App.css'
-import { Message } from './message'
-import { Todos } from './Todos'
-
-import {Home } from './components/pages/Homes'
+import { Home } from './components/pages/Home.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
