@@ -1,6 +1,6 @@
 import React from "react";
 
-const chooserLanguage = () => {
+export const chooserLanguage = () => {
   return (
     <div>
       <h1>LANGUE</h1>

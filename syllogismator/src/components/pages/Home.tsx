@@ -1,14 +1,13 @@
-import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
-import Navigation from "../components/Navigation";
-import SocrateBody from "../components/SocrateBody";
-import ButtonSyllogismes from "../components/ButtonSyllogismes";
-import Texte1 from "../components/Texte1";
-import Texte2 from "../components/Texte2";
+import Navigation from "../elements/Navigation";
+import SocrateBody from "../elements/SocrateBody";
+import ButtonSyllogismes from "../elements/ButtonSyllogismes";
+import Texte1 from "../elements/Texte1";
+import Texte2 from "../elements/Texte2";
 
-const Home = () => {
+export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const items = [<Texte1 />, <Texte2 />];

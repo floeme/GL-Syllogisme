@@ -1,6 +1,6 @@
 import React from "react";
 
-const SocrateBody = () => {
+export const SocrateBody = () => {
   return (
     <div className="socratebody">
       <img

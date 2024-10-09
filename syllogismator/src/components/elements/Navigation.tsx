@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import ChooserLanguage from "./ChooserLanguage";
 
-const Navigation = () => {
+export const Navigation = () => {
   return (
     <div className="container-nav">
       <h1 className="Name">Syllogismator</h1>

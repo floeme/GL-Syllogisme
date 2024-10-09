@@ -1,6 +1,6 @@
 import React from "react";
 
-const Texte1 = () => {
+export const Texte1 = () => {
   return (
     <div className="socratetext">
       <p className="explanation-text">
