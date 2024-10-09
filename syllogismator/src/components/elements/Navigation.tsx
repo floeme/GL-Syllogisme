@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import ChooserLanguage from "./ChooserLanguage";
 
@@ -13,7 +12,7 @@ export const Navigation = () => {
             to="/"
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
-            <li>accueil</li>
+            <li>Accueil</li>
           </NavLink>
           <NavLink
             to="/syllogismes"

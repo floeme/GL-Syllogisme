@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import Navigation from "../elements/Navigation";
 import SocrateBody from "../elements/SocrateBody";
 import ButtonSyllogismes from "../elements/ButtonSyllogismes";
 import Texte1 from "../elements/Texte1";
@@ -20,13 +19,12 @@ export const Home = () => {
 
     // intervalle de temps pour changer le texte. 1000 = 1s
     const intervalId = setInterval(changeItem, 15000);
-    //on clear quand on detruit le composant.
+    // on clear quand on detruit le composant.
     return () => clearInterval(intervalId);
   }, [items.length]);
 
   return (
     <div className="home">
-      <Navigation />
       <div className="content">
         <div className="left-section">
           <div className="title">

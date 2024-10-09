@@ -25,11 +25,14 @@
 /* Conteneur principal */
 .syllogism-container {
   display: grid;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  max-width: 50%;
+  flex: 1;
   grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
   grid-template-rows: auto auto;  /* Deux lignes auto-ajustables */
   gap: 20px; /* Espace entre les éléments */
-  max-width: 1200px;
-  max-height: 80px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -58,7 +61,7 @@
 }
 
 /* Partie 3 (à gauche, sur l'étage 2) */
-.section-conclusion {
+.section-figures {
   grid-column: 1 / 2; /* Colonne 1 */
   grid-row: 2 / 3;    /* Ligne 2 */
   border: 2px solid #2B7A78;

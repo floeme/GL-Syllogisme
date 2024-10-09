@@ -1,5 +1,3 @@
-import React from "react";
-
 export const SocrateBody = () => {
   return (
     <div className="socratebody">

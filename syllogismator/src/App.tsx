@@ -1,25 +1,19 @@
-import './styles/pages/_home.scss'
-import { Home } from './components/pages/Home';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Syllogismes } from './components/pages/Syllogismes';
-import { Polysyllogismes } from './components/pages/Polysyllogismes';
+import Navigation from './components/elements/Navigation';
+import './styles/pages/_app.scss'
 
-function App() {
+import { Outlet } from 'react-router-dom';
+
+const App = () => {
   return (
-   <div>
-    <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home></Home>} />
-
-          {/* si c'est une url qui mene a rien cela ramene a la page home */}
-          <Route path="*" element={<Home></Home>} />
-
-          <Route path="/syllogismes" element={<Syllogismes></Syllogismes>} />
-          <Route path="/polysyllogismes" element={<Polysyllogismes></Polysyllogismes>} />
-        </Routes>
-      </BrowserRouter>
-   </div>
-  )
-}
+    <div className="app-container">
+      <nav className="navbar">
+        <Navigation/>
+      </nav>
+      <div className="content">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
 
 export default App

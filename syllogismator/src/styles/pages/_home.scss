@@ -32,7 +32,7 @@ $color-5: #FEFFFF;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 100%; 
+    max-width: 100%;
     flex: 1;
 }
 
@@ -56,7 +56,7 @@ $color-5: #FEFFFF;
 }
 
 .socratetext {
-    text-align: center; 
+    text-align: center;
     color: $color-5;
 }
 
@@ -74,24 +74,24 @@ $color-5: #FEFFFF;
     }
 
     .color2 {
-        color: $color-5;  
+        color: $color-5;
     }
 
     .button {
-        padding: 15px 30px; 
-        border-radius: 30px; 
-        background-color: $color-2; 
-        color: white; 
-        font-size: 1.2rem; 
-        border: none; 
+        padding: 15px 30px;
+        border-radius: 30px;
+        background-color: $color-2;
+        color: white;
+        font-size: 1.2rem;
+        border: none;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-        transition: all 0.3s ease; 
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
 
         &:hover {
-            background-color: $color-3; 
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); 
-            transform: translateY(-5px); 
+            background-color: $color-3;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
         }
     }
 }
@@ -107,7 +107,7 @@ $color-5: #FEFFFF;
     }
     .right-section {
         width: 100%;
-        align-items: center; 
+        align-items: center;
     }
 
     .title {
