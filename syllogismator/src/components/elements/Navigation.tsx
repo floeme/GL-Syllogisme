@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import ChooserLanguage from "./ChooserLanguage";
 
 export const Navigation = () => {
+  const onChange = (chars: string) => {
+    console.log("Selected: "+chars);
+  };
   return (
     <div className="container-nav">
       <h1 className="Name">Syllogismator</h1>
@@ -29,7 +32,7 @@ export const Navigation = () => {
           </NavLink>
         </ul>
       </div>
-      <ChooserLanguage />
+      <ChooserLanguage callbackLang={onChange}/>
     </div>
   );
 };
