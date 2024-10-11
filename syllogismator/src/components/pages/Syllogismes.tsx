@@ -1,6 +1,6 @@
-import SyllogismTerms from "../elements/SyllogismTerms";
-import SyllogismPremises from "../elements/SyllogismPremises";
-import SyllogismFigures from "../elements/SyllogismFigures";
+import SyllogismTerms from "../elements/syllogism/SyllogismTerms";
+import SyllogismPremises from "../elements/syllogism/SyllogismPremises";
+import SyllogismFigures from "../elements/syllogism/SyllogismFigures";
 import { useState } from "react";
 
 export const Syllogismes = () => {

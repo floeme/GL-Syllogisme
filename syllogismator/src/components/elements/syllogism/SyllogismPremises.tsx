@@ -1,4 +1,4 @@
-import SyllogismMP from "../elements/SyllogismMP";
+import SyllogismMP from "./SyllogismMP";
 
 interface SyllogismPremisesProps {
     subject: string;
