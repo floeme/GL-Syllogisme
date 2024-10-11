@@ -9,7 +9,7 @@ export const Syllogismes = () => {
         <SyllogismTerms />
         <SyllogismFigures />
       </div>
-      <SyllogismPremises />
+        <SyllogismPremises />
     </div>
   );
 };

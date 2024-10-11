@@ -2,60 +2,68 @@ import SyllogismMP from "../elements/SyllogismMP";
 
 function SyllogismPremises() {
     const checkSyllogism = () => {
-        console.log("check")
+        console.log("check");
     };
 
     const clearSyllogism = () => {
-        console.log("clear")
+        console.log("clear");
     };
 
     const help = () => {
-        console.log("clear")
+        console.log("help");
     };
 
     const goSettings = () => {
-        console.log("goSettings")
+        console.log("goSettings");
     };
 
     return (
         <div className="section-premises">
-            {/* clear syllogism button */}
-            <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}>Clear</button>
+            <div className="button-row">
+                {/* clear syllogism button */}
+                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}>Clear</button>
 
-            {/* help button */}
-            <button type="button" name="helpButton" onClick={help}>Help</button>
+                {/* help button */}
+                <button type="button" name="helpButton" onClick={help}>Help</button>
 
-            {/* settings redirection */}
-            <button type="button" name="settingsButton" onClick={goSettings}>Settings</button>
+                {/* settings redirection */}
+                <button type="button" name="settingsButton" onClick={goSettings}>Settings</button>
+            </div>
 
-            <br/>
+            <div className="syllogism-grid">
+                {/* Proposition */}
+                    <div className="proposition">
+                        <label>Proposition</label>
+                    </div>
+                    <div className="syllogism-mp">
+                        <SyllogismMP />
+                    </div>
 
-            {/* label "Proposition" */}
-            <label>Proposition :</label>
-            <SyllogismMP />
+                {/* Proposition */}
+                    <div className="proposition">
+                        <label>Proposition</label>
+                    </div>
+                    <div className="syllogism-mp">
+                        <SyllogismMP />
+                    </div>
 
-            <br/>
+                {/* Conclusion */}
+                    <div className="proposition">
+                        <label>Conclusion</label>
+                    </div>
+                    <div className="syllogism-mp">
+                        <SyllogismMP />
+                    </div>
 
-            {/* label "Proposition" */}
-            <label>Premise :</label>
-            <SyllogismMP />
-
-            <br/>
-
-            {/* label "Conclusion" */}
-            <label>Conclusion :</label>
-            <SyllogismMP />
-
-            <br/>
-
-            {/* label "Existence hypothesis" */}
-            <label>Existence hypothesis</label>
-            {/* checkbox existence hypothesis */}
-            <input type="checkbox" name="existenceHypothesis" />
-            {/* check syllogism button */}
-            <button type="button" name="checkButton" onClick={checkSyllogism}>Check Syllogism</button>
+                {/* Existence Hypothesis and Check Button*/}
+                <div className="hypothesis">
+                    <label>Existence Hypothesis</label>
+                    <input type="checkbox" name="existenceHypothesis" />
+                    <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
-export default SyllogismPremises
+export default SyllogismPremises;

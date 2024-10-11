@@ -1,37 +1,18 @@
-import { useNavigate } from "react-router-dom";
-
 function SyllogismTerms() {
-    const navigate = useNavigate();
-
-    const goBack = () => {
-        console.log("goBack")
-        navigate("/polysyllogismes");
-    };
-
     return (
-        <div>
-            {/* back button */}
-            <button type="button" name="backButton" onClick={goBack}>Back</button>
-
-            <br/>
-
-            {/* label "subject" */}
+        <>
+            {/* SUBJECT */}
             <label>Subject :</label>
-            {/* input subject */}
-            <input type="text" name="SubjectTerm" />
+            <input type="text" name="SubjectTerm" placeholder="Enter a subject term" />
 
-            {/* label "predicate" */}
+            {/* PREDICATE */}
             <label>Predicate :</label>
-            {/* input predicate */}
-            <input type="text" name="predicateTerm" />
+            <input type="text" name="predicateTerm" placeholder="Enter a predicate term" />
 
-            <br/>
-
-            {/* label "medium" */}
+            {/* MEDIUM */}
             <label>Medium Term :</label>
-            {/* input medium */}
-            <input type="text" name="mediumTerm" />
-      </div>
+            <input type="text" name="mediumTerm" placeholder="Enter a medium term" />
+      </>
     )
 }
 

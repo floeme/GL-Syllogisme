@@ -1,19 +1,29 @@
 function SyllogismMP() {
     return (
-        <>
-            {/* Quantifier selecter */}
+        <div className="mp-container">
+            <div className="mp-proposition">
+                <div className="quantifier">
+                    <select>
+                        <option>All</option>
+                        <option>Some</option>
+                        <option>No</option>
+                    </select>
+                </div>
 
-            {/* Label avec le terme choisi automatiquement selon la figure */}
-            <label>Premier terme</label>
+                <div className="subject">
+                    <label>Humans</label>
+                </div>
 
-            {/* Label avec le verbe choisi automatiquement selon la figure */}
-            <label>Verbe</label>
+                <div className="verb">
+                    <label>are</label>
+                </div>
 
-            {/* Label avec le terme choisi automatiquement selon la figure */}
-            <label>Deuxième terme</label>
-
-        </>
-    )
+                <div className="predicate">
+                    <label>Mortal</label>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default SyllogismMP
+export default SyllogismMP;

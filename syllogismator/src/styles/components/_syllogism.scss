@@ -1,34 +1,10 @@
-// .Syllogism {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-//     height: 100vh;  
-//     background-color: #f0f0f0; 
-  
-//   .content {
-//     width: 100%;
-//     max-width: 800px; 
-//     padding: 20px;
-//     background-color: white; 
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-//     border-radius: 10px;
-//     text-align: center;
-//   }
-
-//   h1 {
-//     font-size: 2rem;
-//     margin-bottom: 1.5rem;
-//   }
-// }
-
 /* Conteneur principal */
 .syllogism-container {
   display: grid;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
-  max-width: 50%;
+  width: 60%;
+  max-width: 60%;
   flex: 1;
   grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
   grid-template-rows: auto auto;  /* Deux lignes auto-ajustables */
@@ -36,40 +12,184 @@
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
-}
 
-/* Partie 1 (à gauche sur l'étage 1) */
-.section-terms {
-  grid-column: 1 / 2; /* Colonne 1 */
-  grid-row: 1 / 2;    /* Ligne 1 */
-  border: 2px solid #2B7A78;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
+  /* Partie 1 (à gauche sur l'étage 1) */
+  .section-terms {
+    grid-column: 1 / 2; /* Colonne 1 */
+    grid-row: 1 / 2;    /* Ligne 1 */
+    border: 2px solid #2B7A78;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    margin-top: 20%;
+  }
 
-/* Partie 2 (à droite, occupe les deux étages) */
-.section-premises {
-  grid-column: 2 / 3; /* Colonne 2 */
-  grid-row: 1 / 3;    /* Occupe les lignes 1 et 2 */
-  border: 2px solid #2B7A78;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  display: flex;
-  flex-direction: column;
-}
+  /* Partie 2 (à droite, occupe les deux étages) */
+  // .section-premises {
+  //   grid-column: 2 / 3; /* Colonne 2 */
+  //   grid-row: 1 / 3;    /* Occupe les lignes 1 et 2 */
+  //   border: 2px solid #2B7A78;
+  //   border-radius: 10px;
+  //   padding: 20px;
+  //   background-color: #f5f5f5;
+  //   display: flex;
+  //   flex-direction: column;
+  //   margin-top: 20%;
+  // }
 
-/* Partie 3 (à gauche, sur l'étage 2) */
-.section-figures {
-  grid-column: 1 / 2; /* Colonne 1 */
-  grid-row: 2 / 3;    /* Ligne 2 */
-  border: 2px solid #2B7A78;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #e9f7f7;
-  text-align: center;
-  font-weight: bold;
+  .section-premises {
+    grid-column: 2 / 3; /* Colonne 2 */
+    grid-row: 1 / 3;    /* Occupe les lignes 1 et 2 */
+    border: 2px solid #2B7A78;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+
+      button {
+        padding: 10px;
+        border: 2px solid red;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+
+    .syllogism-grid {
+      border: 1px solid black;
+      display: grid;
+      grid-template-columns: 150px auto;
+      grid-gap: 20px;
+      align-items: center;
+
+      .proposition {
+        // border: 1px solid black;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .syllogism-mp {
+        // border: 2px solid magenta;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .mp-container {
+          // border: 1px solid black;
+          padding: 10px;
+          margin: 10px 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .mp-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+
+          .mp-proposition {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            .quantifier {
+              // border: 2px solid blue;
+              padding: 10px;
+              select {
+                  font-size: 16px;
+              }
+            }
+
+            .subject {
+              // border: 1px solid black;
+              padding: 10px;
+              margin: 0 5px;
+            }
+
+            .verb {
+              // border: 2px solid green;
+              padding: 10px;
+              margin: 0 5px;
+            }
+
+            .predicate {
+              // border: 1px solid black;
+              padding: 10px;
+              margin: 0 5px;
+            }
+          }
+        }
+      }
+
+      .hypothesis {
+        grid-column: 1 / 3; // Occupe toute la ligne
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid yellow;
+      }
+
+      button[name="checkButton"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid red;
+      }
+    }
+  }
+
+
+
+
+
+  /* Partie 3 (à gauche, sur l'étage 2) */
+  .section-figures {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 colonnes de largeur égale
+    grid-gap: 20px; // Espacement entre les figures
+
+    border: 2px solid #2B7A78;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #e9f7f7;
+    text-align: center;
+    font-weight: bold;
+
+    .figure {
+      display: flex;
+      flex-direction: column; // Les éléments sont empilés verticalement dans chaque figure
+      align-items: center;
+      position: relative; // Nécessaire pour positionner les boutons radio
+
+      label {
+        margin-bottom: 10px; // Espace sous le label
+      }
+
+      img {
+        width: 100px; // Taille fixe de l'image
+        height: auto;
+      }
+
+      input[type="radio"] {
+        position: absolute; // Position absolue pour placer les boutons radio
+        right: 0px; // Décalé à droite de l'image
+        transform: translateY(-100%);
+      }
+    }
+  }
 }
 
 /* Boutons et inputs */
