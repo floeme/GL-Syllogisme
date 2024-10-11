@@ -1,4 +1,4 @@
-import Navigation from './components/elements/Navigation';
+import Navigation from './components/elements/navigation/Navigation';
 import './styles/pages/_app.scss'
 
 import { Outlet } from 'react-router-dom';

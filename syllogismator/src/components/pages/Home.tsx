@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import SocrateBody from "../elements/SocrateBody";
-import ButtonSyllogismes from "../elements/ButtonSyllogismes";
-import Texte1 from "../elements/Texte1";
-import Texte2 from "../elements/Texte2";
+import SocrateBody from "../elements/home/SocrateBody";
+import ButtonSyllogismes from "../elements/home/ButtonSyllogismes";
+import Texte1 from "../elements/home/Texte1";
+import Texte2 from "../elements/home/Texte2";
 
 export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
