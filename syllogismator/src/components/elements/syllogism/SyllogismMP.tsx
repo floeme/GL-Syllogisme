@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface SyllogismMPProps {
     firstTerm: string;
@@ -8,9 +8,7 @@ interface SyllogismMPProps {
 function SyllogismMP({ firstTerm, secondTerm }: SyllogismMPProps) {
     const [verb, setVerb] = useState("")
 
-    const handleChange = (event: { target: { value: any; }; }) => {
-        const quantifier = event.target.value[0];
-
+    const handleChange = (quantifier: string) => {
         switch (quantifier) {
             case "A":
                 setVerb("are");
@@ -34,11 +32,12 @@ function SyllogismMP({ firstTerm, secondTerm }: SyllogismMPProps) {
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <select onChange={handleChange}>
-                        <option>A: All</option>
-                        <option>E: None</option>
-                        <option>I: Some</option>
-                        <option>O: Some Not</option>
+                    <select onChange={(e) => handleChange(e.target.value)}>
+                        <option value="">-- Select a quantifier --</option>
+                        <option value="A">A: All</option>
+                        <option value="E">E: None</option>
+                        <option value="I">I: Some</option>
+                        <option value="O">O: Some Not</option>
                     </select>
                 </div>
 

@@ -116,6 +116,8 @@
       grid-template-columns: 150px auto;
       grid-gap: 20px;
       align-items: center;
+      max-width: 90%;
+      width: 90%;
 
       .proposition {
         // border: 1px solid black;
