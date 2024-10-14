@@ -66,13 +66,13 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
         <div className="section-premises">
             <div className="button-row">
                 {/* clear syllogism button */}
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}>Clear</button>
+                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
 
                 {/* help button */}
-                <button type="button" name="helpButton" onClick={help}>Help</button>
+                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
 
                 {/* settings redirection */}
-                <button type="button" name="settingsButton" onClick={goSettings}>Settings</button>
+                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
             </div>
 
             <div className="syllogism-grid">

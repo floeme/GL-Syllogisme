@@ -6,28 +6,39 @@
   width: 100%;
   max-width: 100%;
   flex: 1;
-  grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
+  grid-template-columns: 1fr 2fr; /* Deux colonnes égales */
   grid-template-rows: auto auto;  /* Deux lignes auto-ajustables */
   //gap: 20px; /* Espace entre les éléments */
   margin: 0 auto;
-  //padding: 20px;
+  //padding: 20px;"
   font-family: Arial, sans-serif;
   height: 100%;
 
   /* Partie 1 (à gauche sur l'étage 1) */
-  .section-terms {
+  .section-terms-figures {
     grid-column: 1 / 2; /* Colonne 1 */
     grid-row: 1 / 2;    /* Ligne 1 */
-    border: 2px solid #2B7A78;
+    //border: 2px solid #2B7A78;
     border-radius: 10px;
     padding: 20px;
-    background-color: #f5f5f5;
+    //background-color: #f5f5f5;
     //margin-top: 20%;
     width: 100%;
     height: 100%;
-    
-    .section-terms-input {
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0.2, 0.2, 0.2, 0.2);
 
+    .section-terms-input {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); // 2 colonnes de largeur égale
+      grid-gap: 20px; // Espacement entre les figures
+    
+      border: 2px solid #2B7A78;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #e9f7f7;
+      text-align: center;
+      font-weight: bold;
     }
 
     .section-figures{
@@ -81,10 +92,10 @@
   .section-premises {
     grid-column: 2 / 3; /* Colonne 2 */
     grid-row: 1 / 3;    /* Occupe les lignes 1 et 2 */
-    border: 2px solid #2B7A78;
+    //border: 2px solid #2B7A78;
     border-radius: 10px;
     //  padding: 20px;
-    background-color: #f5f5f5;
+    //background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
     //margin-top: 20%;
@@ -97,6 +108,9 @@
     width: 100%;
 
     .button-row {
+
+      box-sizing: border-box;
+      box-shadow: 0 2px 4px rgba(0.2, 0.2, 0.2, 0.2);
       display: flex;
       justify-content: center;
       gap: 20px;
@@ -104,7 +118,7 @@
 
       button {
         padding: 10px;
-        border: 2px solid red;
+        //border: 2px solid red;
         background-color: transparent;
         cursor: pointer;
       }
@@ -116,7 +130,13 @@
       grid-template-columns: 150px auto;
       grid-gap: 20px;
       align-items: center;
+      //background-color: #f5f5f5;
+      background-color: rgba(233, 247, 247, 1);
+      //border: 2px solid #2B7A78;
+      border-radius: 10px;
 
+      max-width: 90%;
+      width: 90%;
       .proposition {
         // border: 1px solid black;
         padding: 20px;
@@ -133,14 +153,14 @@
         .mp-container {
           // border: 1px solid black;
           padding: 10px;
-          margin: 10px 0;
+          //margin: 10px 0;
           display: flex;
           flex-direction: column;
           align-items: center;
 
           .mp-label {
             font-weight: bold;
-            margin-bottom: 10px;
+            //margin-bottom: 10px;
           }
 
           .mp-proposition {
@@ -219,7 +239,7 @@ label {
 input, select {
   padding: 8px;
   width: 100%;
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }

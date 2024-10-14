@@ -6,9 +6,9 @@ interface SyllogismTermsProps {
 
 function SyllogismTerms({ setSubject, setPredicate, setMiddle }: SyllogismTermsProps) {
     return (
-        <>
+        <div className="section-terms-input">
             {/* SUBJECT */}
-            <label>Subject :</label>
+            <label>Subject</label>
             <input type="text"
                 name="SubjectTerm"
                 placeholder="Enter a subject term"
@@ -16,7 +16,7 @@ function SyllogismTerms({ setSubject, setPredicate, setMiddle }: SyllogismTermsP
             />
 
             {/* PREDICATE */}
-            <label>Predicate :</label>
+            <label>Predicate</label>
             <input type="text"
                 name="predicateTerm"
                 placeholder="Enter a predicate term"
@@ -24,13 +24,13 @@ function SyllogismTerms({ setSubject, setPredicate, setMiddle }: SyllogismTermsP
             />
 
             {/* MIDDLE */}
-            <label>Middle Term :</label>
+            <label>Middle Term</label>
             <input type="text"
                 name="middleTerm"
                 placeholder="Enter a middle term"
                 onChange={(e) => setMiddle(e.target.value)}
             />
-      </>
+      </div>
     )
 }
 

@@ -11,7 +11,7 @@ export const Syllogismes = () => {
 
   return (
     <div className="syllogism-container">
-      <div className="section-terms">
+      <div className="section-terms-figures">
         <SyllogismTerms setSubject={setSubject} setPredicate={setPredicate} setMiddle={setMiddle} />
         <SyllogismFigures setFigure={setFigure} />
       </div>

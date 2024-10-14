@@ -1,7 +1,7 @@
 @mixin verticalCenter {
   display: flex;
   justify-content: center;
-  align-items: center; /* Ajout pour centrer également verticalement */
+  align-items: center;
 }
 
 .name {
