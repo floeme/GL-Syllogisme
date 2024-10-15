@@ -1,18 +1,27 @@
+import { useEffect, useState } from "react";
 import SyllogismMP from "./SyllogismMP";
 
 interface SyllogismPremisesProps {
     subject: string;
+    setSubject: (value: string) => void;
     predicate: string;
+    setPredicate: (value: string) => void;
     middle: string;
+    setMiddle: (value: string) => void;
     figure: string;
-  }
+    setFigure: (value: string) => void;
+}
 
-function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPremisesProps) {
+function SyllogismPremises({ subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure }: SyllogismPremisesProps) {
     const checkSyllogism = () => {
         console.log("check");
     };
 
     const clearSyllogism = () => {
+        setSubject("");
+        setPredicate("");
+        setMiddle("");
+        setFigure("");
         console.log("clear");
     };
 
@@ -62,6 +71,20 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
         }
     };
 
+    const [propositions, setPropositions] = useState([
+        renderSyllogismMP1(figure),
+        renderSyllogismMP2(figure),
+        renderSyllogismMP3(figure)
+    ]);
+
+    useEffect(() => {
+        setPropositions([
+            renderSyllogismMP1(figure),
+            renderSyllogismMP2(figure),
+            renderSyllogismMP3(figure)
+        ]);
+    }, [figure, subject, predicate, middle]);
+
     return (
         <div className="section-premises">
             <div className="button-row">
@@ -76,31 +99,23 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
             </div>
 
             <div className="syllogism-grid">
-                {/* Proposition 1 */}
-                <div className="proposition">
-                    <label>Proposition 1</label>
-                </div>
-                <div className="syllogism-mp">
-                    {renderSyllogismMP1(figure)}
-                </div>
+                {propositions.map((proposition, index) => (
+                    <div
+                        key={index}
+                    >
+                        <div
+                            className="proposition"
+                        >
+                            <label>Proposition {index + 1}</label>
+                        </div>
+                        <div
+                            className="syllogism-mp"
+                        >
+                            {proposition}
+                        </div>
+                    </div>
+                ))}
 
-                {/* Proposition 2 */}
-                <div className="proposition">
-                    <label>Proposition 2</label>
-                </div>
-                <div className="syllogism-mp">
-                    {renderSyllogismMP2(figure)}
-                </div>
-
-                {/* Conclusion */}
-                <div className="proposition">
-                    <label>Conclusion</label>
-                </div>
-                <div className="syllogism-mp">
-                    {renderSyllogismMP3(figure)}
-                </div>
-
-                {/* Existence Hypothesis and Check Button*/}
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />

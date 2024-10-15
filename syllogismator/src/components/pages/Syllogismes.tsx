@@ -12,10 +12,31 @@ export const Syllogismes = () => {
   return (
     <div className="syllogism-container">
       <div className="section-terms-figures">
-        <SyllogismTerms setSubject={setSubject} setPredicate={setPredicate} setMiddle={setMiddle} />
-        <SyllogismFigures setFigure={setFigure} />
+        <SyllogismTerms
+          subject={subject}
+          setSubject={setSubject}
+          predicate={predicate}
+          setPredicate={setPredicate}
+          middle={middle}
+          setMiddle={setMiddle}
+          figure={figure}
+          setFigure={setFigure}
+        />
+        <SyllogismFigures
+          figure={figure}
+          setFigure={setFigure}
+        />
       </div>
-        <SyllogismPremises subject={subject} predicate={predicate} middle={middle} figure={figure} />
+        <SyllogismPremises
+          subject={subject}
+          setSubject={setSubject}
+          predicate={predicate}
+          setPredicate={setPredicate}
+          middle={middle}
+          setMiddle={setMiddle}
+          figure={figure}
+          setFigure={setFigure}
+        />
     </div>
   );
 };

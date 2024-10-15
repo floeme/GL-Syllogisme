@@ -1,8 +1,9 @@
 interface SyllogismFigureProps {
+    figure: string;
     setFigure: (value: string) => void;
 }
 
-function SyllogismTerms({ setFigure }: SyllogismFigureProps) {
+function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
     return (
         <div className="section-figures">
             {/* FIGURE 1 */}
@@ -12,6 +13,7 @@ function SyllogismTerms({ setFigure }: SyllogismFigureProps) {
                 <input type="radio"
                     name="radioFigure"
                     value="figure1"
+                    checked={figure === "figure1"}
                     onChange={(e) => setFigure(e.target.value)}
                 />
             </div>
@@ -23,6 +25,7 @@ function SyllogismTerms({ setFigure }: SyllogismFigureProps) {
                 <input type="radio"
                     name="radioFigure"
                     value="figure2"
+                    checked={figure === "figure2"}
                     onChange={(e) => setFigure(e.target.value)}
                 />
             </div>
@@ -34,6 +37,7 @@ function SyllogismTerms({ setFigure }: SyllogismFigureProps) {
                 <input type="radio"
                     name="radioFigure"
                     value="figure3"
+                    checked={figure === "figure3"}
                     onChange={(e) => setFigure(e.target.value)}
                 />
             </div>
@@ -45,6 +49,7 @@ function SyllogismTerms({ setFigure }: SyllogismFigureProps) {
                 <input type="radio"
                     name="radioFigure"
                     value="figure4"
+                    checked={figure === "figure4"}
                     onChange={(e) => setFigure(e.target.value)}
                 />
             </div>
