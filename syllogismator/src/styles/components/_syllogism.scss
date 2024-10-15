@@ -31,7 +31,7 @@
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
     
-      border: 2px solid #2B7A78;
+      //border: 2px solid #2B7A78;
       border-radius: 10px;
       padding: 20px;
       background-color: #e9f7f7;
@@ -103,7 +103,7 @@
     .button-row {
       display: flex;
       justify-content: center;
-      //gap: 20px;
+      
       background-color: #e9f7f7;
       border-radius: 20px;
       margin-top: 1%;
@@ -120,17 +120,18 @@
     .syllogism-grid {
       border: 1px solid black;
       display: grid;
-      border: 2px solid #2B7A78;
       background-color: #e9f7f7;
       border-radius: 10px;
 
-      grid-template-columns: 15% 60% 15%;
+      grid-template-columns: 25% 70% ;
   
       align-items: center;
       max-width: 90%;
       width: 90%;
       align-items: center;
       justify-content: center;
+
+      padding-top: 2%;
  
       .label-1{
         grid-column: 1 / 2; 

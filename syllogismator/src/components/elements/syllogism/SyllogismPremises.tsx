@@ -95,8 +95,7 @@ function SyllogismPremises({ subject, setSubject, predicate, setPredicate, middl
 
             <div className="syllogism-grid">
                 {propositions.map((proposition, index) => (
-                    <
-                    >
+                    <>
                         <div
                             className={"label-" + (index+1)}
                         >
@@ -109,12 +108,6 @@ function SyllogismPremises({ subject, setSubject, predicate, setPredicate, middl
                         </div>
                     </>
                 ))}
-
-                <div className="button-row">
-                    <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-                    <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-                    <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
-                </div>
 
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
