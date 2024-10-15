@@ -18,7 +18,7 @@ export const Navigation = () => {
             <li>Accueil</li>
           </NavLink>
           <NavLink
-            to="/syllogismes"
+            to="/syllogism"
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
             <li>Syllogismes</li>
