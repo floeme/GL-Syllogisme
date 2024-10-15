@@ -64,43 +64,34 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
 
     return (
         <div className="section-premises">
-            <div className="button-row">
-                {/* clear syllogism button */}
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-
-                {/* help button */}
-                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-
-                {/* settings redirection */}
-                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
-            </div>
-
             <div className="syllogism-grid">
-                {/* Proposition 1 */}
-                <div className="proposition">
+
+                <div className="label-1">
                     <label>Proposition 1</label>
                 </div>
-                <div className="syllogism-mp">
-                    {renderSyllogismMP1(figure)}
-                </div>
-
-                {/* Proposition 2 */}
-                <div className="proposition">
+                <div className="label-2">
                     <label>Proposition 2</label>
                 </div>
-                <div className="syllogism-mp">
-                    {renderSyllogismMP2(figure)}
-                </div>
-
-                {/* Conclusion */}
-                <div className="proposition">
+                <div className="label-3">
                     <label>Conclusion</label>
                 </div>
-                <div className="syllogism-mp">
+                
+                <div className="proposition-1">
+                    {renderSyllogismMP1(figure)}  {/* METTRE sous forme de variable les 3 renders commeca ca cassera pas le css pour faire les changements d'ordres*/}
+                </div>
+                <div className="proposition-2">
+                    {renderSyllogismMP2(figure)}
+                </div>
+                <div className="proposition-3">
                     {renderSyllogismMP3(figure)}
                 </div>
-
-                {/* Existence Hypothesis and Check Button*/}
+                
+                <div className="button-row">
+                    <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
+                    <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
+                    <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
+                </div>
+                
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />
