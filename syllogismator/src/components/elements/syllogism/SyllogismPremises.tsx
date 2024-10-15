@@ -1,18 +1,27 @@
+import { useEffect, useState } from "react";
 import SyllogismMP from "./SyllogismMP";
 
 interface SyllogismPremisesProps {
     subject: string;
+    setSubject: (value: string) => void;
     predicate: string;
+    setPredicate: (value: string) => void;
     middle: string;
+    setMiddle: (value: string) => void;
     figure: string;
-  }
+    setFigure: (value: string) => void;
+}
 
-function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPremisesProps) {
+function SyllogismPremises({ subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure }: SyllogismPremisesProps) {
     const checkSyllogism = () => {
         console.log("check");
     };
 
     const clearSyllogism = () => {
+        setSubject("");
+        setPredicate("");
+        setMiddle("");
+        setFigure("");
         console.log("clear");
     };
 
@@ -62,6 +71,20 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
         }
     };
 
+    const [propositions, setPropositions] = useState([
+        renderSyllogismMP1(figure),
+        renderSyllogismMP2(figure),
+        renderSyllogismMP3(figure)
+    ]);
+
+    useEffect(() => {
+        setPropositions([
+            renderSyllogismMP1(figure),
+            renderSyllogismMP2(figure),
+            renderSyllogismMP3(figure)
+        ]);
+    }, [figure, subject, predicate, middle]);
+
     return (
         <div className="section-premises">
             <div className="button-row">
@@ -71,27 +94,28 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
             </div>
 
             <div className="syllogism-grid">
+                {propositions.map((proposition, index) => (
+                    <
+                    >
+                        <div
+                            className={"label-" + (index+1)}
+                        >
+                            <label>Proposition {index + 1}</label>
+                        </div>
+                        <div
+                            className={"proposition-" + (index+1)}
+                        >
+                            {proposition}
+                        </div>
+                    </>
+                ))}
 
-                <div className="label-1">
-                    <label>Proposition 1</label>
+                <div className="button-row">
+                    <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
+                    <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
+                    <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
                 </div>
-                <div className="label-2">
-                    <label>Proposition 2</label>
-                </div>
-                <div className="label-3">
-                    <label>Conclusion</label>
-                </div>
-                
-                <div className="proposition-1">
-                    {renderSyllogismMP1(figure)}  {/* METTRE sous forme de variable les 3 renders commeca ca cassera pas le css pour faire les changements d'ordres*/}
-                </div>
-                <div className="proposition-2">
-                    {renderSyllogismMP2(figure)}
-                </div>
-                <div className="proposition-3">
-                    {renderSyllogismMP3(figure)}
-                </div>
-                
+
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />
