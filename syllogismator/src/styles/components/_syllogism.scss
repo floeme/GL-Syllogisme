@@ -30,7 +30,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
-    
+
       //border: 2px solid #2B7A78;
       border-radius: 10px;
       padding: 20px;
@@ -103,7 +103,7 @@
     .button-row {
       display: flex;
       justify-content: center;
-      
+
       background-color: #e9f7f7;
       border-radius: 20px;
       margin-top: 1%;
@@ -114,10 +114,7 @@
         background-color: transparent;
         cursor: pointer;
       }
-    }
-    
 
-    .section-switch {
       /* CSS pour le switch */
       .switch {
         position: relative;
@@ -172,7 +169,7 @@
       border-radius: 10px;
 
       grid-template-columns: 25% 70% ;
-  
+
       align-items: center;
       max-width: 90%;
       width: 90%;
@@ -180,7 +177,7 @@
       justify-content: center;
 
       padding-top: 2%;
- 
+
       .label-1{
         grid-column: 1 / 2;
         grid-row: 1 / 2;
@@ -199,7 +196,7 @@
         grid-row: 1 / 2;
         align-items: center;
         justify-content: center;
-        
+
         .please-select{
           align-items: center;
           justify-content: center;
@@ -256,7 +253,7 @@
           }
         }
       }
-  
+
     }
       .hypothesis {
         grid-column: 1 / 3;
