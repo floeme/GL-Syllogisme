@@ -6,6 +6,9 @@ import Home from './components/pages/Home.tsx';
 import Syllogism from './components/pages/Syllogism.tsx';
 import Polysyllogismes from './components/pages/Polysyllogism.tsx';
 
+// import i18n (needs to be bundled ;))
+import './i18n';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <Routes>

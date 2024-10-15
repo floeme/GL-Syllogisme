@@ -1,0 +1,26 @@
+{
+  "home": {
+    "syllogism": {
+      "check": "Vérifier le Syllogisme"
+    },
+    "socrate": {
+      "head": "Tête de Socrate",
+      "body": "Corps de Socrate"
+    },
+    "discover": "À la découverte des",
+    "discover2": "Syllogismes",
+    "text1": "le syllogisme est un raisonnement logique mettant en relation au moins trois propositions :\ndeux ou plus d'entre elles, appelées « prémisses », conduisent à une « conclusion ».\nAristote a été le premier à le formaliser dans son Organon.\nUn exemple très connu de syllogisme est : « Tous les hommes sont mortels, or Socrate est un homme ; donc Socrate est mortel » :\nLes deux prémisses (dites « majeure » et « mineure ») sont des propositions données et supposées vraies,\nle syllogisme permettant d'établir la validité formelle de la conclusion, qui est nécessairement vraie si les prémisses sont vraies.",
+    "text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
+  },
+  "navigation": {
+    "language": "Langue",
+    "menu": {
+      "home": "Accueil",
+      "syllogism": "Syllogismes",
+      "polysyllogism": "Polysyllogismes"
+    }
+  },
+  "syllogism": {
+
+  }
+}

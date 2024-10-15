@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from 'react-i18next';
 
 export const ButtonSyllogismes = () => {
   const navigate = useNavigate();
@@ -7,9 +8,11 @@ export const ButtonSyllogismes = () => {
     navigate("/syllogismes");
   };
 
+  const { t } = useTranslation('translation', { keyPrefix: 'home.syllogism' });
+
   return (
     <div className="button" onClick={handleClick}>
-      <h1>Vérifier Un Syllogisme</h1>
+      <h1>{t('check')}</h1>
     </div>
   );
 };
