@@ -33,7 +33,7 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
             case "figure4":
                 return <SyllogismMP firstTerm={predicate} secondTerm={middle} />;
             default:
-                return <div>Please select a figure</div>;
+                return <div className="please-select">Please select a figure</div>;
         }
     };
 
@@ -64,6 +64,12 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
 
     return (
         <div className="section-premises">
+            <div className="button-row">
+                    <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
+                    <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
+                    <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
+            </div>
+
             <div className="syllogism-grid">
 
                 <div className="label-1">
@@ -84,12 +90,6 @@ function SyllogismPremises({ subject, predicate, middle, figure }: SyllogismPrem
                 </div>
                 <div className="proposition-3">
                     {renderSyllogismMP3(figure)}
-                </div>
-                
-                <div className="button-row">
-                    <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-                    <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-                    <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
                 </div>
                 
                 <div className="hypothesis">
