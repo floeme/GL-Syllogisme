@@ -87,29 +87,18 @@ function SyllogismPremises({ subject, setSubject, predicate, setPredicate, middl
 
     return (
         <div className="section-premises">
-            <div className="button-row">
-                {/* clear syllogism button */}
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-
-                {/* help button */}
-                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-
-                {/* settings redirection */}
-                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
-            </div>
-
             <div className="syllogism-grid">
                 {propositions.map((proposition, index) => (
                     <div
                         key={index}
                     >
                         <div
-                            className="proposition"
+                            className="label-1"
                         >
                             <label>Proposition {index + 1}</label>
                         </div>
                         <div
-                            className="syllogism-mp"
+                            className="proposition-1"
                         >
                             {proposition}
                         </div>
