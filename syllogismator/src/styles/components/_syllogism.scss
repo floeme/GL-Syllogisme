@@ -6,17 +6,21 @@
   max-width: 100%;
   flex: 1;
   grid-template-columns: 1fr 2fr; 
-  grid-template-rows: auto auto; 
+  grid-template-rows: 1 1; 
   margin: 0 auto;
   font-family: Arial, sans-serif;
   height: 100%;
 
+  font-family: $font-1;
   .section-terms-figures {
     grid-column: 1 / 2; 
     grid-row: 1 / 2; 
     padding: 20px;
     width: 100%;
     height: 100%;
+
+    background-color: $color-1;
+    border-radius: 20px;
 
     display: flex;
     flex-direction: column;
@@ -32,18 +36,8 @@
       padding: 20px;
       background-color: #e9f7f7;
       text-align: center;
-      font-weight: bold;
-      
-      border-radius: 10px;
-      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2); /* Ombre pour l'effet de profondeur */
-      perspective: 500px; /* Définition de la perspective */
-      transform-style: preserve-3d; /* Conserve l'effet 3D */
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .section-terms-input:hover {
-      transform: rotateX(15deg) rotateY(15deg); /* Inclinaison pour créer l'effet de bloc 3D */
-      box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.3);
+      //font-weight: bold;
+      font-size: 1.2rem;
     }
 
     .section-figures{
@@ -56,8 +50,9 @@
       padding: 20px;
       background-color: #e9f7f7;
       text-align: center;
-      font-weight: bold;
-    
+      //font-weight: bold;
+      font-size: 1.2rem;
+
       .figure {
         display: flex;
         flex-direction: column;
@@ -83,12 +78,16 @@
   }
  
   .section-premises {
+    label {
+      font-family: $font-1;
+      font-size: 1.2rem;
+    }
+
     grid-column: 2 / 3; 
     grid-row: 1 / 2;   
-   
-    border-radius: 10px;
-    //background-color: #f5f5f5;
-    //border: 2px solid #2B7A78;
+ 
+    background-color: $color-1;
+    border-radius: 20px;
     margin-left: 2%;
     
     display: flex;
@@ -150,7 +149,7 @@
           align-items: center;
 
           .mp-label {
-            font-weight: bold;
+            //font-weight: bold;
           }
 
           .mp-proposition {
@@ -158,7 +157,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-
+            
             .quantifier {
               padding: 10px;
               select {
@@ -187,15 +186,18 @@
       .hypothesis {
         grid-column: 1 / 3; 
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        border: 1px solid yellow;
-      }
 
-      button[name="checkButton"] {
-        width: 50%;
-        padding: 10px;
-        border: 2px solid red;
+        gap: 20px;
+
+        button[name="checkButton"] {
+          width: 25%;
+          padding: 10px;
+          border: 2px solid black;
+        }
+
+        margin-bottom: 2%;
       }
     }
   }  
@@ -207,6 +209,8 @@ button {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: $font-1;
   cursor: pointer;
 }
 
@@ -221,7 +225,6 @@ label {
 
 input, select {
   padding: 8px;
-  width: 100%;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
