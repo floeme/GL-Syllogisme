@@ -13,7 +13,7 @@ export const Syllogism = () => {
           setExpertMode={setExpertMode}
         /> :
         <Expert_Syllogism
-          // expertMode={expertMode}
+          expertMode={expertMode}
           setExpertMode={setExpertMode}
         />}
     </div>

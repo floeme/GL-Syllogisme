@@ -4,10 +4,11 @@ import SyllogismFigures from "./basic/SyllogismFigures";
 import { useState } from "react";
 
 interface Expert_SyllogismProps {
+  expertMode: boolean;
   setExpertMode: (value: boolean) => void;
 }
 
-export const Expert_Syllogism = ({setExpertMode}: Expert_SyllogismProps) => {
+export const Expert_Syllogism = ({expertMode, setExpertMode}: Expert_SyllogismProps) => {
   const [subject, setSubject] = useState("");
   const [predicate, setPredicate] = useState("");
   const [middle, setMiddle] = useState("");
@@ -40,6 +41,8 @@ export const Expert_Syllogism = ({setExpertMode}: Expert_SyllogismProps) => {
           setMiddle={setMiddle}
           figure={figure}
           setFigure={setFigure}
+          expertMode={expertMode}
+          setExpertMode={setExpertMode}
         />
     </>
   );

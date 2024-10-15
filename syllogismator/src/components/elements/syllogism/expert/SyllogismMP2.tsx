@@ -5,7 +5,7 @@ interface SyllogismMPProps {
     secondTerm: string;
 }
 
-function SyllogismMP({ firstTerm, secondTerm }: SyllogismMPProps) {
+function SyllogismMP() {
     const [verb, setVerb] = useState("")
 
     const handleChange = (quantifier: string) => {
