@@ -90,20 +90,20 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
     return (
         <div className="section-premises">
             <div className="button-row">
-                    <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-                    <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-                    <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
-                    <label>Guided</label>
-                    <label className="switch">
-                        <input
-                            type="checkbox"
-                            checked={expertMode}
-                            onChange={() => setExpertMode(!expertMode)}
-                        />
-                        <span className="slider"></span>
-                    </label>
-                    <label>Expert</label>
-                </div>
+                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
+                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
+                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
+                <label>Guided</label>
+                <label className="switch">
+                    <input
+                        type="checkbox"
+                        checked={expertMode}
+                        onChange={() => setExpertMode(!expertMode)}
+                    />
+                    <span className="slider"></span>
+                </label>
+                <label>Expert</label>
+            </div>
 
             <div className="syllogism-grid">
                 {propositions.map((proposition, index) => (

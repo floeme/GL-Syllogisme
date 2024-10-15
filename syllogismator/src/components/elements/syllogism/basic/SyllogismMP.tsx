@@ -23,8 +23,8 @@ function SyllogismMP({ firstTerm, secondTerm }: SyllogismMPProps) {
                 setVerb("are not some");
                 break;
             default:
-                setVerb("are");
-                return <div>Please select a quantifier</div>;
+                setVerb("Please select a quantifier");
+                break;
         }
     };
 
