@@ -1,0 +1,26 @@
+{
+  "home": {
+    "syllogism": {
+      "check": "Check Syllogism"
+    },
+    "socrate": {
+      "head": "Socrates Head",
+      "body": "Socrates Body"
+    },
+    "discover": "To the discover of",
+    "discover2": "Syllogism",
+    "text1": "Syllogism is a logic allowing to link 2 premises with 1 conclusion :\n2 or more, the « premises », lead to a « conclusion ».\nAristote was the first to explain it in Organon.\nA known exemple is : « Every human is mortal, Socrates is human ; so Socrates is mortel » :\nThe 2 premises (said « major » and « minor ») are propositions given and supposed right,\nSyllogism allow to establish a formal validity for the conclusion, which is right if the premises are right.",
+    "text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
+  },
+  "navigation": {
+    "language": "Lang",
+    "menu": {
+      "home": "Home",
+      "syllogism": "Syllogism",
+      "polysyllogism": "Polysyllogism"
+    }
+  },
+  "syllogism": {
+
+  }
+}
