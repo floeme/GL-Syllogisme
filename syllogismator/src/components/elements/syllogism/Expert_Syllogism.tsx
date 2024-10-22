@@ -1,41 +1,30 @@
-import SyllogismTerms from "./basic/SyllogismTerms";
-import SyllogismPropositions from "./basic/SyllogismPropositions";
-import SyllogismFigures from "./basic/SyllogismFigures";
-import { useState } from "react";
+import SyllogismPropositions from "./expert/SyllogismPropositions"
+import { useState } from "react"
 
 interface Expert_SyllogismProps {
-  subject: string;
-  setSubject: (value: string) => void;
-  predicate: string;
-  setPredicate: (value: string) => void;
-  middle: string;
-  setMiddle: (value: string) => void;
-  figure: string;
-  setFigure: (value: string) => void;
-  expertMode: boolean;
-  setExpertMode: (value: boolean) => void;
+  subject: string
+  setSubject: (value: string) => void
+  predicate: string
+  setPredicate: (value: string) => void
+  middle: string
+  setMiddle: (value: string) => void
+  figure: string
+  setFigure: (value: string) => void
+  expertMode: boolean
+  setExpertMode: (value: boolean) => void
 }
 
-export const Expert_Syllogism = ({subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure, expertMode, setExpertMode}: Expert_SyllogismProps) => {
+export const Expert_Syllogism = ({ subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure, expertMode, setExpertMode }: Expert_SyllogismProps) => {
+  const [MP1FirstTerm, setMP1FirstTerm] = useState("Homme")
+  const [MP1SecondTerm, setMP1SecondTerm] = useState("Mortel")
+
   return (
     <>
-      <div className="section-terms-figures">
-        <SyllogismTerms
-          subject={subject}
-          setSubject={setSubject}
-          predicate={predicate}
-          setPredicate={setPredicate}
-          middle={middle}
-          setMiddle={setMiddle}
-          figure={figure}
-          setFigure={setFigure}
-        />
-        <SyllogismFigures
-          figure={figure}
-          setFigure={setFigure}
-        />
-      </div>
         <SyllogismPropositions
+          MP1FirstTerm={MP1FirstTerm}
+          setMP1FirstTerm={setMP1FirstTerm}
+          MP1SecondTerm={MP1SecondTerm}
+          setMP1SecondTerm={setMP1SecondTerm}
           subject={subject}
           setSubject={setSubject}
           predicate={predicate}
@@ -48,7 +37,7 @@ export const Expert_Syllogism = ({subject, setSubject, predicate, setPredicate, 
           setExpertMode={setExpertMode}
         />
     </>
-  );
-};
+  )
+}
 
-export default Expert_Syllogism;
+export default Expert_Syllogism
