@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import SyllogismMP from "./SyllogismMP";
 
 interface SyllogismPremisesProps {
@@ -107,19 +107,14 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
 
             <div className="syllogism-grid">
                 {propositions.map((proposition, index) => (
-                    <
-                    >
-                        <div
-                            className={"label-" + (index+1)}
-                        >
+                    <Fragment key={index}>
+                        <div className={"label-" + (index+1)}>
                             <label>Proposition {index + 1}</label>
                         </div>
-                        <div
-                            className={"proposition-" + (index+1)}
-                        >
+                        <div className={"proposition-" + (index+1)}>
                             {proposition}
                         </div>
-                    </>
+                    </Fragment>
                 ))}
 
                 <div className="hypothesis">
