@@ -1,5 +1,8 @@
 @import "./settings";
-@import "./components/navigation";
+@import "./pages/app";
 @import "./pages/home";
-@import "./components/syllogism";
+@import "./pages/quantifierAliases";
 @import "./components/formulaire";
+@import "./components/navigation";
+@import "./components/quantifierAliasSection";
+@import "./components/syllogism";

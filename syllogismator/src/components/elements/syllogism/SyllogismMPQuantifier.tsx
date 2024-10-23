@@ -1,21 +1,12 @@
-import { useState } from "react"
+import { useContext } from "react"
+import QuantifierContext from "../../../contexts/QuantifierContext"
 
 interface SyllogismMPQuantifierProps {
     setVerb: (value: string) => void
 }
 
 function SyllogismMPQuantifier({ setVerb }: SyllogismMPQuantifierProps) {
-    const [quantifierA, setQuantifierA] = useState(["All", "Every", "Each", "Every single"])
-    const [quantifierE, setQuantifierE] = useState(["None", "No one"])
-    const [quantifierI, setQuantifierI] = useState(["Some", "A few"])
-    const [quantifierO, setQuantifierO] = useState(["Not some", "Not all"])
-
-    const quantifiers = {
-        A: quantifierA,
-        E: quantifierE,
-        I: quantifierI,
-        O: quantifierO,
-    }
+    const { quantifiers } = useContext(QuantifierContext)
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedOption = e.target.selectedOptions[0]
