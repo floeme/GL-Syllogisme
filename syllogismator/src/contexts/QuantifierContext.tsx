@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react'
+import React, { createContext, useState, ReactNode, useEffect } from 'react'
 
 type QuantifierType = {
     A: string[]
@@ -27,7 +27,18 @@ const QuantifierContext = createContext<QuantifierContextType>({
 })
 
 export const QuantifierProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [quantifiers, setQuantifiers] = useState<QuantifierType>(initialQuantifiers)
+    const [quantifiers, setQuantifiers] = useState<QuantifierType>(() => {
+        // Charge les quantifiers depuis le localStorage s'ils existent
+        // Sinon utilise les initialQuantifiers
+        const savedQuantifiers = localStorage.getItem('quantifiers')
+
+        return savedQuantifiers ? JSON.parse(savedQuantifiers) : initialQuantifiers
+    })
+
+    useEffect(() => {
+        // Sauvegarde les quantifiers dans le localStorage chaque fois qu'ils changent
+        localStorage.setItem('quantifiers', JSON.stringify(quantifiers))
+    }, [quantifiers])
 
     return (
         <QuantifierContext.Provider value={{ quantifiers, setQuantifiers, initialQuantifiers }}>
