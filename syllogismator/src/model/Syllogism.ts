@@ -87,8 +87,25 @@ export class Syllogism {
      * Move the proposition from/to given indexes.
      */
     reorderProposition(fromIndex: number, toIndex: number): void {
-        console.error("reorderProposition - Not implemented.");
-        // TODO
+        if (fromIndex !== toIndex && fromIndex < this.getPropositionCount() && toIndex < this.getPropositionCount()) {
+            const propositionToMove = this.getProposition(fromIndex);
+            if (fromIndex === this.getPropositionCount() - 1) { // The proposition to move is the conclusion
+                // Move the last premise to the conclusion
+                this.conclusion = this.premises[-1];
+                this.premises.splice(-1, 1);
+            } else {
+                this.premises.splice(fromIndex, 1);
+            }
+
+            if (toIndex === this.getPropositionCount() - 1) { // Move the proposition to the conclusion
+                this.premises.splice(toIndex, 0, this.conclusion);
+                this.conclusion = propositionToMove;
+            } else {
+                this.premises.splice(toIndex, 0, propositionToMove);
+            }
+        } else {
+            throw new RangeError();
+        }
     }
 
     /**
@@ -96,8 +113,18 @@ export class Syllogism {
      * Does not move the conclusion.
      */
     autoReorder(): void {
-        console.error("autoReorder - Not implemented.");
-        // TODO
+        if (this.hasValidStructure()) {
+            if (this.getPropositionCount() === 3) {
+                // If S is in the first premise, swap premises
+                if (this.premises[0].indexOf(<Term>this.getMinorTerm()) !== -1) {
+                    this.reorderProposition(0, 1);
+                }
+            } else {
+                console.error("autoReorder - Not implemented for polysyllogisms.");
+            }
+        } else {
+            throw new Error("Cannot auto-reorder a syllogism with an invalid structure.");
+        }
     }
 
     /**
@@ -174,13 +201,28 @@ export class Syllogism {
      *
      * Detects the figure type (according to positions of the terms in the propositions) and returns it.
      * If called on a polysyllogism, or in case of invalid structure, returns `null`.
+     *
+     * @see Figure
      */
     getFigure(): Figure | null {
         if (this.getPropositionCount() === 3 && this.hasValidStructure()) {
+            // We have checked that all terms are defined
             const s = <Term>this.getMinorTerm();
-            const p = <Term>this.getMajorTerm()
-            // TODO
-            console.error("getFigure - Not implemented.");
+            const p = <Term>this.getMajorTerm();
+
+            if (this.premises[0].indexOf(p) === 0) {
+                // P is on the left side: Figure 2 or 4; P is in the first premise, S in the second
+                return (this.premises[1].indexOf(s) === 0) ? Figure.Figure2 : Figure.Figure4;
+            } else if (this.premises[1].indexOf(p) === 0) {
+                // P is on the left side: Figure 2 or 4; P is in the second premise, S in the first
+                return (this.premises[0].indexOf(s) === 0) ? Figure.Figure2 : Figure.Figure4;
+            } else if (this.premises[0].indexOf(p) === 1) {
+                // P is on the right side: Figure 1 or 3; P is in the first premise, S in the second
+                return (this.premises[1].indexOf(s) === 0) ? Figure.Figure1 : Figure.Figure3;
+            } else if (this.premises[1].indexOf(p) === 1) {
+                // P is on the right side: Figure 1 or 3; P is in the second premise, S in the first
+                return (this.premises[0].indexOf(s) === 0) ? Figure.Figure1 : Figure.Figure3;
+            }
         }
         return null;
     }

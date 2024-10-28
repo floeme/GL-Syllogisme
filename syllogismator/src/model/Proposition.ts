@@ -33,6 +33,19 @@ export class Proposition {
      */
     hasValidStructure(): boolean {
         return this.quantifier !== undefined && this.predicate !== undefined && this.subject !== undefined
-            && this.predicate.value !== this.predicate.value;
+            && this.subject.value !== this.predicate.value;
+    }
+
+    /**
+     * Looks for the given term in the proposition.
+     * Returns `0` if it is the subject, `1` if it is the predicate, or `-1` if it is absent from the proposition.
+     * @param term Term to find in the proposition
+     */
+    indexOf(term: Term): number {
+        if (term === this.subject)
+            return 0;
+        if (term === this.predicate)
+            return 1;
+        return -1;
     }
 }
