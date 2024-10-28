@@ -103,24 +103,28 @@
     .button-row {
       display: flex;
       justify-content: center;
+      align-items: center;
 
+    
       background-color: #e9f7f7;
       border-radius: 20px;
       margin-top: 1%;
       margin-bottom: 1%;
       width: auto;
+
       button {
         padding: 10px;
         background-color: transparent;
         cursor: pointer;
       }
 
-      /* CSS pour le switch */
-      .switch {
+      .switch {     
+ 
         position: relative;
         display: inline-block;
         width: 60px;
         height: 34px;
+        
       }
 
       .switch input {
