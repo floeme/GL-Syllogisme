@@ -14,6 +14,11 @@ export class Syllogism {
     conclusion: Proposition;
 
     /**
+     * A string which links the subject to the predicate in each proposition.
+     */
+    link: string = "";
+
+    /**
      * Builds a simple syllogism of the given figure type and with the given terms.
      * @param figure one of the four {@link Figure} types
      * @param s minor term (subject of the conclusion)
