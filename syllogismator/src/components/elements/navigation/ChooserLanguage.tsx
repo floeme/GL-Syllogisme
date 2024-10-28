@@ -33,9 +33,8 @@ export const chooserLanguage = (props: FuncType) => {
     };
 
   return (
-    <div>
-      <h1>{t("language")}</h1>
-        <select defaultValue={selected} onChange={onChange}>
+    <div className="langue">
+        <select className="select" defaultValue={selected} onChange={onChange}>
             {
                 langList.map((lang: Lang) => {
                     return (<option key={lang.val} value={lang.val}>{lang.name}</option>)

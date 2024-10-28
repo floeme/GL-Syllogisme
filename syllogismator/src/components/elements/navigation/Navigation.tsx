@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom";
 import ChooserLanguage from "./ChooserLanguage";
+import FlagSelect from "./FlagSelect";
 import {useTranslation} from "react-i18next";
 
 export const Navigation = () => {
-  const onChange = (chars: string) => {
-    console.log("Selected: "+chars);
+  const onChange = (Lang: string) => {
+    console.log("Selected: "+Lang);
   };
   const { t } = useTranslation('translation', { keyPrefix: 'navigation.menu' });
   return (
     <div className="container-nav">
-      <h1 className="Name">Syllogismator</h1>
+      <h1 className="name">Syllogismator</h1>
       <div className="navigation">
         <ul>
           {/* je fais l'action de la barre lors de la selection ici pour invoquer le css */}
@@ -39,7 +40,7 @@ export const Navigation = () => {
           </NavLink>
         </ul>
       </div>
-      <ChooserLanguage callbackLang={onChange}/>
+      <FlagSelect callbackLang={onChange}/>
     </div>
   );
 };

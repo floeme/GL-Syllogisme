@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import SocrateBody from "../elements/home/SocrateBody";
 import ButtonSyllogismes from "../elements/home/ButtonSyllogismes";
 import Texte1 from "../elements/home/Texte1";
 import Texte2 from "../elements/home/Texte2";
 import {useTranslation} from "react-i18next";
+import LewisBody from "../elements/home/LewisBody";
 
 export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,7 +28,7 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <div className="content">
+      <div className="content-home">
         <div className="left-section">
           <div className="title">
             <h1>{t("discover")}</h1>
@@ -38,7 +38,7 @@ export const Home = () => {
         </div>
         <div className="right-section">
           <div>{items[currentIndex]}</div>
-          <SocrateBody />
+          <LewisBody/>
         </div>
       </div>
     </div>

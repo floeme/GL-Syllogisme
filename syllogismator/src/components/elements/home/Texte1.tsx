@@ -4,7 +4,7 @@ export const Texte1 = () => {
 
   const { t } = useTranslation('translation', { keyPrefix: 'home' });
   return (
-    <div className="socratetext">
+    <div className="text">
       <p className="explanation-text">
         {t("text1")}
       </p>

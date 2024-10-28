@@ -6,6 +6,8 @@
 
 .name {
   font-family: $font-1;
+  color: $color-font-blanc;
+  font-size: 3cqw;
 }
 
 .container-nav {
@@ -31,12 +33,12 @@
       font-size: 1.5rem;
 
       li {
-        color: $color-1;
+        color: $color-font-grey;
         transition: color 0.2s ease;
         cursor: pointer;
 
         &:hover {
-          color: $color-2;
+          color: $color-font-blanc;
         }
       }
     }
@@ -48,7 +50,7 @@
         content: "";
         height: 4px;
         width: 0;
-        background: $color-1;
+        background: $color-font-blanc;
         position: absolute;
         border-radius: 10px;
         bottom: 0;
@@ -63,5 +65,26 @@
         }
       }
     }
-  }
+  } 
+}
+
+.langue {
+  display: flex;
+  color: $color-font-blanc;
+
+    .select {
+      appearance: none; 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 50px; 
+      height: 50px; 
+      border-radius: 50%; 
+      border: 2px solid #ccc;
+      
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      padding: 0;
+    }
 }
