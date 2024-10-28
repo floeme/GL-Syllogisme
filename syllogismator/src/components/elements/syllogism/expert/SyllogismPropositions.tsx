@@ -1,7 +1,13 @@
 import { Fragment, useEffect, useState } from "react"
-import SyllogismMP from "./SyllogismMP"
+import SyllogismMP1 from "./SyllogismMP1"
+import SyllogismMP2 from "./SyllogismMP2"
+import SyllogismMP3 from "./SyllogismMP3"
 
 interface SyllogismPremisesProps {
+    MP1FirstTerm: string
+    setMP1FirstTerm: (value: string) => void
+    MP1SecondTerm: string
+    setMP1SecondTerm: (value: string) => void
     subject: string
     setSubject: (value: string) => void
     predicate: string
@@ -14,7 +20,7 @@ interface SyllogismPremisesProps {
     setExpertMode: (value: boolean) => void
 }
 
-function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure, expertMode, setExpertMode }: SyllogismPremisesProps) {
+function SyllogismPropositions({ MP1FirstTerm, setMP1FirstTerm, MP1SecondTerm, setMP1SecondTerm, subject, setSubject, predicate, setPredicate, middle, setMiddle, expertMode, setExpertMode }: SyllogismPremisesProps) {
     const checkSyllogism = () => {
         console.log("check")
     }
@@ -23,7 +29,6 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
         setSubject("")
         setPredicate("")
         setMiddle("")
-        setFigure("")
         console.log("clear")
     }
 
@@ -35,57 +40,49 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
         console.log("goSettings")
     }
 
-    const renderSyllogismMP1 = (figure: string) => {
-        switch (figure) {
-            case "figure1":
-            case "figure3":
-                return <SyllogismMP firstTerm={middle} secondTerm={predicate} />
-            case "figure2":
-            case "figure4":
-                return <SyllogismMP firstTerm={predicate} secondTerm={middle} />
-            default:
-                return <div>Please select a figure</div>
-        }
-    }
-
-    const renderSyllogismMP2 = (figure: string) => {
-        switch (figure) {
-            case "figure1":
-            case "figure2":
-                return <SyllogismMP firstTerm={subject} secondTerm={middle} />
-            case "figure3":
-            case "figure4":
-                return <SyllogismMP firstTerm={middle} secondTerm={subject} />
-            default:
-                return <div>Please select a figure</div>
-        }
-    }
-
-    const renderSyllogismMP3 = (figure: string) => {
-        switch (figure) {
-            case "figure1":
-            case "figure2":
-            case "figure3":
-            case "figure4":
-                return <SyllogismMP firstTerm={subject} secondTerm={predicate} />
-            default:
-                return <div>Please select a figure</div>
-        }
-    }
-
     const [propositions, setPropositions] = useState([
-        renderSyllogismMP1(figure),
-        renderSyllogismMP2(figure),
-        renderSyllogismMP3(figure)
+        <SyllogismMP1
+            MP1FirstTerm={MP1FirstTerm}
+            setMP1FirstTerm={setMP1FirstTerm}
+            MP1SecondTerm={MP1SecondTerm}
+            setMP1SecondTerm={setMP1SecondTerm}
+        />,
+        <SyllogismMP2
+            MP1FirstTerm={MP1FirstTerm}
+            MP1SecondTerm={MP1SecondTerm}
+            subject={subject}
+            setSubject={setSubject}
+            setMiddle={setMiddle}
+            setPredicate={setPredicate}
+        />,
+        <SyllogismMP3
+            subject={subject}
+            predicate={predicate}
+        />
     ])
 
     useEffect(() => {
         setPropositions([
-            renderSyllogismMP1(figure),
-            renderSyllogismMP2(figure),
-            renderSyllogismMP3(figure)
+            <SyllogismMP1
+                MP1FirstTerm={MP1FirstTerm}
+                setMP1FirstTerm={setMP1FirstTerm}
+                MP1SecondTerm={MP1SecondTerm}
+                setMP1SecondTerm={setMP1SecondTerm}
+            />,
+            <SyllogismMP2
+                MP1FirstTerm={MP1FirstTerm}
+                MP1SecondTerm={MP1SecondTerm}
+                subject={subject}
+                setSubject={setSubject}
+                setMiddle={setMiddle}
+                setPredicate={setPredicate}
+            />,
+            <SyllogismMP3
+                subject={subject}
+                predicate={predicate}
+            />
         ])
-    }, [figure, subject, predicate, middle])
+    }, [MP1FirstTerm, MP1SecondTerm, subject, predicate, middle,])
 
     return (
         <div className="section-premises">

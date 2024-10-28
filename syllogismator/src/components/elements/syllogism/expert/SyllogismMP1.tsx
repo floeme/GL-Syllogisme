@@ -1,60 +1,50 @@
-import { useState } from "react";
+import { useState } from "react"
+import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
 
-interface SyllogismMPProps {
-    firstTerm: string;
-    secondTerm: string;
+interface SyllogismMP1Props {
+    MP1FirstTerm: string
+    setMP1FirstTerm: (value: string) => void
+    MP1SecondTerm: string
+    setMP1SecondTerm: (value: string) => void
 }
 
-function SyllogismMP({ firstTerm, secondTerm }: SyllogismMPProps) {
+function SyllogismMP1({ MP1FirstTerm, setMP1FirstTerm, MP1SecondTerm, setMP1SecondTerm }: SyllogismMP1Props) {
     const [verb, setVerb] = useState("")
-
-    const handleChange = (quantifier: string) => {
-        switch (quantifier) {
-            case "A":
-                setVerb("are");
-                break;
-            case "E":
-                setVerb("are not");
-                break;
-            case "I":
-                setVerb("are some");
-                break;
-            case "O":
-                setVerb("are not some");
-                break;
-            default:
-                setVerb("are");
-                return <div>Please select a quantifier</div>;
-        }
-    };
+    const [value, setValue] = useState("")
 
     return (
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <select onChange={(e) => handleChange(e.target.value)}>
-                        <option value="">-- Select a quantifier --</option>
-                        <option value="A">A: All</option>
-                        <option value="E">E: None</option>
-                        <option value="I">I: Some</option>
-                        <option value="O">O: Some Not</option>
-                    </select>
+                    <SyllogismMPQuantifier setVerb={setVerb} />
                 </div>
 
-                <div className="subject">
-                    <input></input>
+                <div className="first-term">
+                    <input
+                        type="text"
+                        name="firstTerm"
+                        placeholder="Enter a first term"
+                        value={MP1FirstTerm}
+                        onChange={(e) => setMP1FirstTerm(e.target.value)}
+                    />
                 </div>
 
                 <div className="verb">
                     <label>{verb}</label>
                 </div>
 
-                <div className="predicate">
-                    <input></input>
+                <div className="second-term">
+                    <input
+                        type="text"
+                        name="secondTerm"
+                        placeholder="Enter a second term"
+                        value={MP1SecondTerm}
+                        onChange={(e) => setMP1SecondTerm(e.currentTarget.value)}
+                    />
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default SyllogismMP;
+export default SyllogismMP1

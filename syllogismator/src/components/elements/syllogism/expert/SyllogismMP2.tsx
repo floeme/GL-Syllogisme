@@ -1,66 +1,109 @@
-import { useState } from "react";
+import { useState } from "react"
+import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
 
-interface SyllogismMPProps {
-    firstTerm: string;
-    secondTerm: string;
+interface SyllogismMP2Props {
+    MP1FirstTerm: string
+    MP1SecondTerm: string
+    subject: string
+    setSubject: (value: string) => void
+    setMiddle: (value: string) => void
+    setPredicate: (value: string) => void
 }
 
-function SyllogismMP() {
+function SyllogismMP2({ MP1FirstTerm, MP1SecondTerm, subject, setSubject, setMiddle, setPredicate}: SyllogismMP2Props) {
     const [verb, setVerb] = useState("")
+    const [selected1, setSelected1] = useState<string | null>(null)
+    const [selected2, setSelected2] = useState<string | null>(null)
 
-    const handleChange = (quantifier: string) => {
-        switch (quantifier) {
-            case "A":
-                setVerb("are");
-                break;
-            case "E":
-                setVerb("are not");
-                break;
-            case "I":
-                setVerb("are some");
-                break;
-            case "O":
-                setVerb("are not some");
-                break;
+    const handleChange1 = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value
+        setSelected1(value)
+        setSelected2(null)
+
+        switch (value) {
+            case "MP1FirstTerm":
+                // Figure 3
+                setMiddle(MP1FirstTerm)
+                setPredicate(MP1SecondTerm)
+                break
+            case "MP1SecondTerm":
+                // Figure 4
+                setPredicate(MP1FirstTerm)
+                setMiddle(MP1SecondTerm)
+                break
             default:
-                setVerb("are");
-                return <div>Please select a quantifier</div>;
+                break
         }
-    };
+    }
+
+    const handleChange2 = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value
+        setSelected2(value)
+        setSelected1(null)
+
+        switch (value) {
+            case "MP1FirstTerm":
+                // Figure 1
+                setMiddle(MP1FirstTerm)
+                setPredicate(MP1SecondTerm)
+                break
+            case "MP1SecondTerm":
+                // Figure 2
+                setPredicate(MP1FirstTerm)
+                setMiddle(MP1SecondTerm)
+                break
+            default:
+                break
+        }
+    }
 
     return (
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <select onChange={(e) => handleChange(e.target.value)}>
-                        <option value="">-- Select a quantifier --</option>
-                        <option value="A">A: All</option>
-                        <option value="E">E: None</option>
-                        <option value="I">I: Some</option>
-                        <option value="O">O: Some Not</option>
-                    </select>
+                    <SyllogismMPQuantifier setVerb={setVerb} />
                 </div>
 
-                <div className="subject">
-                    <select>
-                        <option></option>
-                        <option></option>
-                    </select>
+                <div className="first-term">
+                    {selected2 ? (
+                        <input
+                            type="text"
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
+                            placeholder="Enter a term"
+                        />
+                    ) : (
+                        <select onChange={handleChange1} value={selected1 || ""}>
+                            <option value="">-- Select a term --</option>
+                            <option value="MP1FirstTerm">{MP1FirstTerm}</option>
+                            <option value="MP1SecondTerm">{MP1SecondTerm}</option>
+                        </select>
+                    )}
                 </div>
 
                 <div className="verb">
                     <label>{verb}</label>
                 </div>
 
-                <div className="predicate">
-                    <select>
-                        <option></option>
-                        <option></option>
-                    </select>
+                <div className="second-term">
+                    {selected1 ? (
+                        <input
+                            type="text"
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
+                            placeholder="Enter a term"
+                        />
+                    ) : (
+                        <select onChange={handleChange2} value={selected2 || ""}>
+                            <option value="">-- Select a term --</option>
+                            <option value="MP1FirstTerm">{MP1FirstTerm}</option>
+                            <option value="MP1SecondTerm">{MP1SecondTerm}</option>
+                        </select>
+                    )}
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default SyllogismMP;
+export default SyllogismMP2

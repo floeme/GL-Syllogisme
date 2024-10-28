@@ -31,6 +31,12 @@ export const Navigation = () => {
           >
             <li>{t("polysyllogism")}</li>
           </NavLink>
+          <NavLink
+            to="/quantifiers"
+            className={(nav) => (nav.isActive ? "nav-active" : "")}
+          >
+            <li>Quantifiers</li>
+          </NavLink>
         </ul>
       </div>
       <ChooserLanguage callbackLang={onChange}/>

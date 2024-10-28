@@ -1,6 +1,6 @@
 interface SyllogismFigureProps {
-    figure: string;
-    setFigure: (value: string) => void;
+    figure: string
+    setFigure: (value: string) => void
 }
 
 function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {

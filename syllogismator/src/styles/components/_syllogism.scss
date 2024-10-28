@@ -141,8 +141,8 @@
         right: 0;
         bottom: 0;
         background-color: #ccc;
-        transition: 0.4s;
         border-radius: 34px;
+        transition: background-color 0.4s ease;
       }
 
       .slider:before {
@@ -153,7 +153,7 @@
         left: 4px;
         bottom: 4px;
         background-color: white;
-        transition: 0.4s;
+        transition: transform 0.4s ease;
         border-radius: 50%;
       }
 
@@ -245,12 +245,27 @@
               margin: 0 5px;
             }
 
+            .middle {
+              padding: 10px;
+              margin: 0 5px;
+            }
+
             .verb {
               padding: 10px;
               margin: 0 5px;
             }
 
             .predicate {
+              padding: 10px;
+              margin: 0 5px;
+            }
+
+            .first-term {
+              padding: 10px;
+              margin: 0 5px;
+            }
+
+            .second-term {
               padding: 10px;
               margin: 0 5px;
             }
