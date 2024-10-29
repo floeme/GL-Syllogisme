@@ -28,11 +28,13 @@ export class Proposition {
     }
 
     /**
-     * Returns true if the subject and the predicate are defined and distinct, and if the quantifier is defined.
+     * Returns true if the subject and the predicate are defined, distinct and not blank (empty string or string with
+     * only whitespace characters), and if the quantifier is defined.
      * Otherwise, returns false.
      */
     hasValidStructure(): boolean {
         return this.quantifier !== undefined && this.predicate !== undefined && this.subject !== undefined
+            && this.subject.value.trim().length > 0 && this.predicate.value.trim().length > 0
             && this.subject.value !== this.predicate.value;
     }
 
