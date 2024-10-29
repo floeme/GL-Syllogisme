@@ -35,6 +35,12 @@ export const Navigation = () => {
           >
             <li>Quantifiers</li>
           </NavLink>
+          <NavLink
+            to="/syllogism_table"
+            className={(nav) => (nav.isActive ? "nav-active" : "")}
+          >
+            <li>Syllogism Table</li>
+          </NavLink>
         </ul>
       </div>
       <ChooserLanguage callbackLang={onChange}/>

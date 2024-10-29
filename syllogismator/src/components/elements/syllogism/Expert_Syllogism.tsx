@@ -15,8 +15,10 @@ interface Expert_SyllogismProps {
 }
 
 export const Expert_Syllogism = ({ subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure, expertMode, setExpertMode }: Expert_SyllogismProps) => {
-  const [MP1FirstTerm, setMP1FirstTerm] = useState("Homme")
-  const [MP1SecondTerm, setMP1SecondTerm] = useState("Mortel")
+  const [MP1FirstTerm, setMP1FirstTerm] = useState("")
+  const [MP1SecondTerm, setMP1SecondTerm] = useState("")
+  const [MP2FirstTerm, setMP2FirstTerm] = useState("")
+  const [MP2SecondTerm, setMP2SecondTerm] = useState("")
 
   return (
     <>
@@ -25,6 +27,10 @@ export const Expert_Syllogism = ({ subject, setSubject, predicate, setPredicate,
           setMP1FirstTerm={setMP1FirstTerm}
           MP1SecondTerm={MP1SecondTerm}
           setMP1SecondTerm={setMP1SecondTerm}
+          MP2FirstTerm={MP2FirstTerm}
+          setMP2FirstTerm={setMP2FirstTerm}
+          MP2SecondTerm={MP2SecondTerm}
+          setMP2SecondTerm={setMP2SecondTerm}
           subject={subject}
           setSubject={setSubject}
           predicate={predicate}

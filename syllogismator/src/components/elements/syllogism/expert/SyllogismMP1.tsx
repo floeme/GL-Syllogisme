@@ -9,8 +9,7 @@ interface SyllogismMP1Props {
 }
 
 function SyllogismMP1({ MP1FirstTerm, setMP1FirstTerm, MP1SecondTerm, setMP1SecondTerm }: SyllogismMP1Props) {
-    const [verb, setVerb] = useState("")
-    const [value, setValue] = useState("")
+    const [verb, setVerb] = useState("Please select a quantifier")
 
     return (
         <div className="mp-container">
