@@ -55,11 +55,10 @@ export const QuantifiersAliases = () => {
           removeAlias={removeAlias}
           initialQuantifiers={initialQuantifiers.O}
         />
-
-        <button onClick={resetToDefaults} className="reset-button">
+      </div>
+      <button onClick={resetToDefaults} className="reset-button">
           Reset to defaults
         </button>
-      </div>
     </div>
   )
 }

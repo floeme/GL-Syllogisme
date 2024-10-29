@@ -10,9 +10,9 @@
   margin: 0 auto;
   font-family: Arial, sans-serif;
   height: 100%;
-  
-
   font-family: $font-1;
+
+
   .section-terms-figures {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
@@ -20,24 +20,23 @@
     width: 100%;
     height: 100%;
 
-    background-color: $color-background-main;
+    background-color: transparent;
     border-radius: 20px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 15%;
 
     .section-terms-input {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
 
-      //border: 2px solid #2B7A78;
       border-radius: 10px;
       padding: 20px;
       background-color: $color-font-violet;
       text-align: center;
-      //font-weight: bold;
       font-size: 1.2rem;
     }
 
@@ -107,7 +106,7 @@
       align-items: center;
 
     
-      background-color: transparent;
+      background-color: $color-font-violet;
       border-radius: 20px;
       margin-top: 1%;
       margin-bottom: 1%;
@@ -117,6 +116,17 @@
         padding: 10px;
         background-color: transparent;
         cursor: pointer;
+      }
+
+      .switch-comp {
+        position: flex;
+        display:inline-flex;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        align-items: center;
+        justify-content: space-between;
+      
       }
 
       .switch {     
@@ -170,7 +180,7 @@
     .syllogism-grid {
       border: 1px solid black;
       display: grid;
-      background-color: transparent;
+      background-color: $color-font-violet;
       border-radius: 10px;
 
       grid-template-columns: 25% 70% ;
@@ -307,7 +317,7 @@
   font-family: Arial, sans-serif;
   height: 100%;
   
-
+  background-color: transparent;
   font-family: $font-1;
   
   .section-premises {
@@ -319,10 +329,10 @@
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 
-    background-color: $color-font-violet;
+    background-color: transparent;
     border-radius: 20px;
     margin-left: 2%;
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -339,7 +349,7 @@
       align-items: center;
 
     
-      background-color: transparent;
+      background-color: $color-font-violet;
       border-radius: 20px;
       margin-top: 1%;
       margin-bottom: 1%;
@@ -351,13 +361,19 @@
         cursor: pointer;
       }
 
-      .switch {     
- 
+      .switch-comp {
+        position: flex;
+        display:inline-flex;
+        padding-left: 10px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .switch {    
         position: relative;
         display: inline-block;
         width: 60px;
         height: 34px;
-        
       }
 
       .switch input {
@@ -402,7 +418,7 @@
     .syllogism-grid {
       border: 1px solid black;
       display: grid;
-      background-color: transparent;
+      background-color: $color-font-violet;
       border-radius: 10px;
 
       grid-template-columns: 25% 70% ;
