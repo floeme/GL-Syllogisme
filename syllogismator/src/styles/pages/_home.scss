@@ -11,78 +11,81 @@
 $font-1: "font-1", sans-serif;
 $font-2: "font-2", sans-serif;
 
-$color-1: #17252A;
-$color-2: #2B7A78;
-$color-3: #3AAFA9;
-$color-4: #cddfde;
-$color-5: #FEFFFF;
-
 .home {
-    min-height: 100vh;
+    max-height: 100%;
+    height: 100%;
     min-width: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 0 5%;
+    //padding: 0 5%;
 }
 
-.content {
+.content-home {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 100%;
+    height: 100%;
     flex: 1;
-
 }
 
 .right-section {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    text-align: left;
+    position: relative; 
+    height: 100%;
+    width: 100%;
+    
+    .lewisbody {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: flex-end; 
 
-    .socrates-image {
-        max-width: 60dvw;
-        height: auto;
+        img {
+            max-width: 70%;
+            height: auto;
+        }
     }
-}
-
-.socratebody {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-.socratetext {
-    text-align: center;
-    color: $color-1;
+    
+    .text {
+        text-align: left;
+        color: $color-font-blanc;
+        margin-top: 10%; 
+        padding: 2%;
+    }
 }
 
 .left-section {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;  //alignement a gauche
+    align-items: flex-start;  
     text-align: left;
+    padding: 3%;
 
     .title {
         font-size: 2.5rem;
         margin-bottom: 20px;
-        color: $color-1;
+        color: $color-font-blanc;
     }
 
     .color2 {
-        color: $color-5;
+        color: $color-font-violet;
     }
 
     .button {
         padding: 15px 30px;
         border-radius: 30px;
-        background-color: $color-2;
-        color: white;
+        background-color: $color-button;
+        color: $color-font-blanc;
         font-size: 1.2rem;
         border: none;
         cursor: pointer;
@@ -90,7 +93,7 @@ $color-5: #FEFFFF;
         transition: all 0.3s ease;
 
         &:hover {
-            background-color: $color-3;
+            background-color: $color-blue;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             transform: translateY(-5px);
         }

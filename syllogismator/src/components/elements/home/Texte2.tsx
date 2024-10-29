@@ -1,11 +1,11 @@
+import {useTranslation} from "react-i18next";
+
 export const Texte2 = () => {
+    const { t } = useTranslation('translation', { keyPrefix: 'home' });
   return (
-    <div className="socratetext">
+    <div className="text">
       <p className="explanation-text">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,
-        incidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et
-        dolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,
-        cupiditate?
+          {t("text2")}
       </p>
     </div>
   );

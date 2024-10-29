@@ -9,6 +9,9 @@ import Quantifier from './components/pages/QuantifierAliases.tsx';
 import { QuantifierProvider } from './contexts/QuantifierContext.tsx';
 import SyllogismTable from './components/pages/SyllogismTable.tsx';
 
+// import i18n (needs to be bundled ;))
+import './i18n';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <QuantifierProvider>
     <BrowserRouter>

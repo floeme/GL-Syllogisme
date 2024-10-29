@@ -10,33 +10,39 @@ export const Syllogism = () => {
   const [expertMode, setExpertMode] = useState(false)
 
   return (
-    <div className="syllogism-container">
+    <>
       {expertMode == false ?
-        <Basic_Syllogism
-          subject={subject}
-          setSubject={setSubject}
-          predicate={predicate}
-          setPredicate={setPredicate}
-          middle={middle}
-          setMiddle={setMiddle}
-          figure={figure}
-          setFigure={setFigure}
-          expertMode={expertMode}
-          setExpertMode={setExpertMode}
-        /> :
-        <Expert_Syllogism
-          subject={subject}
-          setSubject={setSubject}
-          predicate={predicate}
-          setPredicate={setPredicate}
-          middle={middle}
-          setMiddle={setMiddle}
-          figure={figure}
-          setFigure={setFigure}
-          expertMode={expertMode}
-          setExpertMode={setExpertMode}
-        />}
-    </div>
+        <div className="syllogism-container-easy">
+          <Basic_Syllogism
+            subject={subject}
+            setSubject={setSubject}
+            predicate={predicate}
+            setPredicate={setPredicate}
+            middle={middle}
+            setMiddle={setMiddle}
+            figure={figure}
+            setFigure={setFigure}
+            expertMode={expertMode}
+            setExpertMode={setExpertMode}
+          /> 
+        </div>
+        :
+        <div className="syllogism-container-expert">
+          <Expert_Syllogism
+            subject={subject}
+            setSubject={setSubject}
+            predicate={predicate}
+            setPredicate={setPredicate}
+            middle={middle}
+            setMiddle={setMiddle}
+            figure={figure}
+            setFigure={setFigure}
+            expertMode={expertMode}
+            setExpertMode={setExpertMode}
+          />
+        </div>
+      }
+    </> 
   )
 }
 

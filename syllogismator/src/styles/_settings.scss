@@ -11,12 +11,13 @@
 $font-1: "font-1", sans-serif;
 $font-2: "font-2", sans-serif;
 
-$color-1: #17252A;
-$color-2: #2B7A78;
-$color-3: #3AAFA9;
-$color-4: #cddfde;
-$color-5: #FEFFFF;
-$color-violet: #CE93D8;
+$color-background-main: #140b29;
+$color-font-blanc: #fff;
+$color-font-violet: #8b7bf3;
+$color-font-grey: #7D7688;
+$color-button: #705df2;
+$color-blue: #62c7ff;
+$color-shadow-violet: #2B2058;
 
 .page {
     min-height: 100vh;
@@ -32,7 +33,8 @@ $color-violet: #CE93D8;
 body {
     min-height: 100vh;
     min-width: 100vh;
-    background: linear-gradient(135deg, #3AAFA9, #CE93D8);
+    background-color: $color-background-main ;
+    //background: linear-gradient(135deg, #3AAFA9, #CE93D8);
     font-family: $font-1;
     margin: 0;
     padding: 0;

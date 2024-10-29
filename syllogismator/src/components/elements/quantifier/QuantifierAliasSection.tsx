@@ -21,6 +21,7 @@ function QuantifierAliasSection({ type, aliases, addAlias, removeAlias, initialQ
     return (
         <div className="quantifier-alias-section">
             <h3>{type}</h3>
+            <div className="list-alias">
             <ul>
                 {aliases.map((alias, index) => (
                     <li key={index}>
@@ -31,7 +32,9 @@ function QuantifierAliasSection({ type, aliases, addAlias, removeAlias, initialQ
                     </li>
                 ))}
             </ul>
-            <div>
+            </div>
+           
+            <div className="add-alias">
                 <input
                     type="text"
                     value={newAlias}
