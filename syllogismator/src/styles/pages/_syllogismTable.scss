@@ -1,0 +1,37 @@
+.syllogism-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    color: #b6aec2;
+    background-color: #221443;
+}
+
+.syllogism-table th {
+    background-color: #705df2;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #000;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.syllogism-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+.syllogism-table tr:nth-child(even) {
+    background-color: #1a0f34;
+}
+
+.syllogism-table tr:hover {
+    background-color: #978be235;
+}
+
+.syllogism-table th, .syllogism-table td {
+    text-align: center;
+}
