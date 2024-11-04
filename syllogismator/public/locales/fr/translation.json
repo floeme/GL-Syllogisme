@@ -21,6 +21,26 @@
     }
   },
   "syllogism": {
-
+    "quantifier": {
+      "A": "Tout",
+      "E": "Aucun",
+      "I": "Il existe",
+      "O": "Pas certains"
+    },
+    "rule": {
+      "Rmt": {
+        "name": "Règle du moyen-terme",
+        "description": "Le quantificateur (pour le moyen-terme) doit être universel dans une prémisse au moins.",
+        "passed": "Le quantificateur est universel dans une prémisse au moins.",
+        "failed": "Aucune prémisse ne comporte un quantificateur universel."
+      },
+      "Rlh": {
+        "name": "Règle du Latius-Hos",
+        "description": "La quantité d’un terme de la conclusion ne peut être universelle que si elle l’est dans la prémisse contenant ce terme.",
+        "specific_conclusion": "La conclusion a un quantificateur spécifique, cette règle ne s'applique donc pas à ce syllogisme.",
+        "passed": "La conclusion est universelle et au moins un terme de celle-ci apparaît dans une prémisse universelle.",
+        "failed": "La conclusion est universelle mais aucun de ses termes n'apparaît dans une prémisse universelle."
+      }
+    }
   }
 }
