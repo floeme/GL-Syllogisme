@@ -25,8 +25,11 @@ export const QuantifiersAliases = () => {
 
   return (
     <div className="quantifiers-aliases">
-      <h2>Quantifiers Aliases</h2>
-      <div className="alias-sections">
+        <div className="alias-title">
+            <h2>Quantifiers Aliases</h2>
+        </div>
+
+        <div className="alias-sections">
         <QuantifierAliasSection
           type="A"
           aliases={quantifiers.A}
@@ -58,7 +61,7 @@ export const QuantifiersAliases = () => {
       </div>
       <button onClick={resetToDefaults} className="reset-button">
           Reset to defaults
-        </button>
+      </button>
     </div>
   )
 }

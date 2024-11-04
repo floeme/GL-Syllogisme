@@ -20,18 +20,21 @@ function QuantifierAliasSection({ type, aliases, addAlias, removeAlias, initialQ
 
     return (
         <div className="quantifier-alias-section">
-            <h3>{type}</h3>
+            <div className="quantifier-alias-section-title">
+                <h3>{type}</h3>
+            </div>
+
             <div className="list-alias">
-            <ul>
-                {aliases.map((alias, index) => (
-                    <li key={index}>
-                        <input type="text" value={alias} readOnly />
-                        {!initialQuantifiers.includes(alias) && (
-                            <button onClick={() => removeAlias(type, alias)}>🗑️</button>
-                        )}
-                    </li>
-                ))}
-            </ul>
+                <ul className="list-alias-ul">
+                    {aliases.map((alias, index) => (
+                        <li key={index} className="list-alias-ul-li">
+                            <input type="text" value={alias} readOnly />
+                            {!initialQuantifiers.includes(alias) && (
+                                <button onClick={() => removeAlias(type, alias)}>🗑️</button>
+                            )}
+                        </li>
+                    ))}
+                </ul>
             </div>
            
             <div className="add-alias">
@@ -40,8 +43,9 @@ function QuantifierAliasSection({ type, aliases, addAlias, removeAlias, initialQ
                     value={newAlias}
                     onChange={(e) => setNewAlias(e.target.value)}
                     placeholder="Add a quantifier alias"
+                    className="add-alias-input"
                 />
-                <button onClick={handleAdd}>Add</button>
+                <button onClick={handleAdd} className="add-alias-button">Add</button>
             </div>
         </div>
     )
