@@ -1,3 +1,5 @@
-test("Proposition: withTerms", () => {
+describe('Rule', () => {
+    it("ete", async ()=>{
 
+    })
 })

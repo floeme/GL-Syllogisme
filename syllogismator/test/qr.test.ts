@@ -1,32 +1,149 @@
-import {Quantifier} from "../src/model/Quantifier.ts";
-import {QuantifierType} from "../src/model/QuantifierType.ts";
-import {QuantifierRepository} from "../src/model/QuantifierRepository.ts";
+import {Quantifier} from "../src/model/Quantifier";
+import {QuantifierType} from "../src/model/QuantifierType";
+import {QuantifierRepository} from "../src/model/QuantifierRepository";
 
-test("Quantifier Repository: getByType", async () => {
+const checkExist = (q : Quantifier[], t : Quantifier): boolean => {
+    return q.find(value => {
+        return value.name == t.name;
+    }) != undefined
+}
 
-    const quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
-    const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
+const search = (q : Quantifier[], t : Quantifier): Quantifier => {
+    const result =  q.find(value => {
+        return value.name == t.name;
+    })
+    if(result == undefined)
+        return t;
+    return result;
+}
 
-    const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
-    const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
-    const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
+describe("QuantifierRepository", () => {
+    it("Repository: getByType", async () => {
 
-    const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
+        const quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
 
-    QuantifierRepository.reset();
+        const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
+        const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
+        const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
 
-    QuantifierRepository.add(quantifiera1);
-    QuantifierRepository.add(quantifiera2);
+        const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
 
-    QuantifierRepository.add(quantifieri1);
-    QuantifierRepository.add(quantifieri2);
-    QuantifierRepository.add(quantifieri3);
+        QuantifierRepository.reset();
 
-    QuantifierRepository.add(quantifiero1);
+        QuantifierRepository.add(quantifiera1);
+        QuantifierRepository.add(quantifiera2);
 
-    expect(QuantifierRepository.getByType(QuantifierType.A).length).toBe(2)
-    expect(QuantifierRepository.getByType(QuantifierType.E).length).toBe(0)
-    expect(QuantifierRepository.getByType(QuantifierType.I).length).toBe(3)
-    expect(QuantifierRepository.getByType(QuantifierType.O).length).toBe(1)
+        QuantifierRepository.add(quantifieri1);
+        QuantifierRepository.add(quantifieri2);
+        QuantifierRepository.add(quantifieri3);
+
+        QuantifierRepository.add(quantifiero1);
+
+        expect(QuantifierRepository.getByType(QuantifierType.A).length).toBe(2)
+        expect(QuantifierRepository.getByType(QuantifierType.E).length).toBe(0)
+        expect(QuantifierRepository.getByType(QuantifierType.I).length).toBe(3)
+        expect(QuantifierRepository.getByType(QuantifierType.O).length).toBe(1)
+
+    })
+
+    it("Repository: Add and getAll", async () => {
+
+        const quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
+
+        const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
+        const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
+        const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
+
+        const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
+
+        QuantifierRepository.reset();
+
+        QuantifierRepository.add(quantifiera1);
+        QuantifierRepository.add(quantifiera2);
+
+        QuantifierRepository.add(quantifieri1);
+        QuantifierRepository.add(quantifieri2);
+        QuantifierRepository.add(quantifieri3);
+
+        QuantifierRepository.add(quantifiero1);
+
+        expect(QuantifierRepository.getAll().length).toBe(6);
+
+
+        const allQuantifier = QuantifierRepository.getAll();
+
+        expect(checkExist(allQuantifier, quantifiera1)).toBe(true);
+        expect(checkExist(allQuantifier, quantifiera2)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifieri1)).toBe(true);
+        expect(checkExist(allQuantifier, quantifieri2)).toBe(true);
+        expect(checkExist(allQuantifier, quantifieri3)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifiero1)).toBe(true);
+
+    })
+
+    it("Repository: Remove", async () => {
+
+        var quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
+
+        const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
+        const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
+        const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
+
+        const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
+
+        QuantifierRepository.reset();
+
+        QuantifierRepository.add(quantifiera1);
+        QuantifierRepository.add(quantifiera2);
+
+        QuantifierRepository.add(quantifieri1);
+        QuantifierRepository.add(quantifieri2);
+        QuantifierRepository.add(quantifieri3);
+
+        QuantifierRepository.add(quantifiero1);
+
+
+        var allQuantifier = QuantifierRepository.getAll();
+
+
+        quantifiera1 = search(allQuantifier, quantifiera1);
+        QuantifierRepository.remove(quantifiera1);
+        allQuantifier = QuantifierRepository.getAll();
+
+
+        expect(checkExist(allQuantifier, quantifiera1)).toBe(false);
+        expect(checkExist(allQuantifier, quantifiera2)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifieri1)).toBe(true);
+        expect(checkExist(allQuantifier, quantifieri2)).toBe(true);
+        expect(checkExist(allQuantifier, quantifieri3)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifiero1)).toBe(true);
+
+
+        QuantifierRepository.remove(search(allQuantifier, quantifieri2));
+        allQuantifier = QuantifierRepository.getAll();
+
+        expect(checkExist(allQuantifier, quantifiera1)).toBe(false);
+        expect(checkExist(allQuantifier, quantifiera2)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifieri1)).toBe(true);
+        expect(checkExist(allQuantifier, quantifieri2)).toBe(false);
+        expect(checkExist(allQuantifier, quantifieri3)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifiero1)).toBe(true);
+
+    })
 
 })

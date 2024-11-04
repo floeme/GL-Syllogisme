@@ -1,3 +1,5 @@
-test("Proposition: withTerms", () => {
+describe('Syllogisme', () => {
+    it("ete", async ()=>{
 
+    })
 })

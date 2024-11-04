@@ -72,7 +72,7 @@ export class QuantifierRepository {
      */
     static remove(quantifier: Quantifier): void {
         this.update(quantifiers => {
-            const index = quantifiers.indexOf(quantifier);
+            const index = quantifiers.findIndex(q=>q.name == quantifier.name);
             if (index >= 0) quantifiers.splice(index, 1);
         });
     }
