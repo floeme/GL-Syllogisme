@@ -21,6 +21,12 @@
     }
   },
   "syllogism": {
+    "quantifier": {
+      "A": "Tout",
+      "E": "Aucun",
+      "I": "Il existe",
+      "O": "Pas certains"
+    },
     "rule": {
       "Rmt": {
         "name": "Règle du moyen-terme",

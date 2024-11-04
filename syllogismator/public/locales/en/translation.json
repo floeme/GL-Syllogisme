@@ -21,6 +21,12 @@
     }
   },
   "syllogism": {
+    "quantifier": {
+      "A": "All",
+      "E": "None",
+      "I": "Some",
+      "O": "Some Not"
+    },
     "rule": {
       "Rmt": {
         "name": "Middle Term Rule",
