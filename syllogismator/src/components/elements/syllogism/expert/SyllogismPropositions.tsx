@@ -44,6 +44,7 @@ function SyllogismPropositions({
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier
 }: SyllogismPremisesProps) {
+    const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
 
@@ -101,8 +102,66 @@ function SyllogismPropositions({
         }
     }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm])
 
+    const validateInputs = () => {
+        let isErrorMessage = false
+
+        if (!MP2SecondTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le quatrième champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!MP2FirstTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le troisième champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!MP1SecondTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le deuxième champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!MP1FirstTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le premier champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!prop3Quantifier) {
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!prop2Quantifier) {
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!prop1Quantifier) {
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        return isErrorMessage
+    }
 
     const checkSyllogism = () => {
+        if (!validateInputs()) {
+
+        }
+
         console.log("check")
     }
 
@@ -196,8 +255,8 @@ function SyllogismPropositions({
             </div>
 
             <div className="syllogism-grid">
-                {errorMessage1 && <p style={{ color: "red" }}>{errorMessage1}</p>}
-                {errorMessage2 && <p style={{ color: "red" }}>{errorMessage2}</p>}
+                {errorMessage1 && <p style={{ color: "#fc9294" }}>{errorMessage1}</p>}
+                {errorMessage2 && <p style={{ color: "#fc9294" }}>{errorMessage2}</p>}
                 {propositions.map((proposition, index) => (
                     <Fragment key={index}>
                         <div className={"label-" + (index+1)}>
@@ -212,6 +271,7 @@ function SyllogismPropositions({
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />
+                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
                 </div>
             </div>

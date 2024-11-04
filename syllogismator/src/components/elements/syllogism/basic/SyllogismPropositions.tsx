@@ -30,7 +30,76 @@ function SyllogismPropositions({
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier
 }: SyllogismPremisesProps) {
+    const [inputErrorMessage, setInputErrorMessage] = useState("")
+
+    const validateInputs = () => {
+        let isErrorMessage = false
+
+        if (!prop3Quantifier) {
+            console.log("a")
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("b")
+            setInputErrorMessage("")
+        }
+
+        if (!prop2Quantifier) {
+            console.log("c")
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("d")
+            setInputErrorMessage("")
+        }
+
+        if (!prop1Quantifier) {
+            console.log("e")
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("f")
+            setInputErrorMessage("")
+        }
+
+        if (!figure) {
+            console.log("g")
+            setInputErrorMessage("Veuillez renseigner une figure")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("h")
+            setInputErrorMessage("")
+        }
+
+        if (!middle) {
+            setInputErrorMessage("Veuillez renseigner un moyen terme")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!predicate) {
+            setInputErrorMessage("Veuillez renseigner un prédicat")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!subject) {
+            setInputErrorMessage("Veuillez renseigner un sujet")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        return isErrorMessage
+    }
+
     const checkSyllogism = () => {
+        if (!validateInputs()) {
+
+        }
+
         console.log("check")
     }
 
@@ -95,6 +164,10 @@ function SyllogismPropositions({
     ])
 
     useEffect(() => {
+        if (subject === predicate || subject === middle || predicate === middle) {
+            setInputErrorMessage("Conflit - Les termes doivent être différents")
+        }
+
         setPropositions([
             renderSyllogismMP1(figure),
             renderSyllogismMP2(figure),
@@ -143,6 +216,7 @@ function SyllogismPropositions({
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />
+                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
                 </div>
             </div>
