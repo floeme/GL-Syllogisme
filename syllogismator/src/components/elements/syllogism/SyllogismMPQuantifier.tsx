@@ -3,9 +3,10 @@ import QuantifierContext from "../../../contexts/QuantifierContext"
 
 interface SyllogismMPQuantifierProps {
     setVerb: (value: string) => void
+    setPropQuantifier: (value: string) => void
 }
 
-function SyllogismMPQuantifier({ setVerb }: SyllogismMPQuantifierProps) {
+function SyllogismMPQuantifier({ setVerb, setPropQuantifier }: SyllogismMPQuantifierProps) {
     const { quantifiers } = useContext(QuantifierContext)
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -14,15 +15,19 @@ function SyllogismMPQuantifier({ setVerb }: SyllogismMPQuantifierProps) {
 
         switch (group) {
             case "A":
+                setPropQuantifier("A")
                 setVerb("are")
                 break
             case "E":
+                setPropQuantifier("E")
                 setVerb("are not")
                 break
             case "I":
+                setPropQuantifier("I")
                 setVerb("are some")
                 break
             case "O":
+                setPropQuantifier("O")
                 setVerb("are not some")
                 break
             default:

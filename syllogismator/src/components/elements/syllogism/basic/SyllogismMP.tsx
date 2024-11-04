@@ -4,16 +4,17 @@ import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
 interface SyllogismMPProps {
     firstTerm: string
     secondTerm: string
+    setPropQuantifier: (value: string) => void
 }
 
-function SyllogismMP({ firstTerm, secondTerm }: SyllogismMPProps) {
+function SyllogismMP({ firstTerm, secondTerm, setPropQuantifier }: SyllogismMPProps) {
     const [verb, setVerb] = useState("Please select a quantifier")
 
     return (
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <SyllogismMPQuantifier setVerb={setVerb} />
+                    <SyllogismMPQuantifier setVerb={setVerb} setPropQuantifier={setPropQuantifier} />
                 </div>
 
                 <div className="subject">

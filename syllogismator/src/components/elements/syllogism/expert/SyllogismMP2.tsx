@@ -8,15 +8,15 @@ interface SyllogismMP2Props {
     setMP2FirstTerm: (value: string) => void
     MP2SecondTerm: string
     setMP2SecondTerm: (value: string) => void
+	setProp2Quantifier: (value: string) => void
 }
 
 function SyllogismMP2({
     MP1FirstTerm,
     MP1SecondTerm,
-    MP2FirstTerm,
-    setMP2FirstTerm,
-    MP2SecondTerm,
-    setMP2SecondTerm,
+    MP2FirstTerm, setMP2FirstTerm,
+    MP2SecondTerm, setMP2SecondTerm,
+    setProp2Quantifier
 }: SyllogismMP2Props) {
     const [verb, setVerb] = useState("Please select a quantifier")
     const [selected1, setSelected1] = useState(false)
@@ -73,7 +73,7 @@ function SyllogismMP2({
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <SyllogismMPQuantifier setVerb={setVerb} />
+                    <SyllogismMPQuantifier setVerb={setVerb} setPropQuantifier={setProp2Quantifier} />
                 </div>
 
                 <div className="first-term">

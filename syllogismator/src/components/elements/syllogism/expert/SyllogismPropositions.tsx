@@ -22,32 +22,29 @@ interface SyllogismPremisesProps {
     setFigure: (value: string) => void
     expertMode: boolean
     setExpertMode: (value: boolean) => void
+	prop1Quantifier: string
+	setProp1Quantifier: (value: string) => void
+	prop2Quantifier: string
+	setProp2Quantifier: (value: string) => void
+	prop3Quantifier: string
+	setProp3Quantifier: (value: string) => void
 }
 
 function SyllogismPropositions({
-    MP1FirstTerm,
-    setMP1FirstTerm,
-    MP1SecondTerm,
-    setMP1SecondTerm,
-    MP2FirstTerm,
-    setMP2FirstTerm,
-    MP2SecondTerm,
-    setMP2SecondTerm,
-    subject,
-    setSubject,
-    predicate,
-    setPredicate,
-    middle,
-    setMiddle,
-    expertMode,
-    setExpertMode
+    MP1FirstTerm, setMP1FirstTerm,
+    MP1SecondTerm, setMP1SecondTerm,
+    MP2FirstTerm, setMP2FirstTerm,
+    MP2SecondTerm, setMP2SecondTerm,
+    subject, setSubject,
+    predicate, setPredicate,
+    middle, setMiddle,
+    figure, setFigure,
+    expertMode, setExpertMode,
+	prop1Quantifier, setProp1Quantifier,
+	prop2Quantifier, setProp2Quantifier,
+	prop3Quantifier, setProp3Quantifier
 }: SyllogismPremisesProps) {
-    // Références pour stocker les valeurs précédentes
-    // const prevMP1FirstTerm = useRef(MP1FirstTerm)
-    // const prevMP1SecondTerm = useRef(MP1SecondTerm)
-    // const prevMP2FirstTerm = useRef(MP2FirstTerm)
-    // const prevMP2SecondTerm = useRef(MP2SecondTerm)
-
+    const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
 
@@ -77,6 +74,7 @@ function SyllogismPropositions({
             setSubject(MP2SecondTerm)
             setMiddle(MP1FirstTerm)
             setPredicate(MP1SecondTerm)
+            setFigure("figure3")
         }
 
         // Figure 1
@@ -84,6 +82,7 @@ function SyllogismPropositions({
             setSubject(MP2FirstTerm)
             setMiddle(MP1FirstTerm)
             setPredicate(MP1SecondTerm)
+            setFigure("figure1")
         }
 
         // Figure 4
@@ -91,6 +90,7 @@ function SyllogismPropositions({
             setSubject(MP2SecondTerm)
             setMiddle(MP1SecondTerm)
             setPredicate(MP1FirstTerm)
+            setFigure("figure4")
         }
 
         // Figure 2
@@ -98,11 +98,70 @@ function SyllogismPropositions({
             setSubject(MP2FirstTerm)
             setMiddle(MP1SecondTerm)
             setPredicate(MP1FirstTerm)
+            setFigure("figure2")
         }
     }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm])
 
+    const validateInputs = () => {
+        let isErrorMessage = false
+
+        if (!MP2SecondTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le quatrième champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!MP2FirstTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le troisième champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!MP1SecondTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le deuxième champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!MP1FirstTerm) {
+            setInputErrorMessage("Veuillez renseigner un terme dans le premier champ")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!prop3Quantifier) {
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!prop2Quantifier) {
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!prop1Quantifier) {
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        return isErrorMessage
+    }
 
     const checkSyllogism = () => {
+        if (!validateInputs()) {
+
+        }
+
         console.log("check")
     }
 
@@ -131,6 +190,7 @@ function SyllogismPropositions({
             setMP1FirstTerm={setMP1FirstTerm}
             MP1SecondTerm={MP1SecondTerm}
             setMP1SecondTerm={setMP1SecondTerm}
+            setProp1Quantifier={setProp1Quantifier}
         />,
         <SyllogismMP2
             MP1FirstTerm={MP1FirstTerm}
@@ -139,10 +199,12 @@ function SyllogismPropositions({
             setMP2FirstTerm={setMP2FirstTerm}
             MP2SecondTerm={MP2SecondTerm}
             setMP2SecondTerm={setMP2SecondTerm}
+            setProp2Quantifier={setProp2Quantifier}
         />,
         <SyllogismMP3
             subject={subject}
             predicate={predicate}
+            setProp3Quantifier={setProp3Quantifier}
         />
     ])
 
@@ -153,6 +215,7 @@ function SyllogismPropositions({
                 setMP1FirstTerm={setMP1FirstTerm}
                 MP1SecondTerm={MP1SecondTerm}
                 setMP1SecondTerm={setMP1SecondTerm}
+                setProp1Quantifier={setProp1Quantifier}
             />,
             <SyllogismMP2
                 MP1FirstTerm={MP1FirstTerm}
@@ -161,64 +224,15 @@ function SyllogismPropositions({
                 setMP2FirstTerm={setMP2FirstTerm}
                 MP2SecondTerm={MP2SecondTerm}
                 setMP2SecondTerm={setMP2SecondTerm}
+                setProp2Quantifier={setProp2Quantifier}
             />,
             <SyllogismMP3
                 subject={subject}
                 predicate={predicate}
+                setProp3Quantifier={setProp3Quantifier}
             />
         ])
     }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, subject, predicate, middle])
-
-    // Pour la synchro mais trop compliqué pour rien
-    // useEffect(() => {
-    //     console.log("aaaaaa")
-    //     if (prevMP1FirstTerm.current === MP2FirstTerm) {
-    //         setMP2FirstTerm(MP1FirstTerm)
-    //     }
-    //     if (prevMP1FirstTerm.current === MP2SecondTerm) {
-    //         setMP2SecondTerm(MP1FirstTerm)
-    //     }
-    //     if (prevMP1SecondTerm.current === MP2FirstTerm) {
-    //         setMP2FirstTerm(MP1SecondTerm)
-    //     }
-    //     if (prevMP1SecondTerm.current === MP2SecondTerm) {
-    //         setMP2SecondTerm(MP1SecondTerm)
-    //     }
-
-    //     prevMP1FirstTerm.current = MP1FirstTerm
-    //     prevMP1SecondTerm.current = MP1SecondTerm
-    // }, [MP1FirstTerm, MP1SecondTerm])
-
-    // useEffect(() => {
-    //     if (MP2FirstTerm !== prevMP2FirstTerm.current) {
-    //         if (prevMP2FirstTerm.current === MP1FirstTerm && MP1FirstTerm !== "") {
-    //             console.log("1")
-    //             setMP1FirstTerm(MP2FirstTerm)
-    //         }
-    //         if (prevMP2FirstTerm.current === MP1SecondTerm && MP1SecondTerm !== "") {
-    //             console.log("2")
-    //             setMP1SecondTerm(MP2FirstTerm)
-    //         }
-    //     }
-
-    //     console.log("prevMP2SecondTerm.current", prevMP2SecondTerm.current)
-    //     console.log("MP1SecondTerm", MP1SecondTerm)
-    //     console.log("MP2SecondTerm", MP2SecondTerm)
-
-    //     if (MP2SecondTerm !== prevMP2SecondTerm.current) {
-    //         if (prevMP2SecondTerm.current === MP1FirstTerm && MP1FirstTerm !== "") {
-    //             console.log("3")
-    //             setMP1FirstTerm(MP2SecondTerm)
-    //         }
-    //         if (prevMP2SecondTerm.current === MP1SecondTerm && MP1SecondTerm !== "") {
-    //             console.log("4")
-    //             setMP1SecondTerm(MP2SecondTerm)
-    //         }
-    //     }
-
-    //     prevMP2FirstTerm.current = MP2FirstTerm
-    //     prevMP2SecondTerm.current = MP2SecondTerm
-    // }, [MP2FirstTerm, MP2SecondTerm])
 
     return (
         <div className="section-premises">
@@ -241,8 +255,8 @@ function SyllogismPropositions({
             </div>
 
             <div className="syllogism-grid">
-                {errorMessage1 && <p style={{ color: "red" }}>{errorMessage1}</p>}
-                {errorMessage2 && <p style={{ color: "red" }}>{errorMessage2}</p>}
+                {errorMessage1 && <p style={{ color: "#fc9294" }}>{errorMessage1}</p>}
+                {errorMessage2 && <p style={{ color: "#fc9294" }}>{errorMessage2}</p>}
                 {propositions.map((proposition, index) => (
                     <Fragment key={index}>
                         <div className={"label-" + (index+1)}>
@@ -257,6 +271,7 @@ function SyllogismPropositions({
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />
+                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
                 </div>
             </div>

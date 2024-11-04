@@ -12,10 +12,94 @@ interface SyllogismPremisesProps {
     setFigure: (value: string) => void
     expertMode: boolean
     setExpertMode: (value: boolean) => void
+    prop1Quantifier: string
+    setProp1Quantifier: (value: string) => void
+    prop2Quantifier: string
+    setProp2Quantifier: (value: string) => void
+    prop3Quantifier: string
+    setProp3Quantifier: (value: string) => void
 }
 
-function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, middle, setMiddle, figure, setFigure, expertMode, setExpertMode }: SyllogismPremisesProps) {
+function SyllogismPropositions({
+    subject, setSubject,
+    predicate, setPredicate,
+    middle, setMiddle,
+    figure, setFigure,
+    expertMode, setExpertMode,
+	prop1Quantifier, setProp1Quantifier,
+	prop2Quantifier, setProp2Quantifier,
+	prop3Quantifier, setProp3Quantifier
+}: SyllogismPremisesProps) {
+    const [inputErrorMessage, setInputErrorMessage] = useState("")
+
+    const validateInputs = () => {
+        let isErrorMessage = false
+
+        if (!prop3Quantifier) {
+            console.log("a")
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("b")
+            setInputErrorMessage("")
+        }
+
+        if (!prop2Quantifier) {
+            console.log("c")
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("d")
+            setInputErrorMessage("")
+        }
+
+        if (!prop1Quantifier) {
+            console.log("e")
+            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("f")
+            setInputErrorMessage("")
+        }
+
+        if (!figure) {
+            console.log("g")
+            setInputErrorMessage("Veuillez renseigner une figure")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            console.log("h")
+            setInputErrorMessage("")
+        }
+
+        if (!middle) {
+            setInputErrorMessage("Veuillez renseigner un moyen terme")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!predicate) {
+            setInputErrorMessage("Veuillez renseigner un prédicat")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        if (!subject) {
+            setInputErrorMessage("Veuillez renseigner un sujet")
+            isErrorMessage = true
+        } else if (!isErrorMessage) {
+            setInputErrorMessage("")
+        }
+
+        return isErrorMessage
+    }
+
     const checkSyllogism = () => {
+        if (!validateInputs()) {
+
+        }
+
         console.log("check")
     }
 
@@ -39,10 +123,10 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
         switch (figure) {
             case "figure1":
             case "figure3":
-                return <SyllogismMP firstTerm={middle} secondTerm={predicate} />
+                return <SyllogismMP firstTerm={middle} secondTerm={predicate} setPropQuantifier={setProp1Quantifier} />
             case "figure2":
             case "figure4":
-                return <SyllogismMP firstTerm={predicate} secondTerm={middle} />
+                return <SyllogismMP firstTerm={predicate} secondTerm={middle} setPropQuantifier={setProp1Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
@@ -52,10 +136,10 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
         switch (figure) {
             case "figure1":
             case "figure2":
-                return <SyllogismMP firstTerm={subject} secondTerm={middle} />
+                return <SyllogismMP firstTerm={subject} secondTerm={middle} setPropQuantifier={setProp2Quantifier} />
             case "figure3":
             case "figure4":
-                return <SyllogismMP firstTerm={middle} secondTerm={subject} />
+                return <SyllogismMP firstTerm={middle} secondTerm={subject} setPropQuantifier={setProp2Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
@@ -67,7 +151,7 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
             case "figure2":
             case "figure3":
             case "figure4":
-                return <SyllogismMP firstTerm={subject} secondTerm={predicate} />
+                return <SyllogismMP firstTerm={subject} secondTerm={predicate} setPropQuantifier={setProp3Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
@@ -80,6 +164,10 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
     ])
 
     useEffect(() => {
+        if (subject === predicate || subject === middle || predicate === middle) {
+            setInputErrorMessage("Conflit - Les termes doivent être différents")
+        }
+
         setPropositions([
             renderSyllogismMP1(figure),
             renderSyllogismMP2(figure),
@@ -99,13 +187,18 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
                         <input
                             type="checkbox"
                             checked={expertMode}
-                            onChange={() => setExpertMode(!expertMode)}
+                            onChange={() => {
+                                setExpertMode(!expertMode)
+                                setProp1Quantifier("")
+                                setProp2Quantifier("")
+                                setProp3Quantifier("")
+                                setFigure("")
+                            }}
                         />
                         <span className="slider"></span>
                     </label>
                     <label className="name2">Expert</label>
                 </div>
-                
             </div>
 
             <div className="syllogism-grid">
@@ -123,6 +216,7 @@ function SyllogismPropositions({ subject, setSubject, predicate, setPredicate, m
                 <div className="hypothesis">
                     <label>Existence Hypothesis</label>
                     <input type="checkbox" name="existenceHypothesis" />
+                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
                 </div>
             </div>

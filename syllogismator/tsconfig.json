@@ -1,4 +1,13 @@
 {
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "node",
+    "outDir": "build",
+    "strict": true
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

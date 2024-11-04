@@ -21,6 +21,26 @@
     }
   },
   "syllogism": {
-
+    "quantifier": {
+      "A": "All",
+      "E": "None",
+      "I": "Some",
+      "O": "Some Not"
+    },
+    "rule": {
+      "Rmt": {
+        "name": "Middle Term Rule",
+        "description": "The quantifier (for the middle-term) must be universal in at least one premise.",
+        "passed": "The quantifier is universal in at least one premise.",
+        "failed": "There is not any universally-quantified premise."
+      },
+      "Rlh": {
+        "name": "Latius-Hos Rule",
+        "description": "The quantifier of the conclusion can be universal only if a term of the conclusion is universally-quantified in its premise.",
+        "specific_conclusion": "The conclusion is not universally-quantified, so this rule is not applicable on this syllogism.",
+        "passed": "The conclusion is universally-quantified and a term of the conclusion is universally-quantified in its premise.",
+        "failed": "The conclusion is universally-quantified but the terms in it are not universally-quantified in their respective premises."
+      }
+    }
   }
 }
