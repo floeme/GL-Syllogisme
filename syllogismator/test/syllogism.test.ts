@@ -186,22 +186,22 @@ describe('Syllogisme', () => {
         syllogism.reorderProposition(2,0)
 
         expect(syllogism.getProposition(0)).toBe(prop3);
-        expect(syllogism.getProposition(1)).toBe(prop2);
-        expect(syllogism.getProposition(2)).toBe(prop);
+        expect(syllogism.getProposition(1)).toBe(prop);
+        expect(syllogism.getProposition(2)).toBe(prop2);
         expect(syllogism.getProposition(3)).toBe(conc);
 
         syllogism.reorderProposition(0,1);
 
-        expect(syllogism.getProposition(0)).toBe(prop2);
+        expect(syllogism.getProposition(0)).toBe(prop);
         expect(syllogism.getProposition(1)).toBe(prop3);
-        expect(syllogism.getProposition(2)).toBe(prop);
+        expect(syllogism.getProposition(2)).toBe(prop2);
         expect(syllogism.getProposition(3)).toBe(conc);
 
         syllogism.reorderProposition(1,3);
 
-        expect(syllogism.getProposition(0)).toBe(prop2);
-        expect(syllogism.getProposition(1)).toBe(conc);
-        expect(syllogism.getProposition(2)).toBe(prop);
+        expect(syllogism.getProposition(0)).toBe(prop);
+        expect(syllogism.getProposition(1)).toBe(prop2);
+        expect(syllogism.getProposition(2)).toBe(conc);
         expect(syllogism.getProposition(3)).toBe(prop3);
 
     })
@@ -306,8 +306,6 @@ describe('Syllogisme', () => {
         syllogism.getProposition(2).predicate = p;
 
         expect(syllogism.getFigure()).toBe(Figure.Figure1)
-
-
     })
 
     it("getFigure : Figure 2", async ()=> {
