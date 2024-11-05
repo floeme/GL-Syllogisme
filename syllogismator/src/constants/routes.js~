@@ -1,0 +1,8 @@
+const ROUTES = {
+    home: "/",
+    syllogism: "/syllogism",
+    polysyllogisms: "/polysyllogisms",
+    quantifiers: "/quantifiers",
+    table: "/table"
+};
+default export { ROUTES };

@@ -6,7 +6,7 @@ export const ButtonSyllogismes = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const route: string = ROUTES.syllogism;
+    const route : string = {ROUTES.syllogism}
     navigate(route);
   };
 

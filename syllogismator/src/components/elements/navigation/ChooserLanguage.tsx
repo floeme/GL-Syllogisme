@@ -20,7 +20,7 @@ const langList = [
 
 export const chooserLanguage = (props: FuncType) => {
 
-    const { t, i18n } = useTranslation('translation', { keyPrefix: 'navigation' });
+    const {i18n } = useTranslation('translation', { keyPrefix: 'navigation' });
     let selected: string = localStorage.getItem("lang") ?? "en";
 
     localStorage.setItem("lang", selected);
