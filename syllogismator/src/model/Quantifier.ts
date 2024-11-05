@@ -14,8 +14,16 @@ export class Quantifier {
 }
 
 export const defaultQuantifiers = {
-    A: new Quantifier("{A}", QuantifierType.A),
-    E: new Quantifier("{E}", QuantifierType.E),
-    I: new Quantifier("{I}", QuantifierType.I),
-    O: new Quantifier("{O}", QuantifierType.O)
+    A1: new Quantifier("All", QuantifierType.A),
+    A2: new Quantifier("Every", QuantifierType.A),
+    A3: new Quantifier("Each", QuantifierType.A),
+    A4: new Quantifier("Every single", QuantifierType.A),
+    E1: new Quantifier("None", QuantifierType.E),
+    E2: new Quantifier("There isn\'t any", QuantifierType.E),
+    I1: new Quantifier("Some", QuantifierType.I),
+    I2: new Quantifier("There are", QuantifierType.I),
+    I3: new Quantifier("Several", QuantifierType.I),
+    I4: new Quantifier("A few", QuantifierType.I),
+    O1: new Quantifier("Some not", QuantifierType.O),
+    O2: new Quantifier("Not every", QuantifierType.O),
 }
