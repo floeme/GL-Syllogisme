@@ -29,14 +29,17 @@ export class QuantifierRepository {
         return (storedQuantifiers != null) ? this.deserialize(storedQuantifiers) : [];
     }
 
-    private static persist(quantifiers: Quantifier[]) {
-        localStorage.setItem(LOCALSTORAGE_QUANTIFIERS_KEY, this.serialize(quantifiers))
-    }
-
     private static update(updateFn: (quantifiers: Quantifier[]) => void) {
         const storedQuantifiers = this.load();
         updateFn(storedQuantifiers);
         this.persist(storedQuantifiers)
+    }
+
+    /**
+     * Persist quantifiers on localStorage
+     */
+    static persist(quantifiers: Quantifier[]) {
+        localStorage.setItem(LOCALSTORAGE_QUANTIFIERS_KEY, this.serialize(quantifiers))
     }
 
     /**

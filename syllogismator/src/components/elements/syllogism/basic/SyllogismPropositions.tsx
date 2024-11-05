@@ -36,38 +36,30 @@ function SyllogismPropositions({
         let isErrorMessage = false
 
         if (!prop3Quantifier) {
-            console.log("a")
             setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
         } else if (!isErrorMessage) {
-            console.log("b")
             setInputErrorMessage("")
         }
 
         if (!prop2Quantifier) {
-            console.log("c")
             setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
         } else if (!isErrorMessage) {
-            console.log("d")
             setInputErrorMessage("")
         }
 
         if (!prop1Quantifier) {
-            console.log("e")
             setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
             isErrorMessage = true
         } else if (!isErrorMessage) {
-            console.log("f")
             setInputErrorMessage("")
         }
 
         if (!figure) {
-            console.log("g")
             setInputErrorMessage("Veuillez renseigner une figure")
             isErrorMessage = true
         } else if (!isErrorMessage) {
-            console.log("h")
             setInputErrorMessage("")
         }
 
@@ -164,8 +156,14 @@ function SyllogismPropositions({
     ])
 
     useEffect(() => {
-        if (subject === predicate || subject === middle || predicate === middle) {
+        if ((subject !== "" && predicate !== "" && middle !== "") &&
+            (subject === predicate ||
+            subject === middle ||
+            predicate === middle)
+        ) {
             setInputErrorMessage("Conflit - Les termes doivent être différents")
+        } else {
+            setInputErrorMessage("")
         }
 
         setPropositions([
