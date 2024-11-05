@@ -130,8 +130,9 @@ export class Syllogism {
     /**
      * **Applies only for a polysyllogism**
      *
-     * Adds a proposition before the conclusion or at the specified index
-     * (<code>[getPropositionCount()]{@link #getPropositionCount} - 1</code> or -1 for the conclusion).
+     * Adds a proposition before the conclusion or at the specified index.
+     * If the index is equal to -1, the proposition is defined as the conclusion and the former conclusion becomes the
+     * last premise.
      *
      * @param proposition proposition to insert
      * @param index where to insert the proposition (before the conclusion if undefined)
@@ -140,7 +141,7 @@ export class Syllogism {
         if (index === undefined) {
             // Insert proposition before the conclusion.
             this.premises.push(proposition);
-        } else if (index === -1 || index === this.premises.length) {
+        } else if (index === -1) {
             // Define proposition as conclusion. The former conclusion becomes the last premise.
             this.premises.push(this.conclusion);
             this.conclusion = proposition;
