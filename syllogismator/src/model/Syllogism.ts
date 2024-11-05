@@ -57,7 +57,10 @@ export class Syllogism {
      * Creates a syllogism with 3 empty propositions (2 premises and a conclusion).
      */
     constructor() {
-        this.premises = [];
+        this.premises = [
+            new Proposition(),
+            new Proposition()
+        ];
         this.conclusion = new Proposition();
     }
 
@@ -208,16 +211,16 @@ export class Syllogism {
             const p = <Term>this.getMajorTerm();
 
             if (this.premises[0].indexOf(p) === 0) {
-                // P is on the left side: Figure 2 or 4; P is in the first premise, S in the second
+                // P is on the left side: Figure 2 or 4; P is in the first premise, S in the second one
                 return (this.premises[1].indexOf(s) === 0) ? Figure.Figure2 : Figure.Figure4;
             } else if (this.premises[1].indexOf(p) === 0) {
-                // P is on the left side: Figure 2 or 4; P is in the second premise, S in the first
+                // P is on the left side: Figure 2 or 4; P is in the second premise, S in the first one
                 return (this.premises[0].indexOf(s) === 0) ? Figure.Figure2 : Figure.Figure4;
             } else if (this.premises[0].indexOf(p) === 1) {
-                // P is on the right side: Figure 1 or 3; P is in the first premise, S in the second
+                // P is on the right side: Figure 1 or 3; P is in the first premise, S in the second one
                 return (this.premises[1].indexOf(s) === 0) ? Figure.Figure1 : Figure.Figure3;
             } else if (this.premises[1].indexOf(p) === 1) {
-                // P is on the right side: Figure 1 or 3; P is in the second premise, S in the first
+                // P is on the right side: Figure 1 or 3; P is in the second premise, S in the first one
                 return (this.premises[0].indexOf(s) === 0) ? Figure.Figure1 : Figure.Figure3;
             }
         }

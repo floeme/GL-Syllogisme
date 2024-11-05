@@ -1,44 +1,48 @@
 .quantifier-alias-section {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    border: 2px solid black;
     padding: 10px;
     border-radius: 5px;
     height: 100%;
+    background: $color-font-violet;
+
+    .quantifier-alias-section-title{
+        margin-bottom: 10px;
+        color: $color-font-blanc;
+    }
+
+    .list-alias {
+        overflow-y: scroll;
+        max-height: 70%;
+        height: 70%;
+
+        .list-alias-ul {
+            list-style-type: none;
+            padding: 0;
+
+            .list-alias-ul-li {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    .add-alias {
+        .add-alias-input[type="text"] {
+            width: 70%;
+        }
+        .add-alias-button {
+            margin-left: 5px;
+        }
+    }
 }
 
-.quantifier-alias-section h3 {
-    margin-bottom: 10px;
-    color: $color-font-blanc;
-}
-
-.quantifier-alias-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.quantifier-alias-section li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.quantifier-alias-section input[type="text"] {
-    width: 70%;
-}
-
-.quantifier-alias-section button {
-    margin-left: 5px;
-}
-
-.reset-button {
-    margin-top: 10px;
-}
 
 
-.list-alias {
-    overflow-y: scroll;
-    max-height: 70%;
-    height: 70%;
-}
+
+
+
+

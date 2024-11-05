@@ -7,7 +7,9 @@ const QuantifiersAliases = () => {
 
     return (
         <div className="quantifiers-aliases">
-            <h2>Quantifiers Aliases</h2>
+            <div className="alias-title">
+                <h2>Quantifiers Aliases</h2>
+            </div>
 
             <div className="alias-sections">
                 <QuantifierAliasSection type="A" />

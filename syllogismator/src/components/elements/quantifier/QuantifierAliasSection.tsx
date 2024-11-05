@@ -35,7 +35,10 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
 
     return (
         <div className="quantifier-alias-section">
-            <h3>{type}</h3>
+            <div className="quantifier-alias-section-title">
+                <h3>{type}</h3>
+            </div>
+
             <div className="list-alias">
                 <ul>
                     {aliases.map((alias, index) => (
@@ -55,8 +58,9 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
                     value={newAlias}
                     onChange={(e) => setNewAlias(e.target.value)}
                     placeholder="Add a quantifier alias"
+                    className="add-alias-input"
                 />
-                <button onClick={handleAdd}>Add</button>
+                <button onClick={handleAdd} className="add-alias-button">Add</button>
             </div>
         </div>
     )
