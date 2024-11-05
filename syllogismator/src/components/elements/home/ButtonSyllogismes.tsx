@@ -5,7 +5,7 @@ export const ButtonSyllogismes = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/syllogismes");
+    navigate("/syllogisms");
   };
 
   const { t } = useTranslation('translation', { keyPrefix: 'home.syllogism' });

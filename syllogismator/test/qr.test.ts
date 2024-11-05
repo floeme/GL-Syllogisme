@@ -144,6 +144,20 @@ describe("QuantifierRepository", () => {
 
         expect(checkExist(allQuantifier, quantifiero1)).toBe(true);
 
+        QuantifierRepository.remove(search(allQuantifier, quantifieri2));
+        allQuantifier = QuantifierRepository.getAll();
+
+        expect(checkExist(allQuantifier, quantifiera1)).toBe(false);
+        expect(checkExist(allQuantifier, quantifiera2)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifieri1)).toBe(true);
+        expect(checkExist(allQuantifier, quantifieri2)).toBe(false);
+        expect(checkExist(allQuantifier, quantifieri3)).toBe(true);
+
+
+        expect(checkExist(allQuantifier, quantifiero1)).toBe(true);
+
     })
 
 })
