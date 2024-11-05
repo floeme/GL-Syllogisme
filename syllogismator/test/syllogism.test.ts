@@ -9,20 +9,32 @@ const generateProposition = (quantName : string, term1 : string, term2 : string)
     return Proposition.withTerms(new Quantifier(quantName, QuantifierType.A), new Term(term1), new Term(term2));
 }
 
+const updateProposition = (proposition : Proposition, quantName : string, term1 : string, term2 : string):Proposition => {
+    proposition.quantifier = new Quantifier(quantName, QuantifierType.A);
+    proposition.subject = new Term(term1);
+    proposition.predicate = new Term(term2);
+    return proposition;
+}
+
+const updatePropositionType = (proposition : Proposition, quantName : Quantifier, term1 : Term, term2 : Term):Proposition => {
+    proposition.quantifier = quantName;
+    proposition.subject = term1;
+    proposition.predicate = term2;
+    return proposition;
+}
+
 describe('Syllogisme', () => {
     it("addProposition", async ()=>{
         const syllogism : Syllogism = new Syllogism();
 
-        expect(syllogism.getPropositions().length).toBe(1);
+        expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = generateProposition("ILU", "Nabil Aiekillu", "test");
-        syllogism.addProposition(prop);
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "ILU", "Nabil Aiekillu", "test");
 
-        expect(syllogism.getPropositions().length).toBe(2);
+        expect(syllogism.getPropositions().length).toBe(3);
         expect(syllogism.getPropositions()[0]).toBe(prop);
 
-        const prop2 : Proposition = generateProposition("dezan", "fez", "tezfst");
-        syllogism.addProposition(prop2);
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "dezan", "fez", "tezfst");
 
         expect(syllogism.getPropositions().length).toBe(3);
         expect(syllogism.getPropositions()[0]).toBe(prop)
@@ -44,17 +56,16 @@ describe('Syllogisme', () => {
         expect(syllogism.getPropositions()[1]).toBe(prop2);
         expect(syllogism.getPropositions()[2]).toBe(prop3);
         expect(syllogism.getPropositions()[3]).toBe(prop4);
+
     })
     it("removeProposition", async ()=>{
         const syllogism : Syllogism = new Syllogism();
 
-        expect(syllogism.getPropositions().length).toBe(1);
+        expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = generateProposition("ILU", "Nabil Aiekillu", "test");
-        syllogism.addProposition(prop);
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "ILU", "Nabil Aiekillu", "test");
 
-        const prop2 : Proposition = generateProposition("dezan", "fez", "tezfst");
-        syllogism.addProposition(prop2);
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "dezan", "fez", "tezfst");
 
         const prop3 : Proposition = generateProposition("frzdz", "Nabil fz", "frefzs");
         syllogism.addProposition(prop3);
@@ -95,20 +106,20 @@ describe('Syllogisme', () => {
 
         const syllogism : Syllogism = new Syllogism();
 
-        expect(syllogism.getPropositions().length).toBe(1);
+        expect(syllogism.getPropositions().length).toBe(3);
 
         const prop : Proposition = generateProposition("ILU", "Nabil Aiekillu", "test");
         syllogism.addProposition(prop);
 
-        expect(syllogism.getPropositionCount()).toBe(2)
+        expect(syllogism.getPropositionCount()).toBe(4)
 
         const prop2 : Proposition = generateProposition("dezan", "fez", "tezfst");
         syllogism.addProposition(prop2);
 
-        expect(syllogism.getPropositionCount()).toBe(3)
+        expect(syllogism.getPropositionCount()).toBe(5)
 
         syllogism.removeProposition(0)
-        expect(syllogism.getPropositionCount()).toBe(2)
+        expect(syllogism.getPropositionCount()).toBe(4)
 
     })
 
@@ -116,13 +127,11 @@ describe('Syllogisme', () => {
 
         const syllogism : Syllogism = new Syllogism();
 
-        expect(syllogism.getPropositions().length).toBe(1);
+        expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = generateProposition("ILU", "Nabil Aiekillu", "test");
-        syllogism.addProposition(prop);
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "ILU", "Nabil Aiekillu", "test");
 
-        const prop2 : Proposition = generateProposition("dezan", "fez", "tezfst");
-        syllogism.addProposition(prop2);
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "dezan", "fez", "tezfst");
 
         const prop3 : Proposition = generateProposition("fer", "sq", "getr");
         syllogism.addProposition(prop3);
@@ -141,13 +150,11 @@ describe('Syllogisme', () => {
 
         const syllogism : Syllogism = new Syllogism();
 
-        expect(syllogism.getPropositions().length).toBe(1);
+        expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = generateProposition("ILU", "Nabil Aiekillu", "test");
-        syllogism.addProposition(prop);
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "ILU", "Nabil Aiekillu", "test");
 
-        const prop2 : Proposition = generateProposition("dezan", "fez", "tezfst");
-        syllogism.addProposition(prop2);
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "dezan", "fez", "tezfst");
 
         const prop3 : Proposition = generateProposition("fer", "sq", "getr");
         syllogism.addProposition(prop3);
@@ -167,11 +174,9 @@ describe('Syllogisme', () => {
 
         const syllogism : Syllogism = new Syllogism();
 
-        const prop : Proposition = generateProposition("ILU", "Nabil Aiekillu", "test");
-        syllogism.addProposition(prop);
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "ILU", "Nabil Aiekillu", "test");
 
-        const prop2 : Proposition = generateProposition("dezan", "fez", "tezfst");
-        syllogism.addProposition(prop2);
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "dezan", "fez", "tezfst");
 
         const prop3 : Proposition = generateProposition("fer", "sq", "getr");
         syllogism.addProposition(prop3);
@@ -296,12 +301,9 @@ describe('Syllogisme', () => {
         const s : Term = new Term("gtergtr"); // s
         const syllogism: Syllogism = new Syllogism();
 
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), m, p);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), s, m);
 
-        const prop1 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), m, p);
-        const prop2 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), s, m);
-
-        syllogism.addProposition(prop1);
-        syllogism.addProposition(prop2);
         syllogism.getProposition(2).subject = s;
         syllogism.getProposition(2).predicate = p;
 
@@ -315,11 +317,9 @@ describe('Syllogisme', () => {
         const syllogism: Syllogism = new Syllogism();
 
 
-        const prop1 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), p, m);
-        const prop2 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), s, m);
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), p, m);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), s, m);
 
-        syllogism.addProposition(prop1);
-        syllogism.addProposition(prop2);
         syllogism.getProposition(2).subject = s;
         syllogism.getProposition(2).predicate = p;
 
@@ -334,11 +334,9 @@ describe('Syllogisme', () => {
         const syllogism: Syllogism = new Syllogism();
 
 
-        const prop1 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), m, p);
-        const prop2 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), m, s);
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), m, p);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), m, s);
 
-        syllogism.addProposition(prop1);
-        syllogism.addProposition(prop2);
         syllogism.getProposition(2).subject = s;
         syllogism.getProposition(2).predicate = p;
 
@@ -354,11 +352,9 @@ describe('Syllogisme', () => {
         const syllogism: Syllogism = new Syllogism();
 
 
-        const prop1 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), p, m);
-        const prop2 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), m, s);
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), p, m);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), s, m);
 
-        syllogism.addProposition(prop1);
-        syllogism.addProposition(prop2);
         syllogism.getProposition(2).subject = s;
         syllogism.getProposition(2).predicate = p;
 
