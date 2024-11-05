@@ -70,10 +70,7 @@ export class Syllogism {
      * @param index
      */
     getProposition(index: number): Proposition {
-        if (index === this.getPropositionCount() - 1 || index === -1) {
-            return this.conclusion;
-        }
-        return this.premises[index];
+        return this.getPropositions()[index];
     }
 
     /**
