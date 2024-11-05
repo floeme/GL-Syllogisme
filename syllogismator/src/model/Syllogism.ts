@@ -85,22 +85,40 @@ export class Syllogism {
 
     /**
      * Move the proposition from/to given indexes.
+     *
+     * The index of the conclusion is <code>[getPropositionCount()]{@link #getPropositionCount} - 1</code> or -1.
+     *
+     * @throws RangeError if `fromIndex` and/or `toIndex` are not between -1 (inclusive) and
+     * [`getPropositionCount()`]{@link #getPropositionCount} (exclusive).
      */
     reorderProposition(fromIndex: number, toIndex: number): void {
-        if (fromIndex !== toIndex && fromIndex < this.getPropositionCount() && toIndex < this.getPropositionCount()) {
+        if (fromIndex === toIndex) return; // Do nothing.
+
+        if (-1 <= fromIndex && fromIndex < this.getPropositionCount()
+                && -1 <= toIndex && toIndex < this.getPropositionCount()) {
+            const conclusionIndex = this.getPropositionCount() - 1;
             const propositionToMove = this.getProposition(fromIndex);
-            if (fromIndex === this.getPropositionCount() - 1) { // The proposition to move is the conclusion
-                // Move the last premise to the conclusion
-                this.conclusion = this.premises[-1];
-                this.premises.splice(-1, 1);
+
+            // Remove the proposition to move from the syllogism. We will re-insert it afterwards.
+            if (fromIndex === conclusionIndex || fromIndex === -1) {
+                // The proposition to move is the conclusion.
+                // Move the last premise to the conclusion.
+                this.conclusion = <Proposition>this.premises.pop();
             } else {
+                // The proposition to move is a premise (not the conclusion).
+                // Remove it from the list of premises.
                 this.premises.splice(fromIndex, 1);
             }
 
-            if (toIndex === this.getPropositionCount() - 1) { // Move the proposition to the conclusion
-                this.premises.splice(toIndex, 0, this.conclusion);
+            // Put the proposition to move at its new index.
+            if (toIndex === conclusionIndex || fromIndex === -1) {
+                // The proposition has to be moved to the conclusion.
+                // The former conclusion becomes the last premise.
+                this.premises.push(this.conclusion);
                 this.conclusion = propositionToMove;
             } else {
+                // Insert the proposition at the given index.
+                // It is a premise, not the conclusion.
                 this.premises.splice(toIndex, 0, propositionToMove);
             }
         } else {
