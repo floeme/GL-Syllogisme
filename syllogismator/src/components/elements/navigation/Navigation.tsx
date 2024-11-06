@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import ChooserLanguage from "./ChooserLanguage";
 import FlagSelect from "./FlagSelect";
 import {useTranslation} from "react-i18next";
+import {ROUTES} from "../../../constants/routes.ts";
 
 export const Navigation = () => {
   const onChange = (Lang: string) => {
@@ -15,7 +15,7 @@ export const Navigation = () => {
         <ul>
           {/* je fais l'action de la barre lors de la selection ici pour invoquer le css */}
           <NavLink
-            to="/"
+            to={ROUTES.home}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
             <li>{t("home")}</li>
@@ -27,19 +27,19 @@ export const Navigation = () => {
             <li>{t("syllogism")}</li>
           </NavLink>
           <NavLink
-            to="/polysyllogismes"
+            to={ROUTES.polysyllogisms}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
             <li>{t("polysyllogism")}</li>
           </NavLink>
           <NavLink
-            to="/quantifiers"
+            to={ROUTES.quantifiers}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
             <li>Quantifiers</li>
           </NavLink>
           <NavLink
-            to="/syllogism_table"
+            to={ROUTES.table}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
             <li>Syllogism Table</li>

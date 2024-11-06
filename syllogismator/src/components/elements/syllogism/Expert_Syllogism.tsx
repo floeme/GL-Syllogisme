@@ -1,3 +1,4 @@
+import { Figure } from "../../../model/Figure"
 import SyllogismPropositions from "./expert/SyllogismPropositions"
 import { useState } from "react"
 
@@ -8,8 +9,8 @@ interface Expert_SyllogismProps {
 	setPredicate: (value: string) => void
 	middle: string
 	setMiddle: (value: string) => void
-	figure: string
-	setFigure: (value: string) => void
+	figure: Figure
+	setFigure: (value: Figure) => void
 	expertMode: boolean
 	setExpertMode: (value: boolean) => void
 	prop1Quantifier: string

@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react"
 import SyllogismMP1 from "./SyllogismMP1"
 import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
+import { Figure } from "../../../../model/Figure"
 
 interface SyllogismPremisesProps {
     MP1FirstTerm: string
@@ -18,8 +19,8 @@ interface SyllogismPremisesProps {
     setPredicate: (value: string) => void
     middle: string
     setMiddle: (value: string) => void
-    figure: string
-    setFigure: (value: string) => void
+    figure: Figure
+    setFigure: (value: Figure) => void
     expertMode: boolean
     setExpertMode: (value: boolean) => void
 	prop1Quantifier: string
@@ -74,7 +75,7 @@ function SyllogismPropositions({
             setSubject(MP2SecondTerm)
             setMiddle(MP1FirstTerm)
             setPredicate(MP1SecondTerm)
-            setFigure("figure3")
+            setFigure(Figure.Figure3)
         }
 
         // Figure 1
@@ -82,7 +83,7 @@ function SyllogismPropositions({
             setSubject(MP2FirstTerm)
             setMiddle(MP1FirstTerm)
             setPredicate(MP1SecondTerm)
-            setFigure("figure1")
+            setFigure(Figure.Figure1)
         }
 
         // Figure 4
@@ -90,7 +91,7 @@ function SyllogismPropositions({
             setSubject(MP2SecondTerm)
             setMiddle(MP1SecondTerm)
             setPredicate(MP1FirstTerm)
-            setFigure("figure4")
+            setFigure(Figure.Figure4)
         }
 
         // Figure 2
@@ -98,7 +99,7 @@ function SyllogismPropositions({
             setSubject(MP2FirstTerm)
             setMiddle(MP1SecondTerm)
             setPredicate(MP1FirstTerm)
-            setFigure("figure2")
+            setFigure(Figure.Figure2)
         }
     }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm])
 

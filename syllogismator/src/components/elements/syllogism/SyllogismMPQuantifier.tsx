@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import QuantifierContext from "../../../contexts/QuantifierContext"
+import { QuantifierType } from "../../../model/QuantifierType"
 
 interface SyllogismMPQuantifierProps {
     setVerb: (value: string) => void
@@ -40,21 +41,20 @@ function SyllogismMPQuantifier({ setVerb, setPropQuantifier }: SyllogismMPQuanti
         <>
             <select onChange={handleChange}>
                 <option value="">-- Select a quantifier --</option>
-                {Object.keys(quantifiers).map((groupKey) => (
-                    <optgroup key={groupKey} label={groupKey}>
-                        {/* groupKey as keyof typeof quantifiers */}
-                        {/* Permet de garantir à TypeScript que groupKey correspondra à l'une des clés de l'objet quantifiers */}
-                        {/* Sinon y a un warning :) */}
-                        {quantifiers[groupKey as keyof typeof quantifiers].map((item: string, index: number) => (
-                            <option key={index} data-group={groupKey} value={item}>
-                                {item}
-                            </option>
-                        ))}
+                {/* Grouping quantifiers by type */}
+                {[QuantifierType.A, QuantifierType.E, QuantifierType.I, QuantifierType.O].map((type) => (
+                    <optgroup key={type.code} label={type.code}>
+                        {quantifiers.filter((quantifier) => quantifier.type === type)
+                            .map((quantifier, index) => (
+                                <option key={index} data-group={type.code} value={quantifier.name}>
+                                    {quantifier.name}
+                                </option>
+                            ))}
                     </optgroup>
                 ))}
             </select>
         </>
-    )
+    );
 }
 
-export default SyllogismMPQuantifier
+export default SyllogismMPQuantifier;
