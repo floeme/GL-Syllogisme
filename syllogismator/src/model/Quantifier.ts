@@ -13,9 +13,18 @@ export class Quantifier {
     }
 }
 
+/**
+ * **Default quantifiers.**
+ *
+ * These quantifiers have to be handled differently from user-defined quantifiers.
+ * * Their name is translated (in translation files, the namespace is `syllogism.quantifier` and the key is the `name`
+ * attribute of the quantifier object).
+ * * Do not edit or delete them. They cannot be modified in the quantifier alias management page.
+ * * They are not returned by `QuantifierRepository`. Don't forget to show them in the quantifier selector.
+ */
 export const defaultQuantifiers = {
-    A: new Quantifier("{A}", QuantifierType.A),
-    E: new Quantifier("{E}", QuantifierType.E),
-    I: new Quantifier("{I}", QuantifierType.I),
-    O: new Quantifier("{O}", QuantifierType.O)
+    A: new Quantifier("A", QuantifierType.A),
+    E: new Quantifier("E", QuantifierType.E),
+    I: new Quantifier("I", QuantifierType.I),
+    O: new Quantifier("O", QuantifierType.O)
 }

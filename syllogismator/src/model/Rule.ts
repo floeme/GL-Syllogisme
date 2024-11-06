@@ -9,8 +9,17 @@ export const RULE_I18N_NAMESPACE = "syllogism.rule";
  * If some data has to be shown in the message, it could be supplied in `extras`.
  */
 export type RuleResult = {
+    /**
+     * Boolean indicating if the rule passed (`true`) or failed (`false`).
+     */
     valid: boolean;
+    /**
+     * Message explaining why the rule passed or failed.
+     */
     message: string;
+    /**
+     * Extra objects if some data has to be shown in the message.
+     */
     extras?: object[];
 }
 
@@ -44,7 +53,7 @@ export type RuleResult = {
  */
 export type Rule = {
     /**
-     * Identifier of the rule, such as Rmt, Rlh...
+     * Identifier of the rule, such as `Rmt`, `Rlh`...
      */
     readonly id: string;
     /**
