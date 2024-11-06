@@ -1,5 +1,7 @@
 import {QuantifierType} from "./QuantifierType.ts";
 
+export const DEFAULT_QUANTIFIERS_I18N_NAMESPACE = "syllogism.quantifier";
+
 /**
  * A quantifier, which has a name and a {@link QuantifierType} (A, E, I, O).
  */
@@ -17,7 +19,8 @@ export class Quantifier {
  * **Default quantifiers.**
  *
  * These quantifiers have to be handled differently from user-defined quantifiers.
- * * Their name is translated (in translation files, the namespace is `syllogism.quantifier` and the key is the `name`
+ * * Their name is translated (in translation files, the namespace is
+ * [`syllogism.quantifier`]{@link DEFAULT_QUANTIFIERS_I18N_NAMESPACE} and the key is the `name`
  * attribute of the quantifier object).
  * * Do not edit or delete them. They cannot be modified in the quantifier alias management page.
  * * They are not returned by `QuantifierRepository`. Don't forget to show them in the quantifier selector.
