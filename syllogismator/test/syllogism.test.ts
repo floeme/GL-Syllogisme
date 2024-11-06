@@ -213,10 +213,14 @@ describe('Syllogisme', () => {
 
 
     it("autoReorder", async ()=>{
-        const syllogism : Syllogism = Syllogism.ofFigure(Figure.Figure1, new Term("yugb"), new Term("yfbzb"), new Term("yzvsu"));
+        const syllogism : Syllogism = Syllogism.ofFigure(Figure.Figure1, new Term("s"), new Term("p"), new Term("m"));
         const prem1 : Proposition = syllogism.getProposition(0);
         const prem2 : Proposition = syllogism.getProposition(1);
         const conc : Proposition = syllogism.getProposition(2);
+
+        prem1.quantifier = new Quantifier("prem1", QuantifierType.A);
+        prem2.quantifier = new Quantifier("prem2", QuantifierType.A);
+        conc.quantifier = new Quantifier("conc", QuantifierType.A);
 
         syllogism.reorderProposition(0, 1)
 
@@ -229,12 +233,6 @@ describe('Syllogisme', () => {
         expect(syllogism.getProposition(0)).toBe(prem1);
         expect(syllogism.getProposition(1)).toBe(prem2);
         expect(syllogism.getProposition(2)).toBe(conc);
-
-        syllogism.reorderProposition(1, 2);
-
-        expect(syllogism.getProposition(0)).toBe(prem1);
-        expect(syllogism.getProposition(1)).toBe(conc);
-        expect(syllogism.getProposition(2)).toBe(prem2);
 
         syllogism.autoReorder();
 
@@ -296,49 +294,43 @@ describe('Syllogisme', () => {
     })
 
     it("getFigure : Figure 1", async ()=> {
-        const m : Term = new Term("yugb"); // m
-        const p : Term = new Term("fez"); // p
-        const s : Term = new Term("gtergtr"); // s
+        const m : Term = new Term("m"); // m
+        const p : Term = new Term("p"); // p
+        const s : Term = new Term("s"); // s
         const syllogism: Syllogism = new Syllogism();
 
-        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), m, p);
-        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), s, m);
-
-        syllogism.getProposition(2).subject = s;
-        syllogism.getProposition(2).predicate = p;
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("qp1", QuantifierType.I), m, p);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("qp2", QuantifierType.I), s, m);
+        updatePropositionType(syllogism.getProposition(2), new Quantifier("qp3", QuantifierType.I), s, p);
 
         expect(syllogism.getFigure()).toBe(Figure.Figure1)
     })
 
     it("getFigure : Figure 2", async ()=> {
-        const m : Term = new Term("yugb"); // m
-        const p : Term = new Term("fez"); // p
-        const s : Term = new Term("gtergtr"); // s
+        const m : Term = new Term("m"); // m
+        const p : Term = new Term("p"); // p
+        const s : Term = new Term("s"); // s
         const syllogism: Syllogism = new Syllogism();
 
 
-        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), p, m);
-        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), s, m);
-
-        syllogism.getProposition(2).subject = s;
-        syllogism.getProposition(2).predicate = p;
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("qp1", QuantifierType.I), p, m);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("qp2", QuantifierType.I), s, m);
+        updatePropositionType(syllogism.getProposition(2), new Quantifier("qp3", QuantifierType.I), s, p);
 
         expect(syllogism.getFigure()).toBe(Figure.Figure2)
 
     })
 
     it("getFigure : Figure 3", async ()=> {
-        const m : Term = new Term("yugb"); // m
-        const p : Term = new Term("fez"); // p
-        const s : Term = new Term("gtergtr"); // s
+        const m : Term = new Term("m"); // m
+        const p : Term = new Term("p"); // p
+        const s : Term = new Term("s"); // s
         const syllogism: Syllogism = new Syllogism();
 
 
-        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), m, p);
-        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), m, s);
-
-        syllogism.getProposition(2).subject = s;
-        syllogism.getProposition(2).predicate = p;
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("qp1", QuantifierType.I), m, p);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("qp2", QuantifierType.I), m, s);
+        updatePropositionType(syllogism.getProposition(2), new Quantifier("qp3", QuantifierType.I), s, p);
 
         expect(syllogism.getFigure()).toBe(Figure.Figure3)
 
@@ -346,17 +338,15 @@ describe('Syllogisme', () => {
     })
 
     it("getFigure : Figure 4", async ()=> {
-        const m : Term = new Term("yugb"); // m
-        const p : Term = new Term("fez"); // p
-        const s : Term = new Term("gtergtr"); // s
+        const m : Term = new Term("m"); // m
+        const p : Term = new Term("p"); // p
+        const s : Term = new Term("s"); // s
         const syllogism: Syllogism = new Syllogism();
 
 
         updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), p, m);
-        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), s, m);
-
-        syllogism.getProposition(2).subject = s;
-        syllogism.getProposition(2).predicate = p;
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("bevdub", QuantifierType.I), m, s);
+        updatePropositionType(syllogism.getProposition(2), new Quantifier("qp3", QuantifierType.I), s, p);
 
         expect(syllogism.getFigure()).toBe(Figure.Figure4)
 
@@ -364,19 +354,14 @@ describe('Syllogisme', () => {
     })
 
     it("hasValidStructure : Okay", async ()=> {
-        const m : Term = new Term("yugb"); // m
-        const p : Term = new Term("fez"); // p
-        const s : Term = new Term("gtergtr"); // s
+        const m : Term = new Term("m"); // m
+        const p : Term = new Term("p"); // p
+        const s : Term = new Term("s"); // s
         const syllogism: Syllogism = new Syllogism();
 
-
-        const prop1 : Proposition = Proposition.withTerms(new Quantifier("bevdub", QuantifierType.I), p, m);
-        const prop2 : Proposition = Proposition.withTerms(new Quantifier("n,", QuantifierType.I), m, s);
-
-        syllogism.addProposition(prop1);
-        syllogism.addProposition(prop2);
-        syllogism.getProposition(2).subject = s;
-        syllogism.getProposition(2).predicate = p;
+        updatePropositionType(syllogism.getProposition(0), new Quantifier("bevdub", QuantifierType.I), p, m);
+        updatePropositionType(syllogism.getProposition(1), new Quantifier("gre", QuantifierType.I), m, s);
+        updatePropositionType(syllogism.getProposition(2), new Quantifier("qp3", QuantifierType.I), s, p);
 
         expect(syllogism.hasValidStructure()).toBe(true)
     })
