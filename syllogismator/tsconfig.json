@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "target": "ES2020",
     "module": "ESNext",

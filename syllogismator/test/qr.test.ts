@@ -20,14 +20,14 @@ const search = (q : Quantifier[], t : Quantifier): Quantifier => {
 describe("QuantifierRepository", () => {
     it("Repository: getByType", async () => {
 
-        const quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
-        const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
+        const quantifiera1 : Quantifier = new Quantifier("q1", QuantifierType.A);
+        const quantifiera2 : Quantifier = new Quantifier("q2", QuantifierType.A);
 
-        const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
-        const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
-        const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
+        const quantifieri1 : Quantifier = new Quantifier("q3", QuantifierType.I);
+        const quantifieri2 : Quantifier = new Quantifier("q4", QuantifierType.I);
+        const quantifieri3 : Quantifier = new Quantifier("q5", QuantifierType.I);
 
-        const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
+        const quantifiero1 : Quantifier = new Quantifier("q6", QuantifierType.O);
 
         QuantifierRepository.reset();
 
@@ -49,14 +49,14 @@ describe("QuantifierRepository", () => {
 
     it("Repository: Add and getAll", async () => {
 
-        const quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
-        const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
+        const quantifiera1 : Quantifier = new Quantifier("q1", QuantifierType.A);
+        const quantifiera2 : Quantifier = new Quantifier("q2", QuantifierType.A);
 
-        const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
-        const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
-        const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
+        const quantifieri1 : Quantifier = new Quantifier("q3", QuantifierType.I);
+        const quantifieri2 : Quantifier = new Quantifier("q4", QuantifierType.I);
+        const quantifieri3 : Quantifier = new Quantifier("q5", QuantifierType.I);
 
-        const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
+        const quantifiero1 : Quantifier = new Quantifier("q6", QuantifierType.O);
 
         QuantifierRepository.reset();
 
@@ -89,14 +89,14 @@ describe("QuantifierRepository", () => {
 
     it("Repository: Remove", async () => {
 
-        var quantifiera1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
-        const quantifiera2 : Quantifier = new Quantifier("DA", QuantifierType.A);
+        var quantifiera1 : Quantifier = new Quantifier("q1", QuantifierType.A);
+        const quantifiera2 : Quantifier = new Quantifier("q2", QuantifierType.A);
 
-        const quantifieri1 : Quantifier = new Quantifier("ZLKJKZ", QuantifierType.I);
-        const quantifieri2 : Quantifier = new Quantifier("M?EZFOK?ML", QuantifierType.I);
-        const quantifieri3 : Quantifier = new Quantifier("LZINZ", QuantifierType.I);
+        const quantifieri1 : Quantifier = new Quantifier("q3", QuantifierType.I);
+        const quantifieri2 : Quantifier = new Quantifier("q4", QuantifierType.I);
+        const quantifieri3 : Quantifier = new Quantifier("q5", QuantifierType.I);
 
-        const quantifiero1 : Quantifier = new Quantifier("ALINA", QuantifierType.O);
+        const quantifiero1 : Quantifier = new Quantifier("q6", QuantifierType.O);
 
         QuantifierRepository.reset();
 
