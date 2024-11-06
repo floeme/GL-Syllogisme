@@ -1,3 +1,4 @@
+import { Figure } from "../../model/Figure.ts"
 import Basic_Syllogism from "../elements/syllogism/Basic_Syllogism.tsx"
 import Expert_Syllogism from "../elements/syllogism/Expert_Syllogism.tsx"
 import { useState } from "react"
@@ -6,7 +7,7 @@ export const Syllogism = () => {
 	const [subject, setSubject] = useState("Socrate")
 	const [predicate, setPredicate] = useState("Mortel")
 	const [middle, setMiddle] = useState("Homme")
-	const [figure, setFigure] = useState("figure1")
+	const [figure, setFigure] = useState(Figure.Figure1)
 	const [prop1Quantifier, setProp1Quantifier] = useState("")
 	const [prop2Quantifier, setProp2Quantifier] = useState("")
 	const [prop3Quantifier, setProp3Quantifier] = useState("")

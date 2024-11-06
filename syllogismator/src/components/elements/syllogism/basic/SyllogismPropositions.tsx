@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useState } from "react"
 import SyllogismMP from "./SyllogismMP"
+import { Syllogism } from "../../../../model/Syllogism"
+import { Figure } from "../../../../model/Figure"
 
 interface SyllogismPremisesProps {
     subject: string
@@ -8,8 +10,8 @@ interface SyllogismPremisesProps {
     setPredicate: (value: string) => void
     middle: string
     setMiddle: (value: string) => void
-    figure: string
-    setFigure: (value: string) => void
+    figure: Figure
+    setFigure: (value: Figure) => void
     expertMode: boolean
     setExpertMode: (value: boolean) => void
     prop1Quantifier: string
@@ -89,8 +91,24 @@ function SyllogismPropositions({
 
     const checkSyllogism = () => {
         if (!validateInputs()) {
+            // let syllogism : Syllogism = Syllogism.ofFigure(figure, subject, predicate, middle)
+            // res = syllogism.check()
 
+            // if (res["rmt"]["validation"] == false) {
+            //     // mettre le msg d'erreur res["rmt"]["errorMessage"]
+            // } else {
+
+            // }
         }
+
+        // {
+        //     "rmt":
+        //         "validity": "false",
+        //         "errorMessage": ""
+        //     "rlh":
+        //         "validity": "false",
+        //         "errorMessage": ""
+        // }
 
         console.log("check")
     }
@@ -99,7 +117,7 @@ function SyllogismPropositions({
         setSubject("")
         setPredicate("")
         setMiddle("")
-        setFigure("")
+        setFigure(Figure.Figure1)
         console.log("clear")
     }
 
@@ -111,38 +129,38 @@ function SyllogismPropositions({
         console.log("goSettings")
     }
 
-    const renderSyllogismMP1 = (figure: string) => {
+    const renderSyllogismMP1 = (figure: Figure) => {
         switch (figure) {
-            case "figure1":
-            case "figure3":
+            case Figure.Figure1:
+            case Figure.Figure3:
                 return <SyllogismMP firstTerm={middle} secondTerm={predicate} setPropQuantifier={setProp1Quantifier} />
-            case "figure2":
-            case "figure4":
+            case Figure.Figure2:
+            case Figure.Figure4:
                 return <SyllogismMP firstTerm={predicate} secondTerm={middle} setPropQuantifier={setProp1Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
     }
 
-    const renderSyllogismMP2 = (figure: string) => {
+    const renderSyllogismMP2 = (figure: Figure) => {
         switch (figure) {
-            case "figure1":
-            case "figure2":
+            case Figure.Figure1:
+            case Figure.Figure2:
                 return <SyllogismMP firstTerm={subject} secondTerm={middle} setPropQuantifier={setProp2Quantifier} />
-            case "figure3":
-            case "figure4":
+            case Figure.Figure3:
+            case Figure.Figure4:
                 return <SyllogismMP firstTerm={middle} secondTerm={subject} setPropQuantifier={setProp2Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
     }
 
-    const renderSyllogismMP3 = (figure: string) => {
+    const renderSyllogismMP3 = (figure: Figure) => {
         switch (figure) {
-            case "figure1":
-            case "figure2":
-            case "figure3":
-            case "figure4":
+            case Figure.Figure1:
+            case Figure.Figure2:
+            case Figure.Figure3:
+            case Figure.Figure4:
                 return <SyllogismMP firstTerm={subject} secondTerm={predicate} setPropQuantifier={setProp3Quantifier} />
             default:
                 return <div>Please select a figure</div>
@@ -190,7 +208,7 @@ function SyllogismPropositions({
                                 setProp1Quantifier("")
                                 setProp2Quantifier("")
                                 setProp3Quantifier("")
-                                setFigure("")
+                                setFigure(Figure.Figure1)
                             }}
                         />
                         <span className="slider"></span>

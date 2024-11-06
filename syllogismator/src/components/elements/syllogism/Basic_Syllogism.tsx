@@ -1,6 +1,7 @@
 import SyllogismTerms from "./basic/SyllogismTerms"
 import SyllogismPropositions from "./basic/SyllogismPropositions"
 import SyllogismFigures from "./basic/SyllogismFigures"
+import { Figure } from "../../../model/Figure"
 
 interface Basic_SyllogismProps {
   subject: string
@@ -9,8 +10,8 @@ interface Basic_SyllogismProps {
   setPredicate: (value: string) => void
   middle: string
   setMiddle: (value: string) => void
-  figure: string
-  setFigure: (value: string) => void
+  figure: Figure
+  setFigure: (value: Figure) => void
   expertMode: boolean
   setExpertMode: (value: boolean) => void
   prop1Quantifier: string
@@ -37,12 +38,10 @@ export const Basic_Syllogism = ({
 				<SyllogismTerms
 					subject={subject}
 					setSubject={setSubject}
-					predicate={predicate}
-					setPredicate={setPredicate}
 					middle={middle}
 					setMiddle={setMiddle}
-					figure={figure}
-					setFigure={setFigure}
+					predicate={predicate}
+					setPredicate={setPredicate}
 				/>
 				<SyllogismFigures
 					figure={figure}

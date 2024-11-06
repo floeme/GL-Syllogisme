@@ -1,12 +1,10 @@
 interface SyllogismTermsProps {
     subject: string
     setSubject: (value: string) => void
-    predicate: string
-    setPredicate: (value: string) => void
     middle: string
     setMiddle: (value: string) => void
-    figure: string
-    setFigure: (value: string) => void
+    predicate: string
+    setPredicate: (value: string) => void
 }
 
 function SyllogismTerms({ subject, setSubject, middle, setMiddle, predicate, setPredicate }: SyllogismTermsProps) {

@@ -1,6 +1,8 @@
+import { Figure } from "../../../../model/Figure"
+
 interface SyllogismFigureProps {
-    figure: string
-    setFigure: (value: string) => void
+    figure: Figure
+    setFigure: (value: Figure) => void
 }
 
 function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
@@ -12,9 +14,9 @@ function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
                 <img src="/images/figure1.png" alt="Figure 1" />
                 <input type="radio"
                     name="radioFigure"
-                    value="figure1"
-                    checked={figure === "figure1"}
-                    onChange={(e) => setFigure(e.target.value)}
+                    value={Figure.Figure1}
+                    checked={figure === Figure.Figure1}
+                    onChange={() => setFigure(Figure.Figure1)}
                 />
             </div>
 
@@ -24,9 +26,9 @@ function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
                 <img src="/images/figure2.png" alt="Figure 2" />
                 <input type="radio"
                     name="radioFigure"
-                    value="figure2"
-                    checked={figure === "figure2"}
-                    onChange={(e) => setFigure(e.target.value)}
+                    value={Figure.Figure2}
+                    checked={figure === Figure.Figure2}
+                    onChange={() => setFigure(Figure.Figure2)}
                 />
             </div>
 
@@ -36,9 +38,9 @@ function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
                 <img src="/images/figure3.png" alt="Figure 3" />
                 <input type="radio"
                     name="radioFigure"
-                    value="figure3"
-                    checked={figure === "figure3"}
-                    onChange={(e) => setFigure(e.target.value)}
+                    value={Figure.Figure3}
+                    checked={figure === Figure.Figure3}
+                    onChange={() => setFigure(Figure.Figure3)}
                 />
             </div>
 
@@ -48,9 +50,9 @@ function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
                 <img src="/images/figure4.png" alt="Figure 4" />
                 <input type="radio"
                     name="radioFigure"
-                    value="figure4"
-                    checked={figure === "figure4"}
-                    onChange={(e) => setFigure(e.target.value)}
+                    value={Figure.Figure4}
+                    checked={figure === Figure.Figure4}
+                    onChange={() => setFigure(Figure.Figure4)}
                 />
             </div>
         </div>

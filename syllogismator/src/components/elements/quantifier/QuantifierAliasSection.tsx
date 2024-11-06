@@ -40,9 +40,9 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
             </div>
 
             <div className="list-alias">
-                <ul>
+                <ul className="list-alias-ul">
                     {aliases.map((alias, index) => (
-                        <li key={index}>
+                        <li key={index} className="list-alias-ul-li">
                             <input type="text" value={alias} readOnly />
                             {!isDefaultQuantifier(alias) && (
                                 <button onClick={() => handleRemove(alias)}>🗑️</button>
