@@ -6,8 +6,8 @@ import {Term} from "../src/model/Term.ts";
 describe("Proposition", () => {
     it("WithTerms", async () => {
         const quantifier : Quantifier = new Quantifier("ILU", QuantifierType.A);
-        const term1 : Term = new Term("Nabil AieKillu");
-        const term2 : Term = new Term("Axel");
+        const term1 : Term = new Term("term1");
+        const term2 : Term = new Term("term2");
 
         const prop : Proposition = Proposition.withTerms(quantifier, term1, term2);
 
@@ -29,8 +29,8 @@ describe("Proposition", () => {
     it("Constructor", () => {
 
         const quantifier : Quantifier = new Quantifier("ILU", QuantifierType.A);
-        const term1 : Term = new Term("Nabil AieKillu");
-        const term2 : Term = new Term("Axel");
+        const term1 : Term = new Term("term1");
+        const term2 : Term = new Term("term2");
 
         const prop : Proposition = new Proposition();
 

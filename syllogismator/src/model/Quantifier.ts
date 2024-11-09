@@ -1,5 +1,7 @@
 import {QuantifierType} from "./QuantifierType.ts";
 
+export const DEFAULT_QUANTIFIERS_I18N_NAMESPACE = "syllogism.quantifier";
+
 /**
  * A quantifier, which has a name and a {@link QuantifierType} (A, E, I, O).
  */
@@ -13,17 +15,19 @@ export class Quantifier {
     }
 }
 
+/**
+ * **Default quantifiers.**
+ *
+ * These quantifiers have to be handled differently from user-defined quantifiers.
+ * * Their name is translated (in translation files, the namespace is
+ * [`syllogism.quantifier`]{@link DEFAULT_QUANTIFIERS_I18N_NAMESPACE} and the key is the `name`
+ * attribute of the quantifier object).
+ * * Do not edit or delete them. They cannot be modified in the quantifier alias management page.
+ * * They are not returned by `QuantifierRepository`. Don't forget to show them in the quantifier selector.
+ */
 export const defaultQuantifiers = {
-    A1: new Quantifier("All", QuantifierType.A),
-    A2: new Quantifier("Every", QuantifierType.A),
-    A3: new Quantifier("Each", QuantifierType.A),
-    A4: new Quantifier("Every single", QuantifierType.A),
-    E1: new Quantifier("None", QuantifierType.E),
-    E2: new Quantifier("There isn\'t any", QuantifierType.E),
-    I1: new Quantifier("Some", QuantifierType.I),
-    I2: new Quantifier("There are", QuantifierType.I),
-    I3: new Quantifier("Several", QuantifierType.I),
-    I4: new Quantifier("A few", QuantifierType.I),
-    O1: new Quantifier("Some not", QuantifierType.O),
-    O2: new Quantifier("Not every", QuantifierType.O),
+    A: new Quantifier("A", QuantifierType.A),
+    E: new Quantifier("E", QuantifierType.E),
+    I: new Quantifier("I", QuantifierType.I),
+    O: new Quantifier("O", QuantifierType.O)
 }
