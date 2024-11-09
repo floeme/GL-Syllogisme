@@ -1,27 +1,11 @@
 import {Syllogism} from "./Syllogism.ts";
-import {Quantifier} from "./Quantifier.ts";
-import {Term} from "./Term.ts";
+import * as r from "./RulesImpl.ts";
 
 export const RULE_I18N_NAMESPACE = "syllogism.rule";
+export const RULE_NAME_I18N_KEY = "name";
+export const RULE_DESCRIPTION_I18N_KEY = "description";
 
-/**
- * Result of a rule, with a boolean indicating if the rule passed or not on a syllogism and a message explaining why.
- * If some data has to be shown in the message, it could be supplied in `extras`.
- */
-export type RuleResult = {
-    /**
-     * Boolean indicating if the rule passed (`true`) or failed (`false`).
-     */
-    valid: boolean;
-    /**
-     * Message explaining why the rule passed or failed.
-     */
-    message: string;
-    /**
-     * Extra objects if some data has to be shown in the message.
-     */
-    extras?: object[];
-}
+const STANDARD_RULES = [r.Rmt, r.Rlh]; // Private; do not mutate it.
 
 /**
  * A rule which validates a given syllogism.
@@ -31,7 +15,7 @@ export type RuleResult = {
  *
  * **Messages and descriptions in translation files:** In translation files (in `public/locales`), there is a
  * "namespace" for each rule (`syllogism.rule.<Rule ID>`), containing the name of the rule (`name` key), its description
- * (`description`) and several messages.
+ * (`description`) and several messages (for different results of syllogism check).
  * This namespace is structured as follows:
  * ```json
  * {
@@ -50,6 +34,8 @@ export type RuleResult = {
  *   }
  * }
  * ```
+ * For instance, the name of the rule `Rmt` is the value of `syllogism.rule.Rmt.name`.
+ * @see ruleNamespace
  */
 export type Rule = {
     /**
@@ -62,67 +48,54 @@ export type Rule = {
     readonly check: (s: Syllogism) => RuleResult;
 }
 
-
-// Rules
-
 /**
- * ## Middle-term rule (Rmt)
- * The quantifier (for the middle-term) must be universal in at least one premise.
+ * Result of a rule, with a boolean indicating if the rule passed or not on a syllogism and a message explaining why.
+ * If some data has to be shown in the message, it could be supplied in `extras`.
  */
-export const Rmt: Rule = {
-    id: "Rmt",
-    check: (s) => {
-        const isValid = s.premises.some(proposition =>
-            (<Quantifier>proposition.quantifier).type.universal
-        );
-
-        return {
-            valid: isValid,
-            message: isValid ? "passed" : "failed"
-        }
-    }
+export type RuleResult = {
+    /**
+     * Boolean indicating if the rule passed (`true`) or failed (`false`).
+     */
+    valid: boolean;
+    /**
+     * Key (without namespace) of the message explaining why the rule passed or failed.
+     * @see Rule
+     */
+    message: string;
+    /**
+     * Extra objects if some data has to be shown in the message.
+     */
+    extras?: object[];
 }
 
 /**
- * ## *Latius-Hos* Rule (Rlh)
- * The quantifier of the conclusion can be universal only if a term of the conclusion is universally quantified.
+ * Check given syllogism with given rules (or [standard rules]{@link STANDARD_RULES} if no rule array is passed as
+ * argument).
+ * @param syllogism Syllogism to check
+ * @param rules Rules to check the syllogism
+ * @return A map which associates a [rule id]{@link Rule.id} to the [result]{@link RuleResult} of that rule
  */
-export const Rlh: Rule = {
-    id: "Rlh",
-    check: (s) => {
-        // If the quantifier of the conclusion is universal…
-        if ((<Quantifier>s.conclusion.quantifier).type.universal) {
-            let isValid = false;
+export function check(syllogism: Syllogism, rules: Rule[] = STANDARD_RULES): Map<string, RuleResult> {
+    const result = new Map<string, RuleResult>();
 
-            // Check if the **minor term** is universally quantified in its premise
-            const minorTerm = <Term>s.getMinorTerm();
-            for (const premise of s.premises) {
-                if (premise.indexOf(minorTerm) !== -1) {
-                    isValid = (<Quantifier>premise.quantifier).type.universal;
-                    break;
-                }
-            }
-
-            if (!isValid) {
-                // Check if the **major term** is universally quantified in its premise
-                const minorTerm = <Term>s.getMajorTerm();
-                for (const premise of s.premises) {
-                    if (premise.indexOf(minorTerm) !== -1) {
-                        isValid = (<Quantifier>premise.quantifier).type.universal;
-                        break;
-                    }
-                }
-            }
-
-            return {
-                valid: isValid,
-                message: isValid ? "passed" : "failed",
-            }
-        } else {
-            return {
-                valid: true,
-                message: "specific_conclusion"
-            }
-        }
+    for (const rule of rules) {
+        result.set(rule.id, rule.check(syllogism));
     }
+
+    return result;
+}
+
+/**
+ * Returns rule namespace for given rule, for i18n.
+ */
+export function ruleNamespace(rule: Rule) {
+    return RULE_I18N_NAMESPACE + "." + rule.id;
+}
+
+export function ruleName(rule: Rule): string {
+    return ruleNamespace(rule) + "." + RULE_NAME_I18N_KEY;
+}
+
+export function ruleDescription(rule: Rule): string {
+    return ruleNamespace(rule) + "." + RULE_DESCRIPTION_I18N_KEY;
 }
