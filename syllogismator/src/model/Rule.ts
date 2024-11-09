@@ -5,7 +5,7 @@ export const RULE_I18N_NAMESPACE = "syllogism.rule";
 export const RULE_NAME_I18N_KEY = "name";
 export const RULE_DESCRIPTION_I18N_KEY = "description";
 
-const STANDARD_RULES = [r.Rmt, r.Rlh]; // Private; do not mutate it.
+const STANDARD_RULES = [r.Rmt, r.Rlh, r.Rnn, r.Rn, r.Raa, r.Rpp, r.Rp, r.Ruu]; // Private; do not mutate it.
 
 /**
  * A rule which validates a given syllogism.
@@ -71,15 +71,26 @@ export type RuleResult = {
 /**
  * Check given syllogism with given rules (or [standard rules]{@link STANDARD_RULES} if no rule array is passed as
  * argument).
+ *
+ * **Precondition:** the syllogism to check must have a valid structure, i.e. {@link Syllogism.hasValidStructure} must
+ * return `true`.
+ *
  * @param syllogism Syllogism to check
  * @param rules Rules to check the syllogism
+ * @param stopOnBrokenRule If true, when a rule is broken, the other rules are not checked. False by default.
  * @return A map which associates a [rule id]{@link Rule.id} to the [result]{@link RuleResult} of that rule
  */
-export function check(syllogism: Syllogism, rules: Rule[] = STANDARD_RULES): Map<string, RuleResult> {
+export function check(
+    syllogism: Syllogism,
+    rules: Rule[] = STANDARD_RULES,
+    stopOnBrokenRule: boolean = false
+): Map<string, RuleResult> {
     const result = new Map<string, RuleResult>();
 
-    for (const rule of rules) {
-        result.set(rule.id, rule.check(syllogism));
+    for (let rule of rules) {
+        const ruleResult = rule.check(syllogism);
+        result.set(rule.id, ruleResult);
+        if (stopOnBrokenRule && !ruleResult) break;
     }
 
     return result;
