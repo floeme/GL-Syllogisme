@@ -2,24 +2,27 @@ import { Fragment, useEffect, useState } from "react"
 import SyllogismMP from "./SyllogismMP"
 import { Syllogism } from "../../../../model/Syllogism"
 import { Figure } from "../../../../model/Figure"
+import { Term } from "../../../../model/Term"
+import { Quantifier } from "../../../../model/Quantifier"
+import { QuantifierType } from "../../../../model/QuantifierType"
 
 interface SyllogismPremisesProps {
-    subject: string
-    setSubject: (value: string) => void
-    predicate: string
-    setPredicate: (value: string) => void
-    middle: string
-    setMiddle: (value: string) => void
+    subject: Term
+    setSubject: (value: Term) => void
+    predicate: Term
+    setPredicate: (value: Term) => void
+    middle: Term
+    setMiddle: (value: Term) => void
     figure: Figure
     setFigure: (value: Figure) => void
     expertMode: boolean
     setExpertMode: (value: boolean) => void
-    prop1Quantifier: string
-    setProp1Quantifier: (value: string) => void
-    prop2Quantifier: string
-    setProp2Quantifier: (value: string) => void
-    prop3Quantifier: string
-    setProp3Quantifier: (value: string) => void
+    prop1Quantifier: Quantifier
+    setProp1Quantifier: (value: Quantifier) => void
+    prop2Quantifier: Quantifier
+    setProp2Quantifier: (value: Quantifier) => void
+    prop3Quantifier: Quantifier
+    setProp3Quantifier: (value: Quantifier) => void
 }
 
 function SyllogismPropositions({
@@ -58,28 +61,28 @@ function SyllogismPropositions({
             setInputErrorMessage("")
         }
 
-        if (!figure) {
+        if (![Figure.Figure1, Figure.Figure2, Figure.Figure3, Figure.Figure4].includes(figure)) {
             setInputErrorMessage("Veuillez renseigner une figure")
             isErrorMessage = true
         } else if (!isErrorMessage) {
             setInputErrorMessage("")
         }
 
-        if (!middle) {
+        if (!middle.value) {
             setInputErrorMessage("Veuillez renseigner un moyen terme")
             isErrorMessage = true
         } else if (!isErrorMessage) {
             setInputErrorMessage("")
         }
 
-        if (!predicate) {
+        if (!predicate.value) {
             setInputErrorMessage("Veuillez renseigner un prédicat")
             isErrorMessage = true
         } else if (!isErrorMessage) {
             setInputErrorMessage("")
         }
 
-        if (!subject) {
+        if (!subject.value) {
             setInputErrorMessage("Veuillez renseigner un sujet")
             isErrorMessage = true
         } else if (!isErrorMessage) {
@@ -91,7 +94,7 @@ function SyllogismPropositions({
 
     const checkSyllogism = () => {
         if (!validateInputs()) {
-            // let syllogism : Syllogism = Syllogism.ofFigure(figure, subject, predicate, middle)
+            let syllogism : Syllogism = Syllogism.ofFigure(figure, subject, predicate, middle)
             // res = syllogism.check()
 
             // if (res["rmt"]["validation"] == false) {
@@ -114,10 +117,15 @@ function SyllogismPropositions({
     }
 
     const clearSyllogism = () => {
-        setSubject("")
-        setPredicate("")
-        setMiddle("")
+        subject.value = ""
+        setSubject({...subject})
+        predicate.value = ""
+        setPredicate({...predicate})
+        middle.value = ""
+        setMiddle({...middle})
+
         setFigure(Figure.Figure1)
+
         console.log("clear")
     }
 
@@ -133,10 +141,10 @@ function SyllogismPropositions({
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure3:
-                return <SyllogismMP firstTerm={middle} secondTerm={predicate} setPropQuantifier={setProp1Quantifier} />
+                return <SyllogismMP firstTerm={middle.value} secondTerm={predicate.value} quantifier={prop1Quantifier} setPropQuantifier={setProp1Quantifier} />
             case Figure.Figure2:
             case Figure.Figure4:
-                return <SyllogismMP firstTerm={predicate} secondTerm={middle} setPropQuantifier={setProp1Quantifier} />
+                return <SyllogismMP firstTerm={predicate.value} secondTerm={middle.value} quantifier={prop1Quantifier} setPropQuantifier={setProp1Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
@@ -146,10 +154,10 @@ function SyllogismPropositions({
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure2:
-                return <SyllogismMP firstTerm={subject} secondTerm={middle} setPropQuantifier={setProp2Quantifier} />
+                return <SyllogismMP firstTerm={subject.value} secondTerm={middle.value} quantifier={prop2Quantifier} setPropQuantifier={setProp2Quantifier} />
             case Figure.Figure3:
             case Figure.Figure4:
-                return <SyllogismMP firstTerm={middle} secondTerm={subject} setPropQuantifier={setProp2Quantifier} />
+                return <SyllogismMP firstTerm={middle.value} secondTerm={subject.value} quantifier={prop2Quantifier} setPropQuantifier={setProp2Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
@@ -161,7 +169,7 @@ function SyllogismPropositions({
             case Figure.Figure2:
             case Figure.Figure3:
             case Figure.Figure4:
-                return <SyllogismMP firstTerm={subject} secondTerm={predicate} setPropQuantifier={setProp3Quantifier} />
+                return <SyllogismMP firstTerm={subject.value} secondTerm={predicate.value} quantifier={prop3Quantifier} setPropQuantifier={setProp3Quantifier} />
             default:
                 return <div>Please select a figure</div>
         }
@@ -174,10 +182,10 @@ function SyllogismPropositions({
     ])
 
     useEffect(() => {
-        if ((subject !== "" && predicate !== "" && middle !== "") &&
-            (subject === predicate ||
-            subject === middle ||
-            predicate === middle)
+        if ((subject.value !== "" && predicate.value !== "" && middle.value !== "") &&
+            (subject.value === predicate.value ||
+            subject.value === middle.value ||
+            predicate.value === middle.value)
         ) {
             setInputErrorMessage("Conflit - Les termes doivent être différents")
         } else {
@@ -205,9 +213,12 @@ function SyllogismPropositions({
                             checked={expertMode}
                             onChange={() => {
                                 setExpertMode(!expertMode)
-                                setProp1Quantifier("")
-                                setProp2Quantifier("")
-                                setProp3Quantifier("")
+                                prop1Quantifier.type = QuantifierType.A
+                                setProp1Quantifier({...prop1Quantifier})
+                                prop2Quantifier.type = QuantifierType.A
+                                setProp2Quantifier({...prop2Quantifier})
+                                prop3Quantifier.type = QuantifierType.A
+                                setProp3Quantifier({...prop3Quantifier})
                                 setFigure(Figure.Figure1)
                             }}
                         />

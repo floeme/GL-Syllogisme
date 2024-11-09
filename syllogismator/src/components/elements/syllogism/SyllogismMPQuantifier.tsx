@@ -1,13 +1,15 @@
 import { useContext } from "react"
 import QuantifierContext from "../../../contexts/QuantifierContext"
 import { QuantifierType } from "../../../model/QuantifierType"
+import { Quantifier } from "../../../model/Quantifier"
 
 interface SyllogismMPQuantifierProps {
     setVerb: (value: string) => void
-    setPropQuantifier: (value: string) => void
+    quantifier: Quantifier
+    setPropQuantifier: (value: Quantifier) => void
 }
 
-function SyllogismMPQuantifier({ setVerb, setPropQuantifier }: SyllogismMPQuantifierProps) {
+function SyllogismMPQuantifier({ setVerb, quantifier, setPropQuantifier }: SyllogismMPQuantifierProps) {
     const { quantifiers } = useContext(QuantifierContext)
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -16,23 +18,24 @@ function SyllogismMPQuantifier({ setVerb, setPropQuantifier }: SyllogismMPQuanti
 
         switch (group) {
             case "A":
-                setPropQuantifier("A")
+                quantifier.type = QuantifierType.A
+                setPropQuantifier({...quantifier})
                 setVerb("are")
                 break
             case "E":
-                setPropQuantifier("E")
+                quantifier.type = QuantifierType.E
+                setPropQuantifier({...quantifier})
                 setVerb("are not")
                 break
             case "I":
-                setPropQuantifier("I")
+                quantifier.type = QuantifierType.I
+                setPropQuantifier({...quantifier})
                 setVerb("are some")
                 break
             case "O":
-                setPropQuantifier("O")
+                quantifier.type = QuantifierType.O
+                setPropQuantifier({...quantifier})
                 setVerb("are not some")
-                break
-            default:
-                setVerb("Please select a quantifier")
                 break
         }
     }
@@ -40,7 +43,6 @@ function SyllogismMPQuantifier({ setVerb, setPropQuantifier }: SyllogismMPQuanti
     return (
         <>
             <select onChange={handleChange}>
-                <option value="">-- Select a quantifier --</option>
                 {/* Grouping quantifiers by type */}
                 {[QuantifierType.A, QuantifierType.E, QuantifierType.I, QuantifierType.O].map((type) => (
                     <optgroup key={type.code} label={type.code}>
@@ -54,7 +56,7 @@ function SyllogismMPQuantifier({ setVerb, setPropQuantifier }: SyllogismMPQuanti
                 ))}
             </select>
         </>
-    );
+    )
 }
 
-export default SyllogismMPQuantifier;
+export default SyllogismMPQuantifier

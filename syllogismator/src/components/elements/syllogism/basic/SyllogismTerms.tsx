@@ -1,13 +1,19 @@
+import { Term } from "../../../../model/Term"
+
 interface SyllogismTermsProps {
-    subject: string
-    setSubject: (value: string) => void
-    middle: string
-    setMiddle: (value: string) => void
-    predicate: string
-    setPredicate: (value: string) => void
+    subject: Term
+    setSubject: (value: Term) => void
+    middle: Term
+    setMiddle: (value: Term) => void
+    predicate: Term
+    setPredicate: (value: Term) => void
 }
 
-function SyllogismTerms({ subject, setSubject, middle, setMiddle, predicate, setPredicate }: SyllogismTermsProps) {
+function SyllogismTerms({
+    subject, setSubject,
+    middle, setMiddle,
+    predicate, setPredicate
+}: SyllogismTermsProps) {
     return (
         <div className="section-terms-input">
             {/* SUBJECT */}
@@ -15,8 +21,11 @@ function SyllogismTerms({ subject, setSubject, middle, setMiddle, predicate, set
             <input type="text"
                 name="SubjectTerm"
                 placeholder="Enter a subject term"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
+                value={subject.value}
+                onChange={(e) => {
+                    subject.value = e.target.value
+                    setSubject({...subject})
+                }}
             />
 
             {/* PREDICATE */}
@@ -24,8 +33,11 @@ function SyllogismTerms({ subject, setSubject, middle, setMiddle, predicate, set
             <input type="text"
                 name="predicateTerm"
                 placeholder="Enter a predicate term"
-                value={predicate}
-                onChange={(e) => setPredicate(e.target.value)}
+                value={predicate.value}
+                onChange={(e) => {
+                    predicate.value = e.target.value
+                    setPredicate({...predicate})
+                }}
             />
 
             {/* MIDDLE */}
@@ -33,8 +45,11 @@ function SyllogismTerms({ subject, setSubject, middle, setMiddle, predicate, set
             <input type="text"
                 name="middleTerm"
                 placeholder="Enter a middle term"
-                value={middle}
-                onChange={(e) => setMiddle(e.target.value)}
+                value={middle.value}
+                onChange={(e) => {
+                    middle.value = e.target.value
+                    setMiddle({...middle})
+                }}
             />
       </div>
     )

@@ -1,31 +1,29 @@
-import { Figure } from "../../../model/Figure"
+import { Quantifier } from "../../../model/Quantifier"
+import { Term } from "../../../model/Term"
 import SyllogismPropositions from "./expert/SyllogismPropositions"
 import { useState } from "react"
 
 interface Expert_SyllogismProps {
-	subject: string
-	setSubject: (value: string) => void
-	predicate: string
-	setPredicate: (value: string) => void
-	middle: string
-	setMiddle: (value: string) => void
-	figure: Figure
-	setFigure: (value: Figure) => void
+	subject: Term
+	setSubject: (value: Term) => void
+	predicate: Term
+	setPredicate: (value: Term) => void
+	middle: Term
+	setMiddle: (value: Term) => void
 	expertMode: boolean
 	setExpertMode: (value: boolean) => void
-	prop1Quantifier: string
-	setProp1Quantifier: (value: string) => void
-	prop2Quantifier: string
-	setProp2Quantifier: (value: string) => void
-	prop3Quantifier: string
-	setProp3Quantifier: (value: string) => void
+	prop1Quantifier: Quantifier
+	setProp1Quantifier: (value: Quantifier) => void
+	prop2Quantifier: Quantifier
+	setProp2Quantifier: (value: Quantifier) => void
+	prop3Quantifier: Quantifier
+	setProp3Quantifier: (value: Quantifier) => void
 }
 
 export const Expert_Syllogism = ({
 	subject, setSubject,
 	predicate, setPredicate,
 	middle, setMiddle,
-	figure, setFigure,
 	expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
@@ -53,8 +51,6 @@ export const Expert_Syllogism = ({
 				setPredicate={setPredicate}
 				middle={middle}
 				setMiddle={setMiddle}
-				figure={figure}
-				setFigure={setFigure}
 				expertMode={expertMode}
 				setExpertMode={setExpertMode}
 				prop1Quantifier={prop1Quantifier}

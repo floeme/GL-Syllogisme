@@ -1,20 +1,22 @@
 import { useState } from "react"
 import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
+import { Quantifier } from "../../../../model/Quantifier"
 
 interface SyllogismMPProps {
     firstTerm: string
     secondTerm: string
-    setPropQuantifier: (value: string) => void
+    quantifier: Quantifier
+    setPropQuantifier: (value: Quantifier) => void
 }
 
-function SyllogismMP({ firstTerm, secondTerm, setPropQuantifier }: SyllogismMPProps) {
-    const [verb, setVerb] = useState("Please select a quantifier")
+function SyllogismMP({ firstTerm, secondTerm, quantifier, setPropQuantifier }: SyllogismMPProps) {
+    const [verb, setVerb] = useState("are")
 
     return (
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <SyllogismMPQuantifier setVerb={setVerb} setPropQuantifier={setPropQuantifier} />
+                    <SyllogismMPQuantifier setVerb={setVerb} quantifier={quantifier} setPropQuantifier={setPropQuantifier} />
                 </div>
 
                 <div className="subject">

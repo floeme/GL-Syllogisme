@@ -2,7 +2,9 @@ import { Fragment, useEffect, useState } from "react"
 import SyllogismMP1 from "./SyllogismMP1"
 import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
-import { Figure } from "../../../../model/Figure"
+import { Term } from "../../../../model/Term"
+import { Quantifier } from "../../../../model/Quantifier"
+import { QuantifierType } from "../../../../model/QuantifierType"
 
 interface SyllogismPremisesProps {
     MP1FirstTerm: string
@@ -13,22 +15,20 @@ interface SyllogismPremisesProps {
     setMP2FirstTerm: (value: string) => void
     MP2SecondTerm: string
     setMP2SecondTerm: (value: string) => void
-    subject: string
-    setSubject: (value: string) => void
-    predicate: string
-    setPredicate: (value: string) => void
-    middle: string
-    setMiddle: (value: string) => void
-    figure: Figure
-    setFigure: (value: Figure) => void
+    subject: Term
+    setSubject: (value: Term) => void
+    predicate: Term
+    setPredicate: (value: Term) => void
+    middle: Term
+    setMiddle: (value: Term) => void
     expertMode: boolean
     setExpertMode: (value: boolean) => void
-	prop1Quantifier: string
-	setProp1Quantifier: (value: string) => void
-	prop2Quantifier: string
-	setProp2Quantifier: (value: string) => void
-	prop3Quantifier: string
-	setProp3Quantifier: (value: string) => void
+	prop1Quantifier: Quantifier
+	setProp1Quantifier: (value: Quantifier) => void
+	prop2Quantifier: Quantifier
+	setProp2Quantifier: (value: Quantifier) => void
+	prop3Quantifier: Quantifier
+	setProp3Quantifier: (value: Quantifier) => void
 }
 
 function SyllogismPropositions({
@@ -39,7 +39,6 @@ function SyllogismPropositions({
     subject, setSubject,
     predicate, setPredicate,
     middle, setMiddle,
-    figure, setFigure,
     expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
@@ -72,34 +71,42 @@ function SyllogismPropositions({
 
         // Figure 3
         if (MP1FirstTerm === MP2FirstTerm) {
-            setSubject(MP2SecondTerm)
-            setMiddle(MP1FirstTerm)
-            setPredicate(MP1SecondTerm)
-            setFigure(Figure.Figure3)
+            subject.value = MP2SecondTerm
+            setSubject({...subject})
+            middle.value = MP1FirstTerm
+            setMiddle({...middle})
+            predicate.value = MP1SecondTerm
+            setPredicate({...predicate})
         }
 
         // Figure 1
         if (MP1FirstTerm === MP2SecondTerm) {
-            setSubject(MP2FirstTerm)
-            setMiddle(MP1FirstTerm)
-            setPredicate(MP1SecondTerm)
-            setFigure(Figure.Figure1)
+            subject.value = MP2FirstTerm
+            setSubject({...subject})
+            middle.value = MP1FirstTerm
+            setMiddle({...middle})
+            predicate.value = MP1SecondTerm
+            setPredicate({...predicate})
         }
 
         // Figure 4
         if (MP1SecondTerm === MP2FirstTerm) {
-            setSubject(MP2SecondTerm)
-            setMiddle(MP1SecondTerm)
-            setPredicate(MP1FirstTerm)
-            setFigure(Figure.Figure4)
+            subject.value = MP2SecondTerm
+            setSubject({...subject})
+            middle.value = MP1SecondTerm
+            setMiddle({...middle})
+            predicate.value = MP1FirstTerm
+            setPredicate({...predicate})
         }
 
         // Figure 2
         if (MP1SecondTerm === MP2SecondTerm) {
-            setSubject(MP2FirstTerm)
-            setMiddle(MP1SecondTerm)
-            setPredicate(MP1FirstTerm)
-            setFigure(Figure.Figure2)
+            subject.value = MP2FirstTerm
+            setSubject({...subject})
+            middle.value = MP1SecondTerm
+            setMiddle({...middle})
+            predicate.value = MP1FirstTerm
+            setPredicate({...predicate})
         }
     }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm])
 
@@ -167,13 +174,18 @@ function SyllogismPropositions({
     }
 
     const clearSyllogism = () => {
-        setSubject("")
-        setPredicate("")
-        setMiddle("")
+        subject.value = ""
+        setSubject({...subject})
+        predicate.value = ""
+        setPredicate({...predicate})
+        middle.value = ""
+        setMiddle({...middle})
+
         setMP1FirstTerm("")
         setMP1SecondTerm("")
         setMP2FirstTerm("")
         setMP2SecondTerm("")
+
         console.log("clear")
     }
 
@@ -191,6 +203,7 @@ function SyllogismPropositions({
             setMP1FirstTerm={setMP1FirstTerm}
             MP1SecondTerm={MP1SecondTerm}
             setMP1SecondTerm={setMP1SecondTerm}
+            quantifier={prop1Quantifier}
             setProp1Quantifier={setProp1Quantifier}
         />,
         <SyllogismMP2
@@ -200,11 +213,13 @@ function SyllogismPropositions({
             setMP2FirstTerm={setMP2FirstTerm}
             MP2SecondTerm={MP2SecondTerm}
             setMP2SecondTerm={setMP2SecondTerm}
+            quantifier={prop2Quantifier}
             setProp2Quantifier={setProp2Quantifier}
         />,
         <SyllogismMP3
-            subject={subject}
-            predicate={predicate}
+            subject={subject.value}
+            predicate={predicate.value}
+            quantifier={prop3Quantifier}
             setProp3Quantifier={setProp3Quantifier}
         />
     ])
@@ -216,6 +231,7 @@ function SyllogismPropositions({
                 setMP1FirstTerm={setMP1FirstTerm}
                 MP1SecondTerm={MP1SecondTerm}
                 setMP1SecondTerm={setMP1SecondTerm}
+                quantifier={prop1Quantifier}
                 setProp1Quantifier={setProp1Quantifier}
             />,
             <SyllogismMP2
@@ -225,11 +241,13 @@ function SyllogismPropositions({
                 setMP2FirstTerm={setMP2FirstTerm}
                 MP2SecondTerm={MP2SecondTerm}
                 setMP2SecondTerm={setMP2SecondTerm}
+                quantifier={prop2Quantifier}
                 setProp2Quantifier={setProp2Quantifier}
             />,
             <SyllogismMP3
-                subject={subject}
-                predicate={predicate}
+                subject={subject.value}
+                predicate={predicate.value}
+                quantifier={prop3Quantifier}
                 setProp3Quantifier={setProp3Quantifier}
             />
         ])

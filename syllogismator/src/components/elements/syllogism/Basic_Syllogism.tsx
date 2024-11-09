@@ -2,24 +2,26 @@ import SyllogismTerms from "./basic/SyllogismTerms"
 import SyllogismPropositions from "./basic/SyllogismPropositions"
 import SyllogismFigures from "./basic/SyllogismFigures"
 import { Figure } from "../../../model/Figure"
+import { Term } from "../../../model/Term"
+import { Quantifier } from "../../../model/Quantifier"
 
 interface Basic_SyllogismProps {
-  subject: string
-  setSubject: (value: string) => void
-  predicate: string
-  setPredicate: (value: string) => void
-  middle: string
-  setMiddle: (value: string) => void
-  figure: Figure
-  setFigure: (value: Figure) => void
-  expertMode: boolean
-  setExpertMode: (value: boolean) => void
-  prop1Quantifier: string
-  setProp1Quantifier: (value: string) => void
-  prop2Quantifier: string
-  setProp2Quantifier: (value: string) => void
-  prop3Quantifier: string
-  setProp3Quantifier: (value: string) => void
+	subject: Term
+	setSubject: (value: Term) => void
+	predicate: Term
+	setPredicate: (value: Term) => void
+	middle: Term
+	setMiddle: (value: Term) => void
+	figure: Figure
+	setFigure: (value: Figure) => void
+	expertMode: boolean
+	setExpertMode: (value: boolean) => void
+	prop1Quantifier: Quantifier
+	setProp1Quantifier: (value: Quantifier) => void
+	prop2Quantifier: Quantifier
+	setProp2Quantifier: (value: Quantifier) => void
+	prop3Quantifier: Quantifier
+	setProp3Quantifier: (value: Quantifier) => void
 }
 
 export const Basic_Syllogism = ({

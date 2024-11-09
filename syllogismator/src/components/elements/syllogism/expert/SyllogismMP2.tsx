@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
+import { Quantifier } from "../../../../model/Quantifier"
 
 interface SyllogismMP2Props {
     MP1FirstTerm: string
@@ -8,7 +9,8 @@ interface SyllogismMP2Props {
     setMP2FirstTerm: (value: string) => void
     MP2SecondTerm: string
     setMP2SecondTerm: (value: string) => void
-	setProp2Quantifier: (value: string) => void
+    quantifier: Quantifier
+	setProp2Quantifier: (value: Quantifier) => void
 }
 
 function SyllogismMP2({
@@ -16,9 +18,9 @@ function SyllogismMP2({
     MP1SecondTerm,
     MP2FirstTerm, setMP2FirstTerm,
     MP2SecondTerm, setMP2SecondTerm,
-    setProp2Quantifier
+    quantifier, setProp2Quantifier
 }: SyllogismMP2Props) {
-    const [verb, setVerb] = useState("Please select a quantifier")
+    const [verb, setVerb] = useState("are")
     const [selected1, setSelected1] = useState(false)
     const [selected2, setSelected2] = useState(false)
     const [manual1, setManual1] = useState(false)
@@ -73,7 +75,7 @@ function SyllogismMP2({
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <SyllogismMPQuantifier setVerb={setVerb} setPropQuantifier={setProp2Quantifier} />
+                    <SyllogismMPQuantifier setVerb={setVerb} quantifier={quantifier} setPropQuantifier={setProp2Quantifier} />
                 </div>
 
                 <div className="first-term">

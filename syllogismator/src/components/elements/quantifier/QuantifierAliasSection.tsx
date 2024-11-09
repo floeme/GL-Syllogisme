@@ -14,7 +14,7 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
     const aliases = quantifiers.filter(q => q.type === QuantifierType.of(type)).map(q => q.name)
 
     const isDefaultQuantifier = (quantifierName: string) => {
-        return Object.values(defaultQuantifiers).some(q => q.name === quantifierName);
+        return Object.values(defaultQuantifiers).some(q => q.name === quantifierName)
     }
 
 

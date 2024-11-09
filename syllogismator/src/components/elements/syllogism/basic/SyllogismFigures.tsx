@@ -16,7 +16,7 @@ function SyllogismTerms({ figure, setFigure }: SyllogismFigureProps) {
                     name="radioFigure"
                     value={Figure.Figure1}
                     checked={figure === Figure.Figure1}
-                    onChange={() => setFigure(Figure.Figure1)}
+                    onChange={() => {setFigure(Figure.Figure1)}}
                 />
             </div>
 
