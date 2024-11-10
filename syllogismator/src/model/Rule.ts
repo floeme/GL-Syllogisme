@@ -69,6 +69,20 @@ export type RuleResult = {
 }
 
 /**
+ * An object containing the results of multiple rules and a boolean denoting the validity of the syllogism.
+ */
+export type CheckResults = {
+    /**
+     * A map which associates a [rule id]{@link Rule.id} to the [result]{@link RuleResult} of that rule.
+     */
+    results: Map<string, RuleResult>;
+    /**
+     * Boolean denoting the validity of the syllogism. It is true if all rules passed, false if at least one rule failed.
+     */
+    valid: boolean;
+};
+
+/**
  * Check given syllogism with given rules (or [standard rules]{@link STANDARD_RULES} if no rule array is passed as
  * argument).
  *
@@ -84,16 +98,20 @@ export function check(
     syllogism: Syllogism,
     rules: Rule[] = STANDARD_RULES,
     stopOnBrokenRule: boolean = false
-): Map<string, RuleResult> {
-    const result = new Map<string, RuleResult>();
+): CheckResults {
+    const results = new Map<string, RuleResult>();
+    let valid: boolean = true;
 
     for (let rule of rules) {
         const ruleResult = rule.check(syllogism);
-        result.set(rule.id, ruleResult);
+
+        results.set(rule.id, ruleResult);
+        valid &&= ruleResult.valid;
+
         if (stopOnBrokenRule && !ruleResult) break;
     }
 
-    return result;
+    return {results, valid};
 }
 
 /**
