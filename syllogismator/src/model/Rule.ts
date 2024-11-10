@@ -5,7 +5,7 @@ export const RULE_I18N_NAMESPACE = "syllogism.rule";
 export const RULE_NAME_I18N_KEY = "name";
 export const RULE_DESCRIPTION_I18N_KEY = "description";
 
-const STANDARD_RULES = [r.Rmt, r.Rlh, r.Rnn, r.Rn, r.Raa, r.Rpp, r.Rp, r.Ruu]; // Private; do not mutate it.
+const STANDARD_RULES = [r.Rmt, r.Rlh, r.Rnn, r.Rn, r.Raa, r.Rpp, r.Rp]; // Private; do not mutate it.
 
 /**
  * A rule which validates a given syllogism.
