@@ -3,7 +3,9 @@
 
 $color-background-main: #140b29;
 $color-font-blanc: #fff;
-$color-font-violet: #8b7bf3;
+$color-font-violet: #221443;
+$color-font-violet2: #8b7bf3;
+
 $color-font-grey: #7D7688;
 $color-button: #705df2;
 $color-blue: #62c7ff;
@@ -37,7 +39,5 @@ html, body, #root, .app-container {
     flex: 1;
     width: 100%;
     height: auto;
-    //padding: 1rem;
     box-sizing: border-box;
-    overflow-y: auto;
 }

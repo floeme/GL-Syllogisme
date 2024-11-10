@@ -42,7 +42,7 @@ export const Navigation = () => {
             to={ROUTES.table}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
-            <li>Syllogism Table</li>
+            <li>Table</li>
           </NavLink>
         </ul>
       </div>

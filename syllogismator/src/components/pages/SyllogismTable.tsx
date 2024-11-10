@@ -151,32 +151,34 @@ export const SyllogismTable = () => {
 	const syllogisms = generateSyllogisms(256)
 
 	return (
-		<table className="syllogism-table">
-			<thead>
-				<tr>
-					<th>Proposition 1</th>
-					<th>Proposition 2</th>
-					<th>Conclusion</th>
-					<th>Figure</th>
-					<th>Validity</th>
-					<th>Validity with Existential Hypothesis</th>
-					<th>Interesting Syllogism</th>
-				</tr>
-			</thead>
-			<tbody>
-				{syllogisms.map((syllogism, index) => (
-					<tr key={index}>
-						<td>{syllogism.prop1}</td>
-						<td>{syllogism.prop2}</td>
-						<td>{syllogism.conclusion}</td>
-						<td>{syllogism.figure}</td>
-						<td>{syllogism.valid ? "Yes" : "No"}</td>
-						<td>{syllogism.validWithExistentialHypothesis ? "Yes" : "No"}</td>
-						<td>{syllogism.isInteresting ? "Yes" : "No"}</td>
+		<div className="table-page">
+			<table className="table">
+				<thead>
+					<tr>
+						<th>Proposition 1</th>
+						<th>Proposition 2</th>
+						<th>Conclusion</th>
+						<th>Figure</th>
+						<th>Validity</th>
+						<th className="th-VE">Validity with Existential Hypothesis</th>
+						<th className="th-IS">Interesting Syllogism</th>
 					</tr>
-				))}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{syllogisms.map((syllogism, index) => (
+						<tr key={index}>
+							<td>{syllogism.prop1}</td>
+							<td>{syllogism.prop2}</td>
+							<td>{syllogism.conclusion}</td>
+							<td>{syllogism.figure}</td>
+							<td>{syllogism.valid ? "Yes" : "No"}</td>
+							<td className="td-VE">{syllogism.validWithExistentialHypothesis ? "Yes" : "No"}</td>
+							<td className="td-IS">{syllogism.isInteresting ? "Yes" : "No"}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
 	)
 }
 
