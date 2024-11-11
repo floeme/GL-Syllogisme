@@ -5,6 +5,9 @@ export const RULE_I18N_NAMESPACE = "syllogism.rule";
 export const RULE_NAME_I18N_KEY = "name";
 export const RULE_DESCRIPTION_I18N_KEY = "description";
 
+const PASSED = "passed";
+const FAILED = "failed";
+
 const STANDARD_RULES = [r.Rmt, r.Rlh, r.Rnn, r.Rn, r.Raa, r.Rpp, r.Rp]; // Private; do not mutate it.
 
 /**
@@ -81,6 +84,13 @@ export type CheckResults = {
      */
     valid: boolean;
 };
+
+export function buildPlainRuleResult(valid: boolean): RuleResult {
+    return {
+        valid,
+        message: valid ? PASSED : FAILED
+    };
+}
 
 /**
  * Check given syllogism with given rules (or [standard rules]{@link STANDARD_RULES} if no rule array is passed as

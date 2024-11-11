@@ -1,4 +1,4 @@
-import {Rule} from "./Rule.ts";
+import {buildPlainRuleResult, Rule} from "./Rule.ts";
 
 // Rules on quantity
 
@@ -10,14 +10,11 @@ export const Rmt: Rule = {
     id: "Rmt",
     check: (s) => {
         // TODO Write the rule for polysyllogisms
-        const isValid = s.premises.some(proposition =>
+        const valid = s.premises.some(proposition =>
             proposition.quantifier!.type.universal
         );
 
-        return {
-            valid: isValid,
-            message: isValid ? "passed" : "failed"
-        }
+        return buildPlainRuleResult(valid);
     }
 }
 
@@ -30,32 +27,29 @@ export const Rlh: Rule = {
     check: (s) => {
         // If the quantifier of the conclusion is universal…
         if (s.conclusion.quantifier!.type.universal) {
-            let isValid = false;
+            let valid = false;
 
             // Check if the **minor term** is universally quantified in its premise
             const minorTerm = s.getMinorTerm()!;
             for (const premise of s.premises) {
                 if (premise.indexOf(minorTerm) !== -1) {
-                    isValid = premise.quantifier!.type.universal;
+                    valid = premise.quantifier!.type.universal;
                     break;
                 }
             }
 
-            if (!isValid) {
+            if (!valid) {
                 // Check if the **major term** is universally quantified in its premise
                 const minorTerm = s.getMajorTerm()!;
                 for (const premise of s.premises) {
                     if (premise.indexOf(minorTerm) !== -1) {
-                        isValid = premise.quantifier!.type.universal;
+                        valid = premise.quantifier!.type.universal;
                         break;
                     }
                 }
             }
 
-            return {
-                valid: isValid,
-                message: isValid ? "passed" : "failed"
-            }
+            return buildPlainRuleResult(valid);
         } else {
             return {
                 valid: true,
@@ -75,13 +69,9 @@ export const Rnn: Rule = {
     id: "Rnn",
     check: (s) => {
         if (s.getPropositionCount() === 3) {
-            const isValid =
-                s.getProposition(0).quantifier!.type.affirmative || s.getProposition(1).quantifier!.type.affirmative;
-
-            return {
-                valid: isValid,
-                message: isValid ? "passed" : "failed"
-            };
+            return buildPlainRuleResult(
+                s.getProposition(0).quantifier!.type.affirmative || s.getProposition(1).quantifier!.type.affirmative
+            );
         } else throw Error("Not implemented."); // TODO
     }
 }
@@ -95,12 +85,7 @@ export const Rn: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (!s.getProposition(0).quantifier!.type.affirmative || !s.getProposition(1).quantifier!.type.affirmative) {
-                const isValid = !s.conclusion.quantifier!.type.affirmative;
-
-                return {
-                    valid: isValid,
-                    message: isValid ? "passed" : "failed"
-                };
+                return buildPlainRuleResult(!s.conclusion.quantifier!.type.affirmative);
             } else {
                 return {
                     valid: true,
@@ -120,12 +105,7 @@ export const Raa: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (s.getProposition(0).quantifier!.type.affirmative && s.getProposition(1).quantifier!.type.affirmative) {
-                const isValid = s.conclusion.quantifier!.type.affirmative;
-
-                return {
-                    valid: isValid,
-                    message: isValid ? "passed" : "failed"
-                };
+                return buildPlainRuleResult(s.conclusion.quantifier!.type.affirmative);
             } else {
                 return {
                     valid: true,
@@ -144,13 +124,9 @@ export const Rpp: Rule = {
     id: "Rpp",
     check: (s) => {
         if (s.getPropositionCount() === 3) {
-            const isValid =
-                s.getProposition(0).quantifier!.type.universal || s.getProposition(1).quantifier!.type.universal;
-
-            return {
-                valid: isValid,
-                message: isValid ? "passed" : "failed"
-            };
+            return buildPlainRuleResult(
+                s.getProposition(0).quantifier!.type.universal || s.getProposition(1).quantifier!.type.universal
+            );
         } else throw Error("Not implemented."); // TODO
     }
 }
@@ -164,12 +140,7 @@ export const Rp: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (!s.getProposition(0).quantifier!.type.universal || !s.getProposition(1).quantifier!.type.universal) {
-                const isValid = !s.conclusion.quantifier!.type.universal;
-
-                return {
-                    valid: isValid,
-                    message: isValid ? "passed" : "failed"
-                };
+                return buildPlainRuleResult(!s.conclusion.quantifier!.type.universal);
             } else {
                 return {
                     valid: true,
@@ -191,12 +162,7 @@ export const Ruu: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (s.getProposition(0).quantifier!.type.universal && s.getProposition(1).quantifier!.type.universal) {
-                const isValid = s.conclusion.quantifier!.type.universal;
-
-                return {
-                    valid: isValid,
-                    message: isValid ? "passed" : "failed"
-                };
+                return buildPlainRuleResult(s.conclusion.quantifier!.type.universal);
             } else {
                 return {
                     valid: true,
