@@ -1,20 +1,50 @@
-import {buildPlainRuleResult, Rule} from "./Rule.ts";
+import {buildRuleResult, Rule} from "./Rule.ts";
+import {Term} from "./Term.ts";
 
 // Rules on quantity
 
 /**
  * ## Middle-term rule (Rmt)
  * The quantifier for each middle-term must be universal in at least one of its premises.
+ *
+ * **Extras:** If a middle-term appears twice with a particular quantifier (violating the rule), it is present in the
+ * {@link RuleResult.extras} property.
  */
 export const Rmt: Rule = {
     id: "Rmt",
     check: (s) => {
-        // TODO Write the rule for polysyllogisms
-        const valid = s.premises.some(proposition =>
-            proposition.quantifier!.type.universal
-        );
+        const major = s.getMajorTerm()!;
+        const minor = s.getMinorTerm()!;
 
-        return buildPlainRuleResult(valid);
+        // Map which associates a middle term to a boolean indicating if it is universal
+        const middleTermsMap = new Map<Term, boolean>;
+
+        // Test on each middle term. Stop when a middle term appears twice with a particular quantifier.
+        for (const premise of s.premises) {
+            for (const term of [premise.subject!, premise.predicate!]) {
+                if (term !== major && term !== minor) { // t is a middle term
+                    const universal = premise.quantifier!.type.universal;
+                    const u: boolean | undefined = middleTermsMap.get(term);
+                    // u is defined if term was previously found during the traversal: it is true if term is universal,
+                    // false if term is particular; it is undefined if it is the first time we find term.
+
+                    if (u === undefined) {
+                        // term is not in middleTermsMap => It is the first occurrence of term
+                        middleTermsMap.set(term, universal);
+                    } else {
+                        // term is in middleTermsMap => It is the second occurrence of term
+                        // If term is particular in both of its occurrences, the syllogism is invalid => Stop!
+                        if (!u && !universal) {
+                            const result = buildRuleResult(false);
+                            result.extras = term;
+                            return result;
+                        }
+                    }
+                }
+            }
+        }
+
+        return buildRuleResult(true);
     }
 }
 
@@ -49,7 +79,7 @@ export const Rlh: Rule = {
                 }
             }
 
-            return buildPlainRuleResult(valid);
+            return buildRuleResult(valid);
         } else {
             return {
                 valid: true,
@@ -69,7 +99,7 @@ export const Rnn: Rule = {
     id: "Rnn",
     check: (s) => {
         if (s.getPropositionCount() === 3) {
-            return buildPlainRuleResult(
+            return buildRuleResult(
                 s.getProposition(0).quantifier!.type.affirmative || s.getProposition(1).quantifier!.type.affirmative
             );
         } else throw Error("Not implemented."); // TODO
@@ -85,7 +115,7 @@ export const Rn: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (!s.getProposition(0).quantifier!.type.affirmative || !s.getProposition(1).quantifier!.type.affirmative) {
-                return buildPlainRuleResult(!s.conclusion.quantifier!.type.affirmative);
+                return buildRuleResult(!s.conclusion.quantifier!.type.affirmative);
             } else {
                 return {
                     valid: true,
@@ -105,7 +135,7 @@ export const Raa: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (s.getProposition(0).quantifier!.type.affirmative && s.getProposition(1).quantifier!.type.affirmative) {
-                return buildPlainRuleResult(s.conclusion.quantifier!.type.affirmative);
+                return buildRuleResult(s.conclusion.quantifier!.type.affirmative);
             } else {
                 return {
                     valid: true,
@@ -124,7 +154,7 @@ export const Rpp: Rule = {
     id: "Rpp",
     check: (s) => {
         if (s.getPropositionCount() === 3) {
-            return buildPlainRuleResult(
+            return buildRuleResult(
                 s.getProposition(0).quantifier!.type.universal || s.getProposition(1).quantifier!.type.universal
             );
         } else throw Error("Not implemented."); // TODO
@@ -140,7 +170,7 @@ export const Rp: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (!s.getProposition(0).quantifier!.type.universal || !s.getProposition(1).quantifier!.type.universal) {
-                return buildPlainRuleResult(!s.conclusion.quantifier!.type.universal);
+                return buildRuleResult(!s.conclusion.quantifier!.type.universal);
             } else {
                 return {
                     valid: true,
@@ -162,7 +192,7 @@ export const Ruu: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (s.getProposition(0).quantifier!.type.universal && s.getProposition(1).quantifier!.type.universal) {
-                return buildPlainRuleResult(s.conclusion.quantifier!.type.universal);
+                return buildRuleResult(s.conclusion.quantifier!.type.universal);
             } else {
                 return {
                     valid: true,
