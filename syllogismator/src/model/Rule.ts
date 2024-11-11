@@ -68,7 +68,7 @@ export type RuleResult = {
     /**
      * Extra objects if some data has to be shown in the message.
      */
-    extras?: object[];
+    extras?: object;
 }
 
 /**
@@ -85,7 +85,7 @@ export type CheckResults = {
     valid: boolean;
 };
 
-export function buildPlainRuleResult(valid: boolean): RuleResult {
+export function buildRuleResult(valid: boolean): RuleResult {
     return {
         valid,
         message: valid ? PASSED : FAILED
