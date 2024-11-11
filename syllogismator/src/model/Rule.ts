@@ -11,6 +11,13 @@ const FAILED = "failed";
 const STANDARD_RULES = [r.Rmt, r.Rlh, r.Rnn, r.Rn, r.Raa, r.Rpp, r.Rp]; // Private; do not mutate it.
 
 /**
+ * Returns all rules, including {@link Ruu}.
+ */
+export function getAllRules(): Rule[] {
+    return [...STANDARD_RULES, r.Ruu];
+}
+
+/**
  * A rule which validates a given syllogism.
  *
  * **Precondition for all rules:** the syllogism to check must have a valid structure, i.e.
