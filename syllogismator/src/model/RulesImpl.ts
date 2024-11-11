@@ -20,6 +20,7 @@ export const Rmt: Rule = {
         }
     }
 }
+
 /**
  * ## *Latius-Hos* Rule (Rlh)
  * The quantifier of the conclusion can be universal only if a term of the conclusion is universally quantified.
