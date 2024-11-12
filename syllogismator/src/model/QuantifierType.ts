@@ -53,3 +53,42 @@ export class QuantifierType {
     }
 }
 
+/**
+ * Returns a boolean indicating if the quantity of the term is universal.
+ *
+ * <table>
+ *   <tr>
+ *     <th></th>
+ *     <th>A</th>
+ *     <th>E</th>
+ *     <th>I</th>
+ *     <th>O</th>
+ *   </tr>
+ *   <tr>
+ *     <th>Subject</th>
+ *     <td>Universal</td>
+ *     <td>Universal</td>
+ *     <td>Particular</td>
+ *     <td>Particular</td>
+ *   </tr>
+ *   <tr>
+ *     <th>Predicate</th>
+ *     <td>Particular</td>
+ *     <td>Universal</td>
+ *     <td>Particular</td>
+ *     <td>Universal</td>
+ *   </tr>
+ * </table>
+ *
+ * @param propositionQuantifier Quantifier of the proposition where the term appears.
+ * @param subject true if the term is the subject of the proposition, false if it is the predicate.
+ */
+export function isUniversal(propositionQuantifier: QuantifierType, subject: boolean): boolean {
+    switch (propositionQuantifier) {
+        case QuantifierType.A: return subject;
+        case QuantifierType.E: return true;
+        case QuantifierType.I: return false;
+        case QuantifierType.O: return !subject;
+        default: throw new Error("Unknown propositionQuantifier");
+    }
+}
