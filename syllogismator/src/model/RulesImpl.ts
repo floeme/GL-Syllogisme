@@ -57,29 +57,28 @@ export const Rlh: Rule = {
     check: (s) => {
         // If the quantifier of the conclusion is universal…
         if (s.conclusion.quantifier!.type.universal) {
+            const major = s.getMajorTerm()!;
+            const minor = s.getMinorTerm()!;
+
+            let foundConclusionTerm = false;
+
             let valid = false;
 
-            // Check if the **minor term** is universally quantified in its premise
-            const minorTerm = s.getMinorTerm()!;
+            // Check that either the major or the minor term are universally quantified in their respective premises
             for (const premise of s.premises) {
-                if (premise.indexOf(minorTerm) !== -1) {
-                    valid = premise.quantifier!.type.universal;
-                    break;
-                }
-            }
-
-            if (!valid) {
-                // Check if the **major term** is universally quantified in its premise
-                const minorTerm = s.getMajorTerm()!;
-                for (const premise of s.premises) {
-                    if (premise.indexOf(minorTerm) !== -1) {
+                for (const term of [premise.subject!, premise.predicate!]) {
+                    if (term === major || term === minor) {
                         valid = premise.quantifier!.type.universal;
-                        break;
+                        if (valid || foundConclusionTerm) {
+                            return buildRuleResult(valid);
+                        } else {
+                            foundConclusionTerm = true;
+                        }
                     }
                 }
             }
 
-            return buildRuleResult(valid);
+            return buildRuleResult(false);
         } else {
             return {
                 valid: true,
