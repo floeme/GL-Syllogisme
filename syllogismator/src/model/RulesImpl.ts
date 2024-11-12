@@ -1,13 +1,14 @@
 import {buildRuleResult, Rule} from "./Rule.ts";
 import {Term} from "./Term.ts";
+import {isUniversal} from "./QuantifierType.ts";
 
 // Rules on quantity
 
 /**
  * ## Middle-term rule (Rmt)
- * The quantifier for each middle-term must be universal in at least one of its premises.
+ * The quantity for each middle-term must be universal in at least one of its premises.
  *
- * **Extras:** If a middle-term appears twice with a particular quantifier (violating the rule), it is present in the
+ * **Extras:** If a middle-term appears twice with a particular quantity (violating the rule), it is present in the
  * {@link RuleResult.extras} property.
  */
 export const Rmt: Rule = {
@@ -19,11 +20,14 @@ export const Rmt: Rule = {
         // Map which associates a middle term to a boolean indicating if it is universal
         const middleTermsMap = new Map<Term, boolean>;
 
-        // Test on each middle term. Stop when a middle term appears twice with a particular quantifier.
+        // Test on each middle term. Stop when a middle term appears twice with a particular quantity.
         for (const premise of s.premises) {
-            for (const term of [premise.subject!, premise.predicate!]) {
+            // Test the subject and the predicate of the premise
+            for (const {term, isSubject} of
+                [{term: premise.subject!, isSubject: true}, {term: premise.predicate!, isSubject: false}]
+            ) {
                 if (term !== major && term !== minor) { // t is a middle term
-                    const universal = premise.quantifier!.type.universal;
+                    const universal = isUniversal(premise.quantifier!.type, isSubject);
                     const u: boolean | undefined = middleTermsMap.get(term);
                     // u is defined if term was previously found during the traversal: it is true if term is universal,
                     // false if term is particular; it is undefined if it is the first time we find term.
