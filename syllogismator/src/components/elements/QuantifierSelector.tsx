@@ -1,16 +1,15 @@
 import { useContext } from "react"
-import QuantifierContext from "../../../contexts/QuantifierContext"
-import { QuantifierType } from "../../../model/QuantifierType"
-import {DEFAULT_QUANTIFIERS_I18N_NAMESPACE, isDefaultQuantifierName, Quantifier} from "../../../model/Quantifier"
+import QuantifierContext from "../../contexts/QuantifierContext"
+import { QuantifierType } from "../../model/QuantifierType"
+import {DEFAULT_QUANTIFIERS_I18N_NAMESPACE, isDefaultQuantifierName, Quantifier} from "../../model/Quantifier"
 import {useTranslation} from "react-i18next";
 
-interface SyllogismMPQuantifierProps {
-    setVerb: (value: string) => void
+interface QuantifierSelectorProps {
     quantifier: Quantifier
     setPropQuantifier: (value: Quantifier) => void
 }
 
-function SyllogismMPQuantifier({ setVerb, quantifier, setPropQuantifier }: SyllogismMPQuantifierProps) {
+function QuantifierSelector({ quantifier, setPropQuantifier }: QuantifierSelectorProps) {
     const { quantifiers } = useContext(QuantifierContext)
 
     const { t } = useTranslation('translation', { keyPrefix: DEFAULT_QUANTIFIERS_I18N_NAMESPACE });
@@ -23,22 +22,18 @@ function SyllogismMPQuantifier({ setVerb, quantifier, setPropQuantifier }: Syllo
             case "A":
                 quantifier.type = QuantifierType.A
                 setPropQuantifier({...quantifier})
-                setVerb("are")
                 break
             case "E":
                 quantifier.type = QuantifierType.E
                 setPropQuantifier({...quantifier})
-                setVerb("are not")
                 break
             case "I":
                 quantifier.type = QuantifierType.I
                 setPropQuantifier({...quantifier})
-                setVerb("are some")
                 break
             case "O":
                 quantifier.type = QuantifierType.O
                 setPropQuantifier({...quantifier})
-                setVerb("are not some")
                 break
         }
     }
@@ -66,4 +61,4 @@ function SyllogismMPQuantifier({ setVerb, quantifier, setPropQuantifier }: Syllo
     )
 }
 
-export default SyllogismMPQuantifier
+export default QuantifierSelector

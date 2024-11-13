@@ -1,5 +1,5 @@
 import { useState } from "react"
-import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
+import QuantifierSelector from "../../QuantifierSelector"
 import { Quantifier } from "../../../../model/Quantifier"
 
 interface SyllogismMPProps {
@@ -21,7 +21,7 @@ function SyllogismMP({
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <SyllogismMPQuantifier setVerb={setVerb} quantifier={quantifier} setPropQuantifier={setPropQuantifier} />
+                    <QuantifierSelector quantifier={quantifier} setPropQuantifier={setPropQuantifier} />
                 </div>
 
                 <div className="subject">
