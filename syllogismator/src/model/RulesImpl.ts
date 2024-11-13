@@ -54,7 +54,7 @@ export const Rmt: Rule = {
 
 /**
  * ## *Latius-Hos* Rule (Rlh)
- * The quantifier of the conclusion can be universal only if a term of the conclusion is universally quantified.
+ * The quantifier of the conclusion can be universal only if a term of the conclusion has universal quantity.
  */
 export const Rlh: Rule = {
     id: "Rlh",
@@ -94,7 +94,7 @@ export const Rlh: Rule = {
     }
 }
 
-// Rules on quality
+// Rules on proposition quality
 
 /**
  * ## 2 Negative Premises Rule (Rnn)
