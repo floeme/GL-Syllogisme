@@ -31,3 +31,7 @@ export const defaultQuantifiers = {
     I: new Quantifier("I", QuantifierType.I),
     O: new Quantifier("O", QuantifierType.O)
 }
+
+export function isDefaultQuantifierName(name: string): boolean {
+    return name === "A" || name === "E" || name === "I" || name === "O";
+}

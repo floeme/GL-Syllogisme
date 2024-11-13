@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import QuantifierContext from '../../../contexts/QuantifierContext'
-import { defaultQuantifiers, Quantifier } from '../../../model/Quantifier'
+import { DEFAULT_QUANTIFIERS_I18N_NAMESPACE, isDefaultQuantifierName, Quantifier } from '../../../model/Quantifier'
 import { QuantifierType } from '../../../model/QuantifierType'
+import { useTranslation } from "react-i18next";
 
 interface QuantifierAliasSectionProps {
     type: 'A' | 'E' | 'I' | 'O'
@@ -11,11 +12,9 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
     const [newAlias, setNewAlias] = useState('')
     const { quantifiers, addQuantifier, removeQuantifier } = useContext(QuantifierContext)
 
-    const aliases = quantifiers.filter(q => q.type === QuantifierType.of(type)).map(q => q.name)
+    const { t } = useTranslation('translation', { keyPrefix: DEFAULT_QUANTIFIERS_I18N_NAMESPACE });
 
-    const isDefaultQuantifier = (quantifierName: string) => {
-        return Object.values(defaultQuantifiers).some(q => q.name === quantifierName)
-    }
+    const aliases = quantifiers.filter(q => q.type === QuantifierType.of(type)).map(q => q.name)
 
 
     const handleAdd = () => {
@@ -36,19 +35,22 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
     return (
         <div className="quantifier-alias-section">
             <div className="quantifier-alias-section-title">
-                <h3>{type}</h3>
+                <h3>{type} – {t(type)}</h3>
             </div>
 
             <div className="list-alias">
                 <ul className="list-alias-ul">
-                    {aliases.map((alias, index) => (
-                        <li key={index} className="list-alias-ul-li">
-                            <input type="text" value={alias} readOnly />
-                            {!isDefaultQuantifier(alias) && (
-                                <button onClick={() => handleRemove(alias)}>🗑️</button>
-                            )}
-                        </li>
-                    ))}
+                    { aliases.map((alias, index) => {
+                        const isDefault = isDefaultQuantifierName(alias);
+                        return (
+                            <li key={index} className="list-alias-ul-li">
+                                <input type="text" value={isDefault ? t(alias) : alias} readOnly/>
+                                {!isDefault && (
+                                    <button onClick={() => handleRemove(alias)}>🗑️</button>
+                                )}
+                            </li>
+                        );
+                    }) }
                 </ul>
             </div>
 
