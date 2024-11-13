@@ -188,6 +188,7 @@ export const Rp: Rule = {
             } else {
                 return {
                     valid: true,
+                    validWithUniversalConclusion: false,
                     message: "2_universal_premises"
                 };
             }
