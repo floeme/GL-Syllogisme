@@ -70,9 +70,11 @@ export const Rlh: Rule = {
 
             // Check that either the major or the minor term are universally quantified in their respective premises
             for (const premise of s.premises) {
-                for (const term of [premise.subject!, premise.predicate!]) {
+                for (const {term, isSubject} of
+                    [{term: premise.subject!, isSubject: true}, {term: premise.predicate!, isSubject: false}]
+                ) {
                     if (term === major || term === minor) {
-                        valid = premise.quantifier!.type.universal;
+                        valid = isUniversal(premise.quantifier!.type, isSubject);
                         if (valid || foundConclusionTerm) {
                             return buildRuleResult(valid);
                         } else {
