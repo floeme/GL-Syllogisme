@@ -68,6 +68,11 @@ export type RuleResult = {
      */
     valid: boolean;
     /**
+     * Boolean indicating if the rule passes when replacing a particular conclusion by a universal one.
+     * If the value is undefined, it must be ignored.
+     */
+    validWithUniversalConclusion?: boolean;
+    /**
      * Key (without namespace) of the message explaining why the rule passed or failed.
      * @see Rule
      */
@@ -90,6 +95,10 @@ export type CheckResults = {
      * Boolean denoting the validity of the syllogism. It is true if all rules passed, false if at least one rule failed.
      */
     valid: boolean;
+    /**
+     * Boolean indicating if the syllogism is still valid when replacing a particular conclusion by a universal one.
+     */
+    validWithUniversalConclusion: boolean;
 };
 
 export function buildRuleResult(valid: boolean): RuleResult {
@@ -118,17 +127,20 @@ export function check(
 ): CheckResults {
     const results = new Map<string, RuleResult>();
     let valid: boolean = true;
+    let validWithUniversalConclusion = true;
 
     for (let rule of rules) {
         const ruleResult = rule.check(syllogism);
 
         results.set(rule.id, ruleResult);
         valid &&= ruleResult.valid;
+        validWithUniversalConclusion &&= valid
+            && ruleResult.validWithUniversalConclusion !== false /* (Ignored if undefined) */;
 
         if (stopOnBrokenRule && !ruleResult) break;
     }
 
-    return {results, valid};
+    return {results, valid, validWithUniversalConclusion};
 }
 
 /**
