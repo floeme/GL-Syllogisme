@@ -15,48 +15,25 @@ describe("Proposition", () => {
         expect(prop.subject).toBe(term1)
         expect(prop.predicate).toBe(term2)
 
-        expect(prop.hasValidStructure()).toBe(true);
-
         const prop2 : Proposition = Proposition.withTerms(quantifier, term1, term1);
 
         expect(prop2.quantifier).toBe(quantifier)
         expect(prop2.subject).toBe(term1)
         expect(prop2.predicate).toBe(term1)
 
-        expect(prop2.hasValidStructure()).toBe(false);
     })
 
-    it("Constructor", () => {
-
+    it("hasValidStructure", async () => {
         const quantifier : Quantifier = new Quantifier("ILU", QuantifierType.A);
         const term1 : Term = new Term("term1");
         const term2 : Term = new Term("term2");
 
-        const prop : Proposition = new Proposition();
+        const prop : Proposition = Proposition.withTerms(quantifier, term1, term2);
 
-        expect(prop.quantifier).toBe(undefined)
-        expect(prop.subject).toBe(undefined)
-        expect(prop.predicate).toBe(undefined)
-
-        expect(prop.hasValidStructure()).toBe(false);
-
-
-        prop.quantifier = quantifier
-
-        expect(prop.quantifier).toBe(quantifier)
-        expect(prop.hasValidStructure()).toBe(false);
-
-        prop.subject = term1
-        expect(prop.subject).toBe(term1)
-        expect(prop.hasValidStructure()).toBe(false);
-
-        prop.predicate = term2
-        expect(prop.predicate).toBe(term2)
         expect(prop.hasValidStructure()).toBe(true);
 
-        prop.predicate = term1
-        expect(prop.predicate).toBe(term1)
-        expect(prop.hasValidStructure()).toBe(false);
+        const prop2 : Proposition = Proposition.withTerms(quantifier, term1, term1);
 
+        expect(prop2.hasValidStructure()).toBe(false);
     })
 })

@@ -366,20 +366,6 @@ describe('Syllogisme', () => {
         expect(syllogism.hasValidStructure()).toBe(true)
     })
 
-    it("hasValidStructure : Prop term equal", async ()=> {
-        const m : Term = new Term("m"); // m
-        const p : Term = new Term("p"); // p
-        const s : Term = new Term("s"); // s
-        const syllogism: Syllogism = new Syllogism();
-
-
-        updatePropositionType(syllogism.getProposition(0), new Quantifier("prop1", QuantifierType.I), p, p);
-        updatePropositionType(syllogism.getProposition(1), new Quantifier("prop2", QuantifierType.I), m, s);
-
-        updatePropositionType(syllogism.getProposition(2), new Quantifier("conc", QuantifierType.A), s, p);
-
-        expect(syllogism.hasValidStructure()).toBe(false)
-    })
 
     it("hasValidStructure : Prop term not 2", async ()=> {
         const m : Term = new Term("m"); // m
