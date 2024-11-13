@@ -1,6 +1,7 @@
 import {buildRuleResult, Rule} from "./Rule.ts";
 import {Term} from "./Term.ts";
 import {isUniversal} from "./QuantifierType.ts";
+import {Syllogism} from "./Syllogism.ts";
 
 // Rules on quantity
 
@@ -52,6 +53,7 @@ export const Rmt: Rule = {
     }
 }
 
+
 /**
  * ## *Latius-Hos* Rule (Rlh)
  * The quantifier of the conclusion can be universal only if a term of the conclusion has universal quantity.
@@ -61,38 +63,45 @@ export const Rlh: Rule = {
     check: (s) => {
         // If the quantifier of the conclusion is universal…
         if (s.conclusion.quantifier!.type.universal) {
-            const major = s.getMajorTerm()!;
-            const minor = s.getMinorTerm()!;
-
-            let foundConclusionTerm = false;
-
-            let valid = false;
-
-            // Check that either the major or the minor term are universally quantified in their respective premises
-            for (const premise of s.premises) {
-                for (const {term, isSubject} of
-                    [{term: premise.subject!, isSubject: true}, {term: premise.predicate!, isSubject: false}]
-                ) {
-                    if (term === major || term === minor) {
-                        valid = isUniversal(premise.quantifier!.type, isSubject);
-                        if (valid || foundConclusionTerm) {
-                            return buildRuleResult(valid);
-                        } else {
-                            foundConclusionTerm = true;
-                        }
-                    }
-                }
-            }
-
-            return buildRuleResult(false);
+            return buildRuleResult(rlh_aux(s));
         } else {
             return {
                 valid: true,
+                validWithUniversalConclusion: rlh_aux(s),
                 message: "specific_conclusion"
-            }
+            };
         }
     }
 }
+
+function rlh_aux(s: Syllogism): boolean {
+    const major = s.getMajorTerm()!;
+    const minor = s.getMinorTerm()!;
+
+    // True when the first occurrence of term is found
+    let foundConclusionTerm = false;
+
+    let valid = false;
+
+    // Check that either the major or the minor term are universally quantified in their respective premises
+    for (const premise of s.premises) {
+        for (const {term, isSubject} of
+            [{term: premise.subject!, isSubject: true}, {term: premise.predicate!, isSubject: false}]
+        ) {
+            if (term === major || term === minor) {
+                valid = isUniversal(premise.quantifier!.type, isSubject);
+                if (valid || foundConclusionTerm) {
+                    return valid;
+                } else {
+                    foundConclusionTerm = true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
 
 // Rules on proposition quality
 
