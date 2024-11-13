@@ -9,15 +9,16 @@ interface SyllogismMP1Props {
     setMP1SecondTerm: (value: string) => void
     quantifier: Quantifier
 	setProp1Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
 }
 
 function SyllogismMP1({
     MP1FirstTerm, setMP1FirstTerm,
     MP1SecondTerm, setMP1SecondTerm,
-    quantifier, setProp1Quantifier
+    quantifier, setProp1Quantifier,
+	verb, setVerb
 }: SyllogismMP1Props) {
-    const [verb, setVerb] = useState("are")
-
     return (
         <div className="mp-container">
             <div className="mp-proposition">
@@ -36,7 +37,14 @@ function SyllogismMP1({
                 </div>
 
                 <div className="verb">
-                    <label>{verb}</label>
+                    <input type="text"
+                        name="verbTerm"
+                        placeholder="Enter a verb"
+                        value={verb}
+                        onChange={(e) => {
+                            setVerb(e.target.value)
+                        }}
+                    />
                 </div>
 
                 <div className="second-term">

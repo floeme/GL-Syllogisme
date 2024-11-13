@@ -22,6 +22,8 @@ interface Basic_SyllogismProps {
 	setProp2Quantifier: (value: Quantifier) => void
 	prop3Quantifier: Quantifier
 	setProp3Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
 }
 
 export const Basic_Syllogism = ({
@@ -32,7 +34,8 @@ export const Basic_Syllogism = ({
 	expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
-	prop3Quantifier, setProp3Quantifier
+	prop3Quantifier, setProp3Quantifier,
+	verb, setVerb
 }: Basic_SyllogismProps) => {
 	return (
 		<>
@@ -68,6 +71,8 @@ export const Basic_Syllogism = ({
 				setProp2Quantifier={setProp2Quantifier}
 				prop3Quantifier={prop3Quantifier}
 				setProp3Quantifier={setProp3Quantifier}
+				verb={verb}
+				setVerb={setVerb}
 			/>
 		</>
 	)

@@ -7,11 +7,16 @@ interface SyllogismMP3Props {
     predicate: string
     quantifier: Quantifier
 	setProp3Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
 }
 
-function SyllogismMP3({ subject, predicate, quantifier, setProp3Quantifier }: SyllogismMP3Props) {
-    const [verb, setVerb] = useState("are")
-
+function SyllogismMP3({
+    subject,
+    predicate,
+    quantifier, setProp3Quantifier,
+	verb, setVerb
+}: SyllogismMP3Props) {
     return (
         <div className="mp-container">
             <div className="mp-proposition">
@@ -24,7 +29,14 @@ function SyllogismMP3({ subject, predicate, quantifier, setProp3Quantifier }: Sy
                 </div>
 
                 <div className="verb">
-                    <label>{verb}</label>
+                    <input type="text"
+                        name="verbTerm"
+                        placeholder="Enter a verb"
+                        value={verb}
+                        onChange={(e) => {
+                            setVerb(e.target.value)
+                        }}
+                    />
                 </div>
 
                 <div className="predicate">

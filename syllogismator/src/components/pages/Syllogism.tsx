@@ -14,6 +14,7 @@ export const Syllogism = () => {
 	const [prop1Quantifier, setProp1Quantifier] = useState(new Quantifier("prop1Quantifier", QuantifierType.A))
 	const [prop2Quantifier, setProp2Quantifier] = useState(new Quantifier("prop2Quantifier", QuantifierType.A))
 	const [prop3Quantifier, setProp3Quantifier] = useState(new Quantifier("prop3Quantifier", QuantifierType.A))
+	const [verb, setVerb] = useState("are")
 	const [expertMode, setExpertMode] = useState(false)
 
 	return (
@@ -37,6 +38,8 @@ export const Syllogism = () => {
 						setProp2Quantifier={setProp2Quantifier}
 						prop3Quantifier={prop3Quantifier}
 						setProp3Quantifier={setProp3Quantifier}
+						verb={verb}
+						setVerb={setVerb}
 					/>
 				</div>
 				:
@@ -56,6 +59,8 @@ export const Syllogism = () => {
 						setProp2Quantifier={setProp2Quantifier}
 						prop3Quantifier={prop3Quantifier}
 						setProp3Quantifier={setProp3Quantifier}
+						verb={verb}
+						setVerb={setVerb}
 					/>
 				</div>
 			}

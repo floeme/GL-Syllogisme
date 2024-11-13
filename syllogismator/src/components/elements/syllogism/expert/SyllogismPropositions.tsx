@@ -29,6 +29,8 @@ interface SyllogismPremisesProps {
 	setProp2Quantifier: (value: Quantifier) => void
 	prop3Quantifier: Quantifier
 	setProp3Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
 }
 
 function SyllogismPropositions({
@@ -42,7 +44,8 @@ function SyllogismPropositions({
     expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
-	prop3Quantifier, setProp3Quantifier
+	prop3Quantifier, setProp3Quantifier,
+	verb, setVerb
 }: SyllogismPremisesProps) {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
@@ -181,6 +184,8 @@ function SyllogismPropositions({
         middle.value = ""
         setMiddle({...middle})
 
+        setVerb("")
+
         setMP1FirstTerm("")
         setMP1SecondTerm("")
         setMP2FirstTerm("")
@@ -205,6 +210,8 @@ function SyllogismPropositions({
             setMP1SecondTerm={setMP1SecondTerm}
             quantifier={prop1Quantifier}
             setProp1Quantifier={setProp1Quantifier}
+            verb={verb}
+            setVerb={setVerb}
         />,
         <SyllogismMP2
             MP1FirstTerm={MP1FirstTerm}
@@ -215,12 +222,16 @@ function SyllogismPropositions({
             setMP2SecondTerm={setMP2SecondTerm}
             quantifier={prop2Quantifier}
             setProp2Quantifier={setProp2Quantifier}
+            verb={verb}
+            setVerb={setVerb}
         />,
         <SyllogismMP3
             subject={subject.value}
             predicate={predicate.value}
             quantifier={prop3Quantifier}
             setProp3Quantifier={setProp3Quantifier}
+            verb={verb}
+            setVerb={setVerb}
         />
     ])
 
@@ -233,6 +244,8 @@ function SyllogismPropositions({
                 setMP1SecondTerm={setMP1SecondTerm}
                 quantifier={prop1Quantifier}
                 setProp1Quantifier={setProp1Quantifier}
+				verb={verb}
+				setVerb={setVerb}
             />,
             <SyllogismMP2
                 MP1FirstTerm={MP1FirstTerm}
@@ -243,15 +256,19 @@ function SyllogismPropositions({
                 setMP2SecondTerm={setMP2SecondTerm}
                 quantifier={prop2Quantifier}
                 setProp2Quantifier={setProp2Quantifier}
+				verb={verb}
+				setVerb={setVerb}
             />,
             <SyllogismMP3
                 subject={subject.value}
                 predicate={predicate.value}
                 quantifier={prop3Quantifier}
                 setProp3Quantifier={setProp3Quantifier}
+				verb={verb}
+				setVerb={setVerb}
             />
         ])
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, subject, predicate, middle])
+    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, subject, predicate, middle, verb])
 
     return (
         <div className="section-premises">
@@ -265,7 +282,9 @@ function SyllogismPropositions({
                         <input
                             type="checkbox"
                             checked={expertMode}
-                            onChange={() => setExpertMode(!expertMode)}
+                            onChange={() => {
+                                setExpertMode(!expertMode)
+                            }}
                         />
                         <span className="slider"></span>
                     </label>

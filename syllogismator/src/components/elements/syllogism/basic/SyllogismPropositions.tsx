@@ -23,6 +23,8 @@ interface SyllogismPremisesProps {
     setProp2Quantifier: (value: Quantifier) => void
     prop3Quantifier: Quantifier
     setProp3Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
 }
 
 function SyllogismPropositions({
@@ -33,7 +35,8 @@ function SyllogismPropositions({
     expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
-	prop3Quantifier, setProp3Quantifier
+	prop3Quantifier, setProp3Quantifier,
+	verb, setVerb
 }: SyllogismPremisesProps) {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
 
@@ -95,6 +98,7 @@ function SyllogismPropositions({
     const checkSyllogism = () => {
         if (!validateInputs()) {
             let syllogism : Syllogism = Syllogism.ofFigure(figure, subject, predicate, middle)
+            syllogism.link = verb
             // res = syllogism.check()
 
             // if (res["rmt"]["validation"] == false) {
@@ -124,6 +128,8 @@ function SyllogismPropositions({
         middle.value = ""
         setMiddle({...middle})
 
+        setVerb("")
+
         setFigure(Figure.Figure1)
 
         console.log("clear")
@@ -141,10 +147,24 @@ function SyllogismPropositions({
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure3:
-                return <SyllogismMP firstTerm={middle.value} secondTerm={predicate.value} quantifier={prop1Quantifier} setPropQuantifier={setProp1Quantifier} />
+                return <SyllogismMP
+                        firstTerm={middle.value}
+                        secondTerm={predicate.value}
+                        quantifier={prop1Quantifier}
+                        setPropQuantifier={setProp1Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
             case Figure.Figure2:
             case Figure.Figure4:
-                return <SyllogismMP firstTerm={predicate.value} secondTerm={middle.value} quantifier={prop1Quantifier} setPropQuantifier={setProp1Quantifier} />
+                return <SyllogismMP
+                        firstTerm={predicate.value}
+                        secondTerm={middle.value}
+                        quantifier={prop1Quantifier}
+                        setPropQuantifier={setProp1Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
             default:
                 return <div>Please select a figure</div>
         }
@@ -154,10 +174,24 @@ function SyllogismPropositions({
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure2:
-                return <SyllogismMP firstTerm={subject.value} secondTerm={middle.value} quantifier={prop2Quantifier} setPropQuantifier={setProp2Quantifier} />
+                return <SyllogismMP
+                        firstTerm={subject.value}
+                        secondTerm={middle.value}
+                        quantifier={prop2Quantifier}
+                        setPropQuantifier={setProp2Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
             case Figure.Figure3:
             case Figure.Figure4:
-                return <SyllogismMP firstTerm={middle.value} secondTerm={subject.value} quantifier={prop2Quantifier} setPropQuantifier={setProp2Quantifier} />
+                return <SyllogismMP
+                        firstTerm={middle.value}
+                        secondTerm={subject.value}
+                        quantifier={prop2Quantifier}
+                        setPropQuantifier={setProp2Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
             default:
                 return <div>Please select a figure</div>
         }
@@ -169,7 +203,14 @@ function SyllogismPropositions({
             case Figure.Figure2:
             case Figure.Figure3:
             case Figure.Figure4:
-                return <SyllogismMP firstTerm={subject.value} secondTerm={predicate.value} quantifier={prop3Quantifier} setPropQuantifier={setProp3Quantifier} />
+                return <SyllogismMP
+                        firstTerm={subject.value}
+                        secondTerm={predicate.value}
+                        quantifier={prop3Quantifier}
+                        setPropQuantifier={setProp3Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
             default:
                 return <div>Please select a figure</div>
         }
@@ -197,7 +238,7 @@ function SyllogismPropositions({
             renderSyllogismMP2(figure),
             renderSyllogismMP3(figure)
         ])
-    }, [figure, subject, predicate, middle])
+    }, [figure, subject, predicate, middle, verb])
 
     return (
         <div className="section-premises">
@@ -220,6 +261,7 @@ function SyllogismPropositions({
                                 prop3Quantifier.type = QuantifierType.A
                                 setProp3Quantifier({...prop3Quantifier})
                                 setFigure(Figure.Figure1)
+                                setVerb("")
                             }}
                         />
                         <span className="slider"></span>

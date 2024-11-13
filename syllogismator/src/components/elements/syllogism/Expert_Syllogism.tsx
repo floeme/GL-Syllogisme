@@ -18,6 +18,8 @@ interface Expert_SyllogismProps {
 	setProp2Quantifier: (value: Quantifier) => void
 	prop3Quantifier: Quantifier
 	setProp3Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
 }
 
 export const Expert_Syllogism = ({
@@ -27,7 +29,8 @@ export const Expert_Syllogism = ({
 	expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
-	prop3Quantifier, setProp3Quantifier
+	prop3Quantifier, setProp3Quantifier,
+	verb, setVerb
 }: Expert_SyllogismProps) => {
 	const [MP1FirstTerm, setMP1FirstTerm] = useState("")
 	const [MP1SecondTerm, setMP1SecondTerm] = useState("")
@@ -59,6 +62,8 @@ export const Expert_Syllogism = ({
 				setProp2Quantifier={setProp2Quantifier}
 				prop3Quantifier={prop3Quantifier}
 				setProp3Quantifier={setProp3Quantifier}
+				verb={verb}
+				setVerb={setVerb}
 			/>
 		</>
 	)
