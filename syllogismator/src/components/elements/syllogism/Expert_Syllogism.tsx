@@ -2,6 +2,7 @@ import { Quantifier } from "../../../model/Quantifier"
 import { Term } from "../../../model/Term"
 import SyllogismPropositions from "./expert/SyllogismPropositions"
 import { useState } from "react"
+import {Syllogism} from "../../../model/Syllogism.ts";
 
 interface Expert_SyllogismProps {
 	subject: Term
@@ -20,6 +21,7 @@ interface Expert_SyllogismProps {
 	setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
+	syllogism : Syllogism
 }
 
 export const Expert_Syllogism = ({
@@ -30,7 +32,8 @@ export const Expert_Syllogism = ({
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
-	verb, setVerb
+	verb, setVerb,
+	syllogism
 }: Expert_SyllogismProps) => {
 	const [MP1FirstTerm, setMP1FirstTerm] = useState("")
 	const [MP1SecondTerm, setMP1SecondTerm] = useState("")
@@ -64,6 +67,7 @@ export const Expert_Syllogism = ({
 				setProp3Quantifier={setProp3Quantifier}
 				verb={verb}
 				setVerb={setVerb}
+				syllogism={syllogism}
 			/>
 		</>
 	)

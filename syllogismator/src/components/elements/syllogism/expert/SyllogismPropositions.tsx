@@ -4,7 +4,7 @@ import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
-import { QuantifierType } from "../../../../model/QuantifierType"
+import {Syllogism} from "../../../../model/Syllogism.ts";
 
 interface SyllogismPremisesProps {
     MP1FirstTerm: string
@@ -31,6 +31,7 @@ interface SyllogismPremisesProps {
 	setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
+    syllogism: Syllogism
 }
 
 function SyllogismPropositions({
@@ -45,7 +46,8 @@ function SyllogismPropositions({
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
-	verb, setVerb
+	verb, setVerb,
+    syllogism
 }: SyllogismPremisesProps) {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
@@ -111,7 +113,7 @@ function SyllogismPropositions({
             predicate.value = MP1FirstTerm
             setPredicate({...predicate})
         }
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm])
+    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, middle, predicate, setMiddle, setPredicate, setSubject, subject])
 
     const validateInputs = () => {
         let isErrorMessage = false
@@ -171,6 +173,7 @@ function SyllogismPropositions({
     const checkSyllogism = () => {
         if (!validateInputs()) {
 
+            syllogism.link = verb
         }
 
         console.log("check")
@@ -268,7 +271,7 @@ function SyllogismPropositions({
 				setVerb={setVerb}
             />
         ])
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, subject, predicate, middle, verb])
+    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, subject, predicate, middle, verb, setMP1FirstTerm, setMP1SecondTerm, prop1Quantifier, setProp1Quantifier, setVerb, setMP2FirstTerm, setMP2SecondTerm, prop2Quantifier, setProp2Quantifier, prop3Quantifier, setProp3Quantifier])
 
     return (
         <div className="section-premises">

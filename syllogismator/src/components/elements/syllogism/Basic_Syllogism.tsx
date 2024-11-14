@@ -4,6 +4,7 @@ import SyllogismFigures from "./basic/SyllogismFigures"
 import { Figure } from "../../../model/Figure"
 import { Term } from "../../../model/Term"
 import { Quantifier } from "../../../model/Quantifier"
+import {Syllogism} from "../../../model/Syllogism.ts";
 
 interface Basic_SyllogismProps {
 	subject: Term
@@ -24,6 +25,7 @@ interface Basic_SyllogismProps {
 	setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
+	syllogism: Syllogism
 }
 
 export const Basic_Syllogism = ({
@@ -35,7 +37,8 @@ export const Basic_Syllogism = ({
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
-	verb, setVerb
+	verb, setVerb,
+	syllogism
 }: Basic_SyllogismProps) => {
 	return (
 		<>
@@ -73,6 +76,7 @@ export const Basic_Syllogism = ({
 				setProp3Quantifier={setProp3Quantifier}
 				verb={verb}
 				setVerb={setVerb}
+				syllogism={syllogism}
 			/>
 		</>
 	)

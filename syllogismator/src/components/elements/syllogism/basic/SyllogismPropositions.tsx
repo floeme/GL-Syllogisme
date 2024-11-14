@@ -25,6 +25,7 @@ interface SyllogismPremisesProps {
     setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
+    syllogism : Syllogism
 }
 
 function SyllogismPropositions({
@@ -36,7 +37,8 @@ function SyllogismPropositions({
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
-	verb, setVerb
+	verb, setVerb,
+    syllogism
 }: SyllogismPremisesProps) {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
 
@@ -97,7 +99,6 @@ function SyllogismPropositions({
 
     const checkSyllogism = () => {
         if (!validateInputs()) {
-            let syllogism : Syllogism = Syllogism.ofFigure(figure, subject, predicate, middle)
             syllogism.link = verb
             // res = syllogism.check()
 
