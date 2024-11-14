@@ -94,6 +94,9 @@
     "enter_term": "Saisir le {{kind}}",
     "check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
     "check": "Vérifier",
-    "enter_verb": "Saisir un verbe"
+    "enter_verb": "Saisir un verbe",
+    "select_type_term": "Sélectionner ou saisir un terme",
+    "select_term": "Sélectionner un terme",
+    "type_term": "Saisir un terme"
   }
 }

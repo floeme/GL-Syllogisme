@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
 import { Quantifier } from "../../../../model/Quantifier"
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../../i18n.ts";
 
 interface SyllogismMP2Props {
     MP1FirstTerm: string
@@ -27,6 +29,8 @@ function SyllogismMP2({
     const [selected2, setSelected2] = useState(false)
     const [manual1, setManual1] = useState(false)
     const [manual2, setManual2] = useState(false)
+
+    const { t } = useTranslation(I18N_NS);
 
     useEffect(() => {
         if ((selected1 || manual1) && MP2FirstTerm == "") {
@@ -86,7 +90,7 @@ function SyllogismMP2({
                             type="text"
                             value={MP2FirstTerm}
                             onChange={(e) => setMP2FirstTerm(e.target.value)}
-                            placeholder="Enter a term"
+                            placeholder={t("input.type_term")}
                         />
                     ) : manual2 ? (
                         <select
@@ -94,7 +98,7 @@ function SyllogismMP2({
                             onChange={(e) => setMP2FirstTerm(e.target.value)}
                         >
                             <option value="" disabled>
-                                Select a term
+                                {t("input.select_term")}
                             </option>
                             <option value={MP1FirstTerm}>{MP1FirstTerm}</option>
                             <option value={MP1SecondTerm}>{MP1SecondTerm}</option>
@@ -103,7 +107,7 @@ function SyllogismMP2({
                         <>
                             <input
                                 list="first-term-list"
-                                placeholder="Select or type a term"
+                                placeholder={t("input.select_type_term")}
                                 value={MP2FirstTerm}
                                 onChange={handleChange1}
                             />
@@ -118,7 +122,7 @@ function SyllogismMP2({
                 <div className="verb">
                     <input type="text"
                         name="verbTerm"
-                        placeholder="Enter a verb"
+                        placeholder={t("input.enter_verb")}
                         value={verb}
                         onChange={(e) => {
                             setVerb(e.target.value)
@@ -132,7 +136,7 @@ function SyllogismMP2({
                             type="text"
                             value={MP2SecondTerm}
                             onChange={(e) => setMP2SecondTerm(e.target.value)}
-                            placeholder="Enter a term"
+                            placeholder={t("input.enter_term")}
                         />
                     ) : manual1 ? (
                         <select
@@ -140,7 +144,7 @@ function SyllogismMP2({
                             onChange={(e) => setMP2SecondTerm(e.target.value)}
                         >
                             <option value="" disabled>
-                                Select a term
+                                {t("input.select_term")}
                             </option>
                             <option value={MP1FirstTerm}>{MP1FirstTerm}</option>
                             <option value={MP1SecondTerm}>{MP1SecondTerm}</option>
@@ -149,7 +153,7 @@ function SyllogismMP2({
                         <>
                             <input
                                 list="second-term-list"
-                                placeholder="Select or type a term"
+                                placeholder={t("input.select_type_term")}
                                 value={MP2SecondTerm}
                                 onChange={handleChange2}
                             />
