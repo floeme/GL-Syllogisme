@@ -100,21 +100,27 @@ export const Polysyllogism = () => {
     return (
         <div className="section-premises">
             <div className="button-row">
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
-                <button type="button" name="settingsButton" onClick={addProposition}>ADD</button>
-                <button type="button" name="settingsButton" onClick={reorderPropositions}>REORDER</button>
+                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}>
+                    <img src="images/delete_icon.svg" alt="delete" />
+                </button>
+                <button type="button" name="helpButton" onClick={help}>
+                    <img src="images/help_icon.svg" alt="help" />
+                </button>
+                <button type="button" name="settingsButton" onClick={goSettings}>
+                    <img src="images/settings_icon.svg" alt="settings" />
+                </button>
+                <button type="button" name="addPropositionButton" onClick={addProposition}>ADD</button>
+                <button type="button" name="reorderButton" onClick={reorderPropositions}>REORDER</button>
             </div>
 
-            <div className="syllogism-grid">
+            <div className="polysyllogism-grid">
                 {propositions.map((proposition, index) => (
                     <Fragment key={index}>
-                        <div className={"label-" + (index+1)}>
+                        <div className="label">
                             <label>Proposition {index + 1}</label>
                         </div>
 
-                        <div className={"proposition-" + (index+1)}>
+                        <div className="proposition">
                             <PolysyllogismMP
                                 verb={verb}
                                 setVerb={setVerb}
@@ -123,11 +129,11 @@ export const Polysyllogism = () => {
                                     updateProposition(index, updatedProposition)
                                 }
                             />
-                        </div>
 
-                        {!(index === 0 || index === 1 || index === 2) && (
-                            <button onClick={() => removeProposition(index)}>🗑️</button>
-                        )}
+                            {index >= 3 && (
+                                <button onClick={() => removeProposition(index)}>🗑️</button>
+                            )}
+                        </div>
                     </Fragment>
                 ))}
 
