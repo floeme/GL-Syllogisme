@@ -91,6 +91,9 @@
     }
   },
   "input": {
-    "enter_term": "Enter {{kind}}"
+    "enter_term": "Enter {{kind}}",
+    "check_ruu": "Check $t(syllogism.rule.Ruu.name)",
+    "check": "Check",
+    "enter_verb": "Enter a verb"
   }
 }

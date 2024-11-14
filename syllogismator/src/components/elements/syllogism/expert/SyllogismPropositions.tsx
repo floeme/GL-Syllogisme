@@ -4,7 +4,9 @@ import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
-import { QuantifierType } from "../../../../model/QuantifierType"
+import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../../i18n.ts";
 
 interface SyllogismPremisesProps {
     MP1FirstTerm: string
@@ -47,9 +49,13 @@ function SyllogismPropositions({
 	prop3Quantifier, setProp3Quantifier,
 	verb, setVerb
 }: SyllogismPremisesProps) {
+    const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
+
     const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
+
+    const { t } = useTranslation(I18N_NS);
 
     const handleTermConflict = (term1: string, term2: string) => {
         if (term1 === term2 && term1 !== "" && term2 !== "") {
@@ -307,10 +313,9 @@ function SyllogismPropositions({
                 ))}
 
                 <div className="hypothesis">
-                    <label>Existence Hypothesis</label>
-                    <input type="checkbox" name="existenceHypothesis" />
+                    <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
-                    <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
+                    <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
             </div>
         </div>

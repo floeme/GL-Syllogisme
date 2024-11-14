@@ -91,6 +91,9 @@
     }
   },
   "input": {
-    "enter_term": "Saisir le {{kind}}"
+    "enter_term": "Saisir le {{kind}}",
+    "check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
+    "check": "Vérifier",
+    "enter_verb": "Saisir un verbe"
   }
 }

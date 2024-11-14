@@ -5,6 +5,9 @@ import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
 import { QuantifierType } from "../../../../model/QuantifierType"
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../../i18n.ts";
+import {RuuCheckbox} from "../RuuCheckbox.tsx";
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -38,7 +41,11 @@ function SyllogismPropositions({
 	prop3Quantifier, setProp3Quantifier,
 	verb, setVerb
 }: SyllogismPremisesProps) {
+    const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
+
     const [inputErrorMessage, setInputErrorMessage] = useState("")
+
+    const { t } = useTranslation(I18N_NS);
 
     const validateInputs = () => {
         let isErrorMessage = false
@@ -283,10 +290,9 @@ function SyllogismPropositions({
                 ))}
 
                 <div className="hypothesis">
-                    <label>Existence Hypothesis</label>
-                    <input type="checkbox" name="existenceHypothesis" />
+                    <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
-                    <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
+                    <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
             </div>
         </div>
