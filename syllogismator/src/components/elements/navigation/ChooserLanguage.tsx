@@ -1,4 +1,5 @@
 import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../i18n.ts";
 
 type FuncType = {
     callbackLang : CallableFunction
@@ -10,7 +11,7 @@ type Lang = {
 
 const langList = [
     {
-        name : "Francais",
+        name : "Français",
         val: "fr"
     },
     {
@@ -20,7 +21,7 @@ const langList = [
 
 export const chooserLanguage = (props: FuncType) => {
 
-    const {i18n } = useTranslation('translation', { keyPrefix: 'navigation' });
+    const {i18n} = useTranslation(I18N_NS, { keyPrefix: 'navigation' });
     let selected: string = localStorage.getItem("lang") ?? "en";
 
     localStorage.setItem("lang", selected);

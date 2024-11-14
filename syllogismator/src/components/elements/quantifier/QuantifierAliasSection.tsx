@@ -3,6 +3,7 @@ import QuantifierContext from '../../../contexts/QuantifierContext'
 import { DEFAULT_QUANTIFIERS_I18N_NAMESPACE, isDefaultQuantifierName, Quantifier } from '../../../model/Quantifier'
 import { QuantifierType } from '../../../model/QuantifierType'
 import { useTranslation } from "react-i18next";
+import {I18N_NS} from "../../../i18n.ts";
 
 interface QuantifierAliasSectionProps {
     type: 'A' | 'E' | 'I' | 'O'
@@ -12,7 +13,7 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
     const [newAlias, setNewAlias] = useState('')
     const { quantifiers, addQuantifier, removeQuantifier } = useContext(QuantifierContext)
 
-    const { t } = useTranslation('translation', { keyPrefix: DEFAULT_QUANTIFIERS_I18N_NAMESPACE });
+    const { t } = useTranslation(I18N_NS, { keyPrefix: DEFAULT_QUANTIFIERS_I18N_NAMESPACE });
 
     const aliases = quantifiers.filter(q => q.type === QuantifierType.of(type)).map(q => q.name)
 
