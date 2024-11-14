@@ -97,6 +97,8 @@
     "enter_verb": "Enter a verb",
     "select_type_term": "Select or type a term",
     "select_term": "Select a term",
-    "type_term": "Type a term"
+    "type_term": "Type a term",
+    "guided": "Guided input",
+    "expert": "Expert"
   }
 }

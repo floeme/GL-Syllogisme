@@ -97,6 +97,8 @@
     "enter_verb": "Saisir un verbe",
     "select_type_term": "Sélectionner ou saisir un terme",
     "select_term": "Sélectionner un terme",
-    "type_term": "Saisir un terme"
+    "type_term": "Saisir un terme",
+    "guided": "Saisie guidée",
+    "expert": "Expert"
   }
 }

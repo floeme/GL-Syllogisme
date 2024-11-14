@@ -254,7 +254,7 @@ function SyllogismPropositions({
                 <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
                 <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
                 <div className="switch-comp">
-                    <label className="name1">Guided</label>
+                    <label className="name1">{t("input.guided")}</label>
                     <label className="switch">
                         <input
                             type="checkbox"
@@ -273,7 +273,7 @@ function SyllogismPropositions({
                         />
                         <span className="slider"></span>
                     </label>
-                    <label className="name2">Expert</label>
+                    <label className="name2">{t("input.expert")}</label>
                 </div>
             </div>
 
