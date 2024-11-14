@@ -1,4 +1,6 @@
 import { Term } from "../../../../model/Term"
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../../i18n.ts";
 
 interface SyllogismTermsProps {
     subject: Term
@@ -16,43 +18,65 @@ function SyllogismTerms({
 }: SyllogismTermsProps) {
     return (
         <div className="section-terms-input">
-            {/* SUBJECT */}
-            <label>Subject</label>
-            <input type="text"
-                name="SubjectTerm"
-                placeholder="Enter a subject term"
-                value={subject.value}
-                onChange={(e) => {
-                    subject.value = e.target.value
-                    setSubject({...subject})
-                }}
+            {/* Minor term (Subject of the conclusion) */}
+            <TermInput term={subject}
+                       kind="minor"
+                       letter="S"
+                       onTermUpdate={(term) => {
+                           setSubject({...term});
+                       }}
+                       inputName="SubjectTerm"
             />
 
-            {/* PREDICATE */}
-            <label>Predicate</label>
-            <input type="text"
-                name="predicateTerm"
-                placeholder="Enter a predicate term"
-                value={predicate.value}
-                onChange={(e) => {
-                    predicate.value = e.target.value
-                    setPredicate({...predicate})
-                }}
+            {/* Major term (Predicate of the conclusion) */}
+            <TermInput term={predicate}
+                       kind="major"
+                       letter="P"
+                       onTermUpdate={(term) => {
+                           setPredicate({...term});
+                       }}
+                       inputName="predicateTerm"
             />
 
-            {/* MIDDLE */}
-            <label>Middle Term</label>
-            <input type="text"
-                name="middleTerm"
-                placeholder="Enter a middle term"
-                value={middle.value}
-                onChange={(e) => {
-                    middle.value = e.target.value
-                    setMiddle({...middle})
-                }}
+            {/* Middle term */}
+            <TermInput term={middle}
+                       kind="middle"
+                       letter="M"
+                       onTermUpdate={(term) => {
+                           setMiddle({...term});
+                       }}
+                       inputName="middleTerm"
             />
       </div>
     )
+}
+
+interface TermInputProps {
+    term: Term;
+    kind: string;
+    letter: string;
+    onTermUpdate: (term: Term) => void;
+    inputName: string;
+}
+
+function TermInput({term, kind, letter, onTermUpdate, inputName}: TermInputProps) {
+    const { t } = useTranslation(I18N_NS);
+
+    const _kind = t(`syllogism.term_kind.${kind}`);
+
+    return <>
+        <label htmlFor={`basicInput__${inputName}`}>{letter} <small>({_kind})</small></label>
+        <input type="text"
+               id={`basicInput__${inputName}`}
+               name={inputName}
+               placeholder={t("input.enter_term", {kind: _kind})}
+               value={term.value}
+               onChange={(e) => {
+                   term.value = e.target.value;
+                   onTermUpdate(term);
+               }}
+        />
+    </>;
 }
 
 export default SyllogismTerms
