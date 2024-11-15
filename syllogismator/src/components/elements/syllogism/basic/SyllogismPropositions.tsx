@@ -8,6 +8,7 @@ import { QuantifierType } from "../../../../model/QuantifierType"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import {ToolbarButtons} from "../Toolbar.tsx";
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -146,10 +147,6 @@ function SyllogismPropositions({
         console.log("help")
     }
 
-    const goSettings = () => {
-        console.log("goSettings")
-    }
-
     const renderSyllogismMP1 = (figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
@@ -250,9 +247,7 @@ function SyllogismPropositions({
     return (
         <div className="section-premises">
             <div className="button-row">
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
+                <ToolbarButtons clearSyllogism={clearSyllogism} help={help}/>
                 <div className="switch-comp">
                     <label className="name1">{t("input.guided")}</label>
                     <label className="switch">

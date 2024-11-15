@@ -130,5 +130,11 @@
     "add": "Ajouter",
     "remove": "Supprimer",
     "reset": "Rétablir les valeurs par défaut"
+  },
+  "toolbar": {
+    "clear_syllogism": "Effacer le syllogisme",
+    "clear_polysyllogism": "Effacer le polysyllogisme",
+    "help": "Aide",
+    "settings": "Gérer les alias de quantificateur"
   }
 }
