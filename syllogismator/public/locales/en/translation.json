@@ -123,5 +123,12 @@
       "verb": "Enter a verb",
       "secondTerm": "Enter a second term"
     }
+  },
+  "quantifier_aliases": {
+    "title": "Quantifier Aliases",
+    "input": "Input a quantifier alias",
+    "add": "Add",
+    "remove": "Remove",
+    "reset": "Reset to defaults"
   }
 }
