@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react"
 import SyllogismMP from "./SyllogismMP"
 import { Syllogism } from "../../../../model/Syllogism"
+import {getAllRules, Rule, check, CheckResults} from "../../../../model/Rule.ts"
 import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
@@ -8,6 +9,7 @@ import { QuantifierType } from "../../../../model/QuantifierType"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -55,58 +57,45 @@ function SyllogismPropositions({
         if (!prop3Quantifier) {
             setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop2Quantifier) {
             setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop1Quantifier) {
             setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (![Figure.Figure1, Figure.Figure2, Figure.Figure3, Figure.Figure4].includes(figure)) {
             setInputErrorMessage("Veuillez renseigner une figure")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!middle.value) {
             setInputErrorMessage("Veuillez renseigner un moyen terme")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!predicate.value) {
             setInputErrorMessage("Veuillez renseigner un prédicat")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!subject.value) {
             setInputErrorMessage("Veuillez renseigner un sujet")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
-        return isErrorMessage
+        return !isErrorMessage
     }
 
     const checkSyllogism = () => {
         if (!validateInputs()) {
             syllogism.link = verb
+            console.log("checkSyllogism")
             // res = syllogism.check()
 
             // if (res["rmt"]["validation"] == false) {
@@ -114,18 +103,29 @@ function SyllogismPropositions({
             // } else {
 
             // }
+
+        }else {
+
+            const resultsCheck: CheckResults = checkRuu ? check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
+
+            let errorMessage = "";
+            let containsErrors = false;
+
+            resultsCheck.results.forEach((value, key, map) => {
+                if (value.valid)
+                    return;
+                errorMessage = errorMessage + "Régle: " + key + " - Erreur: " + value.message;
+                containsErrors = true
+            })
+
+            if (!containsErrors) {
+                errorMessage = "Syllogisme ok"
+            }
+
+            setInputErrorMessage(errorMessage)
+
+            console.log("check")
         }
-
-        // {
-        //     "rmt":
-        //         "validity": "false",
-        //         "errorMessage": ""
-        //     "rlh":
-        //         "validity": "false",
-        //         "errorMessage": ""
-        // }
-
-        console.log("check")
     }
 
     const clearSyllogism = () => {

@@ -8,6 +8,8 @@ import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {Syllogism} from "../../../../model/Syllogism.ts";
+import {check, CheckResults, getAllRules} from "../../../../model/Rule.ts";
+import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 
 interface SyllogismPremisesProps {
     MP1FirstTerm: string
@@ -174,16 +176,34 @@ function SyllogismPropositions({
             setInputErrorMessage("")
         }
 
-        return isErrorMessage
+        return !isErrorMessage
     }
 
     const checkSyllogism = () => {
         if (!validateInputs()) {
 
             syllogism.link = verb
-        }
+        }else{
+            const resultsCheck: CheckResults = checkRuu ? check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
 
-        console.log("check")
+            let errorMessage = "";
+            let containsErrors = false;
+
+            resultsCheck.results.forEach((value, key, map) => {
+                if (value.valid)
+                    return;
+                errorMessage = errorMessage + " Régle: " + key + " - Erreur: " + value.message;
+                containsErrors = true
+            })
+
+            if (!containsErrors) {
+                errorMessage = "Syllogisme ok"
+            }
+
+            setInputErrorMessage(errorMessage)
+
+            console.log("check")
+        }
     }
 
     const clearSyllogism = () => {

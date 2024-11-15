@@ -19,9 +19,16 @@ export const SyllogismPage = () => {
 	const [expertMode, setExpertMode] = useState(false)
 	const [syllogism, setSyllogism] = useState(Syllogism.ofFigure(figure, subject, predicate, middle))
 
+	syllogism.getProposition(0).quantifier = prop1Quantifier
+	syllogism.getProposition(1).quantifier = prop2Quantifier
+	syllogism.getProposition(2).quantifier = prop3Quantifier
+
 	const setFigure = (figure: Figure): void => {
 		setFigureFinale(figure)
 		setSyllogism(Syllogism.ofFigure(figure, subject, predicate, middle))
+		syllogism.getProposition(0).quantifier = prop1Quantifier
+		syllogism.getProposition(1).quantifier = prop2Quantifier
+		syllogism.getProposition(2).quantifier = prop3Quantifier
 	}
 
 	return (
