@@ -103,10 +103,10 @@
 	},
 	"polysyllogism": {
 		"errorMessages": {
-			"missingPredicate": "Please provide the second term for proposition {index}.",
-			"missingVerb": "Please provide a verb in the propositions.",
-			"missingSubject": "Please provide the first term for proposition {index}.",
-			"missingQuantifier": "Please provide the quantifier for proposition {index}."
+			"missingPredicate": "Please provide the second term for proposition ",
+			"missingVerb": "Please provide a verb in the propositions",
+			"missingSubject": "Please provide the first term for proposition ",
+			"missingQuantifier": "Please provide the quantifier for proposition "
 		},
 		"buttons": {
 			"add": "Add a proposition",

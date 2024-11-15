@@ -5,45 +5,42 @@ import { Term } from "../../model/Term"
 import { Quantifier } from "../../model/Quantifier"
 import { QuantifierType } from "../../model/QuantifierType"
 import { useTranslation } from "react-i18next"
+import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided } from "react-beautiful-dnd"
 
 export const Polysyllogism = () => {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
 	const [verb, setVerb] = useState("are")
+    const [propositions, setPropositions] = useState([
+        Proposition.withTerms(
+            new Quantifier("prop1Quantifier", QuantifierType.A),
+            new Term("Homme"),
+            new Term("Mortel")
+        ),
+        Proposition.withTerms(
+            new Quantifier("prop1Quantifier", QuantifierType.A),
+            new Term("Socrate"),
+            new Term("Homme")
+        ),
+        Proposition.withTerms(
+            new Quantifier("prop1Quantifier", QuantifierType.A),
+            new Term("Socrate"),
+            new Term("Mortel")
+        )
+    ])
 
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
-    const validateInputs = () => {
-        let isErrorMessage = false
+    const onDragEnd = (result: any) => {
+        const { source, destination } = result
 
-        let i = 0;
+        if (!destination)
+            return
 
-        propositions.forEach(proposition => {
-            if (!isErrorMessage) {
-                ++i
+        const reorderedPropositions = [...propositions]
+        const [removed] = reorderedPropositions.splice(source.index, 1)
+        reorderedPropositions.splice(destination.index, 0, removed)
 
-                if (!proposition.quantifier?.type) {
-                    setInputErrorMessage(t("errorMessages.missingQuantifier", { index: i }));
-                    isErrorMessage = true;
-                } else if (!proposition.subject?.value) {
-                    setInputErrorMessage(t("errorMessages.missingSubject"));
-                    isErrorMessage = true;
-                } else if (!verb) {
-                    setInputErrorMessage(t("errorMessages.missingVerb", { index: i }));
-                    isErrorMessage = true;
-                } else if (!proposition.predicate?.value) {
-                    setInputErrorMessage(t("errorMessages.missingPredicate", { index: i }));
-                    isErrorMessage = true;
-                }
-            }
-        });
-
-        return isErrorMessage
-    }
-
-    const checkSyllogism = () => {
-        if (!validateInputs()) {
-            console.log("check")
-        }
+        setPropositions(reorderedPropositions)
     }
 
     const clearSyllogism = () => {
@@ -78,29 +75,10 @@ export const Polysyllogism = () => {
         console.log("goSettings")
     }
 
-    const [propositions, setPropositions] = useState([
-        Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
-            new Term("Homme"),
-            new Term("Mortel")
-        ),
-        Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
-            new Term("Socrate"),
-            new Term("Homme")
-        ),
-        Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
-            new Term("Socrate"),
-            new Term("Mortel")
-        )
-    ])
-
     const updateProposition = (index: number, updatedProposition: Proposition) => {
         const newPropositions = [...propositions]
         newPropositions[index] = updatedProposition
         setPropositions(newPropositions)
-        console.log(propositions)
     }
 
     const addProposition = () => {
@@ -114,11 +92,45 @@ export const Polysyllogism = () => {
     }
 
     const removeProposition = (index: number) => {
-        setPropositions(propositions.filter((_, i) => i !== index));
+        setPropositions(propositions.filter((_, i) => i !== index))
     }
 
     const reorderPropositions = () => {
         // reorderProposition(fromIndex: number, toIndex: number) FROM syllogism.ts
+    }
+
+    const validateInputs = () => {
+        let isErrorMessage = false
+
+        let i = 0
+
+        propositions.forEach(proposition => {
+            if (!isErrorMessage) {
+                ++i
+
+                if (!proposition.quantifier?.type) {
+                    setInputErrorMessage(t("errorMessages.missingQuantifier") + i)
+                    isErrorMessage = true
+                } else if (!proposition.subject?.value) {
+                    setInputErrorMessage(t("errorMessages.missingSubject") + i)
+                    isErrorMessage = true
+                } else if (!verb) {
+                    setInputErrorMessage(t("errorMessages.missingVerb"))
+                    isErrorMessage = true
+                } else if (!proposition.predicate?.value) {
+                    setInputErrorMessage(t("errorMessages.missingPredicate") + i)
+                    isErrorMessage = true
+                }
+            }
+        })
+
+        return isErrorMessage
+    }
+
+    const checkSyllogism = () => {
+        if (!validateInputs()) {
+            console.log("check")
+        }
     }
 
     return (
@@ -138,28 +150,49 @@ export const Polysyllogism = () => {
             </div>
 
             <div className="polysyllogism-grid">
-                {propositions.map((proposition, index) => (
-                    <Fragment key={index}>
-                        <div className="label">
-                            <label>Proposition {index + 1}</label>
-                        </div>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="propositions">
+                        {(provided: DroppableProvided) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                {propositions.map((proposition, index) => (
+                                    <Draggable key={index} draggableId={`proposition-${index}`} index={index}>
+                                        {(provided: DraggableProvided) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                            >
+                                                <Fragment key={index}>
+                                                    <div className="label">
+                                                        <label>Proposition {index + 1}</label>
+                                                    </div>
 
-                        <div className="proposition">
-                            <PolysyllogismMP
-                                verb={verb}
-                                setVerb={setVerb}
-                                proposition={proposition}
-                                onPropositionChange={(updatedProposition) =>
-                                    updateProposition(index, updatedProposition)
-                                }
-                            />
-
-                            {index >= 3 && (
-                                <button onClick={() => removeProposition(index)}>🗑️</button>
-                            )}
-                        </div>
-                    </Fragment>
-                ))}
+                                                    <div className="proposition">
+                                                        <PolysyllogismMP
+                                                            verb={verb}
+                                                            setVerb={setVerb}
+                                                            proposition={proposition}
+                                                            onPropositionChange={(updatedProposition) =>
+                                                                updateProposition(index, updatedProposition)
+                                                            }
+                                                        />
+                                                        {index >= 3 && (
+                                                            <button onClick={() => removeProposition(index)}>🗑️</button>
+                                                        )}
+                                                    </div>
+                                                </Fragment>
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
 
                 <div className="hypothesis">
                     <label>{t("labels.existenceHypothesis")}</label>

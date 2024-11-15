@@ -103,10 +103,10 @@
 	},
 	"polysyllogism": {
 		"errorMessages": {
-			"missingPredicate": "Veuillez renseigner le second terme de la proposition {index}.",
-			"missingVerb": "Veuillez renseigner un verbe dans les propositions.",
-			"missingSubject": "Veuillez renseigner le premier terme de la proposition {index}.",
-			"missingQuantifier": "Veuillez renseigner le quantificateur de la proposition {index}."
+			"missingPredicate": "Veuillez renseigner le second terme de la proposition",
+			"missingVerb": "Veuillez renseigner un verbe dans les propositions",
+			"missingSubject": "Veuillez renseigner le premier terme de la proposition",
+			"missingQuantifier": "Veuillez renseigner le quantificateur de la proposition"
 		},
 		"buttons": {
 			"add": "Ajouter une proposition",
