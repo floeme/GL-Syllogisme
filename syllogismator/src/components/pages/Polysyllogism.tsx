@@ -12,14 +12,49 @@ export const Polysyllogism = () => {
     const validateInputs = () => {
         let isErrorMessage = false
 
+        let i = 0;
+
+        propositions.forEach(proposition => {
+            if (!isErrorMessage) {
+                ++i
+
+                if (!proposition.predicate?.value) {
+                    setInputErrorMessage("Veuillez renseigner le second terme de la proposition " + i)
+                    isErrorMessage = true
+                } else if (!isErrorMessage) {
+                    setInputErrorMessage("")
+                }
+
+                if (!verb) {
+                    setInputErrorMessage("Veuillez renseigner un verbe dans les propositions")
+                    isErrorMessage = true
+                } else if (!isErrorMessage) {
+                    setInputErrorMessage("")
+                }
+
+                if (!proposition.subject?.value) {
+                    setInputErrorMessage("Veuillez renseigner le premier terme de la proposition " + i)
+                    isErrorMessage = true
+                } else if (!isErrorMessage) {
+                    setInputErrorMessage("")
+                }
+
+                if (!proposition.quantifier?.type) {
+                    setInputErrorMessage("Veuillez renseigner le quantificateur de la proposition " + i)
+                    isErrorMessage = true
+                } else if (!isErrorMessage) {
+                    setInputErrorMessage("")
+                }
+            }
+        });
+
         return isErrorMessage
     }
 
     const checkSyllogism = () => {
         if (!validateInputs()) {
+            console.log("check")
         }
-
-        console.log("check")
     }
 
     const clearSyllogism = () => {
