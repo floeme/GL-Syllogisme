@@ -2,12 +2,13 @@ import { NavLink } from "react-router-dom";
 import FlagSelect from "./FlagSelect";
 import {useTranslation} from "react-i18next";
 import {ROUTES} from "../../../constants/routes.ts";
+import {I18N_NS} from "../../../i18n.ts";
 
 export const Navigation = () => {
   const onChange = (Lang: string) => {
     console.log("Selected: "+Lang);
   };
-  const { t } = useTranslation('translation', { keyPrefix: 'navigation.menu' });
+  const { t } = useTranslation(I18N_NS, { keyPrefix: 'navigation.menu' });
   return (
     <div className="container-nav">
       <h1 className="name">Syllogismator</h1>

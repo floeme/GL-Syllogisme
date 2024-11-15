@@ -27,6 +27,13 @@
       "I": "Some",
       "O": "Some Not"
     },
+    "term_kind": {
+      "major": "major term",
+      "minor": "minor term",
+      "middle": "middle term",
+      "subject": "subject",
+      "predicate": "predicate"
+    },
     "rule": {
       "Rmt": {
         "name": "Middle Term Rule",
@@ -82,5 +89,16 @@
         "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism."
       }
     }
+  },
+  "input": {
+    "enter_term": "Enter {{kind}}",
+    "check_ruu": "Check $t(syllogism.rule.Ruu.name)",
+    "check": "Check",
+    "enter_verb": "Enter a verb",
+    "select_type_term": "Select or type a term",
+    "select_term": "Select a term",
+    "type_term": "Type a term",
+    "guided": "Guided input",
+    "expert": "Expert"
   }
 }

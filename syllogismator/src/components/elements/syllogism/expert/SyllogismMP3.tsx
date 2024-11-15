@@ -1,6 +1,7 @@
-import { useState } from "react"
 import QuantifierSelector from "../../QuantifierSelector"
-import { Quantifier } from "../../../../model/Quantifier"
+import {Quantifier} from "../../../../model/Quantifier"
+import {I18N_NS} from "../../../../i18n.ts";
+import {useTranslation} from "react-i18next";
 
 interface SyllogismMP3Props {
     subject: string
@@ -17,6 +18,8 @@ function SyllogismMP3({
     quantifier, setProp3Quantifier,
 	verb, setVerb
 }: SyllogismMP3Props) {
+    const { t } = useTranslation(I18N_NS);
+
     return (
         <div className="mp-container">
             <div className="mp-proposition">
@@ -31,7 +34,7 @@ function SyllogismMP3({
                 <div className="verb">
                     <input type="text"
                         name="verbTerm"
-                        placeholder="Enter a verb"
+                        placeholder={t("input.enter_verb")}
                         value={verb}
                         onChange={(e) => {
                             setVerb(e.target.value)
