@@ -1,127 +1,140 @@
 {
-	"home": {
-		"syllogism": {
-			"check": "Check Syllogism"
-		},
-		"socrate": {
-			"head": "Socrates Head",
-			"body": "Socrates Body"
-		},
-		"discover": "Exploring",
-		"discover2": "Syllogisms",
-		"text1": "Syllogism is a logic allowing to link 2 premises with 1 conclusion :\n2 or more, the « premises », lead to a « conclusion ».\nAristote was the first to explain it in Organon.\nA known exemple is : « Every human is mortal, Socrates is human ; so Socrates is mortel » :\nThe 2 premises (said « major » and « minor ») are propositions given and supposed right,\nSyllogism allow to establish a formal validity for the conclusion, which is right if the premises are right.",
-		"text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
-	},
-	"navigation": {
-		"language": "Lang",
-		"menu": {
-			"home": "Home",
-			"syllogism": "Syllogism",
-			"polysyllogism": "Polysyllogism",
-			"quantifiers": "Quantifiers",
-			"syllogism_table": "Syllogism Table"
-		}
-	},
-	"syllogism": {
-		"quantifier": {
-			"A": "All",
-			"E": "None",
-			"I": "Some",
-			"O": "Some Not"
-		},
-		"term_kind": {
-			"major": "major term",
-			"minor": "minor term",
-			"middle": "middle term",
-			"subject": "subject",
-			"predicate": "predicate"
-		},
-		"rule": {
-			"Rmt": {
-				"name": "Middle Term Rule",
-				"description": "The quantifier (for the middle-term) must be universal in at least one premise.",
-				"passed": "The quantifier is universal in at least one premise.",
-				"failed": "There is not any universally-quantified premise, so this syllogism is invalid."
-			},
-			"Rlh": {
-				"name": "Latius-Hos Rule",
-				"description": "The quantifier of the conclusion can be universal only if a term of the conclusion is universally-quantified in its premise.",
-				"specific_conclusion": "The conclusion is not universally-quantified, so this rule is not applicable to this syllogism.",
-				"passed": "The conclusion is universally-quantified and a term of the conclusion is universally-quantified in its premise.",
-				"failed": "The conclusion is universally-quantified but the terms in it are not universally-quantified in their respective premises. Therefore, this syllogism is invalid."
-			},
-			"Rnn": {
-				"name": "Two Negative Premises Rule",
-				"description": "Two negative premises do not lead to a conclusion.",
-				"passed": "There is at least one affirmative premise.",
-				"failed": "Both premises are negative, so this syllogism is invalid."
-			},
-			"Rn": {
-				"name": "One Negative Premise Rule",
-				"description": "If one premise is negative, the conclusion is negative.",
-				"passed": "There is one negative premise and the conclusion is negative.",
-				"failed": "There is one negative premise but the conclusion is affirmative, so this syllogism is invalid.",
-				"2_affirmative_premises": "Both premises are affirmative, so this rule is not applicable to this syllogism."
-			},
-			"Raa": {
-				"name": "Two Affirmative Premises Rule",
-				"description": "Two affirmative premises lead to an affirmative conclusion.",
-				"passed": "Both premises are affirmative and the conclusion is affirmative.",
-				"failed": "Both premises are affirmative but the conclusion is negative, so this syllogism is invalid.",
-				"negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism."
-			},
-			"Rpp": {
-				"name": "Two Particular Premises Rule",
-				"description": "Two particular premises do not lead to a conclusion.",
-				"passed": "There is at least one universal premise.",
-				"failed": "Both premises are particular, so this syllogism is invalid."
-			},
-			"Rp": {
-				"name": "One Particular Premise Rule",
-				"description": "If one premise is particular, the conclusion is particular.",
-				"passed": "There is a particular premise and the conclusion is particular.",
-				"failed": "There is a particular premise but the conclusion is universal, so this syllogism is invalid.",
-				"2_universal_premises": "Both premises are universal, so this rule is not applicable to this syllogism."
-			},
-			"Ruu": {
-				"name": "Existence Hypothesis Rule",
-				"description": "Two universal premises do not lead to a particular conclusion.",
-				"passed": "Both premises are universal and the conclusion is universal.",
-				"failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
-				"particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism."
-			}
-		}
-	},
-	"input": {
-		"enter_term": "Enter {{kind}}",
-		"check_ruu": "Check $t(syllogism.rule.Ruu.name)",
-		"check": "Check",
-		"enter_verb": "Enter a verb",
-		"select_type_term": "Select or type a term",
-		"select_term": "Select a term",
-		"type_term": "Type a term",
-		"guided": "Guided Input",
-		"expert": "Expert Mode"
-	},
-	"polysyllogism": {
-		"errorMessages": {
-			"missingPredicate": "Please provide the second term for proposition ",
-			"missingVerb": "Please provide a verb in the propositions",
-			"missingSubject": "Please provide the first term for proposition ",
-			"missingQuantifier": "Please provide the quantifier for proposition "
-		},
-		"buttons": {
-			"add": "Add a proposition",
-			"reorder": "Reorder the polysyllogism",
-			"check": "Check"
-		},
-		"labels": {
-			"existenceHypothesis": "Existence Hypothesis"
-		},
-		"placeholder": {
-			"firstTerm": "Enter a first term",
-			"verb": "Enter a verb",
-			"secondTerm": "Enter a second term"
-		}
-	}
+  "home": {
+    "syllogism": {
+      "check": "Check Syllogism"
+    },
+    "socrate": {
+      "head": "Socrates Head",
+      "body": "Socrates Body"
+    },
+    "discover": "Exploring",
+    "discover2": "Syllogisms",
+    "text1": "Syllogism is a logic allowing to link 2 premises with 1 conclusion :\n2 or more, the « premises », lead to a « conclusion ».\nAristote was the first to explain it in Organon.\nA known exemple is : « Every human is mortal, Socrates is human ; so Socrates is mortel » :\nThe 2 premises (said « major » and « minor ») are propositions given and supposed right,\nSyllogism allow to establish a formal validity for the conclusion, which is right if the premises are right.",
+    "text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
+  },
+  "navigation": {
+    "language": "Lang",
+    "menu": {
+      "home": "Home",
+      "syllogism": "Syllogism",
+      "polysyllogism": "Polysyllogism",
+      "quantifiers": "Quantifiers",
+      "syllogism_table": "Syllogism Table"
+    }
+  },
+  "syllogism": {
+    "quantifier": {
+      "A": "All",
+      "E": "None",
+      "I": "Some",
+      "O": "Some Not"
+    },
+    "term_kind": {
+      "major": "major term",
+      "minor": "minor term",
+      "middle": "middle term",
+      "subject": "subject",
+      "predicate": "predicate"
+    },
+    "rule": {
+      "Rmt": {
+        "name": "Middle Term Rule",
+        "description": "The quantifier (for the middle-term) must be universal in at least one premise.",
+        "passed": "The quantifier is universal in at least one premise.",
+        "failed": "There is not any universally-quantified premise, so this syllogism is invalid."
+      },
+      "Rlh": {
+        "name": "Latius-Hos Rule",
+        "description": "The quantifier of the conclusion can be universal only if a term of the conclusion is universally-quantified in its premise.",
+        "specific_conclusion": "The conclusion is not universally-quantified, so this rule is not applicable to this syllogism.",
+        "passed": "The conclusion is universally-quantified and a term of the conclusion is universally-quantified in its premise.",
+        "failed": "The conclusion is universally-quantified but the terms in it are not universally-quantified in their respective premises. Therefore, this syllogism is invalid."
+      },
+      "Rnn": {
+        "name": "Two Negative Premises Rule",
+        "description": "Two negative premises do not lead to a conclusion.",
+        "passed": "There is at least one affirmative premise.",
+        "failed": "Both premises are negative, so this syllogism is invalid."
+      },
+      "Rn": {
+        "name": "One Negative Premise Rule",
+        "description": "If one premise is negative, the conclusion is negative.",
+        "passed": "There is one negative premise and the conclusion is negative.",
+        "failed": "There is one negative premise but the conclusion is affirmative, so this syllogism is invalid.",
+        "2_affirmative_premises": "Both premises are affirmative, so this rule is not applicable to this syllogism."
+      },
+      "Raa": {
+        "name": "Two Affirmative Premises Rule",
+        "description": "Two affirmative premises lead to an affirmative conclusion.",
+        "passed": "Both premises are affirmative and the conclusion is affirmative.",
+        "failed": "Both premises are affirmative but the conclusion is negative, so this syllogism is invalid.",
+        "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism."
+      },
+      "Rpp": {
+        "name": "Two Particular Premises Rule",
+        "description": "Two particular premises do not lead to a conclusion.",
+        "passed": "There is at least one universal premise.",
+        "failed": "Both premises are particular, so this syllogism is invalid."
+      },
+      "Rp": {
+        "name": "One Particular Premise Rule",
+        "description": "If one premise is particular, the conclusion is particular.",
+        "passed": "There is a particular premise and the conclusion is particular.",
+        "failed": "There is a particular premise but the conclusion is universal, so this syllogism is invalid.",
+        "2_universal_premises": "Both premises are universal, so this rule is not applicable to this syllogism."
+      },
+      "Ruu": {
+        "name": "Existence Hypothesis Rule",
+        "description": "Two universal premises do not lead to a particular conclusion.",
+        "passed": "Both premises are universal and the conclusion is universal.",
+        "failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
+        "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism."
+      }
+    }
+  },
+  "input": {
+    "enter_term": "Enter {{kind}}",
+    "check_ruu": "Check $t(syllogism.rule.Ruu.name)",
+    "check": "Check",
+    "enter_verb": "Enter a verb",
+    "select_type_term": "Select or type a term",
+    "select_term": "Select a term",
+    "type_term": "Type a term",
+    "guided": "Guided Input",
+    "expert": "Expert Mode"
+  },
+  "polysyllogism": {
+    "errorMessages": {
+      "missingPredicate": "Please provide the second term for proposition {index}.",
+      "missingVerb": "Please provide a verb in the propositions.",
+      "missingSubject": "Please provide the first term for proposition {index}.",
+      "missingQuantifier": "Please provide the quantifier for proposition {index}."
+    },
+    "buttons": {
+      "add": "Add a proposition",
+      "reorder": "Reorder the polysyllogism",
+      "check": "Check"
+    },
+    "labels": {
+      "existenceHypothesis": "Existence Hypothesis"
+    },
+    "placeholder": {
+      "firstTerm": "Enter a first term",
+      "verb": "Enter a verb",
+      "secondTerm": "Enter a second term"
+    }
+  },
+  "quantifier_aliases": {
+    "title": "Quantifier Aliases",
+    "input": "Input a quantifier alias",
+    "add": "Add",
+    "remove": "Remove",
+    "reset": "Reset to defaults"
+  },
+  "toolbar": {
+    "clear_syllogism": "Clear syllogism",
+    "clear_polysyllogism": "Clear polysyllogism",
+    "help": "Help",
+    "settings": "Manage quantifier aliases"
+  }
 }
