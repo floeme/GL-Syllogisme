@@ -17,7 +17,9 @@
 		"menu": {
 			"home": "Accueil",
 			"syllogism": "Syllogismes",
-			"polysyllogism": "Polysyllogismes"
+			"polysyllogism": "Polysyllogismes",
+			"quantifiers": "Quantificateurs",
+			"syllogism_table": "Table des syllogismes"
 		}
 	},
 	"syllogism": {
@@ -99,14 +101,14 @@
 		"select_term": "Sélectionner un terme",
 		"type_term": "Saisir un terme",
 		"guided": "Saisie guidée",
-		"expert": "Expert"
+		"expert": "Mode expert"
 	},
 	"polysyllogism": {
 		"errorMessages": {
-			"missingPredicate": "Veuillez renseigner le second terme de la proposition",
+			"missingPredicate": "Veuillez renseigner le second terme de la proposition ",
 			"missingVerb": "Veuillez renseigner un verbe dans les propositions",
-			"missingSubject": "Veuillez renseigner le premier terme de la proposition",
-			"missingQuantifier": "Veuillez renseigner le quantificateur de la proposition"
+			"missingSubject": "Veuillez renseigner le premier terme de la proposition ",
+			"missingQuantifier": "Veuillez renseigner le quantificateur de la proposition "
 		},
 		"buttons": {
 			"add": "Ajouter une proposition",

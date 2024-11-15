@@ -3,7 +3,7 @@
 		"syllogism": {
 			"check": "Check Syllogism"
 		},
-			"socrate": {
+		"socrate": {
 			"head": "Socrates Head",
 			"body": "Socrates Body"
 		},
@@ -17,7 +17,9 @@
 		"menu": {
 			"home": "Home",
 			"syllogism": "Syllogism",
-			"polysyllogism": "Polysyllogism"
+			"polysyllogism": "Polysyllogism",
+			"quantifiers": "Quantifiers",
+			"syllogism_table": "Syllogism Table"
 		}
 	},
 	"syllogism": {
@@ -91,15 +93,15 @@
 		}
 	},
 	"input": {
-			"enter_term": "Enter {{kind}}",
-			"check_ruu": "Check $t(syllogism.rule.Ruu.name)",
-			"check": "Check",
-			"enter_verb": "Enter a verb",
-			"select_type_term": "Select or type a term",
-			"select_term": "Select a term",
-			"type_term": "Type a term",
-			"guided": "Guided input",
-			"expert": "Expert"
+		"enter_term": "Enter {{kind}}",
+		"check_ruu": "Check $t(syllogism.rule.Ruu.name)",
+		"check": "Check",
+		"enter_verb": "Enter a verb",
+		"select_type_term": "Select or type a term",
+		"select_term": "Select a term",
+		"type_term": "Type a term",
+		"guided": "Guided Input",
+		"expert": "Expert Mode"
 	},
 	"polysyllogism": {
 		"errorMessages": {

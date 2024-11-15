@@ -22,7 +22,7 @@ export const Navigation = () => {
             <li>{t("home")}</li>
           </NavLink>
           <NavLink
-            to="/syllogism"
+            to={ROUTES.syllogism}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
             <li>{t("syllogism")}</li>
@@ -37,13 +37,13 @@ export const Navigation = () => {
             to={ROUTES.quantifiers}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
-            <li>Quantifiers</li>
+            <li>{t("quantifiers")}</li>
           </NavLink>
           <NavLink
             to={ROUTES.table}
             className={(nav) => (nav.isActive ? "nav-active" : "")}
           >
-            <li>Syllogism Table</li>
+            <li>{t("syllogism_table")}</li>
           </NavLink>
         </ul>
       </div>
