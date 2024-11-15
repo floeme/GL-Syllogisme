@@ -27,6 +27,13 @@
 			"I": "Il existe",
 			"O": "Pas certains"
 		},
+		"term_kind": {
+			"major": "terme majeur",
+			"minor": "terme mineur",
+			"middle": "moyen terme",
+			"subject": "sujet",
+			"predicate": "prédicat"
+		},
 		"rule": {
 			"Rmt": {
 				"name": "Règle du moyen-terme",
@@ -36,7 +43,7 @@
 			},
 			"Rlh": {
 				"name": "Règle du Latius-Hos",
-				"description": "La quantité d'un terme de la conclusion ne peut être universelle que si elle l'est dans la prémisse contenant ce terme.",
+				"description": "La quantité d’un terme de la conclusion ne peut être universelle que si elle l’est dans la prémisse contenant ce terme.",
 				"specific_conclusion": "La conclusion a un quantificateur spécifique, cette règle ne s'applique donc pas à ce syllogisme.",
 				"passed": "La conclusion est universelle et au moins un terme de celle-ci apparaît dans une prémisse universelle.",
 				"failed": "La conclusion est universelle mais aucun de ses termes n'apparaît dans une prémisse universelle. Ce syllogisme est donc invalide."
@@ -82,6 +89,17 @@
 				"particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
 			}
 		}
+	},
+	"input": {
+		"enter_term": "Saisir le {{kind}}",
+		"check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
+		"check": "Vérifier",
+		"enter_verb": "Saisir un verbe",
+		"select_type_term": "Sélectionner ou saisir un terme",
+		"select_term": "Sélectionner un terme",
+		"type_term": "Saisir un terme",
+		"guided": "Saisie guidée",
+		"expert": "Expert"
 	},
 	"polysyllogism": {
 		"errorMessages": {

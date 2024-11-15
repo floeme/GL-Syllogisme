@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from 'react-i18next';
 import {ROUTES} from "../../../constants/routes.ts";
+import {I18N_NS} from "../../../i18n.ts";
 
 export const ButtonSyllogismes = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export const ButtonSyllogismes = () => {
     navigate(route);
   };
 
-  const { t } = useTranslation('translation', { keyPrefix: 'home.syllogism' });
+  const { t } = useTranslation(I18N_NS, { keyPrefix: 'home.syllogism' });
 
   return (
     <div className="button" onClick={handleClick}>
