@@ -63,11 +63,20 @@ export class QuantifierRepository {
         return this.load().filter((quantifier: Quantifier) => quantifier.type === type);
     }
 
+    static getByName(name: string): Quantifier | undefined {
+        return this.load().find((quantifier: Quantifier) => name === quantifier.name);
+    }
+
     /**
-     * Adds given quantifier.
+     * Adds given quantifier. If a quantifier with the same name exists, it is not inserted again.
      */
     static add(quantifier: Quantifier): void {
-        this.update(quantifiers => quantifiers.push(quantifier));
+        this.update(quantifiers => {
+            if (quantifiers.findIndex((q: Quantifier) => q.name === quantifier.name) === -1) {
+                console.log("test");
+                quantifiers.push(quantifier);
+            }
+        });
     }
 
     /**
