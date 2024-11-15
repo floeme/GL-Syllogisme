@@ -4,10 +4,13 @@ import { Proposition } from "../../model/Proposition"
 import { Term } from "../../model/Term"
 import { Quantifier } from "../../model/Quantifier"
 import { QuantifierType } from "../../model/QuantifierType"
+import { useTranslation } from "react-i18next"
 
 export const Polysyllogism = () => {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
 	const [verb, setVerb] = useState("are")
+
+    const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
     const validateInputs = () => {
         let isErrorMessage = false
@@ -18,32 +21,18 @@ export const Polysyllogism = () => {
             if (!isErrorMessage) {
                 ++i
 
-                if (!proposition.predicate?.value) {
-                    setInputErrorMessage("Veuillez renseigner le second terme de la proposition " + i)
-                    isErrorMessage = true
-                } else if (!isErrorMessage) {
-                    setInputErrorMessage("")
-                }
-
-                if (!verb) {
-                    setInputErrorMessage("Veuillez renseigner un verbe dans les propositions")
-                    isErrorMessage = true
-                } else if (!isErrorMessage) {
-                    setInputErrorMessage("")
-                }
-
-                if (!proposition.subject?.value) {
-                    setInputErrorMessage("Veuillez renseigner le premier terme de la proposition " + i)
-                    isErrorMessage = true
-                } else if (!isErrorMessage) {
-                    setInputErrorMessage("")
-                }
-
                 if (!proposition.quantifier?.type) {
-                    setInputErrorMessage("Veuillez renseigner le quantificateur de la proposition " + i)
-                    isErrorMessage = true
-                } else if (!isErrorMessage) {
-                    setInputErrorMessage("")
+                    setInputErrorMessage(t("errorMessages.missingQuantifier", { index: i }));
+                    isErrorMessage = true;
+                } else if (!proposition.subject?.value) {
+                    setInputErrorMessage(t("errorMessages.missingSubject"));
+                    isErrorMessage = true;
+                } else if (!verb) {
+                    setInputErrorMessage(t("errorMessages.missingVerb", { index: i }));
+                    isErrorMessage = true;
+                } else if (!proposition.predicate?.value) {
+                    setInputErrorMessage(t("errorMessages.missingPredicate", { index: i }));
+                    isErrorMessage = true;
                 }
             }
         });
@@ -144,8 +133,8 @@ export const Polysyllogism = () => {
                 <button type="button" name="settingsButton" onClick={goSettings}>
                     <img src="images/settings_icon.svg" alt="settings" />
                 </button>
-                <button type="button" name="addPropositionButton" onClick={addProposition}>ADD</button>
-                <button type="button" name="reorderButton" onClick={reorderPropositions}>REORDER</button>
+                <button type="button" name="addPropositionButton" onClick={addProposition}>{t("buttons.add")}</button>
+                <button type="button" name="reorderButton" onClick={reorderPropositions}>{t("buttons.reorder")}</button>
             </div>
 
             <div className="polysyllogism-grid">
@@ -173,10 +162,10 @@ export const Polysyllogism = () => {
                 ))}
 
                 <div className="hypothesis">
-                    <label>Existence Hypothesis</label>
+                    <label>{t("labels.existenceHypothesis")}</label>
                     <input type="checkbox" name="existenceHypothesis" />
                     {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
-                    <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
+                    <button type="button" name="checkButton" onClick={checkSyllogism}>{t("buttons.check")}</button>
                 </div>
             </div>
         </div>

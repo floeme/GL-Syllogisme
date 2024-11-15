@@ -1,5 +1,6 @@
 import PolysyllogismQuantifierSelector from "../PolysyllogismQuantifierSelector"
 import { Proposition } from "../../../model/Proposition"
+import { useTranslation } from "react-i18next"
 
 interface PollysyllogismMPProps {
     verb: string
@@ -12,6 +13,8 @@ function PolysyllogismMP({
     verb, setVerb,
     proposition, onPropositionChange
 }: PollysyllogismMPProps) {
+    const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
+
     return (
         <div className="mp-container">
             <div className="mp-proposition">
@@ -23,7 +26,7 @@ function PolysyllogismMP({
                     <input
                         type="text"
                         name="firstTerm"
-                        placeholder="Enter a first term"
+                        placeholder={t('placeholder.firstTerm')}
                         value={proposition.subject?.value || ""}
                         onChange={(e) => {
                             if (proposition.subject?.value != undefined) {
@@ -37,7 +40,7 @@ function PolysyllogismMP({
                 <div className="verb">
                     <input type="text"
                         name="verbTerm"
-                        placeholder="Enter a verb"
+                        placeholder={t('placeholder.verb')}
                         value={verb}
                         onChange={(e) => {
                             setVerb(e.target.value)
@@ -49,7 +52,7 @@ function PolysyllogismMP({
                     <input
                         type="text"
                         name="secondTerm"
-                        placeholder="Enter a second term"
+                        placeholder={t('placeholder.secondTerm')}
                         value={proposition.predicate?.value}
                         onChange={(e) => {
                             if (proposition.predicate?.value != undefined) {
