@@ -4,6 +4,9 @@ import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
+import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../../i18n.ts";
 import {Syllogism} from "../../../../model/Syllogism.ts";
 
 interface SyllogismPremisesProps {
@@ -49,9 +52,13 @@ function SyllogismPropositions({
 	verb, setVerb,
     syllogism
 }: SyllogismPremisesProps) {
+    const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
+
     const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
+
+    const { t } = useTranslation(I18N_NS);
 
     const handleTermConflict = (term1: string, term2: string) => {
         if (term1 === term2 && term1 !== "" && term2 !== "") {
@@ -280,7 +287,7 @@ function SyllogismPropositions({
                 <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
                 <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
                 <div className="switch-comp">
-                    <label className="name1">Guided</label>
+                    <label className="name1">{t("input.guided")}</label>
                     <label className="switch">
                         <input
                             type="checkbox"
@@ -291,7 +298,7 @@ function SyllogismPropositions({
                         />
                         <span className="slider"></span>
                     </label>
-                    <label className="name2">Expert</label>
+                    <label className="name2">{t("input.expert")}</label>
                 </div>
             </div>
 
@@ -310,10 +317,9 @@ function SyllogismPropositions({
                 ))}
 
                 <div className="hypothesis">
-                    <label>Existence Hypothesis</label>
-                    <input type="checkbox" name="existenceHypothesis" />
+                    <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
-                    <button type="button" name="checkButton" onClick={checkSyllogism}>Check</button>
+                    <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
             </div>
         </div>

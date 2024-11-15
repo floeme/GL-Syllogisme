@@ -1,8 +1,9 @@
 import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../i18n.ts";
 
 export const LewisBody = () => {
 
-    const { t } = useTranslation('translation', { keyPrefix: 'home.lewis' });
+    const { t } = useTranslation(I18N_NS, { keyPrefix: 'home.lewis' });
 
   return (
     <div className="lewisbody">

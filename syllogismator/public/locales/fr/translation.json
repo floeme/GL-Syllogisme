@@ -27,6 +27,13 @@
       "I": "Il existe",
       "O": "Pas certains"
     },
+    "term_kind": {
+      "major": "terme majeur",
+      "minor": "terme mineur",
+      "middle": "moyen terme",
+      "subject": "sujet",
+      "predicate": "prédicat"
+    },
     "rule": {
       "Rmt": {
         "name": "Règle du moyen-terme",
@@ -82,5 +89,16 @@
         "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
       }
     }
+  },
+  "input": {
+    "enter_term": "Saisir le {{kind}}",
+    "check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
+    "check": "Vérifier",
+    "enter_verb": "Saisir un verbe",
+    "select_type_term": "Sélectionner ou saisir un terme",
+    "select_term": "Sélectionner un terme",
+    "type_term": "Saisir un terme",
+    "guided": "Saisie guidée",
+    "expert": "Expert"
   }
 }

@@ -6,13 +6,14 @@ import Texte1 from "../elements/home/Texte1";
 import Texte2 from "../elements/home/Texte2";
 import {useTranslation} from "react-i18next";
 import LewisBody from "../elements/home/LewisBody";
+import {I18N_NS} from "../../i18n.ts";
 
 export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const items = [<Texte1 />, <Texte2 />];
 
-  const { t } = useTranslation('translation', { keyPrefix: 'home' });
+  const { t } = useTranslation(I18N_NS, { keyPrefix: 'home' });
 
   useEffect(() => {
     // changer l'élément

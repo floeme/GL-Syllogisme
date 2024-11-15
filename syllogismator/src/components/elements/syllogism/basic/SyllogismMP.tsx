@@ -1,6 +1,7 @@
-import { useState } from "react"
-import SyllogismMPQuantifier from "../SyllogismMPQuantifier"
+import QuantifierSelector from "../../QuantifierSelector"
 import { Quantifier } from "../../../../model/Quantifier"
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../../../i18n.ts";
 
 interface SyllogismMPProps {
     firstTerm: string
@@ -17,11 +18,13 @@ function SyllogismMP({
     quantifier, setPropQuantifier,
 	verb, setVerb
 }: SyllogismMPProps) {
+    const { t } = useTranslation(I18N_NS);
+
     return (
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <SyllogismMPQuantifier setVerb={setVerb} quantifier={quantifier} setPropQuantifier={setPropQuantifier} />
+                    <QuantifierSelector quantifier={quantifier} setPropQuantifier={setPropQuantifier} />
                 </div>
 
                 <div className="subject">
@@ -31,7 +34,7 @@ function SyllogismMP({
                 <div className="verb">
                     <input type="text"
                         name="verbTerm"
-                        placeholder="Enter a verb"
+                        placeholder={t("input.enter_verb")}
                         value={verb}
                         onChange={(e) => {
                             setVerb(e.target.value)
