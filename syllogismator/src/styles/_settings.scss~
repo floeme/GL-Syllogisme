@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "font-1";
+    src: url(../assets/fonts/BebasNeue-Regular.ttf);
+}
+@font-face {
+    font-family: "font-2";
+    src: url(../assets/fonts/bold_font.ttf);
+}
+
+
+$font-1: "font-1", sans-serif;
+$font-2: "font-2", sans-serif;
+
+$color-background-main: #140b29;
+$color-font-blanc: #fff;
+$color-font-violet: #8b7bf3;
+$color-font-grey: #7D7688;
+$color-button: #705df2;
+$color-blue: #62c7ff;
+$color-shadow-violet: #2B2058;
+
+.page {
+    min-height: 100vh;
+    min-width: 100vh;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    min-width: 100vh;
+    background-color: $color-background-main ;
+    //background: linear-gradient(135deg, #3AAFA9, #CE93D8);
+    font-family: $font-1;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}

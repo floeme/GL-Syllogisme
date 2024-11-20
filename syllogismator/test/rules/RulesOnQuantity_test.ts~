@@ -1,0 +1,43 @@
+import {Rmt, Rlh } from "../../src/model/RulesImpl.ts";
+import {Syllogism} from "../../src/model/Syllogism.ts";
+import {Term} from "../../src/model/Term.ts";
+import {QuantifierType} from "../../src/model/QuantifierType.ts";
+import {Quantifier} from "../../src/model/Quantifier.ts";
+import {Proposition} from "../../src/model/Proposition";
+
+
+describe("Rules on quantity", () => {
+    it("Rmt", () => {
+        const ruleRmt = Rmt;
+        const s : Syllogism = new Syllogism();
+
+        // Proposition 1
+        const q1 : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const t11 : Term = new Term("term_proposition1_1");
+        const t12 : Term = new Term("term_proposition1_2");
+        const p1 : Proposition = Proposition.withTerms(q1, t11, t12);
+
+        // Proposition 2
+        const q2 : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const t21 : Term = new Term("term_proposition2_1");
+        const t22 : Term = new Term("term_proposition2_2");
+        const p2 : Proposition = Proposition.withTerms(q2, t21, t22);
+
+        // Conclusion
+        const q3 : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const t31 : Term = new Term("term_conclusion_1");
+        const t32 : Term = new Term("term_conclusion_2");
+        const conclu : Proposition = Proposition.withTerms(q3, t31, t32);
+
+        s.addProposition(p1,1);
+        s.addProposition(p2,2);
+        s.addProposition(conclu,-1);
+
+        expect(ruleRmt.check(s)).toBe(true);
+    });
+
+
+    it("Rlh", () => {
+
+    });
+});
