@@ -136,7 +136,7 @@ function SyllogismMP2({
                             type="text"
                             value={MP2SecondTerm}
                             onChange={(e) => setMP2SecondTerm(e.target.value)}
-                            placeholder={t("input.enter_term")}
+                            placeholder={t("input.type_term")}
                         />
                     ) : manual1 ? (
                         <select
