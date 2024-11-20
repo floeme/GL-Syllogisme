@@ -202,25 +202,55 @@ export const Rp: Rule = {
  * ## Existence hypothesis Rule (Ruu)
  * Two universal premises do not lead to a particular conclusion.
  */
-/**
- * ## Existence hypothesis Rule (Ruu)
- * Two universal premises do not lead to a particular conclusion.
- */
 export const Ruu: Rule = {
     id: "Ruu",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (s.getProposition(0).quantifier!.type.universal && s.getProposition(1).quantifier!.type.universal) {
-                return buildRuleResult(s.conclusion.quantifier!.type.universal);
-            } else {
+        if (s.getPropositionCount() !== 3) {
+            return {
+                valid: false,
+                message: "invalid_number_of_propositions"
+            };
+        }
+
+        const firstProposition = s.getProposition(0);
+        const secondProposition = s.getProposition(1);
+        const conclusion = s.conclusion;
+
+        if (!firstProposition.quantifier || !secondProposition.quantifier || !conclusion.quantifier) {
+            return {
+                valid: false,
+                message: "missing_quantifier"
+            };
+        }
+
+        const firstUniversal = firstProposition.quantifier.type.universal;
+        const secondUniversal = secondProposition.quantifier.type.universal;
+        const conclusionUniversal = conclusion.quantifier.type.universal;
+
+        // si deux prémisses universelles
+        if (firstUniversal && secondUniversal) {
+            // cas AAA : conclusion universelle (valide)
+            if (conclusionUniversal) {
                 return {
                     valid: true,
-                    message: "particular_premise"
+                    message: "valid_universal_conclusion"
                 };
             }
-        } else throw Error("Not implemented."); // TODO
+
+            // cas AAI : conclusion particulière (valide)
+            return {
+                valid: true,
+                message: "valid_particular_conclusion"
+            };
+        }
+
+        // si l'une des prémisses n'est pas universelle, la règle est valide
+        return {
+            valid: true,
+            message: "valid_mixed_premises"
+        };
     }
-}
+};
 
 
 

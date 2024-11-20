@@ -19,7 +19,7 @@ function testFigure(rule : Rule, q1Type : QuantifierType , q2Type : QuantifierTy
     /**
      * Testing for Figure 1
      */
-    it(`Figure 1 -> ${q1Type.code}${q2Type.code}${conclusionType.code}`, () => {
+    it(`Figure 1 -> ${q1Type.code}${q2Type.code}${conclusionType.code} : ${expectedResults.map(result => result.toString())}`, () => {
         const syllogism = new Syllogism();
         const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
@@ -305,7 +305,7 @@ const casesRAA = [
 ];
 
 describe("test of Raa Rule for all figures", () => {
-    casesRN.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
+    casesRAA.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
         testFigure(Raa , q1Type , q2Type , conclusionType , expectedResults);
     });
 });
@@ -383,7 +383,7 @@ const casesRPP = [
 ];
 
 describe("test of Rpp Rule for all figures", () => {
-    casesRN.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
+    casesRPP.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
         testFigure(Rpp , q1Type , q2Type , conclusionType , expectedResults);
     });
 });
@@ -462,7 +462,7 @@ const casesRP = [
 
 
 describe("test of Rp Rule for all figures", () => {
-    casesRN.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
+    casesRP.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
         testFigure(Rp , q1Type , q2Type , conclusionType , expectedResults);
     });
 });
@@ -539,7 +539,7 @@ const casesRUU = [
 ];
 
 describe("test of Ruu Rule for all figures", () => {
-    casesRN.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
+    casesRUU.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
         testFigure(Ruu , q1Type , q2Type , conclusionType , expectedResults);
     });
 });
