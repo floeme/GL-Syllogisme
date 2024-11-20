@@ -1,8 +1,8 @@
 import { Quantifier } from "../../../model/Quantifier"
 import { Term } from "../../../model/Term"
 import SyllogismPropositions from "./expert/SyllogismPropositions"
-import { useState } from "react"
 import {Syllogism} from "../../../model/Syllogism.ts";
+import {Figure} from "../../../model/Figure.ts";
 
 interface Expert_SyllogismProps {
 	subject: Term
@@ -22,6 +22,8 @@ interface Expert_SyllogismProps {
 	verb: string
 	setVerb: (value: string) => void
 	syllogism : Syllogism
+	figure: Figure
+	setFigure: (value: Figure) => void
 }
 
 export const Expert_Syllogism = ({
@@ -33,24 +35,13 @@ export const Expert_Syllogism = ({
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
 	verb, setVerb,
-	syllogism
+	syllogism,
+	figure, setFigure
 }: Expert_SyllogismProps) => {
-	const [MP1FirstTerm, setMP1FirstTerm] = useState("")
-	const [MP1SecondTerm, setMP1SecondTerm] = useState("")
-	const [MP2FirstTerm, setMP2FirstTerm] = useState("")
-	const [MP2SecondTerm, setMP2SecondTerm] = useState("")
 
 	return (
 		<>
 			<SyllogismPropositions
-				MP1FirstTerm={MP1FirstTerm}
-				setMP1FirstTerm={setMP1FirstTerm}
-				MP1SecondTerm={MP1SecondTerm}
-				setMP1SecondTerm={setMP1SecondTerm}
-				MP2FirstTerm={MP2FirstTerm}
-				setMP2FirstTerm={setMP2FirstTerm}
-				MP2SecondTerm={MP2SecondTerm}
-				setMP2SecondTerm={setMP2SecondTerm}
 				subject={subject}
 				setSubject={setSubject}
 				predicate={predicate}
@@ -68,6 +59,8 @@ export const Expert_Syllogism = ({
 				verb={verb}
 				setVerb={setVerb}
 				syllogism={syllogism}
+				figure={figure}
+				setFigure={setFigure}
 			/>
 		</>
 	)

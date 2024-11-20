@@ -77,6 +77,8 @@ export const SyllogismPage = () => {
 						verb={verb}
 						setVerb={setVerb}
 						syllogism={syllogism}
+						figure={figure}
+						setFigure={setFigure}
 					/>
 				</div>
 			}

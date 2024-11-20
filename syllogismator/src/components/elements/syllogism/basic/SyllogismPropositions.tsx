@@ -1,7 +1,7 @@
-import { Fragment, useEffect, useState } from "react"
+import {Fragment, useCallback, useEffect, useState} from "react"
 import SyllogismMP from "./SyllogismMP"
 import { Syllogism } from "../../../../model/Syllogism"
-import {getAllRules, Rule, check, CheckResults} from "../../../../model/Rule.ts"
+import {getAllRules, check, CheckResults} from "../../../../model/Rule.ts"
 import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
@@ -111,7 +111,7 @@ function SyllogismPropositions({
             let errorMessage = "";
             let containsErrors = false;
 
-            resultsCheck.results.forEach((value, key, map) => {
+            resultsCheck.results.forEach((value, key) => {
                 if (value.valid)
                     return;
                 errorMessage = errorMessage + "Régle: " + key + " - Erreur: " + value.message;
@@ -151,7 +151,7 @@ function SyllogismPropositions({
         console.log("goSettings")
     }
 
-    const renderSyllogismMP1 = (figure: Figure) => {
+    const renderSyllogismMP1 = useCallback((figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure3:
@@ -176,9 +176,9 @@ function SyllogismPropositions({
             default:
                 return <div>Please select a figure</div>
         }
-    }
+    }, [middle.value, predicate.value, prop1Quantifier, setProp1Quantifier, setVerb, verb])
 
-    const renderSyllogismMP2 = (figure: Figure) => {
+    const renderSyllogismMP2 = useCallback((figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure2:
@@ -203,9 +203,9 @@ function SyllogismPropositions({
             default:
                 return <div>Please select a figure</div>
         }
-    }
+    }, [middle.value, prop2Quantifier, setProp2Quantifier, setVerb, subject.value, verb])
 
-    const renderSyllogismMP3 = (figure: Figure) => {
+    const renderSyllogismMP3 = useCallback((figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure2:
@@ -222,7 +222,7 @@ function SyllogismPropositions({
             default:
                 return <div>Please select a figure</div>
         }
-    }
+    }, [predicate.value, prop3Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
 
     const [propositions, setPropositions] = useState([
         renderSyllogismMP1(figure),
@@ -246,7 +246,7 @@ function SyllogismPropositions({
             renderSyllogismMP2(figure),
             renderSyllogismMP3(figure)
         ])
-    }, [figure, subject, predicate, middle, verb])
+    }, [figure, subject, predicate, middle, verb, renderSyllogismMP1, renderSyllogismMP2, renderSyllogismMP3])
 
     return (
         <div className="section-premises">
