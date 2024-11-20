@@ -88,6 +88,12 @@
         "failed": "Les deux prémisses sont universelles mais la conclusion est particulière, ce syllogisme est donc invalide.",
         "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
       }
+    },
+    "true": "Syllogism OK",
+    "false": "Syllogism KO",
+    "summary": {
+      "ok": "Règle valide",
+      "ko": "Règle invalide"
     }
   },
   "input": {

@@ -11,6 +11,7 @@ import {Syllogism} from "../../../../model/Syllogism.ts";
 import {check, CheckResults, getAllRules} from "../../../../model/Rule.ts";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 import {Figure} from "../../../../model/Figure.ts";
+import ResultProposition from "../Result.tsx";
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -48,7 +49,6 @@ function SyllogismPropositions({
 }: SyllogismPremisesProps) {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
-    const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
 
@@ -58,6 +58,11 @@ function SyllogismPropositions({
     const [MP2SecondTerm, setMP2SecondTerm] = useState("")
 
     const { t } = useTranslation(I18N_NS);
+
+    const [isError, setIsError] = useState(false)
+    const [message, setMessage] = useState<string>()
+    const [messageKO, setMessageKO] = useState<string[]>([])
+    const [messageOK, setMessageOK] = useState<string[]>([])
 
     const handleTermConflict = (term1: string, term2: string) => {
         if (term1 === term2 && term1 !== "" && term2 !== "") {
@@ -115,79 +120,69 @@ function SyllogismPropositions({
         let isErrorMessage = false
 
         if (!MP2SecondTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le quatrième champ")
+            messageKO.push("Veuillez renseigner un terme dans le quatrième champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!MP2FirstTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le troisième champ")
+            messageKO.push("Veuillez renseigner un terme dans le troisième champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!MP1SecondTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le deuxième champ")
+            messageKO.push("Veuillez renseigner un terme dans le deuxième champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!MP1FirstTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le premier champ")
+            messageKO.push("Veuillez renseigner un terme dans le premier champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop3Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop2Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop1Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la première proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
+        setMessageKO(messageKO)
+        setIsError(isErrorMessage)
         return !isErrorMessage
     }
 
     const checkSyllogism = () => {
+        setMessageOK([])
+        setMessageKO([])
+        setMessage("")
         if (!validateInputs()) {
 
             syllogism.link = verb
         }else{
             const resultsCheck: CheckResults = checkRuu ? check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
 
-            let errorMessage = "";
-            let containsErrors = false;
+            let res = false
 
             resultsCheck.results.forEach((value, key) => {
                 if (value.valid)
-                    return;
-                errorMessage = errorMessage + " Régle: " + key + " - Erreur: " + value.message;
-                containsErrors = true
+                    messageOK.push(t('syllogism.rule.' + key + '.passed'))
+                else
+                    messageKO.push(t('syllogism.rule.' + key + '.failed'))
+                res = res || value.valid
             })
 
-            if (!containsErrors) {
-                errorMessage = "Syllogisme ok"
-            }
-
-            setInputErrorMessage(errorMessage)
+            setMessageOK(messageOK)
+            setMessageKO(messageKO)
+            setIsError(res)
+            setMessage(t("syllogism."+res))
 
             console.log("check")
         }
@@ -325,9 +320,9 @@ function SyllogismPropositions({
 
                 <div className="hypothesis">
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
-                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
+                <ResultProposition message={message} messageOK={messageOK} messageKO={messageKO}></ResultProposition>
             </div>
         </div>
     )
