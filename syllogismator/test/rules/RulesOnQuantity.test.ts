@@ -7,6 +7,13 @@ import { Rmt, Rlh} from "../../src/model/RulesImpl";
 import { RuleResult } from "../../src/model/Rule";
 
 
+const updatePropositionType = (proposition : Proposition, quantName : Quantifier, term1 : Term, term2 : Term):Proposition => {
+    proposition.quantifier = quantName;
+    proposition.subject = term1;
+    proposition.predicate = term2;
+    return proposition;
+}
+
 // ----------------------------------------------------------------------
 //                    RULE RMT
 //------------------------------------------------------------------------
@@ -42,11 +49,8 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             const syllogism = new Syllogism();
             const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
-            const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (M - P)
-            const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t3, t1); // Minor premise (S - M)
-
-            syllogism.addProposition(p1, 1);
-            syllogism.addProposition(p2, 2);
+            updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2);// Major premise (M - P)
+            updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t3, t1);// Minor premise (S - M)
 
             const result: RuleResult = Rmt.check(syllogism);
             expect(result.valid).toBe(expectedResults[0]);
@@ -59,11 +63,8 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             const syllogism = new Syllogism();
             const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
-            const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
-            const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t3, t2); // Minor premise (S - M)
-
-            syllogism.addProposition(p1, 1);
-            syllogism.addProposition(p2, 2);
+            updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2);// Major premise (P - M)
+            updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t3, t2);// Minor premise (S - M)
 
             const result: RuleResult = Rmt.check(syllogism);
             expect(result.valid).toBe(expectedResults[1]);
@@ -76,11 +77,8 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             const syllogism = new Syllogism();
             const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
-            const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (M - P)
-            const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t1, t3); // Minor premise (M - S)
-
-            syllogism.addProposition(p1, 1);
-            syllogism.addProposition(p2, 2);
+            updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2);// Major premise (M - P)
+            updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t1, t3);// Minor premise (M - S)
 
             const result: RuleResult = Rmt.check(syllogism);
             expect(result.valid).toBe(expectedResults[2]);
@@ -93,11 +91,8 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             const syllogism = new Syllogism();
             const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
-            const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
-            const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t2, t3); // Minor premise (M - S)
-
-            syllogism.addProposition(p1, 1);
-            syllogism.addProposition(p2, 2);
+            updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
+            updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t2, t3); // Minor premise (M - S)
 
             const result: RuleResult = Rmt.check(syllogism);
             expect(result.valid).toBe(expectedResults[3]);
@@ -203,13 +198,9 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
                 const syllogism = new Syllogism();
                 const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
-                const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (M - P)
-                const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t3, t1); // Minor premise (S - M)
-                const conclusion = Proposition.withTerms(new Quantifier("Q", conclusionType), t3, t2);
-
-                syllogism.addProposition(p1, 1);
-                syllogism.addProposition(p2, 2);
-                syllogism.addProposition(conclusion, -1);
+                updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2);// Major premise (M - P)
+                updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t3, t1); // Minor premise (S - M)
+                updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t2);
 
                 const result: RuleResult = Rlh.check(syllogism);
                 expect(result.valid).toBe(expectedResults[0]);
@@ -222,13 +213,9 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
                 const syllogism = new Syllogism();
                 const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
-                const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
-                const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t3, t2); // Minor premise (S - M)
-                const conclusion = Proposition.withTerms(new Quantifier("Q", conclusionType), t3, t1);
-
-                syllogism.addProposition(p1, 1);
-                syllogism.addProposition(p2, 2);
-                syllogism.addProposition(conclusion, -1);
+                updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
+                updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t3, t2); // Minor premise (S - M)
+                updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t1);
 
                 const result: RuleResult = Rlh.check(syllogism);
                 expect(result.valid).toBe(expectedResults[1]);
@@ -241,13 +228,9 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
                 const syllogism = new Syllogism();
                 const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
-                const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (M - P)
-                const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t1, t3); // Minor premise (M - S)
-                const conclusion = Proposition.withTerms(new Quantifier("Q", conclusionType), t3, t2);
-
-                syllogism.addProposition(p1, 1);
-                syllogism.addProposition(p2, 2);
-                syllogism.addProposition(conclusion, -1);
+                updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2); // Major premise (M - P)
+                updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t1, t3); // Minor premise (M - S)
+                updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t2);
 
                 const result: RuleResult = Rlh.check(syllogism);
                 expect(result.valid).toBe(expectedResults[2]);
@@ -260,13 +243,9 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
                 const syllogism = new Syllogism();
                 const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
-                const p1 = Proposition.withTerms(new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
-                const p2 = Proposition.withTerms(new Quantifier("Q", q2Type), t2, t3); // Minor premise (M - S)
-                const conclusion = Proposition.withTerms(new Quantifier("Q", conclusionType), t3, t1);
-
-                syllogism.addProposition(p1, 1);
-                syllogism.addProposition(p2, 2);
-                syllogism.addProposition(conclusion, -1);
+                updatePropositionType(syllogism.getProposition(0), new Quantifier("Q", q1Type), t1, t2); // Major premise (P - M)
+                updatePropositionType(syllogism.getProposition(1), new Quantifier("Q", q2Type), t2, t3); // Minor premise (M - S)
+                updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t1);
 
                 const result: RuleResult = Rlh.check(syllogism);
                 expect(result.valid).toBe(expectedResults[3]);

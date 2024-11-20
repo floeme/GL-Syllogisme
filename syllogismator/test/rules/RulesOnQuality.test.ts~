@@ -310,11 +310,6 @@ describe("test of Raa Rule for all figures", () => {
     });
 });
 
-
-
-// ----------------------------------------------------------------------
-//                    RULE RPP
-//------------------------------------------------------------------------
 const casesRPP = [
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
@@ -388,11 +383,6 @@ describe("test of Rpp Rule for all figures", () => {
     });
 });
 
-
-
-// ----------------------------------------------------------------------
-//                    RULE RP
-//------------------------------------------------------------------------
 const casesRP = [
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
@@ -467,10 +457,6 @@ describe("test of Rp Rule for all figures", () => {
     });
 });
 
-
-// ----------------------------------------------------------------------
-//                    RULE RUU
-//------------------------------------------------------------------------
 const casesRUU = [
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
