@@ -19,7 +19,7 @@ function testFigure(rule : Rule, q1Type : QuantifierType , q2Type : QuantifierTy
     /**
      * Testing for Figure 1
      */
-    it(`Figure 1`, () => {
+    it(`Figure 1 -> ${q1Type.code}${q2Type.code}${conclusionType.code}`, () => {
         const syllogism = new Syllogism();
         const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
@@ -310,6 +310,11 @@ describe("test of Raa Rule for all figures", () => {
     });
 });
 
+
+
+// ----------------------------------------------------------------------
+//                    RULE RPP
+//------------------------------------------------------------------------
 const casesRPP = [
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
@@ -383,6 +388,11 @@ describe("test of Rpp Rule for all figures", () => {
     });
 });
 
+
+
+// ----------------------------------------------------------------------
+//                    RULE RP
+//------------------------------------------------------------------------
 const casesRP = [
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
@@ -457,6 +467,10 @@ describe("test of Rp Rule for all figures", () => {
     });
 });
 
+
+// ----------------------------------------------------------------------
+//                    RULE RUU
+//------------------------------------------------------------------------
 const casesRUU = [
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
     { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
