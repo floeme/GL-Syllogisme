@@ -65,9 +65,9 @@ export const Rlh: Rule = {
         const conclusionQuantifier = s.conclusion.quantifier!.type;
 
         const minor = s.getMinorTerm()!;
-        const isMinorUniversal = isUniversal(conclusionQuantifier, true);
+        const isMinorUniversal = isUniversal(conclusionQuantifier, true);  // quantity of the minor term in the conclusion
         const major = s.getMajorTerm()!;
-        const isMajorUniversal = isUniversal(conclusionQuantifier, false);
+        const isMajorUniversal = isUniversal(conclusionQuantifier, false); // quantity of the major term in the conclusion
 
         // If a term of the conclusion has universal quantity…
         if (isMinorUniversal || isMajorUniversal) {
@@ -77,7 +77,7 @@ export const Rlh: Rule = {
                 result.extras = minor;
                 return result;
             }
-            if (isMajorUniversal && !rlh_aux(s, minor)) {
+            if (isMajorUniversal && !rlh_aux(s, major)) {
                 // The major term has universal quantity in the conclusion but not in its premise
                 const result = buildRuleResult(false);
                 result.extras = major;
@@ -93,7 +93,7 @@ export const Rlh: Rule = {
             const conclusionQuantifier_bis = conclusionQuantifier.affirmative ?
                 QuantifierType.A : QuantifierType.E;
             const isMinorUniversal_bis = isUniversal(conclusionQuantifier_bis, true);
-            const isMajorUniversal_bis = isUniversal(conclusionQuantifier_bis, true);
+            const isMajorUniversal_bis = isUniversal(conclusionQuantifier_bis, false);
 
             let validWithUniversalConclusion = !(isMinorUniversal_bis || isMajorUniversal_bis);
                 // True if both terms of the conclusion have particular quantity
