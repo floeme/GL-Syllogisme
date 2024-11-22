@@ -8,6 +8,7 @@ import { QuantifierType } from "../../../../model/QuantifierType"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import PolyModal from "../../modals/PolyModal.tsx"
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -45,7 +46,9 @@ function SyllogismPropositions({
 
     const [inputErrorMessage, setInputErrorMessage] = useState("")
 
-    const { t } = useTranslation(I18N_NS);
+    const { t } = useTranslation(I18N_NS)
+
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const validateInputs = () => {
         let isErrorMessage = false
@@ -142,7 +145,12 @@ function SyllogismPropositions({
         console.log("clear")
     }
 
+    const closeModal = () => {
+        setModalIsOpen(false)
+    }
+
     const help = () => {
+        setModalIsOpen(true)
         console.log("help")
     }
 
@@ -252,6 +260,7 @@ function SyllogismPropositions({
             <div className="button-row">
                 <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
                 <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
+                <PolyModal isOpen={modalIsOpen} onRequestClose={closeModal} path="/docs/fr/Basic_Guide.pdf" />
                 <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
                 <div className="switch-comp">
                     <label className="name1">{t("input.guided")}</label>

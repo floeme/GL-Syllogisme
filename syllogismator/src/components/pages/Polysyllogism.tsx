@@ -7,6 +7,7 @@ import { QuantifierType } from "../../model/QuantifierType"
 import { useTranslation } from "react-i18next"
 import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided } from "react-beautiful-dnd"
 import { Syllogism } from "../../model/Syllogism"
+import PolyModal from "../elements/modals/PolyModal"
 
 export const Polysyllogism = () => {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
@@ -29,14 +30,15 @@ export const Polysyllogism = () => {
         )
     ])
 	const [syllogism, setSyllogism] = useState(new Syllogism())
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     // Remplace les valeurs de base du syllogisme par les valeurs de base du composant
     useEffect(() => {
-        rebuildPolysyllogism();
-    }, []); // [] garantit que l'effet s'exécute une seule fois au chargement
+        rebuildPolysyllogism()
+    }, []) // [] garantit que l'effet s'exécute une seule fois au chargement
 
     useEffect(() => {
-        rebuildPolysyllogism();
+        rebuildPolysyllogism()
     }, [propositions])
 
     const rebuildPolysyllogism = () => {
@@ -45,19 +47,19 @@ export const Polysyllogism = () => {
         // Supprime les valeurs de base du syllogisme
         syllogism.getPropositions().forEach(() => {
             syllogism.removeProposition(0)
-        });
+        })
 
         // Supprime les valeurs de base du newSyllogisme
         newSyllogism.getPropositions().forEach(() => {
             newSyllogism.removeProposition(0)
-        });
+        })
 
         newSyllogism.removeProposition(-1)
 
         // Mettre les valeurs de base du composant dans le syllogisme
         propositions.forEach(proposition => {
             newSyllogism.addProposition(proposition)
-        });
+        })
 
         setSyllogism(newSyllogism)
     }
@@ -101,7 +103,12 @@ export const Polysyllogism = () => {
         console.log("clear")
     }
 
+    const closeModal = () => {
+        setModalIsOpen(false)
+    }
+
     const help = () => {
+        setModalIsOpen(true)
         console.log("help")
     }
 
@@ -181,6 +188,7 @@ export const Polysyllogism = () => {
                 <button type="button" name="helpButton" onClick={help}>
                     <img src="images/help_icon.svg" alt="help" />
                 </button>
+                <PolyModal isOpen={modalIsOpen} onRequestClose={closeModal} path="/docs/fr/Polysyllogism_Guide.pdf" />
                 <button type="button" name="settingsButton" onClick={goSettings}>
                     <img src="images/settings_icon.svg" alt="settings" />
                 </button>
