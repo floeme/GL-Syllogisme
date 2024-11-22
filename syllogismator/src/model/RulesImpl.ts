@@ -213,11 +213,12 @@ export const Rp: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (!s.getProposition(0).quantifier!.type.universal || !s.getProposition(1).quantifier!.type.universal) {
-                return buildRuleResult(!s.conclusion.quantifier!.type.universal);
+                const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
+                result.validWithUniversalConclusion = false;
+                return result;
             } else {
                 return {
                     valid: true,
-                    validWithUniversalConclusion: false,
                     message: "2_universal_premises"
                 };
             }
