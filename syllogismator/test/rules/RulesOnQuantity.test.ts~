@@ -45,7 +45,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
         /**
          * Testing for Figure 1
          */
-        it(`Figure 1`, () => {
+        it(`Figure 1 -> ${q1Type.code}${q2Type.code}`, () => {
             const syllogism = new Syllogism();
             const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
@@ -59,7 +59,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
         /**
          * Testing for Figure 2
          */
-        it(`Figure 2`, () => {
+        it(`Figure 2 -> ${q1Type.code}${q2Type.code}`, () => {
             const syllogism = new Syllogism();
             const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
@@ -73,7 +73,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
         /**
          * Testing for Figure 3
          */
-        it(`Figure 3`, () => {
+        it(`Figure 3 -> ${q1Type.code}${q2Type.code}`, () => {
             const syllogism = new Syllogism();
             const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
@@ -87,7 +87,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
         /**
          * Testing for Figure 4
          */
-        it(`Figure 4`, () => {
+        it(`Figure 4 -> ${q1Type.code}${q2Type.code}`, () => {
             const syllogism = new Syllogism();
             const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
@@ -194,7 +194,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             /**
              * Testing for Figure 1
              */
-            it(`Figure 1`, () => {
+            it(`Figure 1 -> ${q1Type.code}${q2Type.code}${conclusionType.code}`, () => {
                 const syllogism = new Syllogism();
                 const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
@@ -209,7 +209,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             /**
              * Testing for Figure 2
              */
-            it(`Figure 2`, () => {
+            it(`Figure 2 -> ${q1Type.code}${q2Type.code}${conclusionType.code}`, () => {
                 const syllogism = new Syllogism();
                 const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 
@@ -224,7 +224,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             /**
              * Testing for Figure 3
              */
-            it(`Figure 3 `, () => {
+            it(`Figure 3 -> ${q1Type.code}${q2Type.code}${conclusionType.code}`, () => {
                 const syllogism = new Syllogism();
                 const t1 = new Term("M"), t2 = new Term("P"), t3 = new Term("S");
 
@@ -239,7 +239,7 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
             /**
              * Testing for Figure 4
              */
-            it(`Figure 4`, () => {
+            it(`Figure 4 -> ${q1Type.code}${q2Type.code}${conclusionType.code}`, () => {
                 const syllogism = new Syllogism();
                 const t1 = new Term("P"), t2 = new Term("M"), t3 = new Term("S");
 

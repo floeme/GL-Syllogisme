@@ -105,91 +105,74 @@ describe("Exhaustive testing of Rmt Rule for all figures with specific expectati
 // ----------------------------------------------------------------------
 //                    RULE RLH
 //------------------------------------------------------------------------
-    const casesRLH = [               // figures :  1     2      3     4
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.A, conclusionType: QuantifierType.A, expectedResults: [true, true, false, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.A, conclusionType: QuantifierType.E, expectedResults: [false, true, false, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.A, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.A, conclusionType: QuantifierType.O, expectedResults: [false, true, false, true] },
+const casesRLH = [
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, false, false]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [false, true, false, false]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.O, expectedResults: [false, true, false, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.E, expectedResults: [false, true, false, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.O, expectedResults: [false, true, false, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.A, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.O, expectedResults: [false, true, false, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.A, expectedResults: [false, false, true, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.A,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.O, expectedResults: [false, true, false, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, false, false]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, true, false, false]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.O, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.E, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.O, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.A, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.O, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.A, expectedResults: [false, false, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.E, expectedResults: [false, false, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.E,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.O, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.O, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.O, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.A, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.O, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.A, expectedResults: [false, false, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.I,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.O, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.A, expectedResults: [true, true, false, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.E, expectedResults: [true, false, false, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.A,  conclusionType: QuantifierType.O, expectedResults: [true, false, true, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.A, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.E, expectedResults: [true, false, true, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.E,  conclusionType: QuantifierType.O, expectedResults: [true, false, true, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.A, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.E, expectedResults: [false, false, false, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.I,  conclusionType: QuantifierType.O, expectedResults: [true, false, true, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.A, expectedResults: [false, false, true, true]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.E, expectedResults: [false, false, true, false]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.I, expectedResults: [true, true, true, true]},
+    { q1Type: QuantifierType.O,  q2Type: QuantifierType.O,  conclusionType: QuantifierType.O, expectedResults: [true, false, true, false]},
+];
 
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.E, conclusionType: QuantifierType.A, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.E, conclusionType: QuantifierType.E, expectedResults: [false, true, false, true] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.E, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.E, conclusionType: QuantifierType.O, expectedResults: [false, true, false, true] },
-
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.I, conclusionType: QuantifierType.A, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.I, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.I, conclusionType: QuantifierType.I, expectedResults: [true, false, true, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.I, conclusionType: QuantifierType.O, expectedResults: [true, true, true, true] },
-
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.O, conclusionType: QuantifierType.A, expectedResults: [true, true, true, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.O, conclusionType: QuantifierType.E, expectedResults: [true, true, true, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.O, conclusionType: QuantifierType.I, expectedResults: [true, true, true, false] },
-        { q1Type: QuantifierType.A, q2Type: QuantifierType.O, conclusionType: QuantifierType.O, expectedResults: [true, true, true, false] },
-
-
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.A, conclusionType: QuantifierType.A, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.A, conclusionType: QuantifierType.E, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.A, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.A, conclusionType: QuantifierType.O, expectedResults: [true, true, true, true] },
-
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.E, conclusionType: QuantifierType.A, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.E, conclusionType: QuantifierType.E, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.E, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.E, conclusionType: QuantifierType.O, expectedResults: [true, true, true, true] },
-
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.I, conclusionType: QuantifierType.A, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.I, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.I, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.I, conclusionType: QuantifierType.O, expectedResults: [true, true, true, true] },
-
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.O, conclusionType: QuantifierType.A, expectedResults: [false, false, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.O, conclusionType: QuantifierType.E, expectedResults: [false, false, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.O, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.E, q2Type: QuantifierType.O, conclusionType: QuantifierType.O, expectedResults: [true, true, true, true] },
-
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.A, conclusionType: QuantifierType.A, expectedResults: [true, true, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.A, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.A, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.A, conclusionType: QuantifierType.O, expectedResults: [false, false, false, false] },
-
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.E, conclusionType: QuantifierType.A, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.E, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.E, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.E, conclusionType: QuantifierType.O, expectedResults: [false, false, false, false] },
-
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.I, conclusionType: QuantifierType.A, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.I, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.I, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.I, conclusionType: QuantifierType.O, expectedResults: [false, false, false, false] },
-
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.O, conclusionType: QuantifierType.A, expectedResults: [true, true, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.O, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.O, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.I, q2Type: QuantifierType.O, conclusionType: QuantifierType.O, expectedResults: [false, false, false, false] },
-
-
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.A, conclusionType: QuantifierType.A, expectedResults: [true, true, false, false] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.A, conclusionType: QuantifierType.E, expectedResults: [true, false, false, false] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.A, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.A, conclusionType: QuantifierType.O, expectedResults: [true, false, true, false] },
-
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.E, conclusionType: QuantifierType.A, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.E, conclusionType: QuantifierType.E, expectedResults: [true, false, true, false] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.E, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.E, conclusionType: QuantifierType.O, expectedResults: [true, false, true, false] },
-
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.I, conclusionType: QuantifierType.A, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.I, conclusionType: QuantifierType.E, expectedResults: [false, false, false, false] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.I, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.I, conclusionType: QuantifierType.O, expectedResults: [true, false, true, false] },
-
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.O, conclusionType: QuantifierType.A, expectedResults: [false, false, true, true] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.O, conclusionType: QuantifierType.E, expectedResults: [false, false, true, false] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.O, conclusionType: QuantifierType.I, expectedResults: [true, true, true, true] },
-        { q1Type: QuantifierType.O, q2Type: QuantifierType.O, conclusionType: QuantifierType.O, expectedResults: [true, false, true, false] },
-    ];
-
-    describe("Exhaustive testing of Rlh Rule for all figures with specific expectations", () => {
+describe("Exhaustive testing of Rlh Rule for all figures with specific expectations", () => {
         casesRLH.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
             /**
              * Testing for Figure 1
