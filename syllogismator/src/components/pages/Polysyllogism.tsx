@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import PolysyllogismMP from "../elements/polysyllogism/PolysyllogismMP"
 import { Proposition } from "../../model/Proposition"
 import { Term } from "../../model/Term"
@@ -6,6 +6,7 @@ import { Quantifier } from "../../model/Quantifier"
 import { QuantifierType } from "../../model/QuantifierType"
 import { useTranslation } from "react-i18next"
 import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided } from "react-beautiful-dnd"
+import { Syllogism } from "../../model/Syllogism"
 
 export const Polysyllogism = () => {
     const [inputErrorMessage, setInputErrorMessage] = useState("")
@@ -17,16 +18,49 @@ export const Polysyllogism = () => {
             new Term("Mortel")
         ),
         Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
+            new Quantifier("prop2Quantifier", QuantifierType.A),
             new Term("Socrate"),
             new Term("Homme")
         ),
         Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
+            new Quantifier("prop3Quantifier", QuantifierType.A),
             new Term("Socrate"),
             new Term("Mortel")
         )
     ])
+	const [syllogism, setSyllogism] = useState(new Syllogism())
+
+    // Remplace les valeurs de base du syllogisme par les valeurs de base du composant
+    useEffect(() => {
+        rebuildPolysyllogism();
+    }, []); // [] garantit que l'effet s'exécute une seule fois au chargement
+
+    useEffect(() => {
+        rebuildPolysyllogism();
+    }, [propositions])
+
+    const rebuildPolysyllogism = () => {
+        const newSyllogism = new Syllogism()
+
+        // Supprime les valeurs de base du syllogisme
+        syllogism.getPropositions().forEach(() => {
+            syllogism.removeProposition(0)
+        });
+
+        // Supprime les valeurs de base du newSyllogisme
+        newSyllogism.getPropositions().forEach(() => {
+            newSyllogism.removeProposition(0)
+        });
+
+        newSyllogism.removeProposition(-1)
+
+        // Mettre les valeurs de base du composant dans le syllogisme
+        propositions.forEach(proposition => {
+            newSyllogism.addProposition(proposition)
+        });
+
+        setSyllogism(newSyllogism)
+    }
 
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
@@ -51,12 +85,12 @@ export const Polysyllogism = () => {
                 new Term("Term 2")
             ),
             Proposition.withTerms(
-                new Quantifier("prop1Quantifier", QuantifierType.A),
+                new Quantifier("prop2Quantifier", QuantifierType.A),
                 new Term("Term 3"),
                 new Term("Term 4")
             ),
             Proposition.withTerms(
-                new Quantifier("prop1Quantifier", QuantifierType.A),
+                new Quantifier("prop3Quantifier", QuantifierType.A),
                 new Term("Term 5"),
                 new Term("Term 6")
             )
@@ -83,20 +117,23 @@ export const Polysyllogism = () => {
 
     const addProposition = () => {
         let proposition = Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
+            new Quantifier("propQuantifier", QuantifierType.A),
             new Term("new term 1"),
             new Term("new term 2")
         )
 
         setPropositions([...propositions, proposition])
+
+        syllogism.addProposition(proposition)
     }
 
     const removeProposition = (index: number) => {
         setPropositions(propositions.filter((_, i) => i !== index))
+        syllogism.removeProposition(index)
     }
 
     const reorderPropositions = () => {
-        // reorderProposition(fromIndex: number, toIndex: number) FROM syllogism.ts
+        syllogism.autoReorder()
     }
 
     const validateInputs = () => {
@@ -130,6 +167,8 @@ export const Polysyllogism = () => {
     const checkSyllogism = () => {
         if (!validateInputs()) {
             console.log("check")
+            syllogism.link = verb
+            // TODO - Faire le check du polysyllogism
         }
     }
 
