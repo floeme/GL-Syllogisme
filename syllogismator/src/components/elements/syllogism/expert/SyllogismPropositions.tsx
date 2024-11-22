@@ -59,7 +59,6 @@ function SyllogismPropositions({
 
     const { t } = useTranslation(I18N_NS);
 
-    const [isError, setIsError] = useState(false)
     const [message, setMessage] = useState<string>()
     const [messageKO, setMessageKO] = useState<string[]>([])
     const [messageOK, setMessageOK] = useState<string[]>([])
@@ -154,14 +153,12 @@ function SyllogismPropositions({
             isErrorMessage = true
         }
 
-        setMessageKO(messageKO)
-        setIsError(isErrorMessage)
         return !isErrorMessage
     }
 
     const checkSyllogism = () => {
-        setMessageOK([])
-        setMessageKO([])
+        messageOK.splice(0);
+        messageKO.splice(0)
         setMessage("")
         if (!validateInputs()) {
 
@@ -179,13 +176,12 @@ function SyllogismPropositions({
                 res = res || value.valid
             })
 
-            setMessageOK(messageOK)
-            setMessageKO(messageKO)
-            setIsError(res)
             setMessage(t("syllogism."+res))
 
             console.log("check")
         }
+        setMessageOK(() => messageOK)
+        setMessageKO(() => messageKO)
     }
 
     const clearSyllogism = () => {

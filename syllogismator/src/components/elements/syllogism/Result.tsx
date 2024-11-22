@@ -1,5 +1,6 @@
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../i18n.ts";
+import React from "react";
 
 interface ResultProposition {
     message: string | undefined
@@ -7,42 +8,55 @@ interface ResultProposition {
     messageKO: string[]
 }
 
-function ResultProposition({
-    message, messageKO, messageOK
-}: ResultProposition) {
-
-    const { t } = useTranslation(I18N_NS);
-
+const CheckIcon : React.FC = () => {
     return (
-        <div style={{width:"max-content", backgroundColor:"black"}}>
-        {
-            message && <p style={{color:"white"}}>{message}</p>
-        }
-        {
-            messageKO.length != 0 &&
-            <div style={{width:"auto", color:"red"}}>
+        <img src="images/check_mark.svg" alt="delete"></img>
+    );
+};
 
-                <p>{t("syllogism.summary.ko")}</p>
-                {
-                    messageKO.map((koMessage, i) => (
-                        <p key={i}>{i}: {koMessage}</p>
-                    ))
-                }
+const NoCheckIcon: React.FC = () => {
+    return (
+        <img src="images/close_mark.svg" alt="delete"></img>
+    );
+};
+
+function ResultProposition({
+                               message, messageKO, messageOK
+                           }: ResultProposition) {
+
+    const {t} = useTranslation(I18N_NS);
+    return (
+        (messageKO.length !== 0 || messageOK.length !== 0) && (
+            <div id="result">
+                {message && <p>{message}</p>}
+
+                {messageKO.length !== 0 && (
+                    <div id="msgko">
+                        <p>{t("syllogism.summary.ko")}</p>
+                        <p>{messageKO.length}</p>
+                        {messageKO.map((koMessage, i) => (
+                            <div key={i}>
+                                <NoCheckIcon/> {koMessage}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {messageOK.length !== 0 && (
+                    <div id="msgok">
+                        <p>{t("syllogism.summary.ok")}</p>
+                        <p>{messageOK.length}</p>
+                        {messageOK.map((okMessage, i) => (
+                            <div key={i}>
+                                <CheckIcon/> {okMessage}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
-        }
-        {
-            messageOK.length != 0 &&
-            <div style={{width:"auto", color:"green"}}>
-                <p>{t("syllogism.summary.ok")}</p>
-                {
-                    messageOK.map((okMessage, i) => (
-                        <p key={i}>{i}: {okMessage}</p>
-                    ))
-                }
-            </div>
-        }
-        </div>
-    )
+        )
+    );
+
 }
 
 export default ResultProposition

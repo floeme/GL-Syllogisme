@@ -48,7 +48,6 @@ function SyllogismPropositions({
 }: SyllogismPremisesProps) {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
-    const [isError, setIsError] = useState(false)
     const [message, setMessage] = useState<string>()
     const [messageKO, setMessageKO] = useState<string[]>([])
     const [messageOK, setMessageOK] = useState<string[]>([])
@@ -93,32 +92,20 @@ function SyllogismPropositions({
             isErrorMessage = true
         }
 
-        setIsError(isErrorMessage)
-        setMessageKO(messageKO)
-
         return !isErrorMessage
     }
 
     const checkSyllogism = () => {
-        setMessageKO([])
-        setMessageOK([])
+        messageOK.splice(0);
+        messageKO.splice(0)
         setMessage("")
         if (!validateInputs()) {
+
             syllogism.link = verb
-            console.log("checkSyllogism")
-            // res = syllogism.check()
-
-            // if (res["rmt"]["validation"] == false) {
-            //     // mettre le msg d'erreur res["rmt"]["errorMessage"]
-            // } else {
-
-            // }
-
-        }else {
-
+        }else{
             const resultsCheck: CheckResults = checkRuu ? check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
 
-            let res = false;
+            let res = false
 
             resultsCheck.results.forEach((value, key) => {
                 if (value.valid)
@@ -128,11 +115,12 @@ function SyllogismPropositions({
                 res = res || value.valid
             })
 
-            setMessageOK(messageOK)
-            setMessageKO(messageKO)
-            setIsError(res)
             setMessage(t("syllogism."+res))
+
+            console.log("check")
         }
+        setMessageOK(() => messageOK)
+        setMessageKO(() => messageKO)
     }
 
     const clearSyllogism = () => {
@@ -243,9 +231,9 @@ function SyllogismPropositions({
             subject.value === middle.value ||
             predicate.value === middle.value)
         ) {
+            messageKO.splice(0)
             messageKO.push("Conflit - Les termes doivent être différents")
-            setMessageKO(messageKO)
-            setIsError(true)
+            setMessageKO(() => messageKO)
         }
 
         setPropositions([
