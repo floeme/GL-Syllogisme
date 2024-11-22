@@ -3,7 +3,7 @@ import {Syllogism} from "../../src/model/Syllogism";
 import {Term} from "../../src/model/Term";
 import {Proposition} from "../../src/model/Proposition";
 import {Quantifier} from "../../src/model/Quantifier";
-import {check, CheckResults, Rule, RuleResult} from "../../src/model/Rule";
+import {check, CheckResults} from "../../src/model/Rule";
 
 const updatePropositionType = (proposition : Proposition, quantName : Quantifier, term1 : Term, term2 : Term):Proposition => {
     proposition.quantifier = quantName;
@@ -25,7 +25,7 @@ function testFigure(q1Type : QuantifierType , q2Type : QuantifierType , conclusi
         updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t2);
 
         const result: CheckResults = check(syllogism);
-        expect(result.validWithUniversalConclusion).toBe(expectedResults[0]);
+        expect(result.isInteresting).toBe(expectedResults[0]);
     });
 
     /**
@@ -40,7 +40,7 @@ function testFigure(q1Type : QuantifierType , q2Type : QuantifierType , conclusi
         updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t1);
 
         const result: CheckResults = check(syllogism);
-        expect(result.validWithUniversalConclusion).toBe(expectedResults[1]);
+        expect(result.isInteresting).toBe(expectedResults[1]);
     });
 
     /**
@@ -55,7 +55,7 @@ function testFigure(q1Type : QuantifierType , q2Type : QuantifierType , conclusi
         updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t2);
 
         const result: CheckResults = check(syllogism);
-        expect(result.validWithUniversalConclusion).toBe(expectedResults[2]);
+        expect(result.isInteresting).toBe(expectedResults[2]);
     });
 
     /**
@@ -70,7 +70,7 @@ function testFigure(q1Type : QuantifierType , q2Type : QuantifierType , conclusi
         updatePropositionType(syllogism.getProposition(2), new Quantifier("Q", conclusionType), t3, t1);
 
         const result: CheckResults = check(syllogism);
-        expect(result.validWithUniversalConclusion).toBe(expectedResults[3]);
+        expect(result.isInteresting).toBe(expectedResults[3]);
     });
 }
 
@@ -147,7 +147,7 @@ const casesRUC = [
 ];
 
 describe("test of Ruc Rule for all figures", () => {
-    casesRUC.forEach(({ q1Type, q2Type, conclusionType, expectedResults }, index) => {
+    casesRUC.forEach(({ q1Type, q2Type, conclusionType, expectedResults }) => {
         testFigure(q1Type , q2Type , conclusionType , expectedResults);
     });
 });

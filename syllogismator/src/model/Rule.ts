@@ -99,6 +99,14 @@ export type CheckResults = {
      * Boolean indicating if the syllogism is still valid when replacing a particular conclusion by a universal one.
      */
     validWithUniversalConclusion: boolean;
+    /**
+     * A syllogism is interesting if
+     * * it is valid, and
+     * * the conclusion is particular or the syllogism is invalid when replacing the quantifier of the conclusion by a universal one.
+     *
+     * If a syllogism is uninteresting, we can replace the conclusion by a stronger one, with a universal quantifier.
+     */
+    isInteresting: boolean;
 };
 
 export function buildRuleResult(valid: boolean): RuleResult {
@@ -140,7 +148,10 @@ export function check(
         if (stopOnBrokenRule && !ruleResult) break;
     }
 
-    return {results, valid, validWithUniversalConclusion};
+    const isInteresting = valid
+        && (syllogism.conclusion.quantifier!.type.universal || !validWithUniversalConclusion);
+
+    return {results, valid, validWithUniversalConclusion, isInteresting};
 }
 
 /**
