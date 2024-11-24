@@ -1,127 +1,127 @@
 {
-	"home": {
-		"syllogism": {
-			"check": "Vérifier le Syllogisme"
-		},
-		"socrate": {
-			"head": "Tête de Socrate",
-			"body": "Corps de Socrate"
-		},
-		"discover": "À la découverte des",
-		"discover2": "Syllogismes",
-		"text1": "le syllogisme est un raisonnement logique mettant en relation au moins trois propositions :\ndeux ou plus d'entre elles, appelées « prémisses », conduisent à une « conclusion ».\nAristote a été le premier à le formaliser dans son Organon.\nUn exemple très connu de syllogisme est : « Tous les hommes sont mortels, or Socrate est un homme ; donc Socrate est mortel » :\nLes deux prémisses (dites « majeure » et « mineure ») sont des propositions données et supposées vraies,\nle syllogisme permettant d'établir la validité formelle de la conclusion, qui est nécessairement vraie si les prémisses sont vraies.",
-		"text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
-	},
-	"navigation": {
-		"language": "Langue",
-		"menu": {
-			"home": "Accueil",
-			"syllogism": "Syllogismes",
-			"polysyllogism": "Polysyllogismes",
-			"quantifiers": "Quantificateurs",
-			"syllogism_table": "Table des syllogismes"
-		}
-	},
-	"syllogism": {
-		"quantifier": {
-			"A": "Tout",
-			"E": "Aucun",
-			"I": "Il existe",
-			"O": "Pas certains"
-		},
-		"term_kind": {
-			"major": "terme majeur",
-			"minor": "terme mineur",
-			"middle": "moyen terme",
-			"subject": "sujet",
-			"predicate": "prédicat"
-		},
-		"rule": {
-			"Rmt": {
-				"name": "Règle du moyen-terme",
-				"description": "Le quantificateur (pour le moyen-terme) doit être universel dans une prémisse au moins.",
-				"passed": "Le quantificateur est universel dans une prémisse au moins.",
-				"failed": "Aucune prémisse ne comporte un quantificateur universel, ce qui invalide ce syllogisme."
-			},
-			"Rlh": {
-				"name": "Règle du Latius-Hos",
-				"description": "La quantité d’un terme de la conclusion ne peut être universelle que si elle l’est dans la prémisse contenant ce terme.",
-				"specific_conclusion": "Les deux termes de la conclusion ont une quantité particulière, cette règle ne s'applique donc pas à ce syllogisme.",
-				"passed": "Les deux termes de la conclusion ont une quantité universelle à la fois dans la conclusion et dans leur prémisse respective.",
-				"failed": "Un terme de la conclusion a une quantité universelle dans la conclusion, mais pas dans sa prémisse. Ce syllogisme est donc invalide."
-			},
-			"Rnn": {
-				"name": "Règle des deux prémisses négatives",
-				"description": "Deux prémisses négatives ne conduisent pas à une conclusion.",
-				"passed": "Il y a au moins une prémisse affirmative.",
-				"failed": "Les deux prémisses sont négatives, ce syllogisme est donc invalide."
-			},
-			"Rn": {
-				"name": "Règle de la prémisse négative",
-				"description": "S'il y a une prémisse négative, alors la conclusion est négative.",
-				"passed": "Il y a une prémisse négative et la conclusion est négative.",
-				"failed": "Il y a une prémisse négative mais la conclusion est affirmative, ce syllogisme est donc invalide.",
-				"2_affirmative_premises": "Les deux prémisses sont affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
-			},
-			"Raa": {
-				"name": "Règle des deux prémisses affirmatives",
-				"description": "Deux prémisses affirmatives conduisent à une conclusion affirmative.",
-				"passed": "Les deux prémisses sont affirmatives et la conclusion est affirmative.",
-				"failed": "Les deux prémisses sont affirmatives mais la conclusion est affirmative, ce syllogisme est donc invalide.",
-				"negative_premise": "Il y a une prémisse négative, cette règle ne s'applique donc pas à ce syllogisme."
-			},
-			"Rpp": {
-				"name": "Règle des deux prémisses particulières",
-				"description": "Deux prémisses particulières ne conduisent pas à une conclusion.",
-				"passed": "Il y a au moins une prémisse universelle.",
-				"failed": "Les deux prémisses sont particulières, ce syllogisme est donc invalide."
-			},
-			"Rp": {
-				"name": "Règle de la prémisse particulière",
-				"description": "S'il y a une prémisse particulière, alors la conclusion est particulière.",
-				"passed": "Il y a une prémisse particulière et la conclusion est particulière.",
-				"failed": "Il y a une prémisse particulière mais la conclusion est universelle, ce syllogisme est donc invalide.",
-				"2_universal_premises": "Les deux prémisses sont universelles, cette règle ne s'applique donc pas à ce syllogisme."
-			},
-			"Ruu": {
-				"name": "Règle de l'hypothèse d'existence",
-				"description": "Deux prémisses universelles ne conduisent pas à une conclusion particulière.",
-				"passed": "Les deux prémisses sont universelles et la conclusion est universelle.",
-				"failed": "Les deux prémisses sont universelles mais la conclusion est particulière, ce syllogisme est donc invalide.",
-				"particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
-			}
-		}
-	},
-	"input": {
-		"enter_term": "Saisir le {{kind}}",
-		"check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
-		"check": "Vérifier",
-		"enter_verb": "Saisir un verbe",
-		"select_type_term": "Sélectionner ou saisir un terme",
-		"select_term": "Sélectionner un terme",
-		"type_term": "Saisir un terme",
-		"guided": "Saisie guidée",
-		"expert": "Mode expert"
-	},
-	"polysyllogism": {
-		"errorMessages": {
-			"missingPredicate": "Veuillez renseigner le second terme de la proposition ",
-			"missingVerb": "Veuillez renseigner un verbe dans les propositions",
-			"missingSubject": "Veuillez renseigner le premier terme de la proposition ",
-			"missingQuantifier": "Veuillez renseigner le quantificateur de la proposition "
-		},
-		"buttons": {
-			"add": "Ajouter une proposition",
-			"reorder": "Réorganiser le polysyllogisme",
-			"check": "Vérifier"
-		},
-		"labels": {
-			"existenceHypothesis": "Hypothèse d'existence"
-		},
-		"placeholder": {
-			"firstTerm": "Entrez un premier terme",
-			"verb": "Entrez un verbe",
-			"secondTerm": "Entrez un second terme"
-		}
-	}
+  "home": {
+    "syllogism": {
+      "check": "Vérifier le Syllogisme"
+    },
+    "socrate": {
+      "head": "Tête de Socrate",
+      "body": "Corps de Socrate"
+    },
+    "discover": "À la découverte des",
+    "discover2": "Syllogismes",
+    "text1": "le syllogisme est un raisonnement logique mettant en relation au moins trois propositions :\ndeux ou plus d'entre elles, appelées « prémisses », conduisent à une « conclusion ».\nAristote a été le premier à le formaliser dans son Organon.\nUn exemple très connu de syllogisme est : « Tous les hommes sont mortels, or Socrate est un homme ; donc Socrate est mortel » :\nLes deux prémisses (dites « majeure » et « mineure ») sont des propositions données et supposées vraies,\nle syllogisme permettant d'établir la validité formelle de la conclusion, qui est nécessairement vraie si les prémisses sont vraies.",
+    "text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
+  },
+  "navigation": {
+    "language": "Langue",
+    "menu": {
+      "home": "Accueil",
+      "syllogism": "Syllogismes",
+      "polysyllogism": "Polysyllogismes",
+      "quantifiers": "Quantificateurs",
+      "syllogism_table": "Table des syllogismes"
+    }
+  },
+  "syllogism": {
+    "quantifier": {
+      "A": "Tout",
+      "E": "Aucun",
+      "I": "Il existe",
+      "O": "Pas certains"
+    },
+    "term_kind": {
+      "major": "terme majeur",
+      "minor": "terme mineur",
+      "middle": "moyen terme",
+      "subject": "sujet",
+      "predicate": "prédicat"
+    },
+    "rule": {
+      "Rmt": {
+        "name": "Règle du moyen-terme",
+        "description": "Le quantificateur (pour le moyen-terme) doit être universel dans une prémisse au moins.",
+        "passed": "Le quantificateur est universel dans une prémisse au moins.",
+        "failed": "Aucune prémisse ne comporte un quantificateur universel, ce qui invalide ce syllogisme."
+      },
+      "Rlh": {
+        "name": "Règle du Latius-Hos",
+        "description": "La quantité d’un terme de la conclusion ne peut être universelle que si elle l’est dans la prémisse contenant ce terme.",
+        "specific_conclusion": "Les deux termes de la conclusion ont une quantité particulière, cette règle ne s'applique donc pas à ce syllogisme.",
+        "passed": "Les deux termes de la conclusion ont une quantité universelle à la fois dans la conclusion et dans leur prémisse respective.",
+        "failed": "Un terme de la conclusion a une quantité universelle dans la conclusion, mais pas dans sa prémisse. Ce syllogisme est donc invalide."
+      },
+      "Rnn": {
+        "name": "Règle des deux prémisses négatives",
+        "description": "Deux prémisses négatives ne conduisent pas à une conclusion.",
+        "passed": "Il y a au moins une prémisse affirmative.",
+        "failed": "Les deux prémisses sont négatives, ce syllogisme est donc invalide."
+      },
+      "Rn": {
+        "name": "Règle de la prémisse négative",
+        "description": "S'il y a une prémisse négative, alors la conclusion est négative.",
+        "passed": "Il y a une prémisse négative et la conclusion est négative.",
+        "failed": "Il y a une prémisse négative mais la conclusion est affirmative, ce syllogisme est donc invalide.",
+        "2_affirmative_premises": "Les deux prémisses sont affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
+      },
+      "Raa": {
+        "name": "Règle des deux prémisses affirmatives",
+        "description": "Deux prémisses affirmatives conduisent à une conclusion affirmative.",
+        "passed": "Les deux prémisses sont affirmatives et la conclusion est affirmative.",
+        "failed": "Les deux prémisses sont affirmatives mais la conclusion est affirmative, ce syllogisme est donc invalide.",
+        "negative_premise": "Il y a une prémisse négative, cette règle ne s'applique donc pas à ce syllogisme."
+      },
+      "Rpp": {
+        "name": "Règle des deux prémisses particulières",
+        "description": "Deux prémisses particulières ne conduisent pas à une conclusion.",
+        "passed": "Il y a au moins une prémisse universelle.",
+        "failed": "Les deux prémisses sont particulières, ce syllogisme est donc invalide."
+      },
+      "Rp": {
+        "name": "Règle de la prémisse particulière",
+        "description": "S'il y a une prémisse particulière, alors la conclusion est particulière.",
+        "passed": "Il y a une prémisse particulière et la conclusion est particulière.",
+        "failed": "Il y a une prémisse particulière mais la conclusion est universelle, ce syllogisme est donc invalide.",
+        "2_universal_premises": "Les deux prémisses sont universelles, cette règle ne s'applique donc pas à ce syllogisme."
+      },
+      "Ruu": {
+        "name": "Règle de l'hypothèse d'existence",
+        "description": "Deux prémisses universelles ne conduisent pas à une conclusion particulière.",
+        "passed": "Les deux prémisses sont universelles et la conclusion est universelle.",
+        "failed": "Les deux prémisses sont universelles mais la conclusion est particulière, ce syllogisme est donc invalide.",
+        "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
+      }
+    }
+  },
+  "input": {
+    "enter_term": "Saisir le {{kind}}",
+    "check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
+    "check": "Vérifier",
+    "enter_verb": "Saisir un verbe",
+    "select_type_term": "Sélectionner ou saisir un terme",
+    "select_term": "Sélectionner un terme",
+    "type_term": "Saisir un terme",
+    "guided": "Saisie guidée",
+    "expert": "Mode expert"
+  },
+  "polysyllogism": {
+    "errorMessages": {
+      "missingPredicate": "Veuillez renseigner le second terme de la proposition ",
+      "missingVerb": "Veuillez renseigner un verbe dans les propositions",
+      "missingSubject": "Veuillez renseigner le premier terme de la proposition ",
+      "missingQuantifier": "Veuillez renseigner le quantificateur de la proposition "
+    },
+    "buttons": {
+      "add": "Ajouter une proposition",
+      "reorder": "Réorganiser le polysyllogisme",
+      "check": "Vérifier"
+    },
+    "labels": {
+      "existenceHypothesis": "Hypothèse d'existence"
+    },
+    "placeholder": {
+      "firstTerm": "Entrez un premier terme",
+      "verb": "Entrez un verbe",
+      "secondTerm": "Entrez un second terme"
+    }
+  }
 }
