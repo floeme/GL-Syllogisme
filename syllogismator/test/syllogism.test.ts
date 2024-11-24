@@ -29,18 +29,18 @@ describe('Syllogisme', () => {
 
         expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = updateProposition(syllogism.getProposition(0), "prop1", "Nabil Aiekillu", "test");
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "q1", "A", "B");
 
         expect(syllogism.getPropositions().length).toBe(3);
         expect(syllogism.getPropositions()[0]).toBe(prop);
 
-        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "prop2", "fez", "tezfst");
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "q2", "C", "D");
 
         expect(syllogism.getPropositions().length).toBe(3);
         expect(syllogism.getPropositions()[0]).toBe(prop)
         expect(syllogism.getPropositions()[1]).toBe(prop2);
 
-        const prop3 : Proposition = generateProposition("frzdz", "Nabil fz", "frefzs");
+        const prop3 : Proposition = generateProposition("q3", "E", "F");
         syllogism.addProposition(prop3);
 
         expect(syllogism.getPropositions().length).toBe(4);
@@ -48,7 +48,7 @@ describe('Syllogisme', () => {
         expect(syllogism.getPropositions()[1]).toBe(prop2);
         expect(syllogism.getPropositions()[2]).toBe(prop3);
 
-        const prop4 : Proposition = generateProposition("gede", "Nabil feuzioujhj", "ge");
+        const prop4 : Proposition = generateProposition("q4", "G", "H");
         syllogism.addProposition(prop4);
 
         expect(syllogism.getPropositions().length).toBe(5);
@@ -63,14 +63,14 @@ describe('Syllogisme', () => {
 
         expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = updateProposition(syllogism.getProposition(0), "prop", "Nabil Aiekillu", "test");
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "q1", "A", "B");
 
-        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "prop2", "fez", "tezfst");
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "q2", "C", "D");
 
-        const prop3 : Proposition = generateProposition("prop3", "Nabil fz", "frefzs");
+        const prop3 : Proposition = generateProposition("q3", "E", "F");
         syllogism.addProposition(prop3);
 
-        const prop4 : Proposition = generateProposition("prop4", "Nabil feuzioujhj", "ge");
+        const prop4 : Proposition = generateProposition("q4", "G", "H");
         syllogism.addProposition(prop4);
 
         expect(syllogism.getPropositions().length).toBe(5);
@@ -108,12 +108,12 @@ describe('Syllogisme', () => {
 
         expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = generateProposition("prop1", "Nabil Aiekillu", "test");
+        const prop : Proposition = generateProposition("q1", "A", "B");
         syllogism.addProposition(prop);
 
         expect(syllogism.getPropositionCount()).toBe(4)
 
-        const prop2 : Proposition = generateProposition("prop2", "fez", "tezfst");
+        const prop2 : Proposition = generateProposition("q2", "C", "D");
         syllogism.addProposition(prop2);
 
         expect(syllogism.getPropositionCount()).toBe(5)
@@ -129,11 +129,11 @@ describe('Syllogisme', () => {
 
         expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = updateProposition(syllogism.getProposition(0), "prop1", "Nabil Aiekillu", "test");
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "q1", "A", "B");
 
-        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "prop2", "fez", "tezfst");
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "q2", "C", "D");
 
-        const prop3 : Proposition = generateProposition("prop3", "sq", "getr");
+        const prop3 : Proposition = generateProposition("q3", "E", "F");
         syllogism.addProposition(prop3);
 
         expect(syllogism.getProposition(0)).toBe(prop);
@@ -152,11 +152,11 @@ describe('Syllogisme', () => {
 
         expect(syllogism.getPropositions().length).toBe(3);
 
-        const prop : Proposition = updateProposition(syllogism.getProposition(0), "prop1", "Nabil Aiekillu", "test");
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "q1", "A", "B");
 
-        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "prop2", "fez", "tezfst");
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "q2", "C", "D");
 
-        const prop3 : Proposition = generateProposition("prop3", "sq", "getr");
+        const prop3 : Proposition = generateProposition("q3", "E", "F");
         syllogism.addProposition(prop3);
 
         const propositions : Proposition[] = syllogism.getPropositions();
@@ -174,11 +174,11 @@ describe('Syllogisme', () => {
 
         const syllogism : Syllogism = new Syllogism();
 
-        const prop : Proposition = updateProposition(syllogism.getProposition(0), "prop1", "Nabil Aiekillu", "test");
+        const prop : Proposition = updateProposition(syllogism.getProposition(0), "q1", "A", "B");
 
-        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "prop2", "fez", "tezfst");
+        const prop2 : Proposition = updateProposition(syllogism.getProposition(1), "q2", "C", "D");
 
-        const prop3 : Proposition = generateProposition("prop3", "sq", "getr");
+        const prop3 : Proposition = generateProposition("q3", "E", "F");
         syllogism.addProposition(prop3);
 
         const conc = syllogism.getProposition(3);
