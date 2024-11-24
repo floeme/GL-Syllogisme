@@ -129,8 +129,67 @@ export class Syllogism {
     /**
      * Auto-reorder the premises so that each middle term is present in two consecutive propositions.
      * Does not move the conclusion.
+     * @throws Error if the syllogism has an invalid structure
      */
     autoReorder(): void {
+        if (this.hasValidStructure()) {
+            let minTerm = this.getMajorTerm()!;
+            let maxTerm = this.getMinorTerm()!;
+            let minIndex = 0;
+            let maxIndex = this.premises.length;
+
+            while (minIndex < maxIndex) {
+                minTerm = this.autoReorder_aux(minTerm, minIndex, maxIndex, minIndex);
+                ++minIndex;
+                maxTerm = this.autoReorder_aux(maxTerm, minIndex, maxIndex, maxIndex-1);
+                --maxIndex;
+            }
+        } else {
+            throw new Error("Cannot auto-reorder a syllogism with an invalid structure.");
+        }
+    }
+
+    /**
+     * Finds the premise containing given term in the list of premises, between minIndex and maxIndex (excluded).
+     * Places this premise at given index. Returns the other term of the premise.
+     * *(Auxiliary function for {@link autoReorder})*
+     * @param term Term to look for
+     * @param minIndex Minimum index
+     * @param maxIndex Maximum index (excluded)
+     * @param index Where to place corresponding premise
+     * @private
+     */
+    private autoReorder_aux(term: Term, minIndex: number, maxIndex: number, index: number): Term {
+        // Find premise containing term
+        let otherTerm: Term;
+        let premise: Proposition;
+        let found = false;
+        let i = minIndex;
+        while (!found && i < maxIndex) {
+            premise = this.premises[i];
+            if (premise.subject === term) {
+                otherTerm = premise.predicate!;
+                found = true;
+            } else if (premise.predicate === term) {
+                otherTerm = premise.subject!;
+                found = true;
+            } else ++i;
+        }
+
+        // Move the premise to index
+        if (i !== index) this.reorderProposition(i, index);
+
+        return otherTerm!; // we assume the syllogism has valid structure, so otherTerm has been assigned
+    }
+
+    /**
+     * **Applies only for a simple syllogism (2 premises and a conclusion)**
+     *
+     * Auto-reorder the premises in order to match the structure defined in one of the four [figure types]{@link Figure}.
+     * Does not move the conclusion.
+     * @throws Error if the syllogism has an invalid structure or has more than 3 propositions
+     */
+    autoReorderSimpleSyllogism(): void {
         if (this.hasValidStructure()) {
             if (this.getPropositionCount() === 3) {
                 // If S is in the first premise, swap premises
@@ -138,7 +197,7 @@ export class Syllogism {
                     this.reorderProposition(0, 1);
                 }
             } else {
-                console.error("autoReorder - Not implemented for polysyllogisms.");
+                throw new Error("Not implemented for polysyllogisms.");
             }
         } else {
             throw new Error("Cannot auto-reorder a syllogism with an invalid structure.");
@@ -230,7 +289,7 @@ export class Syllogism {
     }
 
     /**
-     * **Applies only for simple syllogisms**
+     * **Applies only for a simple syllogism (2 premises and a conclusion)**
      *
      * Detects the figure type (according to positions of the terms in the propositions) and returns it.
      * If called on a polysyllogism, or in case of invalid structure, returns `null`.
