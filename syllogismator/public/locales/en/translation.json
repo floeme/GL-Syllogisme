@@ -105,10 +105,10 @@
   },
   "polysyllogism": {
     "errorMessages": {
-      "missingPredicate": "Please provide the second term for proposition ",
-      "missingVerb": "Please provide a verb in the propositions",
-      "missingSubject": "Please provide the first term for proposition ",
-      "missingQuantifier": "Please provide the quantifier for proposition "
+      "missingPredicate": "Please provide the second term for proposition {index}.",
+      "missingVerb": "Please provide a verb in the propositions.",
+      "missingSubject": "Please provide the first term for proposition {index}.",
+      "missingQuantifier": "Please provide the quantifier for proposition {index}."
     },
     "buttons": {
       "add": "Add a proposition",
@@ -123,5 +123,18 @@
       "verb": "Enter a verb",
       "secondTerm": "Enter a second term"
     }
+  },
+  "quantifier_aliases": {
+    "title": "Quantifier Aliases",
+    "input": "Input a quantifier alias",
+    "add": "Add",
+    "remove": "Remove",
+    "reset": "Reset to defaults"
+  },
+  "toolbar": {
+    "clear_syllogism": "Clear syllogism",
+    "clear_polysyllogism": "Clear polysyllogism",
+    "help": "Help",
+    "settings": "Manage quantifier aliases"
   }
 }
