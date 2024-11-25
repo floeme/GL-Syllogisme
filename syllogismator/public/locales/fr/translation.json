@@ -46,9 +46,9 @@
       "Rlh": {
         "name": "Règle du Latius-Hos",
         "description": "La quantité d’un terme de la conclusion ne peut être universelle que si elle l’est dans la prémisse contenant ce terme.",
-        "specific_conclusion": "La conclusion a un quantificateur spécifique, cette règle ne s'applique donc pas à ce syllogisme.",
-        "passed": "La conclusion est universelle et au moins un terme de celle-ci apparaît dans une prémisse universelle.",
-        "failed": "La conclusion est universelle mais aucun de ses termes n'apparaît dans une prémisse universelle. Ce syllogisme est donc invalide."
+        "specific_conclusion": "Les deux termes de la conclusion ont une quantité particulière, cette règle ne s'applique donc pas à ce syllogisme.",
+        "passed": "Les deux termes de la conclusion ont une quantité universelle à la fois dans la conclusion et dans leur prémisse respective.",
+        "failed": "Un terme de la conclusion a une quantité universelle dans la conclusion, mais pas dans sa prémisse. Ce syllogisme est donc invalide."
       },
       "Rnn": {
         "name": "Règle des deux prémisses négatives",
