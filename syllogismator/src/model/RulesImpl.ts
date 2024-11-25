@@ -1,9 +1,10 @@
 import {buildRuleResult, Rule} from "./Rule.ts";
 import {Term} from "./Term.ts";
-import {isUniversal} from "./QuantifierType.ts";
+import {isUniversal, QuantifierType} from "./QuantifierType.ts";
 import {Syllogism} from "./Syllogism.ts";
 
 // Rules on quantity
+// ⚠️ Quantity of a term ≠ quantifier of its proposition. See isUniversal in QuantifierType.ts.
 
 /**
  * ## Middle-term rule (Rmt)
@@ -56,51 +57,99 @@ export const Rmt: Rule = {
 
 /**
  * ## *Latius-Hos* Rule (Rlh)
- * The quantifier of the conclusion can be universal only if a term of the conclusion has universal quantity.
+ * A term of the conclusion can have universal quantity only if it has universal quantity in its premise.
  */
 export const Rlh: Rule = {
     id: "Rlh",
     check: (s) => {
-        // If the quantifier of the conclusion is universal…
-        if (s.conclusion.quantifier!.type.universal) {
-            return buildRuleResult(rlh_aux(s));
+        const conclusionQuantifier = s.conclusion.quantifier!.type;
+
+        const minor = s.getMinorTerm()!;
+        const isMinorUniversal = isUniversal(conclusionQuantifier, true);  // quantity of the minor term in the conclusion
+        const major = s.getMajorTerm()!;
+        const isMajorUniversal = isUniversal(conclusionQuantifier, false); // quantity of the major term in the conclusion
+
+        // If a term of the conclusion has universal quantity…
+        if (isMinorUniversal || isMajorUniversal) {
+            if (isMinorUniversal && !rlh_checkTerm(s, minor)) {
+                // The minor term has universal quantity in the conclusion but not in its premise
+                const result = buildRuleResult(false);
+                result.extras = minor;
+                return result;
+            }
+            if (isMajorUniversal && !rlh_checkTerm(s, major)) {
+                // The major term has universal quantity in the conclusion but not in its premise
+                const result = buildRuleResult(false);
+                result.extras = major;
+                return result;
+            }
+
+            // At this point, both terms of the conclusion have universal quantity in the conclusion and their
+            // respective premise. Thus, the syllogism is valid.
+            const result = buildRuleResult(true);
+            result.validWithUniversalConclusion = rlh_universalConclusion(s);
+            return result;
         } else {
+            // Both terms of the conclusion have particular quantity
             return {
                 valid: true,
-                validWithUniversalConclusion: rlh_aux(s),
+                validWithUniversalConclusion: rlh_universalConclusion(s),
                 message: "specific_conclusion"
             };
         }
     }
 }
 
-function rlh_aux(s: Syllogism): boolean {
-    const major = s.getMajorTerm()!;
-    const minor = s.getMinorTerm()!;
-
-    // True when the first occurrence of term is found
-    let foundConclusionTerm = false;
-
-    let valid = false;
-
-    // Check that either the major or the minor term are universally quantified in their respective premises
+/**
+ * Check that `t` has universal quantity in its premise.
+ * *(Auxiliary function for {@link Rlh})*
+ * @param s Syllogism to check
+ * @param t Term to check
+ * @return true if `t` has universal quantity in its premise, false otherwise.
+ */
+function rlh_checkTerm(s: Syllogism, t: Term): boolean {
+    // Check that t has universal quantity
     for (const premise of s.premises) {
         for (const {term, isSubject} of
             [{term: premise.subject!, isSubject: true}, {term: premise.predicate!, isSubject: false}]
         ) {
-            if (term === major || term === minor) {
-                valid = isUniversal(premise.quantifier!.type, isSubject);
-                if (valid || foundConclusionTerm) {
-                    return valid;
-                } else {
-                    foundConclusionTerm = true;
-                }
+            if (term === t) {
+                return isUniversal(premise.quantifier!.type, isSubject);
             }
         }
     }
 
-    return false;
+    return false; // This shouldn't be reached
 }
+
+/**
+ * Test if the {@link Rlh} rule passes with a universal conclusion.
+ * *(Auxiliary function for {@link Rlh})*
+ * @param s Syllogism to test
+ */
+function rlh_universalConclusion(s: Syllogism): boolean {
+    const conclusionQuantifier = s.conclusion.quantifier!.type;
+    const minor = s.getMinorTerm()!;
+    const major = s.getMajorTerm()!;
+
+    if (!s.conclusion.quantifier!.type.universal) {
+        const conclusionQuantifier_bis = conclusionQuantifier.affirmative ?
+            QuantifierType.A : QuantifierType.E;
+        const isMinorUniversal_bis = isUniversal(conclusionQuantifier_bis, true);
+        const isMajorUniversal_bis = isUniversal(conclusionQuantifier_bis, false);
+
+        let validWithUniversalConclusion = !(isMinorUniversal_bis || isMajorUniversal_bis);
+            // ↪ True if both terms of the conclusion have particular quantity
+        validWithUniversalConclusion ||= !(isMinorUniversal_bis && !rlh_checkTerm(s, minor))
+            && !(isMajorUniversal_bis && !rlh_checkTerm(s, major));
+            // ↪ True if the rule passed with a universal conclusion
+
+        return validWithUniversalConclusion;
+    } else {
+        return true;
+    }
+}
+
 
 
 // Rules on proposition quality
@@ -119,6 +168,7 @@ export const Rnn: Rule = {
         } else throw Error("Not implemented."); // TODO
     }
 }
+
 
 /**
  * ## 1 Negative Premise Rule (Rn)
@@ -140,6 +190,7 @@ export const Rn: Rule = {
     }
 }
 
+
 /**
  * ## 2 Affirmative Premises Rule (Raa)
  * Two affirmative premises lead to an affirmative conclusion.
@@ -160,6 +211,7 @@ export const Raa: Rule = {
     }
 }
 
+
 /**
  * ## 2 Particular Premises Rule (Rpp)
  * Two particular premises do not lead to a conclusion.
@@ -175,6 +227,7 @@ export const Rpp: Rule = {
     }
 }
 
+
 /**
  * ## 1 Particular Premise Rule (Rp)
  * If one premise is particular, the conclusion is particular.
@@ -184,11 +237,12 @@ export const Rp: Rule = {
     check: (s) => {
         if (s.getPropositionCount() === 3) {
             if (!s.getProposition(0).quantifier!.type.universal || !s.getProposition(1).quantifier!.type.universal) {
-                return buildRuleResult(!s.conclusion.quantifier!.type.universal);
+                const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
+                result.validWithUniversalConclusion = false;
+                return result;
             } else {
                 return {
                     valid: true,
-                    validWithUniversalConclusion: false,
                     message: "2_universal_premises"
                 };
             }
@@ -196,8 +250,14 @@ export const Rp: Rule = {
     }
 }
 
+
+
 // Existence hypothesis
 
+/**
+ * ## Existence hypothesis Rule (Ruu)
+ * Two universal premises do not lead to a particular conclusion.
+ */
 /**
  * ## Existence hypothesis Rule (Ruu)
  * Two universal premises do not lead to a particular conclusion.
