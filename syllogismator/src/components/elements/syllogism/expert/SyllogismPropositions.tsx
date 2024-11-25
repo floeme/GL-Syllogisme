@@ -7,7 +7,7 @@ import { Quantifier } from "../../../../model/Quantifier"
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
-import PolyModal from "../../modals/PolyModal.tsx"
+import {ToolbarButtons} from "../Toolbar.tsx";
 
 interface SyllogismPremisesProps {
     MP1FirstTerm: string
@@ -288,10 +288,7 @@ function SyllogismPropositions({
     return (
         <div className="section-premises">
             <div className="button-row">
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}><img src="images/delete_icon.svg" alt="delete"></img></button>
-                <button type="button" name="helpButton" onClick={help}><img src="images/help_icon.svg" alt="help"></img></button>
-                <PolyModal isOpen={modalIsOpen} onRequestClose={closeModal} path="/docs/fr/Expert_Guide.pdf" />
-                <button type="button" name="settingsButton" onClick={goSettings}><img src="images/settings_icon.svg" alt="settings"></img></button>
+            <ToolbarButtons clearSyllogism={clearSyllogism} />
                 <div className="switch-comp">
                     <label className="name1">{t("input.guided")}</label>
                     <label className="switch">

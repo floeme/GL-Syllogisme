@@ -1,14 +1,18 @@
 import { useContext } from 'react'
 import QuantifierContext from '../../contexts/QuantifierContext'
 import QuantifierAliasSection from "../elements/quantifier/QuantifierAliasSection"
+import {useTranslation} from "react-i18next";
+import {I18N_NS} from "../../i18n.ts";
 
 const QuantifiersAliases = () => {
     const { resetQuantifiers } = useContext(QuantifierContext)
 
+    const { t } = useTranslation(I18N_NS, {keyPrefix: "quantifier_aliases"});
+
     return (
         <div className="quantifiers-aliases">
             <div className="alias-title">
-                <h2>Quantifiers Aliases</h2>
+                <h2>{t("title")}</h2>
             </div>
 
             <div className="alias-sections">
@@ -19,7 +23,7 @@ const QuantifiersAliases = () => {
             </div>
 
             <button onClick={resetQuantifiers} className="reset-button">
-                Reset to defaults
+                {t("reset")}
             </button>
         </div>
     )

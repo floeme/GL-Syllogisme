@@ -1,11 +1,11 @@
-import {Proposition} from "../src/model/Proposition.ts";
-import {Quantifier} from "../src/model/Quantifier.ts";
-import {QuantifierType} from "../src/model/QuantifierType.ts";
-import {Term} from "../src/model/Term.ts";
+import {Proposition} from "../src/model/Proposition";
+import {Quantifier} from "../src/model/Quantifier";
+import {QuantifierType} from "../src/model/QuantifierType";
+import {Term} from "../src/model/Term";
 
 describe("Proposition", () => {
     it("WithTerms", async () => {
-        const quantifier : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const quantifier : Quantifier = new Quantifier("quantifier", QuantifierType.A);
         const term1 : Term = new Term("term1");
         const term2 : Term = new Term("term2");
 
@@ -24,7 +24,7 @@ describe("Proposition", () => {
     })
 
     it("hasValidStructure", async () => {
-        const quantifier : Quantifier = new Quantifier("ILU", QuantifierType.A);
+        const quantifier : Quantifier = new Quantifier("quantifier", QuantifierType.A);
         const term1 : Term = new Term("term1");
         const term2 : Term = new Term("term2");
 

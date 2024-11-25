@@ -13,7 +13,8 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
     const [newAlias, setNewAlias] = useState('')
     const { quantifiers, addQuantifier, removeQuantifier } = useContext(QuantifierContext)
 
-    const { t } = useTranslation(I18N_NS, { keyPrefix: DEFAULT_QUANTIFIERS_I18N_NAMESPACE });
+    const { t: tq } = useTranslation(I18N_NS, { keyPrefix: DEFAULT_QUANTIFIERS_I18N_NAMESPACE });
+    const { t: ta } = useTranslation(I18N_NS, { keyPrefix: "quantifier_aliases" });
 
     const aliases = quantifiers.filter(q => q.type === QuantifierType.of(type)).map(q => q.name)
 
@@ -36,7 +37,7 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
     return (
         <div className="quantifier-alias-section">
             <div className="quantifier-alias-section-title">
-                <h3>{type} – {t(type)}</h3>
+                <h3>{type} – {tq(type)}</h3>
             </div>
 
             <div className="list-alias">
@@ -45,9 +46,12 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
                         const isDefault = isDefaultQuantifierName(alias);
                         return (
                             <li key={index} className="list-alias-ul-li">
-                                <input type="text" value={isDefault ? t(alias) : alias} readOnly/>
+                                <input type="text" value={isDefault ? tq(alias) : alias} readOnly/>
                                 {!isDefault && (
-                                    <button onClick={() => handleRemove(alias)}>🗑️</button>
+                                    <button onClick={() => handleRemove(alias)}
+                                            title={ta("remove")}>
+                                        🗑️
+                                    </button>
                                 )}
                             </li>
                         );
@@ -60,10 +64,10 @@ const QuantifierAliasSection = ({ type }: QuantifierAliasSectionProps) => {
                     type="text"
                     value={newAlias}
                     onChange={(e) => setNewAlias(e.target.value)}
-                    placeholder="Add a quantifier alias"
+                    placeholder={ta("input")}
                     className="add-alias-input"
                 />
-                <button onClick={handleAdd} className="add-alias-button">Add</button>
+                <button onClick={handleAdd} className="add-alias-button">{ta("add")}</button>
             </div>
         </div>
     )
