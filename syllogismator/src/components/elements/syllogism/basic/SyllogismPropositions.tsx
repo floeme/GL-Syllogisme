@@ -1,7 +1,7 @@
 import {Fragment, useCallback, useEffect, useState} from "react"
 import SyllogismMP from "./SyllogismMP"
 import { Syllogism } from "../../../../model/Syllogism"
-import {getAllRules, check, CheckResults} from "../../../../model/Rule.ts"
+import {getAllRules, check, CheckResults, RULE_I18N_NAMESPACE} from "../../../../model/Rule.ts"
 import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
@@ -100,22 +100,20 @@ function SyllogismPropositions({
         messageKO.splice(0)
         setMessage("")
         if (!validateInputs()) {
-
             syllogism.link = verb
-        }else{
-            const resultsCheck: CheckResults = checkRuu ? check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
+        } else {
+            const results: CheckResults = checkRuu ?
+                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
 
-            let res = false
-
-            resultsCheck.results.forEach((value, key) => {
-                if (value.valid)
-                    messageOK.push(t('syllogism.rule.' + key + '.passed'))
+            results.results.forEach((result, ruleId) => {
+                const message = ruleId + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleId}.${result.message}`);
+                if (result.valid)
+                    messageOK.push(message);
                 else
-                    messageKO.push(t('syllogism.rule.' + key + '.failed'))
-                res = res || value.valid
+                    messageKO.push(message);
             })
 
-            setMessage(t("syllogism."+res))
+            setMessage(t(`syllogism.${results.valid}`))
 
             console.log("check")
         }
