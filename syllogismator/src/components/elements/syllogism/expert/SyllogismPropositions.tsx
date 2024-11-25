@@ -56,8 +56,6 @@ function SyllogismPropositions({
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
 
-    const [modalIsOpen, setModalIsOpen] = useState(false)
-
     const { t } = useTranslation(I18N_NS);
 
     const handleTermConflict = (term1: string, term2: string) => {
@@ -203,20 +201,6 @@ function SyllogismPropositions({
         console.log("clear")
     }
 
-    const closeModal = () => {
-        setModalIsOpen(false)
-    }
-
-    const help = () => {
-        setModalIsOpen(true)
-        console.log("help")
-    }
-
-    const goSettings = () => {
-        console.log("goSettings")
-    }
-
-
     const [propositions, setPropositions] = useState([
         <SyllogismMP1
             MP1FirstTerm={MP1FirstTerm}
@@ -288,7 +272,7 @@ function SyllogismPropositions({
     return (
         <div className="section-premises">
             <div className="button-row">
-            <ToolbarButtons clearSyllogism={clearSyllogism} />
+            <ToolbarButtons clearSyllogism={clearSyllogism} path="/docs/fr/Expert_Guide.pdf" />
                 <div className="switch-comp">
                     <label className="name1">{t("input.guided")}</label>
                     <label className="switch">

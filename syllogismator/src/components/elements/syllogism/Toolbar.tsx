@@ -1,17 +1,28 @@
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../i18n.ts";
-import React from "react";
+import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import {ROUTES} from "../../../constants/routes.ts";
+import PolyModal from "../modals/PolyModal.tsx";
 
 interface ToolbarButtonsProps {
     clearSyllogism?: React.MouseEventHandler<HTMLButtonElement> | undefined,
-    help?: React.MouseEventHandler<HTMLButtonElement> | undefined,
+    path: string,
 }
 
-export function ToolbarButtons({clearSyllogism, help}: ToolbarButtonsProps) {
+export function ToolbarButtons({clearSyllogism, path}: ToolbarButtonsProps) {
     const navigate = useNavigate();
     const { t } = useTranslation(I18N_NS, {keyPrefix: "toolbar"});
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+
+    const closeModal = () => {
+        setModalIsOpen(false)
+    }
+
+    const help = () => {
+        setModalIsOpen(true)
+        console.log("help")
+    }
 
     return <>
         <button type="button"
@@ -26,6 +37,7 @@ export function ToolbarButtons({clearSyllogism, help}: ToolbarButtonsProps) {
                 onClick={help}>
             <img src="images/help_icon.svg" alt={t("help")}/>
         </button>
+        <PolyModal isOpen={modalIsOpen} onRequestClose={closeModal} path={path} />
         <button type="button"
                 name="settingsButton"
                 title={t("settings")}
