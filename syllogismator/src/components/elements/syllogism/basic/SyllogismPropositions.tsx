@@ -58,6 +58,10 @@ function SyllogismPropositions({
     const validateInputs = () => {
         let isErrorMessage = false
 
+        if (middle.value === predicate.value || middle.value === subject.value || predicate.value === subject.value) {
+            isErrorMessage = true
+        }
+
         if (!prop3Quantifier) {
             messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
