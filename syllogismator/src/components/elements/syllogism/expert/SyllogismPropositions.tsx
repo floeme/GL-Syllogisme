@@ -1,23 +1,20 @@
-import { Fragment, useEffect, useState } from "react"
+import {Fragment, useEffect, useState} from "react"
 import SyllogismMP1 from "./SyllogismMP1"
 import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
-import { Term } from "../../../../model/Term"
-import { Quantifier } from "../../../../model/Quantifier"
+import {Term} from "../../../../model/Term"
+import {Quantifier} from "../../../../model/Quantifier"
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {ToolbarButtons} from "../Toolbar.tsx";
+import {Syllogism} from "../../../../model/Syllogism.ts";
+import {check, CheckResults, getAllRules, RULE_I18N_NAMESPACE} from "../../../../model/Rule.ts";
+import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
+import {Figure} from "../../../../model/Figure.ts";
+import ResultProposition from "../Result.tsx";
 
 interface SyllogismPremisesProps {
-    MP1FirstTerm: string
-    setMP1FirstTerm: (value: string) => void
-    MP1SecondTerm: string
-    setMP1SecondTerm: (value: string) => void
-    MP2FirstTerm: string
-    setMP2FirstTerm: (value: string) => void
-    MP2SecondTerm: string
-    setMP2SecondTerm: (value: string) => void
     subject: Term
     setSubject: (value: Term) => void
     predicate: Term
@@ -34,13 +31,12 @@ interface SyllogismPremisesProps {
 	setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
+    syllogism: Syllogism
+    figure: Figure
+    setFigure: (value: Figure) => void
 }
 
 function SyllogismPropositions({
-    MP1FirstTerm, setMP1FirstTerm,
-    MP1SecondTerm, setMP1SecondTerm,
-    MP2FirstTerm, setMP2FirstTerm,
-    MP2SecondTerm, setMP2SecondTerm,
     subject, setSubject,
     predicate, setPredicate,
     middle, setMiddle,
@@ -48,15 +44,25 @@ function SyllogismPropositions({
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
-	verb, setVerb
+	verb, setVerb,
+    syllogism,
+    figure, setFigure
 }: SyllogismPremisesProps) {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
-    const [inputErrorMessage, setInputErrorMessage] = useState("")
     const [errorMessage1, setErrorMessage1] = useState("")
     const [errorMessage2, setErrorMessage2] = useState("")
 
+    const [MP1FirstTerm, setMP1FirstTerm] = useState("")
+    const [MP1SecondTerm, setMP1SecondTerm] = useState("")
+    const [MP2FirstTerm, setMP2FirstTerm] = useState("")
+    const [MP2SecondTerm, setMP2SecondTerm] = useState("")
+
     const { t } = useTranslation(I18N_NS);
+
+    const [message, setMessage] = useState<string>()
+    const [messageKO, setMessageKO] = useState<string[]>([])
+    const [messageOK, setMessageOK] = useState<string[]>([])
 
     const handleTermConflict = (term1: string, term2: string) => {
         if (term1 === term2 && term1 !== "" && term2 !== "") {
@@ -79,108 +85,100 @@ function SyllogismPropositions({
             setErrorMessage2("")
         }
 
+        const update = (subjectS : string, middleS : string, predicateS : string, figureS : Figure) => {
+            if(subjectS !== subject.value){
+                setSubject({...subject, value: subjectS})
+            }
+            if(middleS !== middle.value){
+                setMiddle({...middle, value: middleS})
+            }
+            if(predicateS !== predicate.value){
+                setPredicate({...predicate, value: predicateS})
+            }
+            if(figureS !== figure){
+                setFigure(figureS)
+            }
+        }
+
         // Figure 3
         if (MP1FirstTerm === MP2FirstTerm) {
-            subject.value = MP2SecondTerm
-            setSubject({...subject})
-            middle.value = MP1FirstTerm
-            setMiddle({...middle})
-            predicate.value = MP1SecondTerm
-            setPredicate({...predicate})
+            update(MP2SecondTerm, MP1FirstTerm, MP1SecondTerm, Figure.Figure3)
+        }else if (MP1FirstTerm === MP2SecondTerm) {
+            // Figure 1
+            update(MP2FirstTerm, MP1FirstTerm, MP1SecondTerm, Figure.Figure1)
+        }else if (MP1SecondTerm === MP2FirstTerm) {
+            // Figure 4
+            update(MP2SecondTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure4)
+        }else if (MP1SecondTerm === MP2SecondTerm) {
+            // Figure 2
+            update(MP2FirstTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure2)
         }
 
-        // Figure 1
-        if (MP1FirstTerm === MP2SecondTerm) {
-            subject.value = MP2FirstTerm
-            setSubject({...subject})
-            middle.value = MP1FirstTerm
-            setMiddle({...middle})
-            predicate.value = MP1SecondTerm
-            setPredicate({...predicate})
-        }
-
-        // Figure 4
-        if (MP1SecondTerm === MP2FirstTerm) {
-            subject.value = MP2SecondTerm
-            setSubject({...subject})
-            middle.value = MP1SecondTerm
-            setMiddle({...middle})
-            predicate.value = MP1FirstTerm
-            setPredicate({...predicate})
-        }
-
-        // Figure 2
-        if (MP1SecondTerm === MP2SecondTerm) {
-            subject.value = MP2FirstTerm
-            setSubject({...subject})
-            middle.value = MP1SecondTerm
-            setMiddle({...middle})
-            predicate.value = MP1FirstTerm
-            setPredicate({...predicate})
-        }
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm])
+    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, figure, middle, predicate, setFigure, setMiddle, setPredicate, setSubject, subject])
 
     const validateInputs = () => {
         let isErrorMessage = false
 
         if (!MP2SecondTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le quatrième champ")
+            messageKO.push("Veuillez renseigner un terme dans le quatrième champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!MP2FirstTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le troisième champ")
+            messageKO.push("Veuillez renseigner un terme dans le troisième champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!MP1SecondTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le deuxième champ")
+            messageKO.push("Veuillez renseigner un terme dans le deuxième champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!MP1FirstTerm) {
-            setInputErrorMessage("Veuillez renseigner un terme dans le premier champ")
+            messageKO.push("Veuillez renseigner un terme dans le premier champ")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop3Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop2Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop1Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la première proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
-        return isErrorMessage
+        return !isErrorMessage
     }
 
     const checkSyllogism = () => {
+        messageOK.splice(0);
+        messageKO.splice(0)
+        setMessage("")
         if (!validateInputs()) {
+            syllogism.link = verb
+        } else {
+            const results: CheckResults = checkRuu ?
+                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
 
+            results.results.forEach((result, ruleId) => {
+                const message = ruleId + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleId}.${result.message}`);
+                if (result.valid)
+                    messageOK.push(message);
+                else
+                    messageKO.push(message);
+            })
+
+            setMessage(t(`syllogism.${results.valid}`))
         }
-
-        console.log("check")
+        setMessageOK(() => messageOK)
+        setMessageKO(() => messageKO)
     }
 
     const clearSyllogism = () => {
@@ -267,7 +265,7 @@ function SyllogismPropositions({
 				setVerb={setVerb}
             />
         ])
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, subject, predicate, middle, verb])
+    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, predicate.value, prop1Quantifier, prop2Quantifier, prop3Quantifier, setMP1FirstTerm, setMP1SecondTerm, setMP2FirstTerm, setMP2SecondTerm, setProp1Quantifier, setProp2Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
 
     return (
         <div className="section-premises">
@@ -305,9 +303,9 @@ function SyllogismPropositions({
 
                 <div className="hypothesis">
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
-                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
+                <ResultProposition message={message} messageOK={messageOK} messageKO={messageKO}></ResultProposition>
             </div>
         </div>
     )

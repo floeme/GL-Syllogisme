@@ -36,7 +36,7 @@ export const QuantifierProvider: React.FC<{ children: ReactNode }> = ({ children
 
     const addQuantifier = (quantifier: Quantifier) => {
         QuantifierRepository.add(quantifier)
-        setQuantifiers(prev => [...prev, quantifier])
+        setQuantifiers(QuantifierRepository.getAll())
     }
 
     const removeQuantifier = (quantifier: Quantifier) => {

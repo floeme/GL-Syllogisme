@@ -5,21 +5,35 @@ import { Term } from "../../model/Term.ts"
 import Basic_Syllogism from "../elements/syllogism/Basic_Syllogism.tsx"
 import Expert_Syllogism from "../elements/syllogism/Expert_Syllogism.tsx"
 import { useState } from "react"
+import {Syllogism} from "../../model/Syllogism.ts";
 
-export const Syllogism = () => {
+export const SyllogismPage = () => {
 	const [subject, setSubject] = useState(new Term("Socrate"))
 	const [predicate, setPredicate] = useState(new Term("Mortel"))
 	const [middle, setMiddle] = useState(new Term("Homme"))
-	const [figure, setFigure] = useState(Figure.Figure1)
+	const [figure, setFigureFinale] = useState(Figure.Figure1)
 	const [prop1Quantifier, setProp1Quantifier] = useState(new Quantifier("prop1Quantifier", QuantifierType.A))
 	const [prop2Quantifier, setProp2Quantifier] = useState(new Quantifier("prop2Quantifier", QuantifierType.A))
 	const [prop3Quantifier, setProp3Quantifier] = useState(new Quantifier("prop3Quantifier", QuantifierType.A))
 	const [verb, setVerb] = useState("are")
 	const [expertMode, setExpertMode] = useState(false)
+	const [syllogism, setSyllogism] = useState(Syllogism.ofFigure(figure, subject, predicate, middle))
+
+	syllogism.getProposition(0).quantifier = prop1Quantifier
+	syllogism.getProposition(1).quantifier = prop2Quantifier
+	syllogism.getProposition(2).quantifier = prop3Quantifier
+
+	const setFigure = (figure: Figure): void => {
+		setFigureFinale(figure)
+		setSyllogism(Syllogism.ofFigure(figure, subject, predicate, middle))
+		syllogism.getProposition(0).quantifier = prop1Quantifier
+		syllogism.getProposition(1).quantifier = prop2Quantifier
+		syllogism.getProposition(2).quantifier = prop3Quantifier
+	}
 
 	return (
 		<>
-			{expertMode == false ?
+			{!expertMode ?
 				<div className="syllogism-container-easy">
 					<Basic_Syllogism
 						subject={subject}
@@ -40,6 +54,7 @@ export const Syllogism = () => {
 						setProp3Quantifier={setProp3Quantifier}
 						verb={verb}
 						setVerb={setVerb}
+						syllogism={syllogism}
 					/>
 				</div>
 				:
@@ -61,6 +76,9 @@ export const Syllogism = () => {
 						setProp3Quantifier={setProp3Quantifier}
 						verb={verb}
 						setVerb={setVerb}
+						syllogism={syllogism}
+						figure={figure}
+						setFigure={setFigure}
 					/>
 				</div>
 			}
@@ -68,4 +86,4 @@ export const Syllogism = () => {
   	)
 }
 
-export default Syllogism
+export default SyllogismPage

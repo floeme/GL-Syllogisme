@@ -90,6 +90,12 @@
         "failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
         "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism."
       }
+    },
+    "true": "Syllogism is Right",
+    "false": "Syllogism is Wrong",
+    "summary": {
+      "ok": "Right Rules",
+      "ko": "Failed Rules"
     }
   },
   "input": {
