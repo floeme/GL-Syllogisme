@@ -11,33 +11,46 @@
   font-family: Arial, sans-serif;
   height: 100%;
   font-family: $font-1;
+  color: rgba( 255 255 255 / 70%);
 
 
   .section-terms-figures {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    padding: 20px;
+    padding: 15%;
     width: 100%;
     height: 100%;
 
     background-color: transparent;
-    border-radius: 20px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15%;
 
     .section-terms-input {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
 
-      border-radius: 10px;
       padding: 20px;
       background-color: $color-font-violet;
       text-align: center;
       font-size: 1.2rem;
+
+      border-radius: 16px;
+      border: 1px solid rgb(255 255 255 / 70%);
+
+
+
+      label {
+        align-self: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      input{
+        width: 100%;
+      }
     }
 
     .section-figures{
@@ -45,33 +58,38 @@
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
 
-      //border: 2px solid #2B7A78;
       border-radius: 10px;
       padding: 20px;
       background-color: $color-font-violet;
       text-align: center;
-      //font-weight: bold;
       font-size: 1.2rem;
+
+      border: 1px solid rgb(255 255 255 / 70%);
+
 
       .figure {
         display: flex;
         flex-direction: column;
+        gap: 8px;
         align-items: center;
         position: relative;
 
+        border-radius: 16px;
+        border: 1px solid rgb(255 255 255 / 10%);
+        padding: 1px 2px 1px;
+
         label {
-          margin-bottom: 10px;
+          padding: 0;
+          margin: 0;
         }
 
         img {
-          width: 100px;
+          width: 100%;
           height: auto;
         }
 
        input[type="radio"] {
-         position: absolute;
-         right: 0px;
-         transform: translateY(-100%);
+         position: relative;
         }
       }
     }
@@ -104,13 +122,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
-    
-      background-color: $color-font-violet;
-      border-radius: 20px;
+      background-color: $color-font-violet2;
       margin-top: 1%;
       margin-bottom: 1%;
       width: auto;
+      border-radius: 16px;
+      border: 1px solid rgb(255 255 255 / 70%);
+      color: black;
 
       button {
         padding: 10px;
@@ -119,14 +137,12 @@
       }
 
       .switch-comp {
-        position: flex;
+        position: relative;
         display:inline-flex;
-        padding-left: 10px;
-        padding-right: 10px;
-
+        gap: 5px;
+        margin-right: 10px;
         align-items: center;
         justify-content: space-between;
-      
       }
 
       .switch {     
@@ -178,20 +194,18 @@
     }
 
     .syllogism-grid {
-      border: 1px solid black;
+      border-radius: 16px;
+      border: 1px solid rgb(255 255 255 / 70%);
+      padding: 10px 24px 14px;
+
       display: grid;
       background-color: $color-font-violet;
-      border-radius: 10px;
-
       grid-template-columns: 25% 70% ;
-
       align-items: center;
       max-width: 90%;
       width: 90%;
       align-items: center;
       justify-content: center;
-
-      padding-top: 2%;
 
       .label-1{
         grid-column: 1 / 2;
@@ -233,9 +247,6 @@
 
       .proposition-1, .proposition-2, .proposition-3 {
         .mp-container {
-          padding: 10px;
-          display: flex;
-          flex-direction: column;
           align-items: center;
 
           .mp-proposition {
@@ -243,42 +254,37 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            gap: 10px;
 
             .quantifier {
-              padding: 10px;
+
               select {
                   font-size: 16px;
               }
             }
 
             .subject {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .middle {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .verb {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .predicate {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .first-term {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .second-term {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
           }
         }
@@ -312,7 +318,7 @@
   width: 100%;
   max-width: 100%;
   flex: 1;
-
+  color: rgba( 255 255 255 / 70%);
   margin: 0 auto;
   font-family: Arial, sans-serif;
   height: 100%;
@@ -348,8 +354,9 @@
       justify-content: center;
       align-items: center;
 
-    
-      background-color: $color-font-violet;
+      color: black;
+      border: 1px solid rgb(255 255 255 / 70%);
+      background-color: $color-font-violet2;
       border-radius: 20px;
       margin-top: 1%;
       margin-bottom: 1%;
@@ -362,14 +369,15 @@
       }
 
       .switch-comp {
-        position: flex;
+        position: relative;
         display:inline-flex;
-        padding-left: 10px;
+        gap: 5px;
+        margin-right: 10px;
         align-items: center;
         justify-content: space-between;
       }
 
-      .switch {    
+      .switch {
         position: relative;
         display: inline-block;
         width: 60px;
@@ -416,20 +424,18 @@
     }
 
     .syllogism-grid {
-      border: 1px solid black;
+      border-radius: 16px;
+      border: 1px solid rgb(255 255 255 / 70%);
+      padding: 10px 24px 14px;
+
       display: grid;
       background-color: $color-font-violet;
-      border-radius: 10px;
-
       grid-template-columns: 25% 70% ;
-
       align-items: center;
       max-width: 90%;
       width: 90%;
       align-items: center;
       justify-content: center;
-
-      padding-top: 2%;
 
       .label-1{
         grid-column: 1 / 2;
@@ -483,40 +489,34 @@
             width: 100%;
 
             .quantifier {
-              padding: 10px;
+
               select {
                   font-size: 16px;
               }
             }
 
             .subject {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .middle {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .verb {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .predicate {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .first-term {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
 
             .second-term {
-              padding: 10px;
-              margin: 0 5px;
+              width: 10%;
             }
           }
         }

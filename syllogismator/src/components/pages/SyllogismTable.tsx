@@ -1,6 +1,6 @@
 export const SyllogismTable = () => {
-  	const propositions = ["A", "E", "I", "O"]
-  	const figures = ["1", "2", "3", "4"]
+	const propositions = ["A", "E", "I", "O"]
+	const figures = ["1", "2", "3", "4"]
 
 	function generateProposition(row: number) {
 		const prop1 = propositions[Math.floor(row / 64) % 4]
@@ -24,9 +24,9 @@ export const SyllogismTable = () => {
 
 		if (conclusion === "E") {
 			return (figure === "1" && ((prop1 === "O" || prop1 === "E") && (prop2 === "A" || prop2 === "E"))) ||
-				   (figure === "2" && ((prop1 === "A" || prop1 === "E") && (prop2 === "A" || prop2 === "E"))) ||
-				   (figure === "3" && ((prop1 === "O" || prop1 === "E") && (prop2 === "O" || prop2 === "E"))) ||
-				   (figure === "4" && ((prop1 === "A" || prop1 === "E") && (prop2 === "O" || prop2 === "E")))
+				(figure === "2" && ((prop1 === "A" || prop1 === "E") && (prop2 === "A" || prop2 === "E"))) ||
+				(figure === "3" && ((prop1 === "O" || prop1 === "E") && (prop2 === "O" || prop2 === "E"))) ||
+				(figure === "4" && ((prop1 === "A" || prop1 === "E") && (prop2 === "O" || prop2 === "E")))
 		}
 
 		if (conclusion === "A") {
@@ -153,28 +153,28 @@ export const SyllogismTable = () => {
 	return (
 		<table className="syllogism-table">
 			<thead>
-				<tr>
-					<th>Proposition 1</th>
-					<th>Proposition 2</th>
-					<th>Conclusion</th>
-					<th>Figure</th>
-					<th>Validity</th>
-					<th>Validity with Existential Hypothesis</th>
-					<th>Interesting Syllogism</th>
-				</tr>
+			<tr>
+				<th>Proposition 1</th>
+				<th>Proposition 2</th>
+				<th>Conclusion</th>
+				<th>Figure</th>
+				<th>Validity</th>
+				<th>Validity with Existential Hypothesis</th>
+				<th>Interesting Syllogism</th>
+			</tr>
 			</thead>
 			<tbody>
-				{syllogisms.map((syllogism, index) => (
-					<tr key={index}>
-						<td>{syllogism.prop1}</td>
-						<td>{syllogism.prop2}</td>
-						<td>{syllogism.conclusion}</td>
-						<td>{syllogism.figure}</td>
-						<td>{syllogism.valid ? "Yes" : "No"}</td>
-						<td>{syllogism.validWithExistentialHypothesis ? "Yes" : "No"}</td>
-						<td>{syllogism.isInteresting ? "Yes" : "No"}</td>
-					</tr>
-				))}
+			{syllogisms.map((syllogism, index) => (
+				<tr key={index}>
+					<td>{syllogism.prop1}</td>
+					<td>{syllogism.prop2}</td>
+					<td>{syllogism.conclusion}</td>
+					<td>{syllogism.figure}</td>
+					<td>{syllogism.valid ? "Yes" : "No"}</td>
+					<td>{syllogism.validWithExistentialHypothesis ? "Yes" : "No"}</td>
+					<td>{syllogism.isInteresting ? "Yes" : "No"}</td>
+				</tr>
+			))}
 			</tbody>
 		</table>
 	)
