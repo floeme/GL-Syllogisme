@@ -177,16 +177,22 @@ export const Rnn: Rule = {
 export const Rn: Rule = {
     id: "Rn",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (!s.getProposition(0).quantifier!.type.affirmative || !s.getProposition(1).quantifier!.type.affirmative) {
-                return buildRuleResult(!s.conclusion.quantifier!.type.affirmative);
-            } else {
-                return {
-                    valid: true,
-                    message: "2_affirmative_premises"
-                };
-            }
-        } else throw Error("Not implemented."); // TODO
+        let negativePremise = false;
+
+        let i = 0;
+        while (!negativePremise && i < s.premises.length) {
+            negativePremise = !s.premises[i].quantifier!.type.affirmative;
+            i++;
+        }
+
+        if (negativePremise) {
+            return buildRuleResult(!s.conclusion.quantifier!.type.affirmative);
+        } else {
+            return {
+                valid: true,
+                message: "all_affirmative_premises"
+            };
+        }
     }
 }
 
@@ -235,18 +241,22 @@ export const Rpp: Rule = {
 export const Rp: Rule = {
     id: "Rp",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (!s.getProposition(0).quantifier!.type.universal || !s.getProposition(1).quantifier!.type.universal) {
-                const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
-                result.validWithUniversalConclusion = false;
-                return result;
-            } else {
-                return {
-                    valid: true,
-                    message: "2_universal_premises"
-                };
-            }
-        } else throw Error("Not implemented."); // TODO
+        let particularPremise = false;
+
+        let i = 0;
+        while (!particularPremise && i < s.premises.length) {
+            particularPremise = !s.premises[i].quantifier!.type.universal;
+            i++;
+        }
+
+        if (particularPremise) {
+            return buildRuleResult(!s.conclusion.quantifier!.type.universal);
+        } else {
+            return {
+                valid: true,
+                message: "all_universal_premises"
+            };
+        }
     }
 }
 
@@ -254,10 +264,6 @@ export const Rp: Rule = {
 
 // Existence hypothesis
 
-/**
- * ## Existence hypothesis Rule (Ruu)
- * Two universal premises do not lead to a particular conclusion.
- */
 /**
  * ## Existence hypothesis Rule (Ruu)
  * Two universal premises do not lead to a particular conclusion.

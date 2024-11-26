@@ -61,7 +61,7 @@
         "description": "S'il y a une prémisse négative, alors la conclusion est négative.",
         "passed": "Il y a une prémisse négative et la conclusion est négative.",
         "failed": "Il y a une prémisse négative mais la conclusion est affirmative, ce syllogisme est donc invalide.",
-        "2_affirmative_premises": "Les deux prémisses sont affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
+        "all_affirmative_premises": "Toutes les prémisses sont affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
       },
       "Raa": {
         "name": "Règle des deux prémisses affirmatives",
@@ -81,7 +81,7 @@
         "description": "S'il y a une prémisse particulière, alors la conclusion est particulière.",
         "passed": "Il y a une prémisse particulière et la conclusion est particulière.",
         "failed": "Il y a une prémisse particulière mais la conclusion est universelle, ce syllogisme est donc invalide.",
-        "2_universal_premises": "Les deux prémisses sont universelles, cette règle ne s'applique donc pas à ce syllogisme."
+        "all_universal_premises": "Toutes les prémisses sont universelles, cette règle ne s'applique donc pas à ce syllogisme."
       },
       "Ruu": {
         "name": "Règle de l'hypothèse d'existence",

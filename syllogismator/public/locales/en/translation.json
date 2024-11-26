@@ -61,7 +61,7 @@
         "description": "If one premise is negative, the conclusion is negative.",
         "passed": "There is one negative premise and the conclusion is negative.",
         "failed": "There is one negative premise but the conclusion is affirmative, so this syllogism is invalid.",
-        "2_affirmative_premises": "Both premises are affirmative, so this rule is not applicable to this syllogism."
+        "all_affirmative_premises": "All premises are affirmative, so this rule is not applicable to this syllogism."
       },
       "Raa": {
         "name": "Two Affirmative Premises Rule",
@@ -81,7 +81,7 @@
         "description": "If one premise is particular, the conclusion is particular.",
         "passed": "There is a particular premise and the conclusion is particular.",
         "failed": "There is a particular premise but the conclusion is universal, so this syllogism is invalid.",
-        "2_universal_premises": "Both premises are universal, so this rule is not applicable to this syllogism."
+        "all_universal_premises": "All premises are universal, so this rule is not applicable to this syllogism."
       },
       "Ruu": {
         "name": "Existence Hypothesis Rule",
