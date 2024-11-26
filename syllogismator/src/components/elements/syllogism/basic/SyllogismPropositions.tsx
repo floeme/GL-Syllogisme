@@ -1,6 +1,7 @@
-import { Fragment, useEffect, useState } from "react"
+import {Fragment, useCallback, useEffect, useState} from "react"
 import SyllogismMP from "./SyllogismMP"
 import { Syllogism } from "../../../../model/Syllogism"
+import {getAllRules, check, CheckResults, RULE_I18N_NAMESPACE} from "../../../../model/Rule.ts"
 import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
@@ -8,6 +9,8 @@ import { QuantifierType } from "../../../../model/QuantifierType"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
+import ResultProposition from "../Result.tsx";
 import {ToolbarButtons} from "../Toolbar.tsx"
 
 interface SyllogismPremisesProps {
@@ -29,6 +32,7 @@ interface SyllogismPremisesProps {
     setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
+    syllogism : Syllogism
 }
 
 function SyllogismPropositions({
@@ -40,11 +44,14 @@ function SyllogismPropositions({
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
-	verb, setVerb
+	verb, setVerb,
+    syllogism
 }: SyllogismPremisesProps) {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
-    const [inputErrorMessage, setInputErrorMessage] = useState("")
+    const [message, setMessage] = useState<string>()
+    const [messageKO, setMessageKO] = useState<string[]>([])
+    const [messageOK, setMessageOK] = useState<string[]>([])
 
     const { t } = useTranslation(I18N_NS)
 
@@ -52,80 +59,65 @@ function SyllogismPropositions({
         let isErrorMessage = false
 
         if (!prop3Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la troisième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop2Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la deuxième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!prop1Quantifier) {
-            setInputErrorMessage("Veuillez renseigner le quantificateur de la première proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la première proposition")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (![Figure.Figure1, Figure.Figure2, Figure.Figure3, Figure.Figure4].includes(figure)) {
-            setInputErrorMessage("Veuillez renseigner une figure")
+            messageKO.push("Veuillez renseigner une figure")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!middle.value) {
-            setInputErrorMessage("Veuillez renseigner un moyen terme")
+            messageKO.push("Veuillez renseigner un moyen terme")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!predicate.value) {
-            setInputErrorMessage("Veuillez renseigner un prédicat")
+            messageKO.push("Veuillez renseigner un prédicat")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
         if (!subject.value) {
-            setInputErrorMessage("Veuillez renseigner un sujet")
+            messageKO.push("Veuillez renseigner un sujet")
             isErrorMessage = true
-        } else if (!isErrorMessage) {
-            setInputErrorMessage("")
         }
 
-        return isErrorMessage
+        return !isErrorMessage
     }
 
     const checkSyllogism = () => {
+        messageOK.splice(0);
+        messageKO.splice(0)
+        setMessage("")
         if (!validateInputs()) {
-            let syllogism : Syllogism = Syllogism.ofFigure(figure, subject, predicate, middle)
             syllogism.link = verb
-            // res = syllogism.check()
+        } else {
+            const results: CheckResults = checkRuu ?
+                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
 
-            // if (res["rmt"]["validation"] == false) {
-            //     // mettre le msg d'erreur res["rmt"]["errorMessage"]
-            // } else {
+            results.results.forEach((result, ruleId) => {
+                const message = ruleId + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleId}.${result.message}`);
+                if (result.valid)
+                    messageOK.push(message);
+                else
+                    messageKO.push(message);
+            })
 
-            // }
+            setMessage(t(`syllogism.${results.valid}`))
         }
-
-        // {
-        //     "rmt":
-        //         "validity": "false",
-        //         "errorMessage": ""
-        //     "rlh":
-        //         "validity": "false",
-        //         "errorMessage": ""
-        // }
-
-        console.log("check")
+        setMessageOK(() => messageOK)
+        setMessageKO(() => messageKO)
     }
 
     const clearSyllogism = () => {
@@ -143,7 +135,7 @@ function SyllogismPropositions({
         console.log("clear")
     }
 
-    const renderSyllogismMP1 = (figure: Figure) => {
+    const renderSyllogismMP1 = useCallback((figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure3:
@@ -168,9 +160,9 @@ function SyllogismPropositions({
             default:
                 return <div>Please select a figure</div>
         }
-    }
+    }, [middle.value, predicate.value, prop1Quantifier, setProp1Quantifier, setVerb, verb])
 
-    const renderSyllogismMP2 = (figure: Figure) => {
+    const renderSyllogismMP2 = useCallback((figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure2:
@@ -195,9 +187,9 @@ function SyllogismPropositions({
             default:
                 return <div>Please select a figure</div>
         }
-    }
+    }, [middle.value, prop2Quantifier, setProp2Quantifier, setVerb, subject.value, verb])
 
-    const renderSyllogismMP3 = (figure: Figure) => {
+    const renderSyllogismMP3 = useCallback((figure: Figure) => {
         switch (figure) {
             case Figure.Figure1:
             case Figure.Figure2:
@@ -214,7 +206,7 @@ function SyllogismPropositions({
             default:
                 return <div>Please select a figure</div>
         }
-    }
+    }, [predicate.value, prop3Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
 
     const [propositions, setPropositions] = useState([
         renderSyllogismMP1(figure),
@@ -228,9 +220,9 @@ function SyllogismPropositions({
             subject.value === middle.value ||
             predicate.value === middle.value)
         ) {
-            setInputErrorMessage("Conflit - Les termes doivent être différents")
-        } else {
-            setInputErrorMessage("")
+            messageKO.splice(0)
+            messageKO.push("Conflit - Les termes doivent être différents")
+            setMessageKO(() => messageKO)
         }
 
         setPropositions([
@@ -238,7 +230,7 @@ function SyllogismPropositions({
             renderSyllogismMP2(figure),
             renderSyllogismMP3(figure)
         ])
-    }, [figure, subject, predicate, middle, verb])
+    }, [figure, subject, predicate, middle, verb, renderSyllogismMP1, renderSyllogismMP2, renderSyllogismMP3, messageKO])
 
     return (
         <div className="section-premises">
@@ -282,9 +274,9 @@ function SyllogismPropositions({
 
                 <div className="hypothesis">
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
-                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
+                <ResultProposition message={message} messageOK={messageOK} messageKO={messageKO}></ResultProposition>
             </div>
         </div>
     )

@@ -6,6 +6,8 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM"],
     "moduleResolution": "node",
+    "declaration": true,
+    "rootDir": "./src",
     "outDir": "build",
     "strict": true
   },
@@ -13,5 +15,9 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "typedocOptions": {
+    "entryPoints": ["src/main.tsx", "src/model/*.ts"],
+    "out": "docs"
+  }
 }
