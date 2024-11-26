@@ -1,7 +1,7 @@
 import {Fragment, useCallback, useEffect, useState} from "react"
 import SyllogismMP from "./SyllogismMP"
 import { Syllogism } from "../../../../model/Syllogism"
-import {getAllRules, check, CheckResults, RULE_I18N_NAMESPACE} from "../../../../model/Rule.ts"
+import {getAllRules, check, CheckResults} from "../../../../model/Rule.ts"
 import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
 import { Quantifier } from "../../../../model/Quantifier"
@@ -49,9 +49,8 @@ function SyllogismPropositions({
 }: SyllogismPremisesProps) {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
-    const [message, setMessage] = useState<string>()
+    const [result, setResult] = useState<CheckResults | undefined>(undefined);
     const [messageKO, setMessageKO] = useState<string[]>([])
-    const [messageOK, setMessageOK] = useState<string[]>([])
 
     const { t } = useTranslation(I18N_NS)
 
@@ -101,26 +100,13 @@ function SyllogismPropositions({
     }
 
     const checkSyllogism = () => {
-        messageOK.splice(0);
         messageKO.splice(0)
-        setMessage("")
         if (!validateInputs()) {
             syllogism.link = verb
         } else {
-            const results: CheckResults = checkRuu ?
-                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
-
-            results.results.forEach((result, ruleId) => {
-                const message = ruleId + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleId}.${result.message}`);
-                if (result.valid)
-                    messageOK.push(message);
-                else
-                    messageKO.push(message);
-            })
-
-            setMessage(t(`syllogism.${results.valid}`))
+            setResult( checkRuu ?
+                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
-        setMessageOK(() => messageOK)
         setMessageKO(() => messageKO)
     }
 
@@ -280,7 +266,7 @@ function SyllogismPropositions({
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
-                <ResultProposition message={message} messageOK={messageOK} messageKO={messageKO}></ResultProposition>
+                <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
             </div>
         </div>
     )
