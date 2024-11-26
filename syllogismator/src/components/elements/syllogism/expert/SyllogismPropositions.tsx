@@ -175,8 +175,6 @@ function SyllogismPropositions({
             })
 
             setMessage(t(`syllogism.${results.valid}`))
-
-            console.log("check")
         }
         setMessageOK(() => messageOK)
         setMessageKO(() => messageKO)
