@@ -1,6 +1,8 @@
-import PolysyllogismQuantifierSelector from "../PolysyllogismQuantifierSelector"
 import { Proposition } from "../../../model/Proposition"
 import { useTranslation } from "react-i18next"
+import QuantifierSelector from "../QuantifierSelector.tsx";
+import {defaultQuantifiers, Quantifier} from "../../../model/Quantifier.ts";
+import {Term} from "../../../model/Term.ts";
 
 interface PollysyllogismMPProps {
     verb: string
@@ -15,24 +17,32 @@ function PolysyllogismMP({
 }: PollysyllogismMPProps) {
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
+    const setQuantifier = (quantifier : Quantifier): void => {
+        proposition.quantifier = quantifier
+        onPropositionChange(proposition)
+    }
+
+    if(proposition.quantifier === undefined) {
+        proposition.quantifier = defaultQuantifiers.A
+    }
+
     return (
         <div className="mp-container">
             <div className="mp-proposition">
                 <div className="quantifier">
-                    <PolysyllogismQuantifierSelector quantifier={proposition.quantifier} />
+                    <QuantifierSelector quantifier={proposition.quantifier!} setPropQuantifier={setQuantifier} />
                 </div>
-
                 <div className="first-term">
                     <input
                         type="text"
                         name="firstTerm"
                         placeholder={t('placeholder.firstTerm')}
-                        value={proposition.subject?.value || ""}
+                        defaultValue={proposition.subject?.value}
                         onChange={(e) => {
-                            if (proposition.subject?.value != undefined) {
-                                proposition.subject.value = e.target.value
-                                onPropositionChange(proposition)
-                            }
+                            if(proposition.subject == undefined)
+                                proposition.subject = new Term(e.target.value)
+                            proposition.subject!.value = e.target.value
+                            onPropositionChange(proposition)
                         }}
                     />
                 </div>
@@ -41,7 +51,7 @@ function PolysyllogismMP({
                     <input type="text"
                         name="verbTerm"
                         placeholder={t('placeholder.verb')}
-                        value={verb}
+                        defaultValue={verb}
                         onChange={(e) => {
                             setVerb(e.target.value)
                         }}
@@ -53,12 +63,12 @@ function PolysyllogismMP({
                         type="text"
                         name="secondTerm"
                         placeholder={t('placeholder.secondTerm')}
-                        value={proposition.predicate?.value}
+                        defaultValue={proposition.predicate?.value}
                         onChange={(e) => {
-                            if (proposition.predicate?.value != undefined) {
-                                proposition.predicate.value = e.target.value
-                                onPropositionChange(proposition)
-                            }
+                            if(proposition.predicate == undefined)
+                                proposition.predicate = new Term(e.target.value)
+                            proposition.predicate!.value = e.target.value
+                            onPropositionChange(proposition)
                         }}
                     />
                 </div>

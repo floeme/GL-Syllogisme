@@ -8,28 +8,23 @@ import { useTranslation } from "react-i18next"
 import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided } from "react-beautiful-dnd"
 import { Syllogism } from "../../model/Syllogism"
 import PolyModal from "../elements/modals/PolyModal"
+import {check, CheckResults, getAllRules} from "../../model/Rule.ts";
+import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../model/RulesImpl.ts";
+import ResultProposition from "../elements/syllogism/Result.tsx";
+import {RuuCheckbox} from "../elements/syllogism/RuuCheckbox.tsx";
 
 export const Polysyllogism = () => {
-    const [inputErrorMessage, setInputErrorMessage] = useState("")
 	const [verb, setVerb] = useState("are")
+    const [result, setResult] = useState<CheckResults | undefined>(undefined);
+    const [messageKO, setMessageKO] = useState<string[]>([])
+    const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
+
+    const [syllogism, setSyllogism] = useState(new Syllogism())
     const [propositions, setPropositions] = useState([
-        Proposition.withTerms(
-            new Quantifier("prop1Quantifier", QuantifierType.A),
-            new Term("Homme"),
-            new Term("Mortel")
-        ),
-        Proposition.withTerms(
-            new Quantifier("prop2Quantifier", QuantifierType.A),
-            new Term("Socrate"),
-            new Term("Homme")
-        ),
-        Proposition.withTerms(
-            new Quantifier("prop3Quantifier", QuantifierType.A),
-            new Term("Socrate"),
-            new Term("Mortel")
-        )
+        syllogism.getProposition(0),
+        syllogism.getProposition(1),
+        syllogism.getProposition(2)
     ])
-	const [syllogism, setSyllogism] = useState(new Syllogism())
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     // Remplace les valeurs de base du syllogisme par les valeurs de base du composant
@@ -80,22 +75,12 @@ export const Polysyllogism = () => {
     }
 
     const clearSyllogism = () => {
+        setSyllogism(new Syllogism())
+
         setPropositions([
-            Proposition.withTerms(
-                new Quantifier("prop1Quantifier", QuantifierType.A),
-                new Term("Term 1"),
-                new Term("Term 2")
-            ),
-            Proposition.withTerms(
-                new Quantifier("prop2Quantifier", QuantifierType.A),
-                new Term("Term 3"),
-                new Term("Term 4")
-            ),
-            Proposition.withTerms(
-                new Quantifier("prop3Quantifier", QuantifierType.A),
-                new Term("Term 5"),
-                new Term("Term 6")
-            )
+            syllogism.getProposition(0),
+            syllogism.getProposition(1),
+            syllogism.getProposition(2)
         ])
 
         setVerb("are")
@@ -153,30 +138,34 @@ export const Polysyllogism = () => {
                 ++i
 
                 if (!proposition.quantifier?.type) {
-                    setInputErrorMessage(t("errorMessages.missingQuantifier") + i)
+                    messageKO.push(t("errorMessages.missingQuantifier") + i)
                     isErrorMessage = true
                 } else if (!proposition.subject?.value) {
-                    setInputErrorMessage(t("errorMessages.missingSubject") + i)
+                    messageKO.push(t("errorMessages.missingSubject") + i)
                     isErrorMessage = true
                 } else if (!verb) {
-                    setInputErrorMessage(t("errorMessages.missingVerb"))
+                    messageKO.push(t("errorMessages.missingVerb"))
                     isErrorMessage = true
                 } else if (!proposition.predicate?.value) {
-                    setInputErrorMessage(t("errorMessages.missingPredicate") + i)
+                    messageKO.push(t("errorMessages.missingPredicate") + i)
                     isErrorMessage = true
                 }
             }
         })
 
-        return isErrorMessage
+        return !isErrorMessage
     }
 
     const checkSyllogism = () => {
+        console.log("checkSyllogism")
+        messageKO.splice(0)
         if (!validateInputs()) {
-            console.log("check")
             syllogism.link = verb
-            // TODO - Faire le check du polysyllogism
+        } else {
+            setResult(checkRuu ?
+                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
+        setMessageKO(() => messageKO)
     }
 
     return (
@@ -243,10 +232,10 @@ export const Polysyllogism = () => {
 
                 <div className="hypothesis">
                     <label>{t("labels.existenceHypothesis")}</label>
-                    <input type="checkbox" name="existenceHypothesis" />
-                    {inputErrorMessage && <p style={{ color: "#fc9294" }}>{inputErrorMessage}</p>}
+                    <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("buttons.check")}</button>
                 </div>
+                <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
             </div>
         </div>
     )
