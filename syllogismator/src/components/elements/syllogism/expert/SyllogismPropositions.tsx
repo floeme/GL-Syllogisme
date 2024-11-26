@@ -119,6 +119,11 @@ function SyllogismPropositions({
     const validateInputs = () => {
         let isErrorMessage = false
 
+        if (middle.value === subject.value || middle.value === predicate.value || predicate.value === subject.value) {
+            messageKO.push("Il ne peut y avoir qu'une unique répétition de moyen terme")
+            isErrorMessage = true
+        }
+
         if (!MP2SecondTerm) {
             messageKO.push("Veuillez renseigner un terme dans le quatrième champ")
             isErrorMessage = true

@@ -47,7 +47,7 @@ function SyllogismMP2({
             setManual2(false)
             setMP2FirstTerm("")
         }
-    }, [MP2FirstTerm, MP2SecondTerm, manual1, manual2, selected1, selected2, setMP2FirstTerm, setMP2SecondTerm])
+    }, [MP2FirstTerm, MP2SecondTerm])
 
     const handleChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
