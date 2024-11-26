@@ -32,8 +32,7 @@
 }
 
 .list-alias-ul-li {
-    justify-content: center;
-    gap: 5px;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
 }
