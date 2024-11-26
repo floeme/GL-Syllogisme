@@ -68,7 +68,8 @@
         "description": "Two affirmative premises lead to an affirmative conclusion.",
         "passed": "Both premises are affirmative and the conclusion is affirmative.",
         "failed": "Both premises are affirmative but the conclusion is negative, so this syllogism is invalid.",
-        "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism."
+        "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism.",
+        "not_2_affirmative_premises": "There is less than two affirmative premises, so this rule is not applicable to this syllogism."
       },
       "Rpp": {
         "name": "Two Particular Premises Rule",
@@ -88,14 +89,15 @@
         "description": "Two universal premises do not lead to a particular conclusion.",
         "passed": "Both premises are universal and the conclusion is universal.",
         "failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
-        "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism."
+        "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism.",
+        "not_2_universal_premises": "There are less than two universal premises, so this rule is not applicable to this syllogism."
       }
     },
-    "true": "Syllogism is Right",
-    "false": "Syllogism is Wrong",
+    "true": "This syllogism is valid",
+    "false": "This syllogism is not valid",
     "summary": {
-      "ok": "Right Rules",
-      "ko": "Failed Rules"
+      "ok": "Passing Rules",
+      "ko": "Failing Rules"
     }
   },
   "input": {

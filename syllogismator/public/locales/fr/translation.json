@@ -68,7 +68,8 @@
         "description": "Deux prémisses affirmatives conduisent à une conclusion affirmative.",
         "passed": "Les deux prémisses sont affirmatives et la conclusion est affirmative.",
         "failed": "Les deux prémisses sont affirmatives mais la conclusion est affirmative, ce syllogisme est donc invalide.",
-        "negative_premise": "Il y a une prémisse négative, cette règle ne s'applique donc pas à ce syllogisme."
+        "negative_premise": "Il y a une prémisse négative, cette règle ne s'applique donc pas à ce syllogisme.",
+        "not_2_affirmative_premises": "Il y a moins de deux prémisses affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
       },
       "Rpp": {
         "name": "Règle des deux prémisses particulières",
@@ -88,14 +89,15 @@
         "description": "Deux prémisses universelles ne conduisent pas à une conclusion particulière.",
         "passed": "Les deux prémisses sont universelles et la conclusion est universelle.",
         "failed": "Les deux prémisses sont universelles mais la conclusion est particulière, ce syllogisme est donc invalide.",
-        "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
+        "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme.",
+        "not_2_universal_premises": "Il y a moins de deux prémisses universelles, cette règle ne s'applique donc pas à ce syllogisme."
       }
     },
-    "true": "Syllogism OK",
-    "false": "Syllogism KO",
+    "true": "Le syllogisme saisi est valide.",
+    "false": "Le syllogisme saisi est invalide.",
     "summary": {
-      "ok": "Règle valide",
-      "ko": "Règle invalide"
+      "ok": "Règles valides",
+      "ko": "Règles invalides"
     }
   },
   "input": {
