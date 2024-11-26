@@ -1,9 +1,6 @@
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useState } from "react"
 import PolysyllogismMP from "../elements/polysyllogism/PolysyllogismMP"
 import { Proposition } from "../../model/Proposition"
-import { Term } from "../../model/Term"
-import { Quantifier } from "../../model/Quantifier"
-import { QuantifierType } from "../../model/QuantifierType"
 import { useTranslation } from "react-i18next"
 import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided } from "react-beautiful-dnd"
 import { Syllogism } from "../../model/Syllogism"
@@ -20,68 +17,18 @@ export const Polysyllogism = () => {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
     const [syllogism, setSyllogism] = useState(new Syllogism())
-    const [propositions, setPropositions] = useState([
-        syllogism.getProposition(0),
-        syllogism.getProposition(1),
-        syllogism.getProposition(2)
-    ])
     const [modalIsOpen, setModalIsOpen] = useState(false)
-
-    // Remplace les valeurs de base du syllogisme par les valeurs de base du composant
-    useEffect(() => {
-        rebuildPolysyllogism()
-    }, []) // [] garantit que l'effet s'exécute une seule fois au chargement
-
-    useEffect(() => {
-        rebuildPolysyllogism()
-    }, [propositions])
-
-    const rebuildPolysyllogism = () => {
-        const newSyllogism = new Syllogism()
-
-        // Supprime les valeurs de base du syllogisme
-        syllogism.getPropositions().forEach(() => {
-            syllogism.removeProposition(0)
-        })
-
-        // Supprime les valeurs de base du newSyllogisme
-        newSyllogism.getPropositions().forEach(() => {
-            newSyllogism.removeProposition(0)
-        })
-
-        newSyllogism.removeProposition(-1)
-
-        // Mettre les valeurs de base du composant dans le syllogisme
-        propositions.forEach(proposition => {
-            newSyllogism.addProposition(proposition)
-        })
-
-        setSyllogism(newSyllogism)
-    }
 
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
     const onDragEnd = (result: any) => {
         const { source, destination } = result
 
-        if (!destination)
-            return
-
-        const reorderedPropositions = [...propositions]
-        const [removed] = reorderedPropositions.splice(source.index, 1)
-        reorderedPropositions.splice(destination.index, 0, removed)
-
-        setPropositions(reorderedPropositions)
+        syllogism.reorderProposition(source, destination)
     }
 
     const clearSyllogism = () => {
         setSyllogism(new Syllogism())
-
-        setPropositions([
-            syllogism.getProposition(0),
-            syllogism.getProposition(1),
-            syllogism.getProposition(2)
-        ])
 
         setVerb("are")
 
@@ -101,26 +48,15 @@ export const Polysyllogism = () => {
         console.log("goSettings")
     }
 
-    const updateProposition = (index: number, updatedProposition: Proposition) => {
-        const newPropositions = [...propositions]
-        newPropositions[index] = updatedProposition
-        setPropositions(newPropositions)
+    const updateProposition = () => {
+        setSyllogism(syllogism)
     }
 
     const addProposition = () => {
-        let proposition = Proposition.withTerms(
-            new Quantifier("propQuantifier", QuantifierType.A),
-            new Term("new term 1"),
-            new Term("new term 2")
-        )
-
-        setPropositions([...propositions, proposition])
-
-        syllogism.addProposition(proposition)
+        syllogism.addProposition(new Proposition())
     }
 
     const removeProposition = (index: number) => {
-        setPropositions(propositions.filter((_, i) => i !== index))
         syllogism.removeProposition(index)
     }
 
@@ -133,7 +69,7 @@ export const Polysyllogism = () => {
 
         let i = 0
 
-        propositions.forEach(proposition => {
+        syllogism.getPropositions().forEach(proposition => {
             if (!isErrorMessage) {
                 ++i
 
@@ -193,7 +129,7 @@ export const Polysyllogism = () => {
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
                             >
-                                {propositions.map((proposition, index) => (
+                                {syllogism.getPropositions().map((proposition, index) => (
                                     <Draggable key={index} draggableId={`proposition-${index}`} index={index}>
                                         {(provided: DraggableProvided) => (
                                             <div
@@ -211,8 +147,8 @@ export const Polysyllogism = () => {
                                                             verb={verb}
                                                             setVerb={setVerb}
                                                             proposition={proposition}
-                                                            onPropositionChange={(updatedProposition) =>
-                                                                updateProposition(index, updatedProposition)
+                                                            onPropositionChange={() =>
+                                                                updateProposition()
                                                             }
                                                         />
                                                         {index >= 3 && (
