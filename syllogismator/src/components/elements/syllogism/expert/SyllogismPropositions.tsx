@@ -9,7 +9,7 @@ import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {ToolbarButtons} from "../Toolbar.tsx";
 import {Syllogism} from "../../../../model/Syllogism.ts";
-import {check, CheckResults, getAllRules, RULE_I18N_NAMESPACE} from "../../../../model/Rule.ts";
+import {check, CheckResults, getAllRules} from "../../../../model/Rule.ts";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 import {Figure} from "../../../../model/Figure.ts";
 import ResultProposition from "../Result.tsx";
@@ -60,9 +60,8 @@ function SyllogismPropositions({
 
     const { t } = useTranslation(I18N_NS);
 
-    const [message, setMessage] = useState<string>()
+    const [result, setResult] = useState<CheckResults | undefined>(undefined);
     const [messageKO, setMessageKO] = useState<string[]>([])
-    const [messageOK, setMessageOK] = useState<string[]>([])
 
     const handleTermConflict = (term1: string, term2: string) => {
         if (term1 === term2 && term1 !== "" && term2 !== "") {
@@ -158,26 +157,13 @@ function SyllogismPropositions({
     }
 
     const checkSyllogism = () => {
-        messageOK.splice(0);
         messageKO.splice(0)
-        setMessage("")
         if (!validateInputs()) {
             syllogism.link = verb
         } else {
-            const results: CheckResults = checkRuu ?
-                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true);
-
-            results.results.forEach((result, ruleId) => {
-                const message = ruleId + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleId}.${result.message}`);
-                if (result.valid)
-                    messageOK.push(message);
-                else
-                    messageKO.push(message);
-            })
-
-            setMessage(t(`syllogism.${results.valid}`))
+            setResult(checkRuu ?
+                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
-        setMessageOK(() => messageOK)
         setMessageKO(() => messageKO)
     }
 
@@ -305,7 +291,7 @@ function SyllogismPropositions({
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
-                <ResultProposition message={message} messageOK={messageOK} messageKO={messageKO}></ResultProposition>
+                <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
             </div>
         </div>
     )
