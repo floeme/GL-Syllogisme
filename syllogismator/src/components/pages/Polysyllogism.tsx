@@ -150,6 +150,7 @@ export const Polysyllogism = () => {
                                                             onPropositionChange={() =>
                                                                 updateProposition()
                                                             }
+                                                            syllogism={syllogism}
                                                         />
                                                         {index >= 3 && (
                                                             <button onClick={() => removeProposition(index)}>🗑️</button>

@@ -3,17 +3,20 @@ import { useTranslation } from "react-i18next"
 import QuantifierSelector from "../QuantifierSelector.tsx";
 import {defaultQuantifiers, Quantifier} from "../../../model/Quantifier.ts";
 import {Term} from "../../../model/Term.ts";
+import {Syllogism} from "../../../model/Syllogism.ts";
 
 interface PollysyllogismMPProps {
     verb: string
     setVerb: (value: string) => void
     proposition: Proposition
     onPropositionChange: (updatedProposition: Proposition) => void
+    syllogism: Syllogism
 }
 
 function PolysyllogismMP({
     verb, setVerb,
-    proposition, onPropositionChange
+    proposition, onPropositionChange,
+    syllogism
 }: PollysyllogismMPProps) {
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
@@ -39,9 +42,16 @@ function PolysyllogismMP({
                         placeholder={t('placeholder.firstTerm')}
                         defaultValue={proposition.subject?.value}
                         onChange={(e) => {
-                            if(proposition.subject == undefined)
-                                proposition.subject = new Term(e.target.value)
-                            proposition.subject!.value = e.target.value
+                            let resTerm = null;
+                            for(const term of syllogism.getTerms()) {
+                                if(term.value===e.target.value) {
+                                    resTerm = term
+                                    break
+                                }
+                            }
+                            if(resTerm == null)
+                                resTerm = new Term(e.target.value)
+                            proposition.subject = resTerm
                             onPropositionChange(proposition)
                         }}
                     />
@@ -51,7 +61,7 @@ function PolysyllogismMP({
                     <input type="text"
                         name="verbTerm"
                         placeholder={t('placeholder.verb')}
-                        defaultValue={verb}
+                        value={verb}
                         onChange={(e) => {
                             setVerb(e.target.value)
                         }}
@@ -65,9 +75,16 @@ function PolysyllogismMP({
                         placeholder={t('placeholder.secondTerm')}
                         defaultValue={proposition.predicate?.value}
                         onChange={(e) => {
-                            if(proposition.predicate == undefined)
-                                proposition.predicate = new Term(e.target.value)
-                            proposition.predicate!.value = e.target.value
+                            let resTerm = null;
+                            for(const term of syllogism.getTerms()) {
+                                if(term.value===e.target.value) {
+                                    resTerm = term
+                                    break
+                                }
+                            }
+                            if(resTerm == null)
+                                resTerm = new Term(e.target.value)
+                            proposition.predicate = resTerm
                             onPropositionChange(proposition)
                         }}
                     />
