@@ -225,7 +225,7 @@ function SyllogismPropositions({
     return (
         <div className="section-premises">
             <div className="button-row">
-                <ToolbarButtons clearSyllogism={clearSyllogism} path="/docs/fr/Basic_Guide.pdf" />
+                <ToolbarButtons clearSyllogism={clearSyllogism} path="/docs/fr/Expert_Guide.pdf" />
                 <div className="switch-comp">
                     <label className="name1">{t("input.guided")}</label>
                     <label className="switch">
