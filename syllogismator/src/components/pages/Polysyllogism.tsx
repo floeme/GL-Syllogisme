@@ -1,8 +1,14 @@
-import { Fragment, useState } from "react"
+import React, { Fragment, useState } from "react"
 import PolysyllogismMP from "../elements/polysyllogism/PolysyllogismMP"
 import { Proposition } from "../../model/Proposition"
 import { useTranslation } from "react-i18next"
-import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided } from "react-beautiful-dnd"
+import {
+    DragDropContext,
+    Droppable,
+    Draggable,
+    DroppableProvided,
+    DraggableProvided,
+} from "react-beautiful-dnd"
 import { Syllogism } from "../../model/Syllogism"
 import PolyModal from "../elements/modals/PolyModal"
 import {check, CheckResults, getAllRules} from "../../model/Rule.ts";
@@ -16,15 +22,32 @@ export const Polysyllogism = () => {
     const [messageKO, setMessageKO] = useState<string[]>([])
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
-    const [syllogism, setSyllogism] = useState(new Syllogism())
+    const [syllogism, setSyllogism] = useState<Syllogism>(new Syllogism())
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+
+    const updateSyllogism = () => {
+        forceUpdate()
+    }
+
     const onDragEnd = (result: any) => {
         const { source, destination } = result
 
-        syllogism.reorderProposition(source, destination)
+        console.log(source.index+" dest: "+destination.index)
+
+        console.log(syllogism.getProposition(source.index).subject?.value)
+        console.log(syllogism.getProposition(destination.index).subject?.value)
+
+        syllogism.reorderProposition(source.index, destination.index)
+
+        console.log(syllogism.getProposition(source.index).subject?.value)
+        console.log(syllogism.getProposition(destination.index).subject?.value)
+
+        updateSyllogism()
     }
 
     const clearSyllogism = () => {
@@ -33,6 +56,7 @@ export const Polysyllogism = () => {
         setVerb("are")
 
         console.log("clear")
+        updateSyllogism()
     }
 
     const closeModal = () => {
@@ -48,20 +72,19 @@ export const Polysyllogism = () => {
         console.log("goSettings")
     }
 
-    const updateProposition = () => {
-        setSyllogism(syllogism)
-    }
-
     const addProposition = () => {
         syllogism.addProposition(new Proposition())
+        updateSyllogism()
     }
 
     const removeProposition = (index: number) => {
         syllogism.removeProposition(index)
+        updateSyllogism()
     }
 
     const reorderPropositions = () => {
         syllogism.autoReorder()
+        updateSyllogism()
     }
 
     const validateInputs = () => {
@@ -148,7 +171,7 @@ export const Polysyllogism = () => {
                                                             setVerb={setVerb}
                                                             proposition={proposition}
                                                             onPropositionChange={() =>
-                                                                updateProposition()
+                                                                updateSyllogism()
                                                             }
                                                             syllogism={syllogism}
                                                         />
