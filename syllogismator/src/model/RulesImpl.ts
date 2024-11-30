@@ -217,7 +217,9 @@ export const Raa: Rule = {
         }
 
         if (affirmativePremises === 2) {
-            return buildRuleResult(s.conclusion.quantifier!.type.affirmative);
+            const result = buildRuleResult(s.conclusion.quantifier!.type.affirmative);
+            if (s.getPropositionCount() > 3) result.message += "_poly";
+            return result;
         } else {
             return {
                 valid: true,
@@ -264,7 +266,9 @@ export const Rp: Rule = {
         }
 
         if (particularPremise) {
-            return buildRuleResult(!s.conclusion.quantifier!.type.universal);
+            const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
+            if (s.getPropositionCount() > 3) result.message += "_poly";
+            return result;
         } else {
             return {
                 valid: true,
@@ -294,7 +298,9 @@ export const Ruu: Rule = {
         }
 
         if (universalPremises === 2) {
-            return buildRuleResult(s.conclusion.quantifier!.type.universal);
+            const result = buildRuleResult(s.conclusion.quantifier!.type.universal);
+            if (s.getPropositionCount() > 3) result.message += "_poly";
+            return result;
         } else {
             return {
                 valid: true,

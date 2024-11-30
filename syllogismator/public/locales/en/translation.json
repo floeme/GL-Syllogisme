@@ -68,6 +68,8 @@
         "description": "Two affirmative premises lead to an affirmative conclusion.",
         "passed": "Both premises are affirmative and the conclusion is affirmative.",
         "failed": "Both premises are affirmative but the conclusion is negative, so this syllogism is invalid.",
+        "passed_poly": "There are at least two affirmative premises and the conclusion is affirmative.",
+        "failed_poly": "There are at least two affirmative premises but the conclusion is negative, so this syllogism is invalid.",
         "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism.",
         "not_2_affirmative_premises": "There is less than two affirmative premises, so this rule is not applicable to this syllogism."
       },
@@ -75,7 +77,9 @@
         "name": "Two Particular Premises Rule",
         "description": "Two particular premises do not lead to a conclusion.",
         "passed": "There is at least one universal premise.",
-        "failed": "Both premises are particular, so this syllogism is invalid."
+        "failed": "Both premises are particular, so this syllogism is invalid.",
+        "passed_poly": "There is at least one universal premise.",
+        "failed_poly": "There are at least two particular premises, so this syllogism is invalid."
       },
       "Rp": {
         "name": "One Particular Premise Rule",
@@ -89,6 +93,8 @@
         "description": "Two universal premises do not lead to a particular conclusion.",
         "passed": "Both premises are universal and the conclusion is universal.",
         "failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
+        "passed_poly": "There are at least two universal premises and the conclusion is universal.",
+        "failed_poly": "There are at least two universal premises but the conclusion is particular, so this syllogism is invalid.",
         "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism.",
         "not_2_universal_premises": "There are less than two universal premises, so this rule is not applicable to this syllogism."
       }
