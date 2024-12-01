@@ -36,17 +36,7 @@ export const Polysyllogism = () => {
 
     const onDragEnd = (result: any) => {
         const { source, destination } = result
-
-        console.log(source.index+" dest: "+destination.index)
-
-        console.log(syllogism.getProposition(source.index).subject?.value)
-        console.log(syllogism.getProposition(destination.index).subject?.value)
-
         syllogism.reorderProposition(source.index, destination.index)
-
-        console.log(syllogism.getProposition(source.index).subject?.value)
-        console.log(syllogism.getProposition(destination.index).subject?.value)
-
         updateSyllogism()
     }
 
@@ -169,11 +159,8 @@ export const Polysyllogism = () => {
                                                         <PolysyllogismMP
                                                             verb={verb}
                                                             setVerb={setVerb}
-                                                            proposition={proposition}
-                                                            onPropositionChange={() =>
-                                                                updateSyllogism()
-                                                            }
                                                             syllogism={syllogism}
+                                                            proposition={proposition}
                                                         />
                                                         {index >= 3 && (
                                                             <button onClick={() => removeProposition(index)}>🗑️</button>
