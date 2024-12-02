@@ -1,50 +1,27 @@
-# React + TypeScript + Vite
+# Syllogismator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*Syllogism and polysyllogism validation tool.*
 
-Currently, two official plugins are available:
+This application is developed with [React](https://react.dev/) and bundled with [Vite](https://vite.dev/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project structure
 
-## Expanding the ESLint configuration
+* The `public` directory contains static files which are served to the client through HTTP (e.g. images and translation files)
+* The `src` directory contains the code of React components and business classes.
+* The `test` directory contains all unit tests.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Business classes
 
-- Configure the top-level `parserOptions` property like this:
+Business classes are located in the `src/model` directory. The class diagram is shown below:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+![Class diagram](ClassDiagram.svg)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Concrete syllogism validation rules are implemented in `RuleImpl.ts`.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+For simplicity, syllogisms and polysyllogisms are referred to as "syllogisms" in the code and the documentation, as they are implemented in the same way.
+A syllogism with 3 propositions (2 premises and a conclusion) is referred to as "simple syllogism".
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Running the application
+
+* Development: `npm run dev`
+* Production: `npm run build`
