@@ -43,8 +43,7 @@ function QuantifierSelector({ quantifier, setPropQuantifier }: QuantifierSelecto
     const quantifierTypes = [QuantifierType.A, QuantifierType.E, QuantifierType.I, QuantifierType.O];
 
     return (
-        <>*
-
+        <>
             <select onChange={handleChange} value={curQuant.name}>
                 { // Grouping quantifiers by type
                     quantifierTypes.map((type) => (
