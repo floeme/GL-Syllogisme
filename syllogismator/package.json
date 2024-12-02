@@ -21,6 +21,7 @@
     "react-i18next": "^15.0.3",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.26.2",
+    "react-tooltip": "^5.28.0",
     "syllogismator": "file:"
   },
   "devDependencies": {

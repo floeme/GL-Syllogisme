@@ -2,6 +2,7 @@ import QuantifierSelector from "../../QuantifierSelector"
 import {Quantifier} from "../../../../model/Quantifier"
 import {I18N_NS} from "../../../../i18n.ts";
 import {useTranslation} from "react-i18next";
+import {Tooltip} from "react-tooltip";
 
 interface SyllogismMP3Props {
     subject: string
@@ -27,8 +28,9 @@ function SyllogismMP3({
                     <QuantifierSelector quantifier={quantifier} setPropQuantifier={setProp3Quantifier} />
                 </div>
 
-                <div className="subject">
+                <div className="subject" style={{display: "flex", alignItems: "baseline"}}>
                     <label>{subject}</label>
+                    <TermTooltip termKind="subject" />
                 </div>
 
                 <div className="verb">
@@ -42,8 +44,9 @@ function SyllogismMP3({
                     />
                 </div>
 
-                <div className="predicate">
+                <div className="predicate" style={{display: "flex", alignItems: "baseline"}}>
                     <label>{predicate}</label>
+                    <TermTooltip termKind="predicate" />
                 </div>
             </div>
         </div>
@@ -51,3 +54,18 @@ function SyllogismMP3({
 }
 
 export default SyllogismMP3
+
+function TermTooltip({termKind}: {termKind: string}) {
+    const { t } = useTranslation(I18N_NS, {keyPrefix: "syllogism.conclusion_term_tooltip"});
+
+    const tooltipId = `conclusion_${termKind}_tooltip`;
+
+    return <>
+        <img src="images/info_icon.svg" alt="info" style={{width: "18px", cursor: "pointer", marginLeft: "1em"}}
+             data-tooltip-id={tooltipId} />
+        <Tooltip id={tooltipId} style={{ fontFamily: "sans-serif" }}>
+            <p><b>{t(termKind)}</b></p>
+            <p>{t("swap")}</p>
+        </Tooltip>
+    </>
+}

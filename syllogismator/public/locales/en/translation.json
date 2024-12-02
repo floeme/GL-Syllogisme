@@ -96,6 +96,11 @@
     "summary": {
       "ok": "Right Rules",
       "ko": "Failed Rules"
+    },
+    "conclusion_term_tooltip": {
+      "subject": "The subject of the conclusion is the term which appears in the second premise.",
+      "predicate": "The predicate of the conclusion is the term which appears in the first premise.",
+      "swap": "If you want to swap the subject and the predicate, swap the premises."
     }
   },
   "input": {
