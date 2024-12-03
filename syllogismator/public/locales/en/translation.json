@@ -1,4 +1,5 @@
 {
+  "universal": "Syllogism conclusion is universal",
   "home": {
     "syllogism": {
       "check": "Check Syllogism"
@@ -24,6 +25,20 @@
     }
   },
   "syllogism": {
+    "expert": {
+      "errorMessages": {
+        "missingPredicate": "Please provide the second term for proposition.",
+        "missingVerb": "Please provide a verb in the propositions.",
+        "missingSubject": "Please provide the first term for proposition.",
+        "missingQuantifier": "Please provide the quantifier for proposition "
+      }
+    },
+    "basic": {
+      "errorMessages": {
+        "middleTermRepeat": "Middle term can only be repeated one time.",
+        "termEqual": "Subject and predicate cannot be the same on proposition "
+      }
+    },
     "table": {
       "yes": "Yes",
       "no": "No",
@@ -137,10 +152,11 @@
   },
   "polysyllogism": {
     "errorMessages": {
-      "missingPredicate": "Please provide the second term for proposition {index}.",
+      "missingPredicate": "Please provide the second term for proposition ",
       "missingVerb": "Please provide a verb in the propositions.",
-      "missingSubject": "Please provide the first term for proposition {index}.",
-      "missingQuantifier": "Please provide the quantifier for proposition {index}."
+      "missingSubject": "Please provide the first term for proposition ",
+      "missingQuantifier": "Please provide the quantifier for proposition ",
+      "invalidStructure": "Polysyllogism structure is invalid"
     },
     "buttons": {
       "add": "Add a proposition",

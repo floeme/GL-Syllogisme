@@ -104,6 +104,13 @@ export const Polysyllogism = () => {
             }
         })
 
+        if(!isErrorMessage){
+            if(syllogism.hasValidStructure()){
+                isErrorMessage = true
+                messageKO.push(t("errorMessages.invalidStructure"))
+            }
+        }
+
         return !isErrorMessage
     }
 
@@ -116,7 +123,8 @@ export const Polysyllogism = () => {
             setResult(checkRuu ?
                 check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
-        setMessageKO(() => messageKO)
+        setMessageKO([...messageKO])
+
     }
 
     const syllogismSize : number = syllogism.getPropositions().length

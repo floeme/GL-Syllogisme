@@ -1,4 +1,5 @@
 {
+  "universal": "Syllogism conclusion is universal",
   "home": {
     "syllogism": {
       "check": "Vérifier le Syllogisme"
@@ -24,6 +25,20 @@
     }
   },
   "syllogism": {
+    "expert": {
+      "errorMessages": {
+        "missingPredicate": "Veuillez renseigner le second terme de la proposition.",
+        "missingVerb": "Veuillez renseigner un verbe dans les propositions.",
+        "missingSubject": "Veuillez renseigner le premier terme de la proposition.",
+        "missingQuantifier": "Veuillez renseigner le quantificateur de la proposition "
+      }
+    },
+    "basic": {
+      "errorMessages": {
+        "middleTermRepeat": "Il ne peut y avoir qu'une unique répétition de moyen terme.",
+        "termEqual": "Le sujet et le predicat ne peuvent être identique dans la proposition "
+      }
+    },
     "table": {
       "yes": "Oui",
       "no": "Non",
@@ -137,10 +152,11 @@
   },
   "polysyllogism": {
     "errorMessages": {
-      "missingPredicate": "Veuillez renseigner le second terme de la proposition {index}.",
+      "missingPredicate": "Veuillez renseigner le second terme de la proposition ",
       "missingVerb": "Veuillez renseigner un verbe dans les propositions.",
-      "missingSubject": "Veuillez renseigner le premier terme de la proposition {index}.",
-      "missingQuantifier": "Veuillez renseigner le quantificateur de la proposition {index}."
+      "missingSubject": "Veuillez renseigner le premier terme de la proposition ",
+      "missingQuantifier": "Veuillez renseigner le quantificateur de la proposition ",
+      "invalidStructure": "Structure du polysyllogisme invalide"
     },
     "buttons": {
       "add": "Ajouter une proposition",
