@@ -127,6 +127,7 @@
     "check_ruu": "Check $t(syllogism.rule.Ruu.name)",
     "check": "Check",
     "enter_verb": "Enter a verb",
+    "verb_tooltip": "Input an affirmative verb to link the terms (optional). Do not input a negative one!",
     "select_type_term": "Select or type a term",
     "select_term": "Select a term",
     "type_term": "Type a term",

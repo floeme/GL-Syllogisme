@@ -12,6 +12,7 @@ import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 import ResultProposition from "../Result.tsx";
 import {ToolbarButtons} from "../Toolbar.tsx"
+import {LinkVerbTooltip} from "../../LinkVerbTooltip.tsx";
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -277,6 +278,8 @@ function SyllogismPropositions({
                 </div>
                 <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
             </div>
+
+            <LinkVerbTooltip/>
         </div>
     )
 }

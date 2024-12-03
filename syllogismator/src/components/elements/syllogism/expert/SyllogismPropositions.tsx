@@ -13,6 +13,7 @@ import {check, CheckResults, getAllRules} from "../../../../model/Rule.ts";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 import {Figure} from "../../../../model/Figure.ts";
 import ResultProposition from "../Result.tsx";
+import {LinkVerbTooltip} from "../../LinkVerbTooltip.tsx";
 
 interface SyllogismPremisesProps {
     subject: Term
@@ -308,6 +309,8 @@ function SyllogismPropositions({
                 </div>
                 <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
             </div>
+
+            <LinkVerbTooltip/>
         </div>
     )
 }

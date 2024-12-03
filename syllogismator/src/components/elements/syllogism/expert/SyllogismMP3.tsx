@@ -3,6 +3,7 @@ import {Quantifier} from "../../../../model/Quantifier"
 import {I18N_NS} from "../../../../i18n.ts";
 import {useTranslation} from "react-i18next";
 import {Tooltip} from "react-tooltip";
+import {LINK_VERB_TOOLTIP_ID} from "../../LinkVerbTooltip.tsx";
 
 interface SyllogismMP3Props {
     subject: string
@@ -33,7 +34,7 @@ function SyllogismMP3({
                     <TermTooltip termKind="subject" />
                 </div>
 
-                <div className="verb">
+                <div className="verb" data-tooltip-id={LINK_VERB_TOOLTIP_ID}>
                     <input type="text"
                         name="verbTerm"
                         placeholder={t("input.enter_verb")}
