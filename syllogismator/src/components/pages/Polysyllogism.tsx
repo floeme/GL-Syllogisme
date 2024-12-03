@@ -28,7 +28,8 @@ export const Polysyllogism = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
     const [, updateState] = React.useState();
-    const forceUpdate = React.useCallback(() => updateState(() => {}), []);
+    // @ts-expect-error updateState({}) is considered as error
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     const updateSyllogism = () => {
         forceUpdate()
