@@ -153,7 +153,8 @@
       "missingPredicate": "Veuillez renseigner le second terme de la proposition ",
       "missingVerb": "Veuillez renseigner un verbe dans les propositions.",
       "missingSubject": "Veuillez renseigner le premier terme de la proposition ",
-      "missingQuantifier": "Veuillez renseigner le quantificateur de la proposition "
+      "missingQuantifier": "Veuillez renseigner le quantificateur de la proposition ",
+      "invalidStructure": "Structure du polysyllogisme invalide"
     },
     "buttons": {
       "add": "Ajouter une proposition",

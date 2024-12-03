@@ -153,7 +153,8 @@
       "missingPredicate": "Please provide the second term for proposition ",
       "missingVerb": "Please provide a verb in the propositions.",
       "missingSubject": "Please provide the first term for proposition ",
-      "missingQuantifier": "Please provide the quantifier for proposition "
+      "missingQuantifier": "Please provide the quantifier for proposition ",
+      "invalidStructure": "Polysyllogism structure is invalid"
     },
     "buttons": {
       "add": "Add a proposition",
