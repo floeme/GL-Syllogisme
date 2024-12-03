@@ -63,17 +63,18 @@ function SyllogismPropositions({
         }
 
         if (!prop3Quantifier) {
-            messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
+
+            messageKO.push(t("syllogism.expert.errorMessages.missingQuantifier") + 3)
             isErrorMessage = true
         }
 
         if (!prop2Quantifier) {
-            messageKO.push("Veuillez renseigner le quantificateur de la deuxième proposition")
+            messageKO.push(t("syllogism.expert.errorMessages.missingQuantifier") + 2)
             isErrorMessage = true
         }
 
         if (!prop1Quantifier) {
-            messageKO.push("Veuillez renseigner le quantificateur de la première proposition")
+            messageKO.push(t("syllogism.expert.errorMessages.missingQuantifier") + 1)
             isErrorMessage = true
         }
 
@@ -83,17 +84,17 @@ function SyllogismPropositions({
         }
 
         if (!middle.value) {
-            messageKO.push("Veuillez renseigner un moyen terme")
+            messageKO.push(t("syllogism.expert.errorMessages.missingVerb"))
             isErrorMessage = true
         }
 
         if (!predicate.value) {
-            messageKO.push("Veuillez renseigner un prédicat")
+            messageKO.push(t("syllogism.expert.errorMessages.missingPredicate"))
             isErrorMessage = true
         }
 
         if (!subject.value) {
-            messageKO.push("Veuillez renseigner un sujet")
+            messageKO.push(t("syllogism.expert.errorMessages.missingSubject"))
             isErrorMessage = true
         }
 

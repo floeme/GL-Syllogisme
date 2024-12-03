@@ -106,37 +106,37 @@ function SyllogismPropositions({
         let isErrorMessage = false
 
         if (handleTermConflict(MP1FirstTerm, MP1SecondTerm)) {
-            messageKO.push("Conflit - Proposition 1 : Les deux termes ne peuvent pas être identiques.")
+            messageKO.push(t("syllogism.basic.errorMessages.termEqual")+1)
             isErrorMessage = true
         }
 
         if (handleTermConflict(MP2FirstTerm, MP2SecondTerm)) {
-            messageKO.push("Conflit - Proposition  : Les deux termes ne peuvent pas être identiques.")
+            messageKO.push(t("syllogism.basic.errorMessages.termEqual")+2)
             isErrorMessage = true
         }
 
         if ((middle.value !== "" && subject.value !== "" && subject.value !== "") && (middle.value === subject.value || middle.value === predicate.value || predicate.value === subject.value)) {
-            messageKO.push("Il ne peut y avoir qu'une unique répétition de moyen terme.")
+            messageKO.push(t("syllogism.basic.errorMessages.middleTermRepeat"))
             isErrorMessage = true
         }
 
         if (!MP2SecondTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le quatrième champ")
+            messageKO.push(t("polysyllogism.errorMessages.missingPredicate") + 2)
             isErrorMessage = true
         }
 
         if (!MP2FirstTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le troisième champ")
+            messageKO.push(t("polysyllogism.errorMessages.missingSubject") + 2)
             isErrorMessage = true
         }
 
         if (!MP1SecondTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le deuxième champ")
+            messageKO.push(t("polysyllogism.errorMessages.missingPredicate") + 1)
             isErrorMessage = true
         }
 
         if (!MP1FirstTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le premier champ")
+            messageKO.push(t("polysyllogism.errorMessages.missingSubject") + 1)
             isErrorMessage = true
         }
 
@@ -155,7 +155,6 @@ function SyllogismPropositions({
             isErrorMessage = true
         }
 
-        console.log("basic")
         setMessageKO([...messageKO])
         return !isErrorMessage
     }
