@@ -11,6 +11,7 @@ import React, {useContext} from "react";
 import QuantifierContext from "../../../contexts/QuantifierContext.tsx";
 import {QuantifierType} from "../../../model/QuantifierType.ts";
 import {I18N_NS} from "../../../i18n.ts";
+import {LINK_VERB_TOOLTIP_ID} from "../LinkVerbTooltip.tsx";
 
 interface PollysyllogismMPProps {
     verb: string
@@ -98,7 +99,7 @@ function PolysyllogismMP({
                     />
                 </div>
 
-                <div className="verb">
+                <div className="verb" data-tooltip-id={LINK_VERB_TOOLTIP_ID}>
                     <input type="text"
                         name="verbTerm"
                         placeholder={t('polysyllogism.placeholder.verb')}

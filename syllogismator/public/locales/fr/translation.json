@@ -31,8 +31,8 @@
       "conc": "Conclusion",
       "figure": "Figure",
       "validity": "Valide",
-      "validityhe": "Hypothese d'existance valide",
-      "is": "Syllogisme interessant"
+      "validityhe": "Hypothèse d'existence valide",
+      "is": "Syllogisme intéressant"
     },
     "quantifier": {
       "A": "Tout",
@@ -127,6 +127,7 @@
     "check_ruu": "Vérifier la $t(syllogism.rule.Ruu.name)",
     "check": "Vérifier",
     "enter_verb": "Saisir un verbe",
+    "verb_tooltip": "Saisissez un verbe dans sa forme affirmative pour relier les termes (facultatif). Il ne doit pas être négatif.",
     "select_type_term": "Sélectionner ou saisir un terme",
     "select_term": "Sélectionner un terme",
     "type_term": "Saisir un terme",
