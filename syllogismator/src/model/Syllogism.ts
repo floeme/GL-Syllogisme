@@ -354,7 +354,7 @@ export class Syllogism {
             str += i + " : " + this.premises[i] + "\n";
         }
 
-        str += this.conclusion;
+        str += "C : " + this.conclusion;
 
         return str;
     }
