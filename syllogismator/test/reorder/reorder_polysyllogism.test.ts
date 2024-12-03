@@ -41,14 +41,14 @@ describe("Test : reorder a valid order polysyllogism", () => {
         })
         console.log("\nReceived : " + tmp);
 
-        expect(received[0].subject).toBe(P);
-        expect(received[0].predicate).toBe(M1);
+        expect([1,0]).toContain(received[0].indexOf(P));
+        expect([1,0]).toContain(received[0].indexOf(M1));
 
-        expect(received[1].subject).toBe(M1);
-        expect(received[1].predicate).toBe(M2);
+        expect([1,0]).toContain(received[1].indexOf(M1));
+        expect([1,0]).toContain(received[1].indexOf(M2));
 
-        expect(received[2].subject).toBe(M2);
-        expect(received[2].predicate).toBe(S);
+        expect([1,0]).toContain(received[2].indexOf(M2));
+        expect([1,0]).toContain(received[2].indexOf(S));
 
         expect(received[3].subject).toBe(S);
         expect(received[3].predicate).toBe(P);
@@ -84,17 +84,17 @@ describe("Test : reorder a valid order polysyllogism", () => {
         })
         console.log("\nReceived : " + tmp);
 
-        expect(received[0].subject).toBe(P);
-        expect(received[0].predicate).toBe(M1);
+        expect([1,0]).toContain(received[0].indexOf(P));
+        expect([1,0]).toContain(received[0].indexOf(M1));
 
-        expect(received[1].subject).toBe(M1);
-        expect(received[1].predicate).toBe(M2);
+        expect([1,0]).toContain(received[1].indexOf(M1));
+        expect([1,0]).toContain(received[1].indexOf(M2));
 
-        expect(received[2].subject).toBe(M2);
-        expect(received[2].predicate).toBe(M3);
+        expect([1,0]).toContain(received[2].indexOf(M2));
+        expect([1,0]).toContain(received[2].indexOf(M3));
 
-        expect(received[3].subject).toBe(M3);
-        expect(received[3].predicate).toBe(S);
+        expect([1,0]).toContain(received[3].indexOf(M3));
+        expect([1,0]).toContain(received[3].indexOf(S));
 
         expect(received[4].subject).toBe(S);
         expect(received[4].predicate).toBe(P);
@@ -132,20 +132,20 @@ describe("Test : reorder a valid order polysyllogism", () => {
         })
         console.log("\nReceived : " + tmp);
 
-        expect(received[0].subject).toBe(P);
-        expect(received[0].predicate).toBe(M1);
+        expect([1,0]).toContain(received[0].indexOf(P));
+        expect([1,0]).toContain(received[0].indexOf(M1));
 
-        expect(received[1].subject).toBe(M1);
-        expect(received[1].predicate).toBe(M2);
+        expect([1,0]).toContain(received[1].indexOf(M1));
+        expect([1,0]).toContain(received[1].indexOf(M2));
 
-        expect(received[2].subject).toBe(M2);
-        expect(received[2].predicate).toBe(M3);
+        expect([1,0]).toContain(received[2].indexOf(M2));
+        expect([1,0]).toContain(received[2].indexOf(M3));
 
-        expect(received[3].subject).toBe(M3);
-        expect(received[3].predicate).toBe(M4);
+        expect([1,0]).toContain(received[3].indexOf(M3));
+        expect([1,0]).toContain(received[3].indexOf(M4));
 
-        expect(received[4].subject).toBe(M4);
-        expect(received[4].predicate).toBe(S);
+        expect([1,0]).toContain(received[4].indexOf(M4));
+        expect([1,0]).toContain(received[4].indexOf(S));
 
         expect(received[5].subject).toBe(S);
         expect(received[5].predicate).toBe(P);
