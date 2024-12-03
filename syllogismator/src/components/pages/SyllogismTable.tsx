@@ -1,6 +1,11 @@
+import {useTranslation} from "react-i18next";
+
 export const SyllogismTable = () => {
 	const propositions = ["A", "E", "I", "O"]
 	const figures = ["1", "2", "3", "4"]
+
+
+	const { t } = useTranslation('translation', { keyPrefix: 'syllogism.table' })
 
 	function generateProposition(row: number) {
 		const prop1 = propositions[Math.floor(row / 64) % 4]
@@ -87,7 +92,7 @@ export const SyllogismTable = () => {
 		const isUniversalConclusion = conclusion === "A" || conclusion === "E"
 
 		if (!isUniversalConclusion) {
-			let hasStrongerConclusion = false
+			let hasStrongerConclusion: boolean
 
 			if (conclusion === "I") {
 				hasStrongerConclusion = checkValidity(prop1, prop2, "A", figure, false)
@@ -154,13 +159,13 @@ export const SyllogismTable = () => {
 		<table className="syllogism-table">
 			<thead>
 			<tr>
-				<th>Proposition 1</th>
-				<th>Proposition 2</th>
-				<th>Conclusion</th>
-				<th>Figure</th>
-				<th>Validity</th>
-				<th>Validity with Existential Hypothesis</th>
-				<th>Interesting Syllogism</th>
+				<th>{t("prop1")}</th>
+				<th>{t("prop2")}</th>
+				<th>{t("conc")}</th>
+				<th>{t("figure")}</th>
+				<th>{t("validity")}</th>
+				<th>{t("validityhe")}</th>
+				<th>{t("is")}</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -170,9 +175,9 @@ export const SyllogismTable = () => {
 					<td>{syllogism.prop2}</td>
 					<td>{syllogism.conclusion}</td>
 					<td>{syllogism.figure}</td>
-					<td>{syllogism.valid ? "Yes" : "No"}</td>
-					<td>{syllogism.validWithExistentialHypothesis ? "Yes" : "No"}</td>
-					<td>{syllogism.isInteresting ? "Yes" : "No"}</td>
+					<td>{syllogism.valid ? t("yes") : t("no")}</td>
+					<td>{syllogism.validWithExistentialHypothesis ? t("yes") : t("no")}</td>
+					<td>{syllogism.isInteresting ? t("yes") : t("no")}</td>
 				</tr>
 			))}
 			</tbody>

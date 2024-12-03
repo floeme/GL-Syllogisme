@@ -23,6 +23,17 @@
     }
   },
   "syllogism": {
+    "table": {
+      "yes": "Yes",
+      "no": "No",
+      "prop1": "Proposition 1",
+      "prop2": "Proposition 2",
+      "conc": "Conclusion",
+      "figure": "Figure",
+      "validity": "Validity",
+      "validityhe": "Validity with Existential Hypothesis",
+      "is": "Interesting Syllogism"
+    },
     "quantifier": {
       "A": "All",
       "E": "None",
