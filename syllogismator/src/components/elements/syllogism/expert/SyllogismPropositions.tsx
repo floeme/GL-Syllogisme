@@ -259,6 +259,8 @@ function SyllogismPropositions({
         ])
     }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, predicate.value, prop1Quantifier, prop2Quantifier, prop3Quantifier, setMP1FirstTerm, setMP1SecondTerm, setMP2FirstTerm, setMP2SecondTerm, setProp1Quantifier, setProp2Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
 
+    const syllogismSize : number = syllogism.getPropositions().length
+
     return (
         <div className="section-premises">
             <div className="button-row">
@@ -285,7 +287,14 @@ function SyllogismPropositions({
                 {propositions.map((proposition, index) => (
                     <Fragment key={index}>
                         <div className={"label-" + (index+1)}>
-                            <label>Proposition {index + 1}</label>
+                            {
+                                syllogismSize - 1 != index &&
+                                    <label>Proposition {index + 1}</label>
+                            }
+                            {
+                                syllogismSize - 1 == index &&
+                                <label>Conclusion</label>
+                            }
                         </div>
                         <div className={"proposition-" + (index+1)}>
                             {proposition}

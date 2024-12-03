@@ -155,7 +155,14 @@ export const Polysyllogism = () => {
                                             >
                                                 <Fragment key={index}>
                                                     <div className="label">
-                                                        <label>Proposition {index + 1}</label>
+                                                        {
+                                                            syllogismSize - 1 != index &&
+                                                            <label>Proposition {index + 1}</label>
+                                                        }
+                                                        {
+                                                            syllogismSize - 1 == index &&
+                                                            <label>Conclusion</label>
+                                                        }
                                                     </div>
 
                                                     <div className="proposition">

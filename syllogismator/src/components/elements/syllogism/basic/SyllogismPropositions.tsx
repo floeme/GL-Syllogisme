@@ -222,6 +222,8 @@ function SyllogismPropositions({
         ])
     }, [figure, subject, predicate, middle, verb, renderSyllogismMP1, renderSyllogismMP2, renderSyllogismMP3, messageKO])
 
+    const syllogismSize : number = syllogism.getPropositions().length
+
     return (
         <div className="section-premises">
             <div className="button-row">
@@ -254,7 +256,14 @@ function SyllogismPropositions({
                 {propositions.map((proposition, index) => (
                     <Fragment key={index}>
                         <div className={"label-" + (index+1)}>
-                            <label>Proposition {index + 1}</label>
+                            {
+                                syllogismSize - 1 != index &&
+                                <label>Proposition {index + 1}</label>
+                            }
+                            {
+                                syllogismSize - 1 == index &&
+                                <label>Conclusion</label>
+                            }
                         </div>
                         <div className={"proposition-" + (index+1)}>
                             {proposition}
