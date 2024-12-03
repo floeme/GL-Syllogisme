@@ -50,4 +50,8 @@ export class Proposition {
             return 1;
         return -1;
     }
+
+    toString(): string {
+        return `(${this.quantifier?.type.code}) ${this.subject?.value} → ${this.predicate?.value}`;
+    }
 }
