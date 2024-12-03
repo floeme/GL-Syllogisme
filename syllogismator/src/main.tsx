@@ -9,6 +9,7 @@ import Quantifier from './components/pages/QuantifierAliases.tsx';
 import { QuantifierProvider } from './contexts/QuantifierContext.tsx';
 import SyllogismTable from './components/pages/SyllogismTable.tsx';
 import {ROUTES} from './constants/routes.ts';
+import Documentation from './components/pages/Documentation.tsx';
 
 // import i18n (needs to be bundled ;))
 import './i18n';
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path={ROUTES.polysyllogisms} element={<Polysyllogismes />} />
           <Route path={ROUTES.quantifiers} element={<Quantifier />} />
           <Route path={ROUTES.table} element={<SyllogismTable />} />
+          <Route path={ROUTES.documentation} element={<Documentation />} />
         </Route>
       </Routes>
     </BrowserRouter>

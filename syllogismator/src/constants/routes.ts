@@ -3,5 +3,6 @@ export const ROUTES = {
     syllogism: "/syllogism",
     polysyllogisms: "/polysyllogisms",
     quantifiers: "/quantifiers",
-    table: "/table"
+    table: "/table",
+    documentation: "/documentation",
 };

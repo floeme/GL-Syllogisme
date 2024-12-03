@@ -19,7 +19,8 @@
       "syllogism": "Syllogismes",
       "polysyllogism": "Polysyllogismes",
       "quantifiers": "Quantificateurs",
-      "syllogism_table": "Table des syllogismes"
+      "syllogism_table": "Table des syllogismes",
+      "documentation": "Documentation"
     }
   },
   "syllogism": {

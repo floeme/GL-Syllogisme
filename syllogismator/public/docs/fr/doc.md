@@ -1,5 +1,43 @@
 
 ---
+# Sommaire
+- [Documentation](#documentation)
+- [Syllogisme Guidé](#syllogisme-guidé)
+  - [Description](#description)
+  - Étapes d'utilisation
+    - Étape 1 - Configurer chaque proposition
+    - Étape 2 - Vérification
+    - Barre utilitaire
+- [Syllogisme Expert](#syllogisme-expert)
+  - [Description](#description-1)
+  - Étapes d'utilisation
+    - Étape 1 - Entrez les termes
+    - Étape 2 - Choisir la figure
+    - Étape 3 - Remplir les propositions
+    - Étape 4 - Vérification
+    - Barre utilitaire
+- [Polysyllogisme](#polysyllogisme)
+  - [Description](#description-2)
+  - Étapes d'utilisation
+    - Étape 1 - Saisie des propositions
+    - Étape 2 - Ajout de nouvelles propositions
+    - Étape 3 - Suppression des propositions
+    - Étape 4 - Réorganisation des propositions
+    - Étape 5 - Validation
+    - Barre utilitaire
+    - Exemple de Polysyllogisme
+    - Conseils d'utilisation
+- [Page Quantificateur](#page-quantificateur)
+  - [Description](#description-3)
+  - [Fonctionnalités](#fonctionnalités)
+- [Page Table des Syllogismes](#page-table-des-syllogismes)
+  - [Description](#description-4)
+- [Gestion de la langue](#gestion-de-la-langue)
+  - [Description](#description-5)
+- [Conclusion](#conclusion)
+
+
+
 # Documentation
 Cette application permet de créer des syllogismes grâce à deux modes (guidé, expert), ainsi que des polysyllogismes.
 
@@ -36,13 +74,15 @@ La structure est la suivante (l'ordre des termes dans les deux premières propos
 
 - Les termes de la première proposition sont choisis dans les champs texte
 
-- Le premier terme de la deuxième proposition est choisi parmi les deux premiers termes (`prédicat ou moyen terme`) OU l'utilisateur peut choisir un nouveau terme (`Sujet`).<br>
+- Le premier terme de la deuxième proposition est choisi parmi les deux premiers termes (`prédicat ou moyen terme`) OU l'utilisateur peut choisir un nouveau terme (`Sujet`).
+
 Une fois ce choix fait, l'utilisateur peut entrer le deuxième terme, qui sera l'inverse de ce qu'il a choisi pour le premier terme
 
 #### Étape 2 - Vérification :
 Vous pouvez cocher ou non l'option `Vérifier la Règle de l'hypothèse d'existence`.
 
-Cliquez sur le `bouton Vérifier` pour valider le syllogisme et voir apparaître les différentes règles, avec leur validité ou non. <br>
+Cliquez sur le `bouton Vérifier` pour valider le syllogisme et voir apparaître les différentes règles, avec leur validité ou non.
+
 Si elles ne sont pas valides, une explication est fournie pour en indiquer la raison.
 
 #### Barre utilitaire :
@@ -84,7 +124,8 @@ Sélectionnez la structure du syllogisme parmi les `figures 1, 2, 3 ou 4`. Les f
 #### Étape 4 - Vérification :
 Vous pouvez cocher ou non l'option `Vérifier la Règle de l'hypothèse d'existence`.
 
-Cliquez sur le `bouton Vérifier` pour valider le syllogisme et voir apparaître les différentes règles, avec leur validité ou non. <br>
+Cliquez sur le `bouton Vérifier` pour valider le syllogisme et voir apparaître les différentes règles, avec leur validité ou non.
+
 Si elles ne sont pas valides, une explication est fournie pour en indiquer la raison.
 
 #### Barre utilitaire :

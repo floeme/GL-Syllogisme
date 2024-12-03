@@ -45,6 +45,12 @@ export const Navigation = () => {
           >
             <li>{t("syllogism_table")}</li>
           </NavLink>
+          <NavLink
+            to={ROUTES.documentation}
+            className={(nav) => (nav.isActive ? "nav-active" : "")}
+          >
+            <li>{t("documentation")}</li>
+          </NavLink>
         </ul>
       </div>
       <FlagSelect callbackLang={onChange}/>
