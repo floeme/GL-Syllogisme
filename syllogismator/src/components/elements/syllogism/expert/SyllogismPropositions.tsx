@@ -1,18 +1,17 @@
-import {Fragment, useEffect, useState} from "react"
-import SyllogismMP1 from "./SyllogismMP1"
-import SyllogismMP2 from "./SyllogismMP2"
-import SyllogismMP3 from "./SyllogismMP3"
-import {Term} from "../../../../model/Term"
-import {Quantifier} from "../../../../model/Quantifier"
-import {RuuCheckbox} from "../RuuCheckbox.tsx";
+import {Fragment, useCallback, useEffect, useState} from "react"
+import SyllogismMP from "./SyllogismMP"
+import { Syllogism } from "../../../../model/Syllogism"
+import {getAllRules, check, CheckResults} from "../../../../model/Rule.ts"
+import { Figure } from "../../../../model/Figure"
+import { Term } from "../../../../model/Term"
+import { Quantifier } from "../../../../model/Quantifier"
+import { QuantifierType } from "../../../../model/QuantifierType"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
-import {ToolbarButtons} from "../Toolbar.tsx";
-import {Syllogism} from "../../../../model/Syllogism.ts";
-import {check, CheckResults, getAllRules} from "../../../../model/Rule.ts";
+import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
-import {Figure} from "../../../../model/Figure.ts";
 import ResultProposition from "../Result.tsx";
+import {ToolbarButtons} from "../Toolbar.tsx"
 import {LinkVerbTooltip} from "../../LinkVerbTooltip.tsx";
 
 interface SyllogismPremisesProps {
@@ -22,141 +21,79 @@ interface SyllogismPremisesProps {
     setPredicate: (value: Term) => void
     middle: Term
     setMiddle: (value: Term) => void
-    expertMode: boolean
-    setExpertMode: (value: boolean) => void
-	prop1Quantifier: Quantifier
-	setProp1Quantifier: (value: Quantifier) => void
-	prop2Quantifier: Quantifier
-	setProp2Quantifier: (value: Quantifier) => void
-	prop3Quantifier: Quantifier
-	setProp3Quantifier: (value: Quantifier) => void
-	verb: string
-	setVerb: (value: string) => void
-    syllogism: Syllogism
     figure: Figure
     setFigure: (value: Figure) => void
+    expertMode: boolean
+    setExpertMode: (value: boolean) => void
+    prop1Quantifier: Quantifier
+    setProp1Quantifier: (value: Quantifier) => void
+    prop2Quantifier: Quantifier
+    setProp2Quantifier: (value: Quantifier) => void
+    prop3Quantifier: Quantifier
+    setProp3Quantifier: (value: Quantifier) => void
+	verb: string
+	setVerb: (value: string) => void
+    syllogism : Syllogism
 }
 
 function SyllogismPropositions({
     subject, setSubject,
     predicate, setPredicate,
     middle, setMiddle,
+    figure, setFigure,
     expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
 	verb, setVerb,
-    syllogism,
-    figure, setFigure
+    syllogism
 }: SyllogismPremisesProps) {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
-
-    const [errorMessage1, setErrorMessage1] = useState("")
-    const [errorMessage2, setErrorMessage2] = useState("")
-
-    const [MP1FirstTerm, setMP1FirstTerm] = useState("")
-    const [MP1SecondTerm, setMP1SecondTerm] = useState("")
-    const [MP2FirstTerm, setMP2FirstTerm] = useState("")
-    const [MP2SecondTerm, setMP2SecondTerm] = useState("")
-
-    const { t } = useTranslation(I18N_NS);
 
     const [result, setResult] = useState<CheckResults | undefined>(undefined);
     const [messageKO, setMessageKO] = useState<string[]>([])
 
-    const handleTermConflict = (term1: string, term2: string) => {
-        if (term1 === term2 && term1 !== "" && term2 !== "") {
-            console.warn("Duplicate terms detected. Adjusting terms to ensure unique syllogism structure.")
-            return true
-        }
-        return false
-    }
-
-    useEffect(() => {
-        if (handleTermConflict(MP1FirstTerm, MP1SecondTerm)) {
-            setErrorMessage1("Conflit - Proposition 1 : Les deux termes ne peuvent pas être identiques.")
-        } else {
-            setErrorMessage1("")
-        }
-
-        if (handleTermConflict(MP2FirstTerm, MP2SecondTerm)) {
-            setErrorMessage2("Conflit - Proposition 2 : Les deux termes ne peuvent pas être identiques.")
-        } else {
-            setErrorMessage2("")
-        }
-
-        if ((middle.value !== "" && subject.value !== "" && subject.value !== "") && (middle.value === subject.value || middle.value === predicate.value || predicate.value === subject.value)) {
-            setErrorMessage2("Il ne peut y avoir qu'une unique répétition de moyen terme")
-        } else {
-            setErrorMessage2("")
-        }
-
-        const update = (subjectS : string, middleS : string, predicateS : string, figureS : Figure) => {
-            if(subjectS !== subject.value){
-                setSubject({...subject, value: subjectS})
-            }
-            if(middleS !== middle.value){
-                setMiddle({...middle, value: middleS})
-            }
-            if(predicateS !== predicate.value){
-                setPredicate({...predicate, value: predicateS})
-            }
-            if(figureS !== figure){
-                setFigure(figureS)
-            }
-        }
-
-        // Figure 3
-        if (MP1FirstTerm === MP2FirstTerm) {
-            update(MP2SecondTerm, MP1FirstTerm, MP1SecondTerm, Figure.Figure3)
-        }else if (MP1FirstTerm === MP2SecondTerm) {
-            // Figure 1
-            update(MP2FirstTerm, MP1FirstTerm, MP1SecondTerm, Figure.Figure1)
-        }else if (MP1SecondTerm === MP2FirstTerm) {
-            // Figure 4
-            update(MP2SecondTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure4)
-        }else if (MP1SecondTerm === MP2SecondTerm) {
-            // Figure 2
-            update(MP2FirstTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure2)
-        }
-
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, figure, middle, predicate, setFigure, setMiddle, setPredicate, setSubject, subject])
+    const { t } = useTranslation(I18N_NS)
 
     const validateInputs = () => {
         let isErrorMessage = false
 
-        if (!MP2SecondTerm) {
-            setErrorMessage2("Veuillez renseigner un terme dans le quatrième champ")
-            isErrorMessage = true
-        }
-
-        if (!MP2FirstTerm) {
-            setErrorMessage2("Veuillez renseigner un terme dans le troisième champ")
-            isErrorMessage = true
-        }
-
-        if (!MP1SecondTerm) {
-            setErrorMessage2("Veuillez renseigner un terme dans le deuxième champ")
-            isErrorMessage = true
-        }
-
-        if (!MP1FirstTerm) {
-            setErrorMessage2("Veuillez renseigner un terme dans le premier champ")
+        if (middle.value === predicate.value || middle.value === subject.value || predicate.value === subject.value) {
             isErrorMessage = true
         }
 
         if (!prop3Quantifier) {
-            setErrorMessage2("Veuillez renseigner le quantificateur de la troisième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
         }
 
         if (!prop2Quantifier) {
-            setErrorMessage2("Veuillez renseigner le quantificateur de la deuxième proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
         }
 
         if (!prop1Quantifier) {
-            setErrorMessage2("Veuillez renseigner le quantificateur de la première proposition")
+            messageKO.push("Veuillez renseigner le quantificateur de la première proposition")
+            isErrorMessage = true
+        }
+
+        if (![Figure.Figure1, Figure.Figure2, Figure.Figure3, Figure.Figure4].includes(figure)) {
+            messageKO.push("Veuillez renseigner une figure")
+            isErrorMessage = true
+        }
+
+        if (!middle.value) {
+            messageKO.push("Veuillez renseigner un moyen terme")
+            isErrorMessage = true
+        }
+
+        if (!predicate.value) {
+            messageKO.push("Veuillez renseigner un prédicat")
+            isErrorMessage = true
+        }
+
+        if (!subject.value) {
+            messageKO.push("Veuillez renseigner un sujet")
             isErrorMessage = true
         }
 
@@ -168,10 +105,10 @@ function SyllogismPropositions({
         if (!validateInputs()) {
             syllogism.link = verb
         } else {
-            setResult(checkRuu ?
+            setResult( checkRuu ?
                 check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
-        setMessageKO(() => messageKO)
+        setMessageKO([...messageKO])
     }
 
     const clearSyllogism = () => {
@@ -184,88 +121,114 @@ function SyllogismPropositions({
 
         setVerb("")
 
-        setMP1FirstTerm("")
-        setMP1SecondTerm("")
-        setMP2FirstTerm("")
-        setMP2SecondTerm("")
+        setFigure(Figure.Figure1)
 
         console.log("clear")
     }
 
+    const renderSyllogismMP1 = useCallback((figure: Figure) => {
+        switch (figure) {
+            case Figure.Figure1:
+            case Figure.Figure3:
+                return <SyllogismMP
+                        firstTerm={middle.value}
+                        secondTerm={predicate.value}
+                        quantifier={prop1Quantifier}
+                        setPropQuantifier={setProp1Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
+            case Figure.Figure2:
+            case Figure.Figure4:
+                return <SyllogismMP
+                        firstTerm={predicate.value}
+                        secondTerm={middle.value}
+                        quantifier={prop1Quantifier}
+                        setPropQuantifier={setProp1Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
+            default:
+                return <div>Please select a figure</div>
+        }
+    }, [middle.value, predicate.value, prop1Quantifier, setProp1Quantifier, setVerb, verb])
+
+    const renderSyllogismMP2 = useCallback((figure: Figure) => {
+        switch (figure) {
+            case Figure.Figure1:
+            case Figure.Figure2:
+                return <SyllogismMP
+                        firstTerm={subject.value}
+                        secondTerm={middle.value}
+                        quantifier={prop2Quantifier}
+                        setPropQuantifier={setProp2Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
+            case Figure.Figure3:
+            case Figure.Figure4:
+                return <SyllogismMP
+                        firstTerm={middle.value}
+                        secondTerm={subject.value}
+                        quantifier={prop2Quantifier}
+                        setPropQuantifier={setProp2Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
+            default:
+                return <div>Please select a figure</div>
+        }
+    }, [middle.value, prop2Quantifier, setProp2Quantifier, setVerb, subject.value, verb])
+
+    const renderSyllogismMP3 = useCallback((figure: Figure) => {
+        switch (figure) {
+            case Figure.Figure1:
+            case Figure.Figure2:
+            case Figure.Figure3:
+            case Figure.Figure4:
+                return <SyllogismMP
+                        firstTerm={subject.value}
+                        secondTerm={predicate.value}
+                        quantifier={prop3Quantifier}
+                        setPropQuantifier={setProp3Quantifier}
+                        verb={verb}
+                        setVerb={setVerb}
+                    />
+            default:
+                return <div>Please select a figure</div>
+        }
+    }, [predicate.value, prop3Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
+
     const [propositions, setPropositions] = useState([
-        <SyllogismMP1
-            MP1FirstTerm={MP1FirstTerm}
-            setMP1FirstTerm={setMP1FirstTerm}
-            MP1SecondTerm={MP1SecondTerm}
-            setMP1SecondTerm={setMP1SecondTerm}
-            quantifier={prop1Quantifier}
-            setProp1Quantifier={setProp1Quantifier}
-            verb={verb}
-            setVerb={setVerb}
-        />,
-        <SyllogismMP2
-            MP1FirstTerm={MP1FirstTerm}
-            MP1SecondTerm={MP1SecondTerm}
-            MP2FirstTerm={MP2FirstTerm}
-            setMP2FirstTerm={setMP2FirstTerm}
-            MP2SecondTerm={MP2SecondTerm}
-            setMP2SecondTerm={setMP2SecondTerm}
-            quantifier={prop2Quantifier}
-            setProp2Quantifier={setProp2Quantifier}
-            verb={verb}
-            setVerb={setVerb}
-        />,
-        <SyllogismMP3
-            subject={subject.value}
-            predicate={predicate.value}
-            quantifier={prop3Quantifier}
-            setProp3Quantifier={setProp3Quantifier}
-            verb={verb}
-            setVerb={setVerb}
-        />
+        renderSyllogismMP1(figure),
+        renderSyllogismMP2(figure),
+        renderSyllogismMP3(figure)
     ])
 
     useEffect(() => {
+        if ((subject.value !== "" && predicate.value !== "" && middle.value !== "") &&
+            (subject.value === predicate.value ||
+            subject.value === middle.value ||
+            predicate.value === middle.value)
+        ) {
+            messageKO.splice(0)
+            messageKO.push("Conflit - Les termes doivent être différents")
+            setMessageKO(() => messageKO)
+        }
+
         setPropositions([
-            <SyllogismMP1
-                MP1FirstTerm={MP1FirstTerm}
-                setMP1FirstTerm={setMP1FirstTerm}
-                MP1SecondTerm={MP1SecondTerm}
-                setMP1SecondTerm={setMP1SecondTerm}
-                quantifier={prop1Quantifier}
-                setProp1Quantifier={setProp1Quantifier}
-				verb={verb}
-				setVerb={setVerb}
-            />,
-            <SyllogismMP2
-                MP1FirstTerm={MP1FirstTerm}
-                MP1SecondTerm={MP1SecondTerm}
-                MP2FirstTerm={MP2FirstTerm}
-                setMP2FirstTerm={setMP2FirstTerm}
-                MP2SecondTerm={MP2SecondTerm}
-                setMP2SecondTerm={setMP2SecondTerm}
-                quantifier={prop2Quantifier}
-                setProp2Quantifier={setProp2Quantifier}
-				verb={verb}
-				setVerb={setVerb}
-            />,
-            <SyllogismMP3
-                subject={subject.value}
-                predicate={predicate.value}
-                quantifier={prop3Quantifier}
-                setProp3Quantifier={setProp3Quantifier}
-				verb={verb}
-				setVerb={setVerb}
-            />
+            renderSyllogismMP1(figure),
+            renderSyllogismMP2(figure),
+            renderSyllogismMP3(figure)
         ])
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, predicate.value, prop1Quantifier, prop2Quantifier, prop3Quantifier, setMP1FirstTerm, setMP1SecondTerm, setMP2FirstTerm, setMP2SecondTerm, setProp1Quantifier, setProp2Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
+    }, [figure, subject, predicate, middle, verb, renderSyllogismMP1, renderSyllogismMP2, renderSyllogismMP3, messageKO])
 
     const syllogismSize : number = syllogism.getPropositions().length
 
     return (
         <div className="section-premises">
             <div className="button-row">
-            <ToolbarButtons clearSyllogism={clearSyllogism} path="/docs/fr/Basic_Guide.pdf" />
+                <ToolbarButtons clearSyllogism={clearSyllogism} path="/docs/fr/Expert_Guide.pdf" />
                 <div className="switch-comp">
                     <label className="name1">{t("input.guided")}</label>
                     <label className="switch">
@@ -274,6 +237,14 @@ function SyllogismPropositions({
                             checked={expertMode}
                             onChange={() => {
                                 setExpertMode(!expertMode)
+                                prop1Quantifier.type = QuantifierType.A
+                                setProp1Quantifier({...prop1Quantifier})
+                                prop2Quantifier.type = QuantifierType.A
+                                setProp2Quantifier({...prop2Quantifier})
+                                prop3Quantifier.type = QuantifierType.A
+                                setProp3Quantifier({...prop3Quantifier})
+                                setFigure(Figure.Figure1)
+                                setVerb("")
                             }}
                         />
                         <span className="slider"></span>
@@ -283,14 +254,12 @@ function SyllogismPropositions({
             </div>
 
             <div className="syllogism-grid">
-                {errorMessage1 && <p style={{ color: "#fc9294" }}>{errorMessage1}</p>}
-                {errorMessage2 && <p style={{ color: "#fc9294" }}>{errorMessage2}</p>}
                 {propositions.map((proposition, index) => (
                     <Fragment key={index}>
                         <div className={"label-" + (index+1)}>
                             {
                                 syllogismSize - 1 != index &&
-                                    <label>Proposition {index + 1}</label>
+                                <label>Proposition {index + 1}</label>
                             }
                             {
                                 syllogismSize - 1 == index &&

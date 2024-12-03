@@ -1,20 +1,16 @@
-import SyllogismTerms from "./basic/SyllogismTerms"
-import SyllogismPropositions from "./basic/SyllogismPropositions"
-import SyllogismFigures from "./basic/SyllogismFigures"
-import { Figure } from "../../../model/Figure"
-import { Term } from "../../../model/Term"
 import { Quantifier } from "../../../model/Quantifier"
+import { Term } from "../../../model/Term"
+import SyllogismPropositions from "./basic/SyllogismPropositions"
 import {Syllogism} from "../../../model/Syllogism.ts";
+import {Figure} from "../../../model/Figure.ts";
 
-interface Basic_SyllogismProps {
+interface Expert_SyllogismProps {
 	subject: Term
 	setSubject: (value: Term) => void
 	predicate: Term
 	setPredicate: (value: Term) => void
 	middle: Term
 	setMiddle: (value: Term) => void
-	figure: Figure
-	setFigure: (value: Figure) => void
 	expertMode: boolean
 	setExpertMode: (value: boolean) => void
 	prop1Quantifier: Quantifier
@@ -25,38 +21,26 @@ interface Basic_SyllogismProps {
 	setProp3Quantifier: (value: Quantifier) => void
 	verb: string
 	setVerb: (value: string) => void
-	syllogism: Syllogism
+	syllogism : Syllogism
+	figure: Figure
+	setFigure: (value: Figure) => void
 }
 
 export const Basic_Syllogism = ({
 	subject, setSubject,
 	predicate, setPredicate,
 	middle, setMiddle,
-	figure, setFigure,
 	expertMode, setExpertMode,
 	prop1Quantifier, setProp1Quantifier,
 	prop2Quantifier, setProp2Quantifier,
 	prop3Quantifier, setProp3Quantifier,
 	verb, setVerb,
-	syllogism
-}: Basic_SyllogismProps) => {
+	syllogism,
+	figure, setFigure
+}: Expert_SyllogismProps) => {
+
 	return (
 		<>
-			<div className="section-terms-figures">
-				<SyllogismTerms
-					subject={subject}
-					setSubject={setSubject}
-					middle={middle}
-					setMiddle={setMiddle}
-					predicate={predicate}
-					setPredicate={setPredicate}
-				/>
-				<SyllogismFigures
-					figure={figure}
-					setFigure={setFigure}
-				/>
-			</div>
-
 			<SyllogismPropositions
 				subject={subject}
 				setSubject={setSubject}
@@ -64,8 +48,6 @@ export const Basic_Syllogism = ({
 				setPredicate={setPredicate}
 				middle={middle}
 				setMiddle={setMiddle}
-				figure={figure}
-				setFigure={setFigure}
 				expertMode={expertMode}
 				setExpertMode={setExpertMode}
 				prop1Quantifier={prop1Quantifier}
@@ -77,6 +59,8 @@ export const Basic_Syllogism = ({
 				verb={verb}
 				setVerb={setVerb}
 				syllogism={syllogism}
+				figure={figure}
+				setFigure={setFigure}
 			/>
 		</>
 	)

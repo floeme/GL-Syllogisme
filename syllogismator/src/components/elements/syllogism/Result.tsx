@@ -25,6 +25,23 @@ function ResultProposition({checkResult, messageKO}: ResultProposition) {
 
     const {t} = useTranslation(I18N_NS);
     const filterResults = (toFilter : CheckResults, valid: boolean)  => {
+
+        if(messageKO.length > 0) {
+            return (
+                <div id="result">
+                    <div id="msgko">
+                        <p>{t("syllogism.summary.ko")}</p>
+                        <p>{messageKO.length}</p>
+                        {messageKO.map((koMessage, i) => (
+                            <div key={i}>
+                                <NoCheckIcon/> {koMessage}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )
+        }
+
         const res : string[] = []
 
         toFilter.results.forEach((value, key) => {

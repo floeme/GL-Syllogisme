@@ -2,8 +2,8 @@ import { Figure } from "../../model/Figure.ts"
 import { Quantifier } from "../../model/Quantifier.ts"
 import { QuantifierType } from "../../model/QuantifierType.ts"
 import { Term } from "../../model/Term.ts"
-import Basic_Syllogism from "../elements/syllogism/Basic_Syllogism.tsx"
 import Expert_Syllogism from "../elements/syllogism/Expert_Syllogism.tsx"
+import Basic_Syllogism from "../elements/syllogism/Basic_Syllogism.tsx"
 import { useState } from "react"
 import {Syllogism} from "../../model/Syllogism.ts";
 
@@ -35,7 +35,7 @@ export const SyllogismPage = () => {
 		<>
 			{expertMode == true ?
 				<div className="syllogism-container-easy">
-					<Basic_Syllogism
+					<Expert_Syllogism
 						subject={subject}
 						setSubject={setSubject}
 						predicate={predicate}
@@ -59,7 +59,7 @@ export const SyllogismPage = () => {
 				</div>
 				:
 				<div className="syllogism-container-expert">
-					<Expert_Syllogism
+					<Basic_Syllogism
 						subject={subject}
 						setSubject={setSubject}
 						predicate={predicate}
