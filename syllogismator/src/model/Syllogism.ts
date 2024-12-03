@@ -346,5 +346,17 @@ export class Syllogism {
         // The syllogism has a valid structure if it was not invalidated above.
         return true;
     }
+
+    toString(): string {
+        let str = "";
+
+        for (let i = 0; i < this.premises.length; ++i) {
+            str += i + " : " + this.premises[i] + "\n";
+        }
+
+        str += this.conclusion;
+
+        return str;
+    }
 }
 
