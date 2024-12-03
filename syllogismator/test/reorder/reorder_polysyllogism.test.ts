@@ -25,21 +25,12 @@ describe("Test : reorder a valid order polysyllogism", () => {
         updatePropositionType(polysyllogism.getProposition(2), new Quantifier("Q", QuantifierType.A), M2, S); // (M2 - S)
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), S, P), -1);   // (S - P)
 
-        const expected = polysyllogism.getPropositions();
-        let tmp : string = "";
-        expected.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("Expected : " + tmp);
+        console.log("Expected : " + polysyllogism.toString());
 
         polysyllogism.autoReorder();
 
         const received : Proposition[] = polysyllogism.getPropositions();
-        tmp = "";
-        received.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("\nReceived : " + tmp);
+        console.log("\nReceived : " + polysyllogism.toString());
 
         expect([1,0]).toContain(received[0].indexOf(P));
         expect([1,0]).toContain(received[0].indexOf(M1));
@@ -68,21 +59,12 @@ describe("Test : reorder a valid order polysyllogism", () => {
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), M3, S), -1);   // (M3 - S)
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), S, P), -1);   // (S - P)
 
-        const expected = polysyllogism.getPropositions();
-        let tmp : string = "";
-        expected.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("Expected : " + tmp);
+        console.log("Expected : " + polysyllogism.toString());
 
         polysyllogism.autoReorder();
 
         const received : Proposition[] = polysyllogism.getPropositions();
-        tmp = "";
-        received.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("\nReceived : " + tmp);
+        console.log("\nReceived : " + polysyllogism.toString());
 
         expect([1,0]).toContain(received[0].indexOf(P));
         expect([1,0]).toContain(received[0].indexOf(M1));
@@ -116,21 +98,12 @@ describe("Test : reorder a valid order polysyllogism", () => {
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), M4, S), -1);   // (M4 - S)
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), S, P), -1);   // (S - P)
 
-        const expected = polysyllogism.getPropositions();
-        let tmp : string = "";
-        expected.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("Expected : " + tmp);
+        console.log("Expected : " + polysyllogism.toString());
 
         polysyllogism.autoReorder();
 
         const received : Proposition[] = polysyllogism.getPropositions();
-        tmp = "";
-        received.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("\nReceived : " + tmp);
+        console.log("\nReceived : " + polysyllogism.toString());
 
         expect([1,0]).toContain(received[0].indexOf(P));
         expect([1,0]).toContain(received[0].indexOf(M1));
@@ -160,27 +133,17 @@ describe("Test : reorder a non valid order polysyllogism", ()=> {
         const M2 = new Term("M2");
         const S = new Term("S");
 
-
         updatePropositionType(polysyllogism.getProposition(0), new Quantifier("Q", QuantifierType.A), M1, M2);// (M1 - M2)
         updatePropositionType(polysyllogism.getProposition(1), new Quantifier("Q", QuantifierType.A), P, M1);//  (P - M1)
         updatePropositionType(polysyllogism.getProposition(2), new Quantifier("Q", QuantifierType.A), M2, S);// (M2 - S)
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), S, P), -1);// (S - P)
 
-        const before = polysyllogism.getPropositions();
-        let tmp : string = "";
-        before.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("before : " + tmp);
+        console.log("before : " + polysyllogism.toString());
 
         polysyllogism.autoReorder();
 
         const after : Proposition[] = polysyllogism.getPropositions();
-        tmp = "";
-        after.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("\nReceived : " + tmp);
+        console.log("\nReceived : " + polysyllogism.toString());
 
         expect([1,0]).toContain(after[0].indexOf(P));
         expect([1,0]).toContain(after[0].indexOf(M1));
@@ -208,21 +171,12 @@ describe("Test : reorder a non valid order polysyllogism", ()=> {
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), M3, S), -1);// (M3 - S)
         polysyllogism.addProposition(Proposition.withTerms( new Quantifier("Q", QuantifierType.A), S, P), -1);// (S - P)
 
-        const before = polysyllogism.getPropositions();
-        let tmp : string = "";
-        before.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("before : " + tmp);
+        console.log("before : " + polysyllogism.toString());
 
         polysyllogism.autoReorder();
 
         const after : Proposition[] = polysyllogism.getPropositions();
-        tmp = "";
-        after.map((p) => {
-            tmp = tmp + "\nsubject : " + p.subject!.value + " | predicate : " + p.predicate!.value;
-        })
-        console.log("\nReceived : " + tmp);
+        console.log("\nReceived : " + polysyllogism.toString());
 
         expect([1,0]).toContain(after[0].indexOf(P));
         expect([1,0]).toContain(after[0].indexOf(M1));
