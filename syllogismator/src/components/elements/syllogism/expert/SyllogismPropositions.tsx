@@ -84,6 +84,12 @@ function SyllogismPropositions({
             setErrorMessage2("")
         }
 
+        if ((middle.value !== "" && subject.value !== "" && subject.value !== "") && (middle.value === subject.value || middle.value === predicate.value || predicate.value === subject.value)) {
+            setErrorMessage2("Il ne peut y avoir qu'une unique répétition de moyen terme")
+        } else {
+            setErrorMessage2("")
+        }
+
         const update = (subjectS : string, middleS : string, predicateS : string, figureS : Figure) => {
             if(subjectS !== subject.value){
                 setSubject({...subject, value: subjectS})
@@ -118,43 +124,38 @@ function SyllogismPropositions({
     const validateInputs = () => {
         let isErrorMessage = false
 
-        if (middle.value === subject.value || middle.value === predicate.value || predicate.value === subject.value) {
-            messageKO.push("Il ne peut y avoir qu'une unique répétition de moyen terme")
-            isErrorMessage = true
-        }
-
         if (!MP2SecondTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le quatrième champ")
+            setErrorMessage2("Veuillez renseigner un terme dans le quatrième champ")
             isErrorMessage = true
         }
 
         if (!MP2FirstTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le troisième champ")
+            setErrorMessage2("Veuillez renseigner un terme dans le troisième champ")
             isErrorMessage = true
         }
 
         if (!MP1SecondTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le deuxième champ")
+            setErrorMessage2("Veuillez renseigner un terme dans le deuxième champ")
             isErrorMessage = true
         }
 
         if (!MP1FirstTerm) {
-            messageKO.push("Veuillez renseigner un terme dans le premier champ")
+            setErrorMessage2("Veuillez renseigner un terme dans le premier champ")
             isErrorMessage = true
         }
 
         if (!prop3Quantifier) {
-            messageKO.push("Veuillez renseigner le quantificateur de la troisième proposition")
+            setErrorMessage2("Veuillez renseigner le quantificateur de la troisième proposition")
             isErrorMessage = true
         }
 
         if (!prop2Quantifier) {
-            messageKO.push("Veuillez renseigner le quantificateur de la deuxième proposition")
+            setErrorMessage2("Veuillez renseigner le quantificateur de la deuxième proposition")
             isErrorMessage = true
         }
 
         if (!prop1Quantifier) {
-            messageKO.push("Veuillez renseigner le quantificateur de la première proposition")
+            setErrorMessage2("Veuillez renseigner le quantificateur de la première proposition")
             isErrorMessage = true
         }
 
