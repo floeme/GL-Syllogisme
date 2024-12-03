@@ -70,6 +70,11 @@ function ResultProposition({checkResult, messageKO}: ResultProposition) {
                     <div id="msgok">
                         <p>{t("syllogism.summary.ok")}</p>
                         <p>{res.length}</p>
+                        {checkResult?.validWithUniversalConclusion &&
+                            <div>
+                                <CheckIcon/> {t("universal")}
+                            </div>
+                        }
                         {res.map((ruleID) => (
 
                             <div>
@@ -82,11 +87,11 @@ function ResultProposition({checkResult, messageKO}: ResultProposition) {
         }
     }
 
-    if(messageKO.length === 0) {
+    if (messageKO.length === 0) {
         return (
             (checkResult) && (
                 <div id="result">
-                    <p>{t(`syllogism.${checkResult.valid}`)}</p>
+                <p>{t(`syllogism.${checkResult.valid}`)}</p>
 
                     {
                         filterResults(checkResult, false)
