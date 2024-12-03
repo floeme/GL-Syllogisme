@@ -118,6 +118,8 @@ export const Polysyllogism = () => {
         setMessageKO(() => messageKO)
     }
 
+    const syllogismSize : number = syllogism.getPropositions().length
+
     return (
         <div className="section-premises">
             <div className="button-row">
@@ -163,7 +165,7 @@ export const Polysyllogism = () => {
                                                             syllogism={syllogism}
                                                             proposition={proposition}
                                                         />
-                                                        {index >= 3 && (
+                                                        {syllogismSize > 3 && syllogismSize-1 != index &&(
                                                             <button onClick={() => removeProposition(index)}>🗑️</button>
                                                         )}
                                                     </div>
