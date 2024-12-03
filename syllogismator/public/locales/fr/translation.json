@@ -61,41 +61,49 @@
         "description": "S'il y a une prémisse négative, alors la conclusion est négative.",
         "passed": "Il y a une prémisse négative et la conclusion est négative.",
         "failed": "Il y a une prémisse négative mais la conclusion est affirmative, ce syllogisme est donc invalide.",
-        "2_affirmative_premises": "Les deux prémisses sont affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
+        "all_affirmative_premises": "Toutes les prémisses sont affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
       },
       "Raa": {
         "name": "Règle des deux prémisses affirmatives",
         "description": "Deux prémisses affirmatives conduisent à une conclusion affirmative.",
         "passed": "Les deux prémisses sont affirmatives et la conclusion est affirmative.",
         "failed": "Les deux prémisses sont affirmatives mais la conclusion est affirmative, ce syllogisme est donc invalide.",
-        "negative_premise": "Il y a une prémisse négative, cette règle ne s'applique donc pas à ce syllogisme."
+        "passed_poly": "Il y a au moins deux prémisses affirmatives et la conclusion est affirmative.",
+        "failed_poly": "Il y a au moins deux prémisses affirmatives mais la conclusion est affirmative, ce syllogisme est donc invalide.",
+        "negative_premise": "Il y a une prémisse négative, cette règle ne s'applique donc pas à ce syllogisme.",
+        "not_2_affirmative_premises": "Il y a moins de deux prémisses affirmatives, cette règle ne s'applique donc pas à ce syllogisme."
       },
       "Rpp": {
         "name": "Règle des deux prémisses particulières",
         "description": "Deux prémisses particulières ne conduisent pas à une conclusion.",
         "passed": "Il y a au moins une prémisse universelle.",
-        "failed": "Les deux prémisses sont particulières, ce syllogisme est donc invalide."
+        "failed": "Les deux prémisses sont particulières, ce syllogisme est donc invalide.",
+        "passed_poly": "Il y a au moins une prémisse universelle.",
+        "failed_poly": "Il y a au moins deux prémisses particulières, ce syllogisme est donc invalide."
       },
       "Rp": {
         "name": "Règle de la prémisse particulière",
         "description": "S'il y a une prémisse particulière, alors la conclusion est particulière.",
         "passed": "Il y a une prémisse particulière et la conclusion est particulière.",
         "failed": "Il y a une prémisse particulière mais la conclusion est universelle, ce syllogisme est donc invalide.",
-        "2_universal_premises": "Les deux prémisses sont universelles, cette règle ne s'applique donc pas à ce syllogisme."
+        "all_universal_premises": "Toutes les prémisses sont universelles, cette règle ne s'applique donc pas à ce syllogisme."
       },
       "Ruu": {
         "name": "Règle de l'hypothèse d'existence",
         "description": "Deux prémisses universelles ne conduisent pas à une conclusion particulière.",
         "passed": "Les deux prémisses sont universelles et la conclusion est universelle.",
         "failed": "Les deux prémisses sont universelles mais la conclusion est particulière, ce syllogisme est donc invalide.",
-        "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme."
+        "passed_poly": "Il y a au moins deux prémisses universelles et la conclusion est universelle.",
+        "failed_poly": "Il y a au moins deux prémisses universelles mais la conclusion est particulière, ce syllogisme est donc invalide.",
+        "particular_premise": "Il y a une prémisse particulière, cette règle ne s'applique donc pas à ce syllogisme.",
+        "not_2_universal_premises": "Il y a moins de deux prémisses universelles, cette règle ne s'applique donc pas à ce syllogisme."
       }
     },
-    "true": "Syllogism OK",
-    "false": "Syllogism KO",
+    "true": "Le syllogisme saisi est valide.",
+    "false": "Le syllogisme saisi est invalide.",
     "summary": {
-      "ok": "Règle valide",
-      "ko": "Règle invalide"
+      "ok": "Règles valides",
+      "ko": "Règles invalides"
     },
     "conclusion_term_tooltip": {
       "subject": "Le sujet de la conclusion est le terme qui apparaît dans la seconde prémisse.",

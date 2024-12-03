@@ -161,11 +161,15 @@ function rlh_universalConclusion(s: Syllogism): boolean {
 export const Rnn: Rule = {
     id: "Rnn",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            return buildRuleResult(
-                s.getProposition(0).quantifier!.type.affirmative || s.getProposition(1).quantifier!.type.affirmative
-            );
-        } else throw Error("Not implemented."); // TODO
+        let negativePremises = 0;
+
+        let i = 0;
+        while (negativePremises < 2 && i < s.premises.length) {
+            if (!s.premises[i].quantifier!.type.affirmative) ++negativePremises;
+            ++i;
+        }
+
+        return buildRuleResult(negativePremises < 2);
     }
 }
 
@@ -177,16 +181,22 @@ export const Rnn: Rule = {
 export const Rn: Rule = {
     id: "Rn",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (!s.getProposition(0).quantifier!.type.affirmative || !s.getProposition(1).quantifier!.type.affirmative) {
-                return buildRuleResult(!s.conclusion.quantifier!.type.affirmative);
-            } else {
-                return {
-                    valid: true,
-                    message: "2_affirmative_premises"
-                };
-            }
-        } else throw Error("Not implemented."); // TODO
+        let negativePremise = false;
+
+        let i = 0;
+        while (!negativePremise && i < s.premises.length) {
+            negativePremise = !s.premises[i].quantifier!.type.affirmative;
+            ++i;
+        }
+
+        if (negativePremise) {
+            return buildRuleResult(!s.conclusion.quantifier!.type.affirmative);
+        } else {
+            return {
+                valid: true,
+                message: "all_affirmative_premises"
+            };
+        }
     }
 }
 
@@ -198,16 +208,24 @@ export const Rn: Rule = {
 export const Raa: Rule = {
     id: "Raa",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (s.getProposition(0).quantifier!.type.affirmative && s.getProposition(1).quantifier!.type.affirmative) {
-                return buildRuleResult(s.conclusion.quantifier!.type.affirmative);
-            } else {
-                return {
-                    valid: true,
-                    message: "negative_premise"
-                };
-            }
-        } else throw Error("Not implemented."); // TODO
+        let affirmativePremises = 0;
+
+        let i = 0;
+        while (affirmativePremises < 2 && i < s.premises.length) {
+            if (s.premises[i].quantifier!.type.affirmative) ++affirmativePremises;
+            ++i;
+        }
+
+        if (affirmativePremises === 2) {
+            const result = buildRuleResult(s.conclusion.quantifier!.type.affirmative);
+            if (s.getPropositionCount() > 3) result.message += "_poly";
+            return result;
+        } else {
+            return {
+                valid: true,
+                message: s.getPropositionCount() > 3 ? "not_2_affirmative_premises" : "negative_premise"
+            };
+        }
     }
 }
 
@@ -219,11 +237,15 @@ export const Raa: Rule = {
 export const Rpp: Rule = {
     id: "Rpp",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            return buildRuleResult(
-                s.getProposition(0).quantifier!.type.universal || s.getProposition(1).quantifier!.type.universal
-            );
-        } else throw Error("Not implemented."); // TODO
+        let particularPremises = 0;
+
+        let i = 0;
+        while (particularPremises < 2 && i < s.premises.length) {
+            if (!s.premises[i].quantifier!.type.universal) ++particularPremises;
+            ++i;
+        }
+
+        return buildRuleResult(particularPremises < 2);
     }
 }
 
@@ -235,18 +257,24 @@ export const Rpp: Rule = {
 export const Rp: Rule = {
     id: "Rp",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (!s.getProposition(0).quantifier!.type.universal || !s.getProposition(1).quantifier!.type.universal) {
-                const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
-                result.validWithUniversalConclusion = false;
-                return result;
-            } else {
-                return {
-                    valid: true,
-                    message: "2_universal_premises"
-                };
-            }
-        } else throw Error("Not implemented."); // TODO
+        let particularPremise = false;
+
+        let i = 0;
+        while (!particularPremise && i < s.premises.length) {
+            particularPremise = !s.premises[i].quantifier!.type.universal;
+            i++;
+        }
+
+        if (particularPremise) {
+            const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
+            if (s.getPropositionCount() > 3) result.message += "_poly";
+            return result;
+        } else {
+            return {
+                valid: true,
+                message: "all_universal_premises"
+            };
+        }
     }
 }
 
@@ -258,22 +286,26 @@ export const Rp: Rule = {
  * ## Existence hypothesis Rule (Ruu)
  * Two universal premises do not lead to a particular conclusion.
  */
-/**
- * ## Existence hypothesis Rule (Ruu)
- * Two universal premises do not lead to a particular conclusion.
- */
 export const Ruu: Rule = {
     id: "Ruu",
     check: (s) => {
-        if (s.getPropositionCount() === 3) {
-            if (s.getProposition(0).quantifier!.type.universal && s.getProposition(1).quantifier!.type.universal) {
-                return buildRuleResult(s.conclusion.quantifier!.type.universal);
-            } else {
-                return {
-                    valid: true,
-                    message: "particular_premise"
-                };
-            }
-        } else throw Error("Not implemented."); // TODO
+        let universalPremises = 0;
+
+        let i = 0;
+        while (universalPremises < 2 && i < s.premises.length) {
+            if (s.premises[i].quantifier!.type.universal) ++universalPremises;
+            ++i;
+        }
+
+        if (universalPremises === 2) {
+            const result = buildRuleResult(s.conclusion.quantifier!.type.universal);
+            if (s.getPropositionCount() > 3) result.message += "_poly";
+            return result;
+        } else {
+            return {
+                valid: true,
+                message: s.getPropositionCount() > 3 ? "particular_premise" : "not_2_universal_premises"
+            };
+        }
     }
 }

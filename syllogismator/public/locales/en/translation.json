@@ -61,41 +61,49 @@
         "description": "If one premise is negative, the conclusion is negative.",
         "passed": "There is one negative premise and the conclusion is negative.",
         "failed": "There is one negative premise but the conclusion is affirmative, so this syllogism is invalid.",
-        "2_affirmative_premises": "Both premises are affirmative, so this rule is not applicable to this syllogism."
+        "all_affirmative_premises": "All premises are affirmative, so this rule is not applicable to this syllogism."
       },
       "Raa": {
         "name": "Two Affirmative Premises Rule",
         "description": "Two affirmative premises lead to an affirmative conclusion.",
         "passed": "Both premises are affirmative and the conclusion is affirmative.",
         "failed": "Both premises are affirmative but the conclusion is negative, so this syllogism is invalid.",
-        "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism."
+        "passed_poly": "There are at least two affirmative premises and the conclusion is affirmative.",
+        "failed_poly": "There are at least two affirmative premises but the conclusion is negative, so this syllogism is invalid.",
+        "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism.",
+        "not_2_affirmative_premises": "There is less than two affirmative premises, so this rule is not applicable to this syllogism."
       },
       "Rpp": {
         "name": "Two Particular Premises Rule",
         "description": "Two particular premises do not lead to a conclusion.",
         "passed": "There is at least one universal premise.",
-        "failed": "Both premises are particular, so this syllogism is invalid."
+        "failed": "Both premises are particular, so this syllogism is invalid.",
+        "passed_poly": "There is at least one universal premise.",
+        "failed_poly": "There are at least two particular premises, so this syllogism is invalid."
       },
       "Rp": {
         "name": "One Particular Premise Rule",
         "description": "If one premise is particular, the conclusion is particular.",
         "passed": "There is a particular premise and the conclusion is particular.",
         "failed": "There is a particular premise but the conclusion is universal, so this syllogism is invalid.",
-        "2_universal_premises": "Both premises are universal, so this rule is not applicable to this syllogism."
+        "all_universal_premises": "All premises are universal, so this rule is not applicable to this syllogism."
       },
       "Ruu": {
         "name": "Existence Hypothesis Rule",
         "description": "Two universal premises do not lead to a particular conclusion.",
         "passed": "Both premises are universal and the conclusion is universal.",
         "failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
-        "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism."
+        "passed_poly": "There are at least two universal premises and the conclusion is universal.",
+        "failed_poly": "There are at least two universal premises but the conclusion is particular, so this syllogism is invalid.",
+        "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism.",
+        "not_2_universal_premises": "There are less than two universal premises, so this rule is not applicable to this syllogism."
       }
     },
-    "true": "Syllogism is Right",
-    "false": "Syllogism is Wrong",
+    "true": "This syllogism is valid",
+    "false": "This syllogism is not valid",
     "summary": {
-      "ok": "Right Rules",
-      "ko": "Failed Rules"
+      "ok": "Passing Rules",
+      "ko": "Failing Rules"
     },
     "conclusion_term_tooltip": {
       "subject": "The subject of the conclusion is the term which appears in the second premise.",
