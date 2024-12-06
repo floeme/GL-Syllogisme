@@ -160,26 +160,32 @@ export class Syllogism {
      * @private
      */
     private autoReorder_aux(term: Term, minIndex: number, maxIndex: number, index: number): Term {
-        // Find premise containing term
-        let otherTerm: Term;
-        let premise: Proposition;
-        let found = false;
-        let i = minIndex;
-        while (!found && i < maxIndex) {
-            premise = this.premises[i];
-            if (premise.subject === term) {
-                otherTerm = premise.predicate!;
-                found = true;
-            } else if (premise.predicate === term) {
-                otherTerm = premise.subject!;
-                found = true;
-            } else ++i;
+        if (minIndex < maxIndex) {
+            // Find premise containing term
+            let otherTerm: Term;
+            let premise: Proposition;
+            let found = false;
+            let i = minIndex;
+            while (!found && i < maxIndex) {
+                premise = this.premises[i];
+                if (premise.subject === term) {
+                    otherTerm = premise.predicate!;
+                    found = true;
+                } else if (premise.predicate === term) {
+                    otherTerm = premise.subject!;
+                    found = true;
+                } else ++i;
+            }
+
+            // Move the premise to index
+            if (i !== index) this.reorderProposition(i, index);
+
+            return otherTerm!; // we assume the syllogism has valid structure, so otherTerm has been assigned
+        } else {
+            // No premise to move
+            let premise = this.premises[minIndex];
+            return premise.subject! === term ? premise.predicate! : premise.subject!;
         }
-
-        // Move the premise to index
-        if (i !== index) this.reorderProposition(i, index);
-
-        return otherTerm!; // we assume the syllogism has valid structure, so otherTerm has been assigned
     }
 
     /**
@@ -345,6 +351,18 @@ export class Syllogism {
 
         // The syllogism has a valid structure if it was not invalidated above.
         return true;
+    }
+
+    toString(): string {
+        let str = "";
+
+        for (let i = 0; i < this.premises.length; ++i) {
+            str += i + " : " + this.premises[i] + "\n";
+        }
+
+        str += "C : " + this.conclusion;
+
+        return str;
     }
 }
 
