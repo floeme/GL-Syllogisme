@@ -12,7 +12,7 @@ import {Syllogism} from "../../../../model/Syllogism.ts";
 import {check, CheckResults, getAllRules} from "../../../../model/Rule.ts";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
 import {Figure} from "../../../../model/Figure.ts";
-import ResultProposition from "../Result.tsx";
+import ResultReport from "../Result.tsx";
 import {LinkVerbTooltip} from "../../LinkVerbTooltip.tsx";
 
 interface SyllogismPremisesProps {
@@ -300,7 +300,7 @@ function SyllogismPropositions({
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
-                <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
+                <ResultReport checkResult={result} messageKO={messageKO}></ResultReport>
             </div>
 
             <LinkVerbTooltip/>

@@ -10,7 +10,7 @@ import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../../../model/RulesImpl.ts";
-import ResultProposition from "../Result.tsx";
+import ResultReport from "../Result.tsx";
 import {ToolbarButtons} from "../Toolbar.tsx"
 import {LinkVerbTooltip} from "../../LinkVerbTooltip.tsx";
 
@@ -277,7 +277,7 @@ function SyllogismPropositions({
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
-                <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
+                <ResultReport checkResult={result} messageKO={messageKO}></ResultReport>
             </div>
 
             <LinkVerbTooltip/>

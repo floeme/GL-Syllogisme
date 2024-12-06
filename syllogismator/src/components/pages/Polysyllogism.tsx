@@ -13,7 +13,7 @@ import { Syllogism } from "../../model/Syllogism"
 import PolyModal from "../elements/modals/PolyModal"
 import {check, CheckResults, getAllRules} from "../../model/Rule.ts";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../model/RulesImpl.ts";
-import ResultProposition from "../elements/syllogism/Result.tsx";
+import ResultReport from "../elements/syllogism/Result.tsx";
 import {RuuCheckbox} from "../elements/syllogism/RuuCheckbox.tsx";
 import {LinkVerbTooltip} from "../elements/LinkVerbTooltip.tsx";
 
@@ -201,7 +201,7 @@ export const Polysyllogism = () => {
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("buttons.check")}</button>
                 </div>
-                <ResultProposition checkResult={result} messageKO={messageKO}></ResultProposition>
+                <ResultReport checkResult={result} messageKO={messageKO}></ResultReport>
             </div>
 
             <LinkVerbTooltip/>
