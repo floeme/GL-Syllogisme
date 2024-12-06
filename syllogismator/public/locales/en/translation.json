@@ -148,7 +148,8 @@
     "select_term": "Select a term",
     "type_term": "Type a term",
     "guided": "Guided Input",
-    "expert": "Expert Mode"
+    "expert": "Expert Mode",
+    "invalid": "Invalid input"
   },
   "polysyllogism": {
     "errorMessages": {

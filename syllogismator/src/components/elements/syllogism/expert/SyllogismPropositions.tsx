@@ -277,7 +277,7 @@ function SyllogismPropositions({
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
-                <ResultReport checkResult={result} messageKO={messageKO}></ResultReport>
+                <ResultReport checkResults={result} inputErrors={messageKO}></ResultReport>
             </div>
 
             <LinkVerbTooltip/>

@@ -1,126 +1,99 @@
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../i18n.ts";
-import React from "react";
 import {CheckResults} from "../../../model/Rule.ts";
 import {RULE_I18N_NAMESPACE} from "../../../model/Rule.ts";
+import {Tooltip} from "react-tooltip";
 
-const OKIcon : React.FC = () => {
-    return (
-        <img src="images/check_mark.svg" alt="OK"/>
-    );
-};
-
-const KOIcon: React.FC = () => {
-    return (
-        <img src="images/close_mark.svg" alt="KO"/>
-    );
-};
+const RULE_TOOLTIP_ID = "rule-tooltip";
 
 interface ResultReportProps {
-    checkResult: CheckResults | undefined
-    messageKO: string[]
+    checkResults: CheckResults | undefined
+    inputErrors: string[]
 }
 
-function ResultReport({checkResult, messageKO}: ResultReportProps) {
+function ResultReport({checkResults, inputErrors}: ResultReportProps) {
+    const inputErrorsPresent = inputErrors.length > 0;
 
-    const {t} = useTranslation(I18N_NS);
-    const filterResults = (toFilter : CheckResults, valid: boolean)  => {
+    if (checkResults || inputErrorsPresent) {
+        return <section className="result">
+            { (inputErrorsPresent) && <InputErrors inputErrors={inputErrors} /> }
+            { (checkResults) && <RuleReport checkResults={checkResults} /> }
 
-        if(messageKO.length > 0) {
-            return (
-                <div id="result">
-                    <div id="msgko">
-                        <p>{t("syllogism.summary.ko")}</p>
-                        <p>{messageKO.length}</p>
-                        {messageKO.map((koMessage, i) => (
-                            <div key={i}>
-                                <KOIcon/> {koMessage}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )
-        }
 
-        const res : string[] = []
+        </section>
+    } else {
+        return <></>
+    }
+}
+
+export default ResultReport;
+
+function InputErrors({inputErrors}: {inputErrors: string[]}) {
+    const { t } = useTranslation(I18N_NS);
+
+    return <>
+        <p className="result__header">{t("input.invalid")}</p>
+
+        <ul className="result__msgko">
+            { inputErrors.map((koMessage, i) => (
+                <li key={i}>{koMessage}</li>
+            )) }
+        </ul>
+    </>
+}
+
+function RuleReport({checkResults}: {checkResults: CheckResults}) {
+    const { t } = useTranslation(I18N_NS);
+
+    const renderResults = (toFilter: CheckResults, valid: boolean)  => {
+        const ruleIDs : string[] = []
 
         toFilter.results.forEach((value, key) => {
             if(value.valid == valid)
-                res.push(key);
+                ruleIDs.push(key);
         })
 
-        if(!valid) {
-            return (
-                (res.length !== 0) && (
-                    <div id="msgko">
-                        <p>{t("syllogism.summary.ko")}</p>
-                        <p>{res.length}</p>
-                        {res.map((ruleID) => (
+        if (ruleIDs.length > 0) {
+            return <div className="result__group">
+                <p>{t(`syllogism.summary.${valid ? "ok" : "ko"}`)} ({ruleIDs.length})</p>
 
-                            <div>
-                                <KOIcon/> {ruleID + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleID}.${toFilter.results.get(ruleID)!.message}`)}
-                            </div>
-                        ))}
-                    </div>
-                )
-            )
-        }else{
-            return (
-                (res.length !== 0) && (
-                    <div id="msgok">
-                        <p>{t("syllogism.summary.ok")}</p>
-                        <p>{res.length}</p>
-                        {checkResult?.validWithUniversalConclusion &&
-                            <div>
-                                <OKIcon/> {t("universal")}
-                            </div>
-                        }
-                        {res.map((ruleID) => (
-
-                            <div>
-                                <OKIcon/> {ruleID + " · " + t(`${RULE_I18N_NAMESPACE}.${ruleID}.${toFilter.results.get(ruleID)!.message}`)}
-                            </div>
-                        ))}
-                    </div>
-                )
-            )
+                <ul className={`result__${valid ? "msgok" : "msgko"}`}>
+                    { ruleIDs.map((ruleID) => <li key={ruleID}>
+                        <span className="result__ruleid"
+                              data-tooltip-id={RULE_TOOLTIP_ID}
+                              data-tooltip-content={ruleID}>
+                            {ruleID}
+                        </span>
+                        &nbsp;·&nbsp;
+                        {t(`${RULE_I18N_NAMESPACE}.${ruleID}.${toFilter.results.get(ruleID)!.message}`)}
+                    </li>) }
+                </ul>
+            </div>
+        } else {
+            return <></>
         }
     }
 
-    if (messageKO.length === 0) {
-        return (
-            (checkResult) && (
-                <div id="result">
-                <p>{t(`syllogism.${checkResult.valid}`)}</p>
+    return <>
+        <p className="result__header">{t(`syllogism.${checkResults.valid}`)}</p>
 
-                    {
-                        filterResults(checkResult, false)
-                    }
+        { !checkResults.valid && renderResults(checkResults, false) }
+        { renderResults(checkResults, true) }
 
-                    {
-                        filterResults(checkResult, true)
-                    }
-                </div>
-            )
-        );
-    }else{
-        return (
-            <div id="result">
-                {messageKO.length !== 0 && (
-                    <div id="msgko">
-                        <p>{t("syllogism.summary.ko")}</p>
-                        <p>{messageKO.length}</p>
-                        {messageKO.map((koMessage, i) => (
-                            <div key={i}>
-                                <KOIcon/> {koMessage}
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        )
-    }
-
+        <RuleTooltip/>
+    </>
 }
 
-export default ResultReport
+function RuleTooltip() {
+    const { t } = useTranslation(I18N_NS);
+
+    return <Tooltip id={RULE_TOOLTIP_ID}
+                    render={({content}) =>
+                        // content = ruleID
+                        content && <>
+                            <p><b>{t(`${RULE_I18N_NAMESPACE}.${content}.name`)}</b></p>
+                            <p>{t(`${RULE_I18N_NAMESPACE}.${content}.description`)}</p>
+                        </>
+                    }
+                    style={{fontFamily: "sans-serif"}}/>
+}

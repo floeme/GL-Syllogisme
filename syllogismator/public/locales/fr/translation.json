@@ -148,7 +148,8 @@
     "select_term": "Sélectionner un terme",
     "type_term": "Saisir un terme",
     "guided": "Saisie guidée",
-    "expert": "Mode expert"
+    "expert": "Mode expert",
+    "invalid": "La saisie est invalide."
   },
   "polysyllogism": {
     "errorMessages": {
