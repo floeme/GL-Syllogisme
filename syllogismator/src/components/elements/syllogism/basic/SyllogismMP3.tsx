@@ -5,6 +5,8 @@ import {useTranslation} from "react-i18next";
 import {Tooltip} from "react-tooltip";
 import {LINK_VERB_TOOLTIP_ID} from "../../LinkVerbTooltip.tsx";
 
+const TERM_TOOLTIP_ID = "term-tooltip";
+
 interface SyllogismMP3Props {
     subject: string
     predicate: string
@@ -29,9 +31,10 @@ function SyllogismMP3({
                     <QuantifierSelector quantifier={quantifier} setPropQuantifier={setProp3Quantifier} />
                 </div>
 
-                <div className="subject" style={{display: "flex", alignItems: "baseline"}}>
-                    <label>{subject}</label>
-                    <TermTooltip termKind="subject" />
+                <div className="term term--info subject"
+                     data-tooltip-id={TERM_TOOLTIP_ID}
+                     data-tooltip-content={"subject"}>
+                    {subject}
                 </div>
 
                 <div className="verb" data-tooltip-id={LINK_VERB_TOOLTIP_ID}>
@@ -45,28 +48,35 @@ function SyllogismMP3({
                     />
                 </div>
 
-                <div className="predicate" style={{display: "flex", alignItems: "baseline"}}>
-                    <label>{predicate}</label>
-                    <TermTooltip termKind="predicate" />
+                <div className="term term--info predicate"
+                     data-tooltip-id={TERM_TOOLTIP_ID}
+                     data-tooltip-content={"subject"}>
+                    {predicate}
                 </div>
             </div>
+
+            <TermTooltip/>
         </div>
     )
 }
 
 export default SyllogismMP3
 
-function TermTooltip({termKind}: {termKind: string}) {
+function TermTooltip() {
     const { t } = useTranslation(I18N_NS, {keyPrefix: "syllogism.conclusion_term_tooltip"});
 
-    const tooltipId = `conclusion_${termKind}_tooltip`;
-
-    return <>
-        <img src="images/info_icon.svg" alt="info" style={{width: "18px", cursor: "pointer", marginLeft: "1em"}}
-             data-tooltip-id={tooltipId} />
-        <Tooltip id={tooltipId} style={{ fontFamily: "sans-serif" }}>
-            <p><b>{t(termKind)}</b></p>
-            <p>{t("swap")}</p>
-        </Tooltip>
-    </>
+    return <Tooltip id={TERM_TOOLTIP_ID}
+                    style={{fontFamily: "sans-serif"}}
+                    render={({content}) => {
+                        // content: "subject" | "predicate"
+                        if (content) {
+                            return <>
+                                <p><b>{t(content)}</b></p>
+                                <p>{t("swap")}</p>
+                            </>
+                        } else {
+                            return <></>
+                        }
+                    }}>
+    </Tooltip>
 }

@@ -28,8 +28,8 @@ function SyllogismMP({
                     <QuantifierSelector quantifier={quantifier} setPropQuantifier={setPropQuantifier} />
                 </div>
 
-                <div className="subject">
-                    <label>{firstTerm}</label>
+                <div className="term subject">
+                    {firstTerm}
                 </div>
 
                 <div className="verb" data-tooltip-id={LINK_VERB_TOOLTIP_ID}>
@@ -43,8 +43,8 @@ function SyllogismMP({
                     />
                 </div>
 
-                <div className="predicate">
-                    <label>{secondTerm}</label>
+                <div className="term predicate">
+                    {secondTerm}
                 </div>
             </div>
         </div>

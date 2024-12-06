@@ -590,3 +590,22 @@ form {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+.term {
+  font-family: sans-serif;
+
+  &--info {
+    cursor: help;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 1.25em;
+      height: 1.25em;
+      background-image: url("images/info_icon.svg");
+      background-size: contain;
+      vertical-align: middle;
+      margin-left: 0.5em;
+    }
+  }
+}
