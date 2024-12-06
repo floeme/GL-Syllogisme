@@ -136,7 +136,9 @@
       "subject": "The subject of the conclusion is the term which appears in the second premise.",
       "predicate": "The predicate of the conclusion is the term which appears in the first premise.",
       "swap": "If you want to swap the subject and the predicate, swap the premises."
-    }
+    },
+    "valid_with_universal_conclusion": "This syllogism is \"uninteresting\".",
+    "valid_with_universal_conclusion_description": "It is valid, but its existential conclusion could be replaced by a universal one, which is stronger."
   },
   "input": {
     "enter_term": "Enter {{kind}}",

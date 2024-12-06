@@ -136,7 +136,9 @@
       "subject": "Le sujet de la conclusion est le terme qui apparaît dans la seconde prémisse.",
       "predicate": "Le prédicat de la conclusion est le terme qui apparaît dans la première prémisse.",
       "swap": "Si vous souhaitez intervertir les termes de la conclusion, échangez les deux prémisses."
-    }
+    },
+    "valid_with_universal_conclusion": "Ce syllogisme est « inintéressant ».",
+    "valid_with_universal_conclusion_description": "Il est valide, mais sa conclusion existentielle peut avantageusement être remplacée par une conclusion universelle, plus forte."
   },
   "input": {
     "enter_term": "Saisir le {{kind}}",

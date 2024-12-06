@@ -77,6 +77,13 @@ function RuleReport({checkResults}: {checkResults: CheckResults}) {
     return <>
         <p className="result__header">{t(`syllogism.${checkResults.valid}`)}</p>
 
+        { checkResults.valid && !checkResults.isInteresting && <ul className="result__msginfo">
+            <li>
+                <b>{t("syllogism.valid_with_universal_conclusion")}</b>&nbsp;
+                {t("syllogism.valid_with_universal_conclusion_description")}
+            </li>
+        </ul> }
+
         { !checkResults.valid && renderResults(checkResults, false) }
         { renderResults(checkResults, true) }
 
