@@ -11,9 +11,9 @@ const updatePropositionType = (proposition : Proposition, quantName : Quantifier
     return proposition;
 };
 
-describe("Test : reorder a valid order polysyllogism", () => {
+describe("Reorder a polysyllogism in the right order (must not move premises)", () => {
 
-    it(`Case : (P-M1)(M1-M2)(M2-S)(S-P)`, () => {
+    it(`[4 propositions] (P-M1)(M1-M2)(M2-S)(S-P)`, () => {
         const polysyllogism = new Syllogism();
         const P = new Term("P");
         const M1 = new Term("M1");
@@ -45,7 +45,7 @@ describe("Test : reorder a valid order polysyllogism", () => {
         expect(received[3].predicate).toBe(P);
     });
 
-    it(`Case : (P-M1)(M1-M2)(M2-M3)(M3-S)(S-P)`, () => {
+    it(`[5 propositions] (P-M1)(M1-M2)(M2-M3)(M3-S)(S-P)`, () => {
         const polysyllogism = new Syllogism();
         const P = new Term("P");
         const M1 = new Term("M1");
@@ -82,7 +82,7 @@ describe("Test : reorder a valid order polysyllogism", () => {
         expect(received[4].predicate).toBe(P);
     });
 
-    it(`Case : (P-M1)(M1-M2)(M2-M3)(M3-M4)(M4-S)(S-P)`, () => {
+    it(`[6 propositions] (P-M1)(M1-M2)(M2-M3)(M3-M4)(M4-S)(S-P)`, () => {
         const polysyllogism = new Syllogism();
         const P = new Term("P");
         const M1 = new Term("M1");
@@ -125,8 +125,8 @@ describe("Test : reorder a valid order polysyllogism", () => {
     });
 });
 
-describe("Test : reorder a non valid order polysyllogism", ()=> {
-    it(`Case : (M1-M2)(P-M1)(S-P)(M2-S)`, () => {
+describe("Reorder a polysyllogism in the wrong order", ()=> {
+    it(`[4 propositions] (M1-M2)(P-M1)(M2-S)(S-P)`, () => {
         const polysyllogism = new Syllogism();
         const P = new Term("P");
         const M1 = new Term("M1");
@@ -157,7 +157,8 @@ describe("Test : reorder a non valid order polysyllogism", ()=> {
         expect(after[3].subject).toBe(S);
         expect(after[3].predicate).toBe(P);
     });
-    it(`Case : (M1-M2)(P-M1)(M2-M3)(S-P)(M3-S)`, () => {
+
+    it(`[5 propositions] (M1-M2)(P-M1)(M2-M3)(M3-S)(S-P)`, () => {
         const polysyllogism = new Syllogism();
         const P = new Term("P");
         const M1 = new Term("M1");
