@@ -105,7 +105,7 @@ export const Polysyllogism = () => {
         })
 
         if(!isErrorMessage){
-            if(syllogism.hasValidStructure()){
+            if(!syllogism.hasValidStructure()){
                 isErrorMessage = true
                 messageKO.push(t("errorMessages.invalidStructure"))
             }
@@ -115,7 +115,6 @@ export const Polysyllogism = () => {
     }
 
     const checkSyllogism = () => {
-        console.log("checkSyllogism")
         messageKO.splice(0)
         if (!validateInputs()) {
             syllogism.link = verb
@@ -197,7 +196,6 @@ export const Polysyllogism = () => {
                 </DragDropContext>
 
                 <div className="hypothesis">
-                    <label>{t("labels.existenceHypothesis")}</label>
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("buttons.check")}</button>
                 </div>
