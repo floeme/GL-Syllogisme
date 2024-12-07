@@ -41,7 +41,7 @@ export const Rmt: Rule = {
                         // term is in middleTermsMap => It is the second occurrence of term
                         // If term is particular in both of its occurrences, the syllogism is invalid => Stop!
                         if (!u && !universal) {
-                            const result = buildRuleResult(false);
+                            const result = buildRuleResult(false, s.getPropositionCount() > 3);
                             result.extras = term;
                             return result;
                         }
@@ -50,7 +50,7 @@ export const Rmt: Rule = {
             }
         }
 
-        return buildRuleResult(true);
+        return buildRuleResult(true, s.getPropositionCount() > 3);
     }
 }
 
@@ -217,9 +217,7 @@ export const Raa: Rule = {
         }
 
         if (affirmativePremises === 2) {
-            const result = buildRuleResult(s.conclusion.quantifier!.type.affirmative);
-            if (s.getPropositionCount() > 3) result.message += "_poly";
-            return result;
+            return buildRuleResult(s.conclusion.quantifier!.type.affirmative, s.getPropositionCount() > 3);
         } else {
             return {
                 valid: true,
@@ -266,9 +264,7 @@ export const Rp: Rule = {
         }
 
         if (particularPremise) {
-            const result = buildRuleResult(!s.conclusion.quantifier!.type.universal);
-            if (s.getPropositionCount() > 3) result.message += "_poly";
-            return result;
+            return buildRuleResult(!s.conclusion.quantifier!.type.universal, s.getPropositionCount() > 3);
         } else {
             return {
                 valid: true,
@@ -298,9 +294,7 @@ export const Ruu: Rule = {
         }
 
         if (universalPremises === 2) {
-            const result = buildRuleResult(s.conclusion.quantifier!.type.universal);
-            if (s.getPropositionCount() > 3) result.message += "_poly";
-            return result;
+            return buildRuleResult(s.conclusion.quantifier!.type.universal, s.getPropositionCount() > 3);
         } else {
             return {
                 valid: true,

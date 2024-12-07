@@ -109,10 +109,15 @@ export type CheckResults = {
     isInteresting: boolean;
 };
 
-export function buildRuleResult(valid: boolean): RuleResult {
+/**
+ * Build a simple {@link RuleResult} object, with `passed` or `failed` message.
+ * @param valid Boolean indicating if the rule passed
+ * @param withPolySuffix If true, add a `_poly` suffix to the message key.
+ */
+export function buildRuleResult(valid: boolean, withPolySuffix: boolean = false): RuleResult {
     return {
         valid,
-        message: valid ? PASSED : FAILED
+        message: (valid ? PASSED : FAILED) + (withPolySuffix ? "_poly" : "")
     };
 }
 
