@@ -8,14 +8,14 @@ import { useState } from "react"
 import {Syllogism} from "../../model/Syllogism.ts";
 
 export const SyllogismPage = () => {
-	const [subject, setSubject] = useState(new Term("Socrate"))
-	const [predicate, setPredicate] = useState(new Term("Mortel"))
-	const [middle, setMiddle] = useState(new Term("Homme"))
+	const [subject, setSubject] = useState(new Term(""))
+	const [predicate, setPredicate] = useState(new Term(""))
+	const [middle, setMiddle] = useState(new Term(""))
 	const [figure, setFigureFinale] = useState(Figure.Figure1)
 	const [prop1Quantifier, setProp1Quantifier] = useState(new Quantifier("prop1Quantifier", QuantifierType.A))
 	const [prop2Quantifier, setProp2Quantifier] = useState(new Quantifier("prop2Quantifier", QuantifierType.A))
 	const [prop3Quantifier, setProp3Quantifier] = useState(new Quantifier("prop3Quantifier", QuantifierType.A))
-	const [verb, setVerb] = useState("are")
+	const [verb, setVerb] = useState("")
 	const [expertMode, setExpertMode] = useState(false)
 	const [syllogism, setSyllogism] = useState(Syllogism.ofFigure(figure, subject, predicate, middle))
 

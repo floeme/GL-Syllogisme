@@ -4,8 +4,7 @@ import { Syllogism } from "../../../../model/Syllogism"
 import {getAllRules, check, CheckResults} from "../../../../model/Rule.ts"
 import { Figure } from "../../../../model/Figure"
 import { Term } from "../../../../model/Term"
-import { Quantifier } from "../../../../model/Quantifier"
-import { QuantifierType } from "../../../../model/QuantifierType"
+import {defaultQuantifiers, Quantifier} from "../../../../model/Quantifier"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
@@ -238,12 +237,9 @@ function SyllogismPropositions({
                             checked={expertMode}
                             onChange={() => {
                                 setExpertMode(!expertMode)
-                                prop1Quantifier.type = QuantifierType.A
-                                setProp1Quantifier({...prop1Quantifier})
-                                prop2Quantifier.type = QuantifierType.A
-                                setProp2Quantifier({...prop2Quantifier})
-                                prop3Quantifier.type = QuantifierType.A
-                                setProp3Quantifier({...prop3Quantifier})
+                                setProp1Quantifier(defaultQuantifiers.A)
+                                setProp2Quantifier(defaultQuantifiers.A)
+                                setProp3Quantifier(defaultQuantifiers.A)
                                 setFigure(Figure.Figure1)
                                 setVerb("")
                             }}

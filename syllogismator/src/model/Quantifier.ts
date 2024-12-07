@@ -6,8 +6,8 @@ export const DEFAULT_QUANTIFIERS_I18N_NAMESPACE = "syllogism.quantifier";
  * A quantifier, which has a name and a {@link QuantifierType} (A, E, I, O).
  */
 export class Quantifier {
-    name: string;
-    type: QuantifierType;
+    readonly name: string;
+    readonly type: QuantifierType;
 
     constructor(name: string, type: QuantifierType) {
         this.name = name;
