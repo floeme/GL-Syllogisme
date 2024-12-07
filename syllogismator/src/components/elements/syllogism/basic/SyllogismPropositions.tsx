@@ -301,7 +301,7 @@ function SyllogismPropositions({
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
 
-                <ResultReport checkResults={result} inputErrors={messageKO} figure={syllogism.getFigure() ?? undefined} />
+                <ResultReport checkResults={result} inputErrors={messageKO} figure={figure} />
             </div>
 
             <LinkVerbTooltip/>

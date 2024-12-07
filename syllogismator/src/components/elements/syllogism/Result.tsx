@@ -72,7 +72,7 @@ function RuleReport({checkResults, figure}: ResultReportProps) {
         {/* Figure */}
         { figure ? <ul className="result__msginfo">
             <li>
-                {t("syllogism.has_figure", {number: figure + 1})}
+                {t("syllogism.has_figure", {number: figure})}
             </li>
         </ul> : <></> }
 

@@ -15,7 +15,7 @@ export enum Figure {
      * S → P
      * ```
      */
-    Figure1,
+    Figure1 = 1,
     /**
      * ```
      * P → M
@@ -23,7 +23,7 @@ export enum Figure {
      * S → P
      * ```
      */
-    Figure2,
+    Figure2 = 2,
     /**
      * ```
      * M → P
@@ -31,7 +31,7 @@ export enum Figure {
      * S → P
      * ```
      */
-    Figure3,
+    Figure3 = 3,
     /**
      * ```
      * P → M
@@ -39,5 +39,5 @@ export enum Figure {
      * S → P
      * ```
      */
-    Figure4,
+    Figure4 = 4,
 }

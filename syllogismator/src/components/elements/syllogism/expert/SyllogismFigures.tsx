@@ -31,7 +31,7 @@ function SyllogismFigureItem({figure, checked, onChecked}: SyllogismFigureItemPr
     const classNames = "figure" + (checked ? " figure--selected" : "");
 
     return <div className={classNames} onClick={checkFigureItem}>
-        <label>Figure {figure + 1}</label>
+        <label>Figure {figure}</label>
         <div>
             <div>{figure === Figure.Figure2 || figure === Figure.Figure4 ? "P    →    M" : "M    →    P"}</div>
             <div>{figure === Figure.Figure1 || figure === Figure.Figure2 ? "S    →    M" : "M    →    S"}</div>
