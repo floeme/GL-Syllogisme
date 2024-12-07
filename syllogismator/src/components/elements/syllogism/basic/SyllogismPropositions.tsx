@@ -59,7 +59,7 @@ function SyllogismPropositions({
     const { t } = useTranslation(I18N_NS);
 
     const [result, setResult] = useState<CheckResults | undefined>(undefined);
-    const [messageKO, setMessageKO] = useState<string[]>([])
+    const [messageKO, setMessageKO] = useState<string[]>([]);
 
     const handleTermConflict = (term1: string, term2: string) => {
         if (term1 === term2 && term1 !== "" && term2 !== "") {
@@ -165,7 +165,7 @@ function SyllogismPropositions({
             syllogism.link = verb
         } else {
             setResult(checkRuu ?
-                check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
+                check(syllogism, getAllRules()) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp]))
         }
     }
 
@@ -300,7 +300,8 @@ function SyllogismPropositions({
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("input.check")}</button>
                 </div>
-                <ResultReport checkResults={result} inputErrors={messageKO}></ResultReport>
+
+                <ResultReport checkResults={result} inputErrors={messageKO} figure={syllogism.getFigure() ?? undefined} />
             </div>
 
             <LinkVerbTooltip/>

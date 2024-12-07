@@ -130,6 +130,7 @@
       "ok": "Passing Rules",
       "ko": "Failing Rules"
     },
+    "has_figure": "This syllogism belongs to figure {{number}}.",
     "conclusion_term_tooltip": {
       "subject": "The subject of the conclusion is the term which appears in the second premise.",
       "predicate": "The predicate of the conclusion is the term which appears in the first premise.",

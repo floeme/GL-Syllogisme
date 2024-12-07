@@ -130,6 +130,7 @@
       "ok": "Règles valides",
       "ko": "Règles invalides"
     },
+    "has_figure": "Ce syllogisme appartient à la figure {{number}}.",
     "conclusion_term_tooltip": {
       "subject": "Le sujet de la conclusion est le terme qui apparaît dans la seconde prémisse.",
       "predicate": "Le prédicat de la conclusion est le terme qui apparaît dans la première prémisse.",

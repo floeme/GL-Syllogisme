@@ -199,7 +199,7 @@ export const Polysyllogism = () => {
                     <RuuCheckbox checked={checkRuu} onChange={setCheckRuu}/>
                     <button type="button" name="checkButton" onClick={checkSyllogism}>{t("buttons.check")}</button>
                 </div>
-                <ResultReport checkResults={result} inputErrors={messageKO}></ResultReport>
+                <ResultReport checkResults={result} inputErrors={messageKO} figure={syllogism.getFigure() ?? undefined} />
             </div>
 
             <LinkVerbTooltip/>
