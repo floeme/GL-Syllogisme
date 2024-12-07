@@ -102,5 +102,5 @@ function RuleTooltip() {
                             <p>{t(`${RULE_I18N_NAMESPACE}.${content}.description`)}</p>
                         </>
                     }
-                    style={{fontFamily: "sans-serif"}}/>
+                    style={{fontFamily: "sans-serif", maxWidth: "80vw"}}/>
 }
