@@ -4,10 +4,6 @@
     "syllogism": {
       "check": "Check Syllogism"
     },
-    "socrate": {
-      "head": "Socrates Head",
-      "body": "Socrates Body"
-    },
     "discover": "Exploring",
     "discover2": "Syllogisms",
     "text1": "Syllogism is a logic allowing to link 2 premises with 1 conclusion :\n2 or more, the « premises », lead to a « conclusion ».\nAristote was the first to explain it in Organon.\nA known exemple is : « Every human is mortal, Socrates is human ; so Socrates is mortel » :\nThe 2 premises (said « major » and « minor ») are propositions given and supposed right,\nSyllogism allow to establish a formal validity for the conclusion, which is right if the premises are right.",
@@ -66,9 +62,11 @@
     "rule": {
       "Rmt": {
         "name": "Middle Term Rule",
-        "description": "The quantifier (for the middle-term) must be universal in at least one premise.",
-        "passed": "The quantifier is universal in at least one premise.",
-        "failed": "There is not any universally-quantified premise, so this syllogism is invalid."
+        "description": "The quantity of the middle term must be universal in at least one premise. In a polysyllogism, this rule applies individually on each middle term.",
+        "passed": "The quantity of the middle term is universal in at least one premise.",
+        "failed": "The quantity of the middle term is particular in both premises, so this syllogism is invalid.",
+        "passed_poly": "Each middle term has universal quantity in at least one premise.",
+        "failed_poly": "At least one middle term has particular quantity in both of its premises, so this polysyllogism is invalid."
       },
       "Rlh": {
         "name": "Latius-Hos Rule",
@@ -96,7 +94,7 @@
         "passed": "Both premises are affirmative and the conclusion is affirmative.",
         "failed": "Both premises are affirmative but the conclusion is negative, so this syllogism is invalid.",
         "passed_poly": "There are at least two affirmative premises and the conclusion is affirmative.",
-        "failed_poly": "There are at least two affirmative premises but the conclusion is negative, so this syllogism is invalid.",
+        "failed_poly": "There are at least two affirmative premises but the conclusion is negative, so this polysyllogism is invalid.",
         "negative_premise": "There is a negative premise, so this rule is not applicable to this syllogism.",
         "not_2_affirmative_premises": "There is less than two affirmative premises, so this rule is not applicable to this syllogism."
       },
@@ -106,7 +104,7 @@
         "passed": "There is at least one universal premise.",
         "failed": "Both premises are particular, so this syllogism is invalid.",
         "passed_poly": "There is at least one universal premise.",
-        "failed_poly": "There are at least two particular premises, so this syllogism is invalid."
+        "failed_poly": "There are at least two particular premises, so this polysyllogism is invalid."
       },
       "Rp": {
         "name": "One Particular Premise Rule",
@@ -121,7 +119,7 @@
         "passed": "Both premises are universal and the conclusion is universal.",
         "failed": "Both premises are universal but the conclusion is particular, so this syllogism is invalid.",
         "passed_poly": "There are at least two universal premises and the conclusion is universal.",
-        "failed_poly": "There are at least two universal premises but the conclusion is particular, so this syllogism is invalid.",
+        "failed_poly": "There are at least two universal premises but the conclusion is particular, so this polysyllogism is invalid.",
         "particular_premise": "There is a particular premise, so this rule is not applicable to this syllogism.",
         "not_2_universal_premises": "There are less than two universal premises, so this rule is not applicable to this syllogism."
       }

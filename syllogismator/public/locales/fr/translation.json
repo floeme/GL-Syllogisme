@@ -4,10 +4,6 @@
     "syllogism": {
       "check": "Vérifier le Syllogisme"
     },
-    "socrate": {
-      "head": "Tête de Socrate",
-      "body": "Corps de Socrate"
-    },
     "discover": "À la découverte des",
     "discover2": "Syllogismes",
     "text1": "le syllogisme est un raisonnement logique mettant en relation au moins trois propositions :\ndeux ou plus d'entre elles, appelées « prémisses », conduisent à une « conclusion ».\nAristote a été le premier à le formaliser dans son Organon.\nUn exemple très connu de syllogisme est : « Tous les hommes sont mortels, or Socrate est un homme ; donc Socrate est mortel » :\nLes deux prémisses (dites « majeure » et « mineure ») sont des propositions données et supposées vraies,\nle syllogisme permettant d'établir la validité formelle de la conclusion, qui est nécessairement vraie si les prémisses sont vraies.",
@@ -35,8 +31,8 @@
     },
     "basic": {
       "errorMessages": {
-        "middleTermRepeat": "Il ne peut y avoir qu'une unique répétition de moyen terme.",
-        "termEqual": "Le sujet et le predicat ne peuvent être identique dans la proposition "
+        "middleTermRepeat": "Il ne peut y avoir qu'une unique répétition de moyen-terme.",
+        "termEqual": "Le sujet et le prédicat ne peuvent être identiques dans la proposition "
       }
     },
     "table": {
@@ -59,16 +55,18 @@
     "term_kind": {
       "major": "terme majeur",
       "minor": "terme mineur",
-      "middle": "moyen terme",
+      "middle": "moyen-terme",
       "subject": "sujet",
       "predicate": "prédicat"
     },
     "rule": {
       "Rmt": {
         "name": "Règle du moyen-terme",
-        "description": "Le quantificateur (pour le moyen-terme) doit être universel dans une prémisse au moins.",
-        "passed": "Le quantificateur est universel dans une prémisse au moins.",
-        "failed": "Aucune prémisse ne comporte un quantificateur universel, ce qui invalide ce syllogisme."
+        "description": "La quantité du moyen-terme doit être universelle dans une prémisse au moins. Dans le cas d'un polysyllogisme, cette règle s'applique individuellement à chaque moyen terme.",
+        "passed": "Le moyen-terme a une quantité universelle dans une prémisse au moins.",
+        "failed": "Le moyen-terme n'a une quantité universelle dans aucune prémisse, ce qui invalide ce syllogisme.",
+        "passed_poly": "Chaque moyen-terme a une quantité universelle dans au moins une des prémisses dans lesquelles il apparaît.",
+        "failed_poly": "Au moins un moyen-terme n'a une quantité universelle dans aucune prémisse dans laquelle il apparaît, ce qui invalide ce polysyllogisme."
       },
       "Rlh": {
         "name": "Règle du Latius-Hos",
