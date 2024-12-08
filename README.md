@@ -1,48 +1,27 @@
-## Available Scripts
+# Syllogismator
 
-In the project directory, you can run:
+*Syllogism and polysyllogism validation tool.*
 
-### `npm start`
+This application is developed with [React](https://react.dev/) and bundled with [Vite](https://vite.dev/).
 
-Runs the app in the development mode.
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project structure
 
-### `npm test`
+* The `public` directory contains static files which are served to the client through HTTP (e.g. images and translation files)
+* The `src` directory contains the code of React components and business classes.
+* The `test` directory contains all unit tests.
 
-Launches the test runner in the interactive watch mode.
+### Business classes
 
-### `npm update`
+Business classes are located in the `src/model` directory. The class diagram is shown below:
 
-Update the dependencies. after a pull for exemple.
+![Class diagram](ClassDiagram.svg)
 
-### `npm run build`
+Concrete syllogism validation rules are implemented in `RuleImpl.ts`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For simplicity, syllogisms and polysyllogisms are referred to as "syllogisms" in the code and the documentation, as they are implemented in the same way.
+A syllogism with 3 propositions (2 premises and a conclusion) is referred to as "simple syllogism".
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running the application
 
-### ` bibliothèques a telecharger pour notre site pour utiliser les routes`
-
-npm i -s react-router-dom sass
-
-# `plugin à installer pour coder plus vite`
-
-Simple react snippets
-Reactjs code snippets
-Mithril Emmet
-
-Dans settings.json, rajouter (ctrl + shift + P puis preference opensettings ):
-
-"emmet.includeLanguages":
-{
-"javascript": "javascriptreact"
-},
-"emmet.triggerExpansionOnTab": true
-
-PremiseForm : Formulaire permettant de saisir une prémisse.
-SyllogismDisplay : Composant qui affiche la construction du syllogisme.
-FigureSelector : Permet de choisir l’une des quatre figures.
-ConclusionDisplay : Affiche la conclusion une fois le syllogisme complété.
+* Development: `npm run dev`
+* Production: `npm run build`
