@@ -205,8 +205,6 @@ export const Polysyllogism = () => {
             </div>
 
             <LinkVerbTooltip/>
-
-            <pre style={{backgroundColor: "white"}}>{syllogism.toString()}</pre>
         </div>
     )
 }
