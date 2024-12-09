@@ -13,6 +13,10 @@ export class Quantifier {
         this.name = name;
         this.type = type;
     }
+
+    toString(): string {
+        return `${this.name} (${this.type.code})`;
+    }
 }
 
 /**
