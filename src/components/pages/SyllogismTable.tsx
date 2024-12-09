@@ -175,9 +175,9 @@ export const SyllogismTable = () => {
 					<td>{syllogism.prop2}</td>
 					<td>{syllogism.conclusion}</td>
 					<td>{syllogism.figure}</td>
-					<td>{syllogism.valid ? t("yes") : t("no")}</td>
-					<td>{syllogism.validWithExistentialHypothesis ? t("yes") : t("no")}</td>
-					<td>{syllogism.isInteresting ? t("yes") : t("no")}</td>
+					<td className={syllogism.valid ?"valid" : "unvalid"}>{syllogism.valid ? t("yes") : t("no")}</td>
+					<td className={syllogism.validWithExistentialHypothesis ?"valid" : "unvalid"}>{syllogism.validWithExistentialHypothesis ? t("yes") : t("no")}</td>
+					<td className={syllogism.isInteresting ?"valid" : "unvalid"}>{syllogism.isInteresting ? t("yes") : t("no")}</td>
 				</tr>
 			))}
 			</tbody>
