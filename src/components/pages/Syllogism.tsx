@@ -8,9 +8,11 @@ import { useState } from "react"
 import {Syllogism} from "../../model/Syllogism.ts";
 
 export const SyllogismPage = () => {
+
 	const [subject, setSubject] = useState(new Term(""))
 	const [predicate, setPredicate] = useState(new Term(""))
 	const [middle, setMiddle] = useState(new Term(""))
+
 	const [figure, setFigureFinale] = useState(Figure.Figure1)
 	const [prop1Quantifier, setProp1Quantifier] = useState(new Quantifier("prop1Quantifier", QuantifierType.A))
 	const [prop2Quantifier, setProp2Quantifier] = useState(new Quantifier("prop2Quantifier", QuantifierType.A))
@@ -33,7 +35,7 @@ export const SyllogismPage = () => {
 
 	return (
 		<>
-			{expertMode == true ?
+			{expertMode ?
 				<div className="syllogism-container-easy">
 					<Expert_Syllogism
 						subject={subject}
@@ -82,6 +84,8 @@ export const SyllogismPage = () => {
 					/>
 				</div>
 			}
+
+			<pre style={{backgroundColor: "white"}}>{syllogism.toString()}</pre>
 		</>
   	)
 }

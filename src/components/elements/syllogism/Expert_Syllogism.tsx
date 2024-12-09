@@ -6,7 +6,7 @@ import { Term } from "../../../model/Term"
 import { Quantifier } from "../../../model/Quantifier"
 import {Syllogism} from "../../../model/Syllogism.ts";
 
-interface Basic_SyllogismProps {
+interface Expert_SyllogismProps {
 	subject: Term
 	setSubject: (value: Term) => void
 	predicate: Term
@@ -39,7 +39,7 @@ export const Expert_Syllogism = ({
 	prop3Quantifier, setProp3Quantifier,
 	verb, setVerb,
 	syllogism
-}: Basic_SyllogismProps) => {
+}: Expert_SyllogismProps) => {
 	return (
 		<>
 			<div className="section-terms-figures">

@@ -71,16 +71,43 @@ function SyllogismPropositions({
 
     useEffect(() => {
 
+        setPropositions([
+            <SyllogismMP1
+                MP1FirstTerm={MP1FirstTerm}
+                setMP1FirstTerm={setMP1FirstTerm}
+                MP1SecondTerm={MP1SecondTerm}
+                setMP1SecondTerm={setMP1SecondTerm}
+                quantifier={prop1Quantifier}
+                setProp1Quantifier={setProp1Quantifier}
+                verb={verb}
+                setVerb={setVerb}
+            />,
+            <SyllogismMP2
+                MP1FirstTerm={MP1FirstTerm}
+                MP1SecondTerm={MP1SecondTerm}
+                MP2FirstTerm={MP2FirstTerm}
+                setMP2FirstTerm={setMP2FirstTerm}
+                MP2SecondTerm={MP2SecondTerm}
+                setMP2SecondTerm={setMP2SecondTerm}
+                quantifier={prop2Quantifier}
+                setProp2Quantifier={setProp2Quantifier}
+                verb={verb}
+                setVerb={setVerb}
+            />,
+            <SyllogismMP3
+                subject={subject.value}
+                predicate={predicate.value}
+                quantifier={prop3Quantifier}
+                setProp3Quantifier={setProp3Quantifier}
+                verb={verb}
+                setVerb={setVerb}
+            />
+        ])
+
         const update = (subjectS : string, middleS : string, predicateS : string, figureS : Figure) => {
-            if(subjectS !== subject.value){
-                setSubject({...subject, value: subjectS})
-            }
-            if(middleS !== middle.value){
-                setMiddle({...middle, value: middleS})
-            }
-            if(predicateS !== predicate.value){
-                setPredicate({...predicate, value: predicateS})
-            }
+            subject.value = subjectS
+            middle.value = middleS
+            predicate.value = predicateS
             if(figureS !== figure){
                 setFigure(figureS)
             }
@@ -98,9 +125,30 @@ function SyllogismPropositions({
         }else if (MP1SecondTerm === MP2SecondTerm) {
             // Figure 2
             update(MP2FirstTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure2)
+        }else{
+            // Figure de maniere arbitraire
+            switch (figure) {
+                case Figure.Figure1:
+                {
+                    update(MP2FirstTerm, MP1FirstTerm, MP1SecondTerm, Figure.Figure1)
+                    break;
+                }
+                case Figure.Figure2:{
+                    update(MP2FirstTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure2)
+                    break;
+                }
+                case Figure.Figure3:{
+                    update(MP2SecondTerm, MP1FirstTerm, MP1SecondTerm, Figure.Figure3)
+                    break;
+                }
+                case Figure.Figure4:{
+                    update(MP2SecondTerm, MP1SecondTerm, MP1FirstTerm, Figure.Figure4)
+                    break;
+                }
+            }
         }
 
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, figure, messageKO, middle, predicate, setFigure, setMiddle, setPredicate, setSubject, setMessageKO, subject])
+    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, figure, messageKO, middle, predicate, setFigure, setMiddle, setPredicate, setSubject, setMessageKO, subject, prop1Quantifier, setProp1Quantifier, verb, setVerb, prop2Quantifier, setProp2Quantifier, prop3Quantifier, setProp3Quantifier])
 
     const validateInputs = () => {
         let isErrorMessage = false
@@ -161,6 +209,8 @@ function SyllogismPropositions({
 
     const checkSyllogism = () => {
         messageKO.splice(0)
+        setMessageKO([...messageKO])
+        setResult(undefined)
         if (!validateInputs()) {
             syllogism.link = verb
         } else {
@@ -219,41 +269,6 @@ function SyllogismPropositions({
             setVerb={setVerb}
         />
     ])
-
-    useEffect(() => {
-        setPropositions([
-            <SyllogismMP1
-                MP1FirstTerm={MP1FirstTerm}
-                setMP1FirstTerm={setMP1FirstTerm}
-                MP1SecondTerm={MP1SecondTerm}
-                setMP1SecondTerm={setMP1SecondTerm}
-                quantifier={prop1Quantifier}
-                setProp1Quantifier={setProp1Quantifier}
-				verb={verb}
-				setVerb={setVerb}
-            />,
-            <SyllogismMP2
-                MP1FirstTerm={MP1FirstTerm}
-                MP1SecondTerm={MP1SecondTerm}
-                MP2FirstTerm={MP2FirstTerm}
-                setMP2FirstTerm={setMP2FirstTerm}
-                MP2SecondTerm={MP2SecondTerm}
-                setMP2SecondTerm={setMP2SecondTerm}
-                quantifier={prop2Quantifier}
-                setProp2Quantifier={setProp2Quantifier}
-				verb={verb}
-				setVerb={setVerb}
-            />,
-            <SyllogismMP3
-                subject={subject.value}
-                predicate={predicate.value}
-                quantifier={prop3Quantifier}
-                setProp3Quantifier={setProp3Quantifier}
-				verb={verb}
-				setVerb={setVerb}
-            />
-        ])
-    }, [MP1FirstTerm, MP1SecondTerm, MP2FirstTerm, MP2SecondTerm, predicate.value, prop1Quantifier, prop2Quantifier, prop3Quantifier, setMP1FirstTerm, setMP1SecondTerm, setMP2FirstTerm, setMP2SecondTerm, setProp1Quantifier, setProp2Quantifier, setProp3Quantifier, setVerb, subject.value, verb])
 
     const syllogismSize : number = syllogism.getPropositions().length
 

@@ -4,7 +4,7 @@ import SyllogismPropositions from "./basic/SyllogismPropositions"
 import {Syllogism} from "../../../model/Syllogism.ts";
 import {Figure} from "../../../model/Figure.ts";
 
-interface Expert_SyllogismProps {
+interface Basic_SyllogismProps {
 	subject: Term
 	setSubject: (value: Term) => void
 	predicate: Term
@@ -37,7 +37,7 @@ export const Basic_Syllogism = ({
 	verb, setVerb,
 	syllogism,
 	figure, setFigure
-}: Expert_SyllogismProps) => {
+}: Basic_SyllogismProps) => {
 
 	return (
 		<>

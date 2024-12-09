@@ -102,6 +102,8 @@ function SyllogismPropositions({
 
     const checkSyllogism = () => {
         messageKO.splice(0)
+        setMessageKO([...messageKO])
+        setResult(undefined)
         if (!validateInputs()) {
             syllogism.link = verb
         } else {

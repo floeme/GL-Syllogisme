@@ -23,7 +23,9 @@ function SyllogismTerms({
                        kind="minor"
                        letter="S"
                        onTermUpdate={(term) => {
-                           setSubject({...term});
+                           console.log("SUB: "+term)
+                           subject.value = term
+                           setSubject({...subject, value: term});
                        }}
                        inputName="SubjectTerm"
             />
@@ -33,7 +35,9 @@ function SyllogismTerms({
                        kind="major"
                        letter="P"
                        onTermUpdate={(term) => {
-                           setPredicate({...term});
+                           console.log("PRE: "+term)
+                           predicate.value = term
+                           setPredicate({...predicate, value: term});
                        }}
                        inputName="predicateTerm"
             />
@@ -43,7 +47,10 @@ function SyllogismTerms({
                        kind="middle"
                        letter="M"
                        onTermUpdate={(term) => {
-                           setMiddle({...term});
+                           console.log("MID: "+term)
+                           middle.value = term
+                           console.log("MID: "+middle.value)
+                           setMiddle({...middle, value: term});
                        }}
                        inputName="middleTerm"
             />
@@ -55,7 +62,7 @@ interface TermInputProps {
     term: Term;
     kind: string;
     letter: string;
-    onTermUpdate: (term: Term) => void;
+    onTermUpdate: (term: string) => void;
     inputName: string;
 }
 
@@ -72,8 +79,7 @@ function TermInput({term, kind, letter, onTermUpdate, inputName}: TermInputProps
                placeholder={t("input.enter_term", {kind: _kind})}
                value={term.value}
                onChange={(e) => {
-                   term.value = e.target.value;
-                   onTermUpdate(term);
+                   onTermUpdate(e.target.value);
                }}
         />
     </>;
