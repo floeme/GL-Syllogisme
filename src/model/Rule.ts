@@ -139,6 +139,8 @@ export function check(
     stopOnBrokenRule: boolean = false
 ): CheckResults {
 
+    console.log(syllogism.toString())
+
     const results = new Map<string, RuleResult>();
     let valid: boolean = true;
     let validWithUniversalConclusion = true;

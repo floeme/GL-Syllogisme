@@ -22,8 +22,8 @@ export const SyllogismPage = () => {
 
 
 	syllogism.getProposition(0).quantifier = prop1Quantifier
-	syllogism.getProposition(1).quantifier = prop1Quantifier
-	syllogism.getProposition(2).quantifier = prop1Quantifier
+	syllogism.getProposition(1).quantifier = prop2Quantifier
+	syllogism.getProposition(2).quantifier = prop3Quantifier
 
 	const finalProp1Quantifier = (quantifier: Quantifier): void => {
 		setProp1Quantifier(quantifier)
