@@ -63,10 +63,6 @@ export class QuantifierRepository {
         return this.load().filter((quantifier: Quantifier) => quantifier.type === type);
     }
 
-    static getByName(name: string): Quantifier | undefined {
-        return this.load().find((quantifier: Quantifier) => name === quantifier.name);
-    }
-
     /**
      * Adds given quantifier. If a quantifier with the same name exists, it is not inserted again.
      */

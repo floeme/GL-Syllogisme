@@ -33,7 +33,7 @@ export const SyllogismPage = () => {
 
 	return (
 		<>
-			{expertMode == true ?
+			{expertMode ?
 				<div className="syllogism-container-easy">
 					<Expert_Syllogism
 						subject={subject}

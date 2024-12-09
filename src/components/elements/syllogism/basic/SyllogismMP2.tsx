@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import QuantifierSelector from "../../QuantifierSelector"
 import { Quantifier } from "../../../../model/Quantifier"
 import {useTranslation} from "react-i18next";
