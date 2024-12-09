@@ -1,6 +1,7 @@
 import { Term } from "../../../../model/Term"
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
+import {Figure} from "../../../../model/Figure.ts";
 
 interface SyllogismTermsProps {
     subject: Term
@@ -9,12 +10,15 @@ interface SyllogismTermsProps {
     setMiddle: (value: Term) => void
     predicate: Term
     setPredicate: (value: Term) => void
+    figure: Figure
+    setFigure: (value: Figure) => void
 }
 
 function SyllogismTerms({
     subject, setSubject,
     middle, setMiddle,
-    predicate, setPredicate
+    predicate, setPredicate,
+    figure, setFigure
 }: SyllogismTermsProps) {
     return (
         <div className="section-terms-input">
@@ -23,9 +27,9 @@ function SyllogismTerms({
                        kind="minor"
                        letter="S"
                        onTermUpdate={(term) => {
-                           console.log("SUB: "+term)
                            subject.value = term
-                           setSubject({...subject, value: term});
+                           setSubject({value: term})
+                           setFigure(figure)
                        }}
                        inputName="SubjectTerm"
             />
@@ -35,9 +39,9 @@ function SyllogismTerms({
                        kind="major"
                        letter="P"
                        onTermUpdate={(term) => {
-                           console.log("PRE: "+term)
                            predicate.value = term
-                           setPredicate({...predicate, value: term});
+                           setPredicate({value: term})
+                           setFigure(figure)
                        }}
                        inputName="predicateTerm"
             />
@@ -47,10 +51,9 @@ function SyllogismTerms({
                        kind="middle"
                        letter="M"
                        onTermUpdate={(term) => {
-                           console.log("MID: "+term)
                            middle.value = term
-                           console.log("MID: "+middle.value)
-                           setMiddle({...middle, value: term});
+                           setMiddle({value: term})
+                           setFigure(figure)
                        }}
                        inputName="middleTerm"
             />

@@ -62,7 +62,6 @@ function SyllogismPropositions({
         }
 
         if (!prop3Quantifier) {
-
             messageKO.push(t("syllogism.expert.errorMessages.missingQuantifier") + 3)
             isErrorMessage = true
         }
@@ -110,7 +109,6 @@ function SyllogismPropositions({
             setResult( checkRuu ?
                 check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
-        setMessageKO([...messageKO])
     }
 
     const clearSyllogism = () => {
@@ -123,9 +121,12 @@ function SyllogismPropositions({
 
         setVerb("")
 
+        setProp1Quantifier(defaultQuantifiers.A)
+        setProp2Quantifier(defaultQuantifiers.A)
+        setProp3Quantifier(defaultQuantifiers.A)
+
         setFigure(Figure.Figure1)
 
-        console.log("clear")
     }
 
     const renderSyllogismMP1 = useCallback((figure: Figure) => {
@@ -238,12 +239,8 @@ function SyllogismPropositions({
                             type="checkbox"
                             checked={expertMode}
                             onChange={() => {
+                                clearSyllogism()
                                 setExpertMode(!expertMode)
-                                setProp1Quantifier(defaultQuantifiers.A)
-                                setProp2Quantifier(defaultQuantifiers.A)
-                                setProp3Quantifier(defaultQuantifiers.A)
-                                setFigure(Figure.Figure1)
-                                setVerb("")
                             }}
                         />
                         <span className="slider"></span>

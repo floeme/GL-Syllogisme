@@ -50,6 +50,8 @@ export const Expert_Syllogism = ({
 					setMiddle={setMiddle}
 					predicate={predicate}
 					setPredicate={setPredicate}
+					figure={figure}
+					setFigure={setFigure}
 				/>
 				<SyllogismFigures
 					figure={figure}

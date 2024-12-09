@@ -73,7 +73,6 @@ export class QuantifierRepository {
     static add(quantifier: Quantifier): void {
         this.update(quantifiers => {
             if (quantifiers.findIndex((q: Quantifier) => q.name === quantifier.name) === -1) {
-                console.log("test");
                 quantifiers.push(quantifier);
             }
         });

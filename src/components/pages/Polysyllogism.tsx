@@ -16,6 +16,8 @@ import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../model/RulesImpl.ts";
 import ResultReport from "../elements/syllogism/Result.tsx";
 import {RuuCheckbox} from "../elements/syllogism/RuuCheckbox.tsx";
 import {LinkVerbTooltip} from "../elements/LinkVerbTooltip.tsx";
+import {ROUTES} from "../../constants/routes.ts";
+import {useNavigate} from "react-router-dom";
 
 export const Polysyllogism = () => {
 	const [verb, setVerb] = useState("are")
@@ -32,6 +34,8 @@ export const Polysyllogism = () => {
     // @ts-expect-error updateState({}) is considered as error
     const forceUpdate = React.useCallback(() => updateState({}), []);
 
+    const navigate = useNavigate();
+
     const updateSyllogism = () => {
         forceUpdate()
     }
@@ -47,7 +51,6 @@ export const Polysyllogism = () => {
 
         setVerb("are")
 
-        console.log("clear")
         updateSyllogism()
     }
 
@@ -57,11 +60,10 @@ export const Polysyllogism = () => {
 
     const help = () => {
         setModalIsOpen(true)
-        console.log("help")
     }
 
     const goSettings = () => {
-        console.log("goSettings")
+        navigate(ROUTES.quantifiers)
     }
 
     const addProposition = () => {

@@ -21,7 +21,6 @@ export function ToolbarButtons({clearSyllogism, path}: ToolbarButtonsProps) {
 
     const help = () => {
         setModalIsOpen(true)
-        console.log("help")
     }
 
     return <>

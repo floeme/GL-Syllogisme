@@ -138,7 +138,6 @@ export function check(
     rules: Rule[] = STANDARD_RULES,
     stopOnBrokenRule: boolean = false
 ): CheckResults {
-    console.log("Syllogism to check:\n" + syllogism.toString());
 
     const results = new Map<string, RuleResult>();
     let valid: boolean = true;

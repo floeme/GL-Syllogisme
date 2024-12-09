@@ -3,7 +3,7 @@ import SyllogismMP1 from "./SyllogismMP1"
 import SyllogismMP2 from "./SyllogismMP2"
 import SyllogismMP3 from "./SyllogismMP3"
 import {Term} from "../../../../model/Term"
-import {Quantifier} from "../../../../model/Quantifier"
+import {defaultQuantifiers, Quantifier} from "../../../../model/Quantifier"
 import {RuuCheckbox} from "../RuuCheckbox.tsx";
 import {useTranslation} from "react-i18next";
 import {I18N_NS} from "../../../../i18n.ts";
@@ -62,11 +62,8 @@ function SyllogismPropositions({
     const [messageKO, setMessageKO] = useState<string[]>([]);
 
     const handleTermConflict = (term1: string, term2: string) => {
-        if (term1 === term2 && term1 !== "" && term2 !== "") {
-            console.warn("Duplicate terms detected. Adjusting terms to ensure unique syllogism structure.")
-            return true
-        }
-        return false
+        return term1 === term2 && term1 !== "" && term2 !== "";
+
     }
 
     useEffect(() => {
@@ -220,21 +217,23 @@ function SyllogismPropositions({
     }
 
     const clearSyllogism = () => {
-        subject.value = ""
-        setSubject({...subject})
-        predicate.value = ""
-        setPredicate({...predicate})
-        middle.value = ""
-        setMiddle({...middle})
-
-        setVerb("")
-
         setMP1FirstTerm("")
         setMP1SecondTerm("")
         setMP2FirstTerm("")
         setMP2SecondTerm("")
 
-        console.log("clear")
+        subject.value = ""
+        predicate.value = ""
+        middle.value = ""
+
+        setVerb("")
+
+        setProp1Quantifier(defaultQuantifiers.A)
+        setProp2Quantifier(defaultQuantifiers.A)
+        setProp3Quantifier(defaultQuantifiers.A)
+
+        setFigure(Figure.Figure1)
+
     }
 
     const [propositions, setPropositions] = useState([
@@ -283,6 +282,7 @@ function SyllogismPropositions({
                             type="checkbox"
                             checked={expertMode}
                             onChange={() => {
+                                clearSyllogism()
                                 setExpertMode(!expertMode)
                             }}
                         />
