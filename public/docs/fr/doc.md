@@ -66,11 +66,13 @@ La structure est la suivante (l'ordre des termes dans les deux premières propos
 
 ### Étapes d'utilisation :
 #### Étape 1 - Configurer chaque proposition :
-**`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc.*, pour définir le type de chaque proposition **(A, E, I, O)**.
+**`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc.*, pour définir le type de chaque proposition **(A, E, I, O)** (Encadré en bleu).
 
-**`Verbe`** : Entrez le verbe reliant les termes.
+**`Verbe`** : Entrez le verbe reliant les termes (Encadré en vert).
 
-**`Termes`** : Entrez les termes directement dans les champs texte dédiés (l'ordre n'est pas imposé).
+**`Termes`** : Entrez les termes directement dans les champs texte dédiés (l'ordre n'est pas imposé) (Encadré en orange).
+
+![Description image1](/docs/fr/image1.png)
 
 - Les termes de la première proposition sont choisis dans les champs texte
 
@@ -94,6 +96,8 @@ Cliquez sur le `bouton paramètres` pour accéder aux paramètres de quantificat
 
 Cliquez sur le `bouton interrupteur (switch)` pour passer du mode expert au mode guidé, et vice-versa.
 
+![](/docs/fr/image2.png)
+
 ## Syllogisme Expert
 ### Description
 Le mode expert assiste l'utilisateur dans la construction d'un syllogisme en demandant les termes nécessaires (`Sujet, Prédicat, Moyen terme`) et en organisant automatiquement les propositions selon la figure sélectionnée.
@@ -111,8 +115,12 @@ Le mode expert assiste l'utilisateur dans la construction d'un syllogisme en dem
     Mortel pour P.
     Homme pour M.
 
+![](/docs/fr/image3.png)
+
 #### Étape 2 - Choisir la figure :
 Sélectionnez la structure du syllogisme parmi les `figures 1, 2, 3 ou 4`. Les figures définissent comment les termes S, P et M s'organisent dans les propositions.
+
+![](/docs/fr/image4.png)
 
 #### Étape 3 - Remplir les propositions :
 **`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc.*, pour définir le type de chaque proposition **(A, E, I, O)**.
@@ -120,6 +128,8 @@ Sélectionnez la structure du syllogisme parmi les `figures 1, 2, 3 ou 4`. Les f
 **`Verbe`** : Entrez le verbe reliant les termes.
 
 **`Termes`** : Les termes sont automatiquement organisés selon la figure choisie.
+
+![](/docs/fr/image5.png)
 
 #### Étape 4 - Vérification :
 Vous pouvez cocher ou non l'option `Vérifier la Règle de l'hypothèse d'existence`.
@@ -137,6 +147,8 @@ Cliquez sur le `bouton paramètres` pour accéder aux paramètres de quantificat
 
 Cliquez sur le `bouton interrupteur (switch)` pour passer du mode expert au mode guidé, et vice-versa.
 
+![](/docs/fr/image6.png)
+
 ## Polysyllogisme
 ### Description
 La page polysyllogisme permet de construire des polysyllogismes, c'est-à-dire une série de propositions liées.
@@ -152,6 +164,8 @@ Chaque proposition doit inclure :
 - Un verbe (ex. : *are*).
 - Deux termes (ex. : *Homme et Mortel*).
 
+![](/docs/fr/image7.png)
+
 #### Étape 2 - Ajout de nouvelles propositions :
 Cliquez sur `Ajouter une Proposition` pour ajouter une nouvelle proposition.
 
@@ -161,6 +175,8 @@ Ces propositions ajoutées apparaîtront sous les propositions déjà existantes
 Les propositions ajoutées peuvent être supprimées à l'aide du `bouton poubelle` situé à droite de chaque ligne.
 
 Les trois propositions initiales (fournies par défaut) ne peuvent pas être supprimées.
+
+![](/docs/fr/image8.png)
 
 #### Étape 4 - Réorganisation des propositions :
 Cliquez sur le `bouton Réorganiser le Polysyllogisme` pour réarranger les propositions afin de respecter un ordre logique valide.
@@ -182,6 +198,8 @@ Cliquez sur le `bouton paramètres` pour accéder aux paramètres de quantificat
 Cliquez sur le `bouton Ajouter une Proposition` pour ajouter une proposition.
 
 Cliquez sur le `bouton Réorganiser le Polysyllogisme` pour réorganiser le polysyllogisme.
+
+![](/docs/fr/image9.png)
 
 #### Exemple de Polysyllogisme :
     Proposition 1 : All Homme are Mortel
@@ -207,6 +225,8 @@ Dans cette page, vous pouvez ajouter des quantificateurs personnalisés de type 
 Vous pouvez supprimer certains quantificateurs que vous avez créés grâce au `bouton poubelle` ou réinitialiser les quantificateurs par défaut en cliquant sur le `bouton Rétablir les valeurs par défaut`.
 
 Les quantificateurs créés seront disponibles dans les sélecteurs de quantificateurs des pages `Syllogisme` et `Polysyllogisme`.
+
+![](/docs/fr/image10.png)
 
 ---
 
