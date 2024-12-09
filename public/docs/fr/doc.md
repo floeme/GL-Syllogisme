@@ -59,14 +59,14 @@ Cependant, quelques règles doivent être respectées :
 - Le moyen terme doit être unique
 
 **Informations supplémentaires :**
-La structure est la suivante (l'ordre des termes dans les deux premières propositions n'importe pas, seule la conclusion a un ordre prédéfini) :
+La structure est la suivante (l'ordre des termes dans les deux premières propositions n'importe pas, seule la conclusion possède un ordre prédéfini) :
 - Première proposition : Prédicat et Moyen terme.
 - Deuxième proposition : Sujet et Moyen terme.
 - Conclusion : Sujet et Prédicat.
 
 ### Étapes d'utilisation :
 #### Étape 1 - Configurer chaque proposition :
-**`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc.*, pour définir le type de chaque proposition **(A, E, I, O)** (Encadré en bleu).
+**`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc*, pour définir le type de chaque proposition **(A, E, I, O)** (Encadré en bleu).
 
 **`Verbe`** : Entrez le verbe reliant les termes (Encadré en vert).
 
@@ -123,7 +123,7 @@ Sélectionnez la structure du syllogisme parmi les `figures 1, 2, 3 ou 4`. Les f
 ![](/docs/fr/image4.png)
 
 #### Étape 3 - Remplir les propositions :
-**`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc.*, pour définir le type de chaque proposition **(A, E, I, O)**.
+**`Quantificateurs`** : Choisissez parmi *All*, *Some*, *etc*, pour définir le type de chaque proposition **(A, E, I, O)**.
 
 **`Verbe`** : Entrez le verbe reliant les termes.
 
@@ -210,8 +210,6 @@ Cliquez sur le `bouton Réorganiser le Polysyllogisme` pour réorganiser le poly
 Assurez-vous que les termes soient cohérents entre les propositions.
 
 Utilisez la fonctionnalité glisser-déposer (drag and drop) pour tester différentes organisations si le polysyllogisme semble invalide.
-
-Voici la version corrigée de votre texte :
 
 ## Page Quantificateur
 ### Description
