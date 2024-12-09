@@ -10,7 +10,7 @@ import {Syllogism} from "./Syllogism.ts";
  * ## Middle-term rule (Rmt)
  * The quantity for each middle-term must be universal in at least one of its premises.
  *
- * **Extras:** If a middle-term appears twice with a particular quantity (violating the rule), it is present in the
+ * **Extra:** If a middle-term appears twice with a particular quantity (violating the rule), it is present in the
  * {@link RuleResult.extras} property.
  */
 export const Rmt: Rule = {
@@ -58,6 +58,9 @@ export const Rmt: Rule = {
 /**
  * ## *Latius-Hos* Rule (Rlh)
  * A term of the conclusion can have universal quantity only if it has universal quantity in its premise.
+ *
+ * **Extra:** If a term appears with universal quantity in the conclusion but with particular quantity in its premise
+ * (violating the rule), it is present in the {@link RuleResult.extras} property.
  */
 export const Rlh: Rule = {
     id: "Rlh",

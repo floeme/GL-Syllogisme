@@ -65,16 +65,16 @@
         "name": "Middle Term Rule",
         "description": "The quantity of the middle term must be universal in at least one premise. In a polysyllogism, this rule applies individually on each middle term.",
         "passed": "The quantity of the middle term is universal in at least one premise.",
-        "failed": "The quantity of the middle term is particular in both premises, so this syllogism is invalid.",
+        "failed": "The quantity of the middle term \"{{extra}}\" is particular in both premises, so this syllogism is invalid.",
         "passed_poly": "Each middle term has universal quantity in at least one premise.",
-        "failed_poly": "At least one middle term has particular quantity in both of its premises, so this polysyllogism is invalid."
+        "failed_poly": "The middle term \"{{extra}}\" has particular quantity in both of its premises, so this polysyllogism is invalid."
       },
       "Rlh": {
         "name": "Latius-Hos Rule",
         "description": "A term of the conclusion can have universal quantity only if it has universal quantity in its premise.",
         "specific_conclusion": "Both terms from the conclusion have specific quantities, so this rule is not applicable to this syllogism.",
         "passed": "Both terms of the conclusion have universal quantity in the conclusion and their respective premise.",
-        "failed": "A term from the conclusion has universal quantity in the conclusion but not in its premise. Therefore, this syllogism is invalid."
+        "failed": "Term \"{{extra}}\" has universal quantity in the conclusion but not in its premise. Therefore, this syllogism is invalid."
       },
       "Rnn": {
         "name": "Two Negative Premises Rule",

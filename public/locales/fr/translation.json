@@ -65,16 +65,16 @@
         "name": "Règle du moyen-terme",
         "description": "La quantité du moyen-terme doit être universelle dans une prémisse au moins. Dans le cas d'un polysyllogisme, cette règle s'applique individuellement à chaque moyen terme.",
         "passed": "Le moyen-terme a une quantité universelle dans une prémisse au moins.",
-        "failed": "Le moyen-terme n'a une quantité universelle dans aucune prémisse, ce qui invalide ce syllogisme.",
+        "failed": "Le moyen-terme \"{{extra}}\" n'a une quantité universelle dans aucune prémisse, ce qui invalide ce syllogisme.",
         "passed_poly": "Chaque moyen-terme a une quantité universelle dans au moins une des prémisses dans lesquelles il apparaît.",
-        "failed_poly": "Au moins un moyen-terme n'a une quantité universelle dans aucune prémisse dans laquelle il apparaît, ce qui invalide ce polysyllogisme."
+        "failed_poly": "Le moyen-terme \"{{extra}}\" n'a une quantité universelle dans aucune prémisse dans laquelle il apparaît, ce qui invalide ce polysyllogisme."
       },
       "Rlh": {
         "name": "Règle du Latius-Hos",
         "description": "La quantité d’un terme de la conclusion ne peut être universelle que si elle l’est dans la prémisse contenant ce terme.",
         "specific_conclusion": "Les deux termes de la conclusion ont une quantité particulière, cette règle ne s'applique donc pas à ce syllogisme.",
         "passed": "Les deux termes de la conclusion ont une quantité universelle à la fois dans la conclusion et dans leur prémisse respective.",
-        "failed": "Un terme de la conclusion a une quantité universelle dans la conclusion, mais pas dans sa prémisse. Ce syllogisme est donc invalide."
+        "failed": "Le terme \"{{extra}}\" a une quantité universelle dans la conclusion, mais pas dans sa prémisse. Ce syllogisme est donc invalide."
       },
       "Rnn": {
         "name": "Règle des deux prémisses négatives",

@@ -53,15 +53,19 @@ function RuleReport({checkResults, figure}: ResultReportProps) {
             <p>{t(`syllogism.summary.${valid ? "ok" : "ko"}`)} ({ruleIDs.length})</p>
 
             <ul className={`result__${valid ? "msgok" : "msgko"}`}>
-                { ruleIDs.map((ruleID) => <li key={ruleID}>
-                    <span className="result__ruleid"
-                          data-tooltip-id={RULE_TOOLTIP_ID}
-                          data-tooltip-content={ruleID}>
-                        {ruleID}
-                    </span>
-                    &nbsp;·&nbsp;
-                    {t(`${RULE_I18N_NAMESPACE}.${ruleID}.${toFilter.results.get(ruleID)!.message}`)}
-                </li>) }
+                { ruleIDs.map((ruleID) => {
+                    const ruleResult = toFilter.results.get(ruleID)!;
+
+                    return <li key={ruleID}>
+                        <span className="result__ruleid"
+                              data-tooltip-id={RULE_TOOLTIP_ID}
+                              data-tooltip-content={ruleID}>
+                            {ruleID}
+                        </span>
+                        &nbsp;·&nbsp;
+                        {t(`${RULE_I18N_NAMESPACE}.${ruleID}.${ruleResult.message}`, {extra: ruleResult.extras})}
+                    </li>
+                }) }
             </ul>
         </div> : <></>
     }
