@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {useTranslation} from "react-i18next";
 import {Tooltip} from "react-tooltip";
 
@@ -6,9 +7,14 @@ const INTERESTING_TOOLTIP_ID = "interesting-syllogism"
 export const SyllogismTable = () => {
 	const propositions = ["A", "E", "I", "O"]
 	const figures = ["1", "2", "3", "4"]
-
+	const [hoveredRow, setHoveredRow] = useState<number | null>(null)
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
 	const { t } = useTranslation('translation', { keyPrefix: 'syllogism.table' })
+
+	function handleMouseMove(event: React.MouseEvent) {
+		setMousePosition({ x: event.clientX, y: event.clientY })
+	}
 
 	function generateProposition(row: number) {
 		const prop1 = propositions[Math.floor(row / 64) % 4]
@@ -161,30 +167,57 @@ export const SyllogismTable = () => {
 	return <>
 		<table className="syllogism-table">
 			<thead>
-			<tr>
-				<th>{t("prop1")}</th>
-				<th>{t("prop2")}</th>
-				<th>{t("conc")}</th>
-				<th>{t("figure")}</th>
-				<th>{t("validity")}</th>
-				<th>{t("validityhe")}</th>
-				<th data-tooltip-id={INTERESTING_TOOLTIP_ID} className="info">{t("is")}</th>
-			</tr>
+				<tr>
+					<th>{t("prop1")}</th>
+					<th>{t("prop2")}</th>
+					<th>{t("conc")}</th>
+					<th>{t("figure")}</th>
+					<th>{t("validity")}</th>
+					<th>{t("validityhe")}</th>
+					<th data-tooltip-id={INTERESTING_TOOLTIP_ID} className="info">{t("is")}</th>
+				</tr>
 			</thead>
 			<tbody>
-			{syllogisms.map((syllogism, index) => (
-				<tr key={index}>
-					<td>{syllogism.prop1}</td>
-					<td>{syllogism.prop2}</td>
-					<td>{syllogism.conclusion}</td>
-					<td>{syllogism.figure}</td>
-					<td className={syllogism.valid ?"valid" : "unvalid"}>{syllogism.valid ? t("yes") : t("no")}</td>
-					<td className={syllogism.validWithExistentialHypothesis ?"valid" : "unvalid"}>{syllogism.validWithExistentialHypothesis ? t("yes") : t("no")}</td>
-					<td className={syllogism.isInteresting ?"valid" : "unvalid"}>{syllogism.isInteresting ? t("yes") : t("no")}</td>
-				</tr>
-			))}
+				{syllogisms.map((syllogism, index) => (
+					<tr key={index}
+						onMouseEnter={() => setHoveredRow(index)}
+						onMouseMove={handleMouseMove}
+						onMouseLeave={() => setHoveredRow(null)}
+						className={hoveredRow === index ? "hovered" : ""}
+					>
+						<td>{syllogism.prop1}</td>
+						<td>{syllogism.prop2}</td>
+						<td>{syllogism.conclusion}</td>
+						<td>{syllogism.figure}</td>
+						<td className={syllogism.valid ?"valid" : "unvalid"}>{syllogism.valid ? t("yes") : t("no")}</td>
+						<td className={syllogism.validWithExistentialHypothesis ?"valid" : "unvalid"}>{syllogism.validWithExistentialHypothesis ? t("yes") : t("no")}</td>
+						<td className={syllogism.isInteresting ?"valid" : "unvalid"}>{syllogism.isInteresting ? t("yes") : t("no")}</td>
+					</tr>
+				))}
 			</tbody>
 		</table>
+
+		{hoveredRow !== null && (
+			<div
+				className="hover-tooltip"
+				style={{
+					top: mousePosition.y + 15,
+					left: mousePosition.x + 15,
+				}}
+			>
+				Row {hoveredRow + 1}: {syllogisms[hoveredRow].prop1}, {syllogisms[hoveredRow].prop2},
+				{syllogisms[hoveredRow].conclusion}, Figure {syllogisms[hoveredRow].figure}
+				<br />
+				Rmt: {syllogisms[hoveredRow].rulesResult.rmt.toString()} |
+				Rlh: {syllogisms[hoveredRow].rulesResult.rlh.toString()} <br />
+				Rnn: {syllogisms[hoveredRow].rulesResult.rnn.toString()} |
+				Rn: {syllogisms[hoveredRow].rulesResult.rn.toString()} <br />
+				Raa: {syllogisms[hoveredRow].rulesResult.raa.toString()} |
+				Rpp: {syllogisms[hoveredRow].rulesResult.rpp.toString()} <br />
+				Rp: {syllogisms[hoveredRow].rulesResult.rp.toString()} |
+				Ruu: {syllogisms[hoveredRow].rulesResult.ruu.toString()}
+			</div>
+		)}
 
 		<Tooltip id={INTERESTING_TOOLTIP_ID} style={{zIndex: 1, fontFamily: "sans-serif", maxWidth: "80vw"}}>
 			{t("is_description")}
