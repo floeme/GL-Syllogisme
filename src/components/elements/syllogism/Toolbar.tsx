@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import {ROUTES} from "../../../constants/routes.ts";
 import PolyModal from "../modals/PolyModal.tsx";
+import {Tooltip} from "react-tooltip";
+
+const TOOLBAR_TOOLTIP_ID = "toolbar";
 
 interface ToolbarButtonsProps {
     clearSyllogism?: React.MouseEventHandler<HTMLButtonElement> | undefined,
@@ -26,22 +29,27 @@ export function ToolbarButtons({clearSyllogism, path}: ToolbarButtonsProps) {
     return <>
         <button type="button"
                 name="clearSyllogismButton"
-                title={t("clear_syllogism")}
-                onClick={clearSyllogism}>
+                onClick={clearSyllogism}
+                data-tooltip-id={TOOLBAR_TOOLTIP_ID}
+                data-tooltip-content={t("clear_syllogism")}>
             <img src="images/delete_icon.svg" alt={t("clear_syllogism")}/>
         </button>
         <button type="button"
                 name="helpButton"
-                title={t("help")}
-                onClick={help}>
+                onClick={help}
+                data-tooltip-id={TOOLBAR_TOOLTIP_ID}
+                data-tooltip-content={t("help")}>
             <img src="images/help_icon.svg" alt={t("help")}/>
         </button>
         <PolyModal isOpen={modalIsOpen} onRequestClose={closeModal} path={path} />
         <button type="button"
                 name="settingsButton"
-                title={t("settings")}
-                onClick={() => navigate(ROUTES.quantifiers)}>
+                onClick={() => navigate(ROUTES.quantifiers)}
+                data-tooltip-id={TOOLBAR_TOOLTIP_ID}
+                data-tooltip-content={t("settings")}>
             <img src="images/settings_icon.svg" alt={t("settings")}/>
         </button>
+
+        <Tooltip id={TOOLBAR_TOOLTIP_ID} style={{fontFamily: "sans-serif"}}/>
     </>;
 }
