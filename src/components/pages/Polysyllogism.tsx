@@ -10,14 +10,12 @@ import {
     DraggableProvided,
 } from "react-beautiful-dnd"
 import { Syllogism } from "../../model/Syllogism"
-import PolyModal from "../elements/modals/PolyModal"
 import {check, CheckResults, getAllRules} from "../../model/Rule.ts";
 import {Raa, Rlh, Rmt, Rn, Rnn, Rp, Rpp} from "../../model/RulesImpl.ts";
 import ResultReport from "../elements/syllogism/Result.tsx";
 import {RuuCheckbox} from "../elements/syllogism/RuuCheckbox.tsx";
 import {LinkVerbTooltip} from "../elements/LinkVerbTooltip.tsx";
-import {ROUTES} from "../../constants/routes.ts";
-import {useNavigate} from "react-router-dom";
+import {ToolbarButtons} from "../elements/syllogism/Toolbar.tsx";
 
 export const Polysyllogism = () => {
 	const [verb, setVerb] = useState("are")
@@ -26,15 +24,12 @@ export const Polysyllogism = () => {
     const [checkRuu, setCheckRuu] = useState(true); // TODO temporary
 
     const [syllogism, setSyllogism] = useState<Syllogism>(new Syllogism())
-    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const { t } = useTranslation('translation', { keyPrefix: 'polysyllogism' })
 
     const [, updateState] = React.useState();
     // @ts-expect-error updateState({}) is considered as error
     const forceUpdate = React.useCallback(() => updateState({}), []);
-
-    const navigate = useNavigate();
 
     const updateSyllogism = () => {
         forceUpdate()
@@ -52,18 +47,6 @@ export const Polysyllogism = () => {
         setVerb("are")
 
         updateSyllogism()
-    }
-
-    const closeModal = () => {
-        setModalIsOpen(false)
-    }
-
-    const help = () => {
-        setModalIsOpen(true)
-    }
-
-    const goSettings = () => {
-        navigate(ROUTES.quantifiers)
     }
 
     const addProposition = () => {
@@ -133,16 +116,8 @@ export const Polysyllogism = () => {
     return (
         <div className="section-premises">
             <div className="button-row">
-                <button type="button" name="clearSyllogismButton" onClick={clearSyllogism}>
-                    <img src="images/delete_icon.svg" alt="delete" />
-                </button>
-                <button type="button" name="helpButton" onClick={help}>
-                    <img src="images/help_icon.svg" alt="help" />
-                </button>
-                <PolyModal isOpen={modalIsOpen} onRequestClose={closeModal} path="/docs/fr/Polysyllogism_Guide.pdf" />
-                <button type="button" name="settingsButton" onClick={goSettings}>
-                    <img src="images/settings_icon.svg" alt="settings" />
-                </button>
+                <ToolbarButtons clearSyllogism={clearSyllogism} path="/docs/fr/Polysyllogism_Guide.pdf" />
+
                 <button type="button" name="addPropositionButton" onClick={addProposition}>{t("buttons.add")}</button>
                 <button type="button" name="reorderButton" onClick={reorderPropositions}>{t("buttons.reorder")}</button>
             </div>
