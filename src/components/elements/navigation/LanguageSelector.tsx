@@ -16,7 +16,7 @@ const langList: Lang[] = [
   { name: 'English', val: 'en', flagUrl: 'images/flagUK.svg' },
 ];
 
-const FlagSelect: React.FC<FuncType> = ({ callbackLang }) => {
+const LanguageSelector: React.FC<FuncType> = ({ callbackLang }) => {
   const { i18n } = useTranslation();
   const [selectedLang, setSelectedLang] = useState<Lang>(
     langList.find((lang) => lang.val === i18n.language) || langList[0]
@@ -42,4 +42,4 @@ const FlagSelect: React.FC<FuncType> = ({ callbackLang }) => {
   );
 };
 
-export default FlagSelect;
+export default LanguageSelector;

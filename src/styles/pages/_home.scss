@@ -1,33 +1,16 @@
-@font-face {
-    font-family: "font-1";
-    src: url(../../assets/fonts/BebasNeue-Regular.ttf);
-}
-@font-face {
-    font-family: "font-2";
-    src: url(../../assets/fonts/bold_font.ttf);
-}
-
-
-$font-1: "font-1", sans-serif;
-$font-2: "font-2", sans-serif;
-
 .home {
-    max-height: 100%;
     height: 100%;
-    min-width: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    //padding: 0 5%;
 }
 
 .content-home {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 100%;
     height: 100%;
     flex: 1;
 }
@@ -36,89 +19,120 @@ $font-2: "font-2", sans-serif;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: relative; 
+    align-items: center;
+    justify-items: center;
     height: 100%;
     width: 100%;
-    
+
     .lewisbody {
-        position: absolute;
-        bottom: 0;
-        right: 0;
+        flex: 1;
         display: flex;
-        justify-content: flex-end; 
+        position: relative;
+        height: 50%; /* Dynamique selon la hauteur */
+        width: 100%;
 
         img {
-            max-width: 70%;
-            height: auto;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 80%; /* Ajusté dynamiquement */
+            max-height: 50vh; /* Ne dépasse pas 50% de la hauteur de l'écran */
+            width: auto;
+            z-index: 1;
         }
-    }
-    
-    .text {
-        text-align: left;
-        color: $color-font-blanc;
-        margin-top: 10%; 
-        padding: 2%;
     }
 }
 
 .left-section {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;  
-    text-align: left;
-    padding: 3%;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
 
-    .title {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        color: $color-font-blanc;
-    }
+    .left-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
 
-    .color2 {
-        color: $color-button;
-    }
+        padding-left: 5%;
+        height: 60%; /* Dynamique selon la hauteur */
+        width: 60%; /* Dynamique selon la largeur */
 
-    .button {
-        padding: 15px 30px;
-        border-radius: 30px;
-        background-color: $color-button;
-        color: $color-font-blanc;
-        font-size: 1.2rem;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
+        gap: 2vh; /* Espacement dynamique basé sur la hauteur */
+        font-size: clamp(1.5rem, 3vh, 3vw); /* S'ajuste dynamiquement avec la fenêtre */
 
-        &:hover {
-            background-color: $color-blue;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            transform: translateY(-5px);
+        .title {
+            color: $color-font-blanc;
+            font-size: clamp(2rem, 5vh, 5vw); /* Dynamique avec largeur et hauteur */
+        }
+
+        .color2 {
+            color: $color-button;
+        }
+
+        .button {
+            padding: clamp(0.5rem, 1vw, 1.5rem) clamp(1rem, 2vw, 2.5rem);
+            font-size: clamp(1rem, 2vh, 2rem);
+            border-radius: clamp(10px, 2vh, 30px);
+
+            background-color: $color-button;
+            color: $color-font-blanc;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $color-blue;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+                transform: translateY(-5px);
+            }
         }
     }
 }
 
-@media (max-width: 768px) {
-    .content {
+@media (max-width: 957px) {
+    .content-home {
+        height: auto;
         flex-direction: column;
         text-align: center;
+        overflow-y: auto; /* Permet le scroll si nécessaire */
     }
 
     .left-section {
-        width: auto;
-    }
-    .right-section {
         width: 100%;
         align-items: center;
+        .left-container {
+            height: auto;
+            width: 80%;
+            padding-left: 0;
+        }
+    }
+
+    .right-section {
+        width: 100%;
+        flex-direction: row;
+        .lewisbody {
+            height: 100%;
+            width: 100%;
+            img {
+                height: 100%;
+                width: auto;
+            }
+        }
     }
 
     .title {
+        align-self: center;
         text-align: center;
     }
 
     .button {
+        align-self: center;
         margin-top: 20px;
     }
 }

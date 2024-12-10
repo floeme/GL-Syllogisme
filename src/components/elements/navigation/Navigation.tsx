@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import FlagSelect from "./FlagSelect";
+import LanguageSelector from "./LanguageSelector.tsx";
 import {useTranslation} from "react-i18next";
 import {ROUTES} from "../../../constants/routes.ts";
 import {I18N_NS} from "../../../i18n.ts";
@@ -53,7 +53,7 @@ export const Navigation = () => {
           </NavLink>
         </ul>
       </div>
-      <FlagSelect callbackLang={onChange}/>
+      <LanguageSelector callbackLang={onChange}/>
     </div>
   );
 };

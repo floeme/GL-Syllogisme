@@ -168,11 +168,3 @@ export function check(
 export function ruleNamespace(rule: Rule) {
     return RULE_I18N_NAMESPACE + "." + rule.id;
 }
-
-export function ruleName(rule: Rule): string {
-    return ruleNamespace(rule) + "." + RULE_NAME_I18N_KEY;
-}
-
-export function ruleDescription(rule: Rule): string {
-    return ruleNamespace(rule) + "." + RULE_DESCRIPTION_I18N_KEY;
-}

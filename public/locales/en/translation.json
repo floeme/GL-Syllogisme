@@ -6,8 +6,9 @@
     },
     "discover": "Exploring",
     "discover2": "Syllogisms",
-    "text1": "Syllogism is a logic allowing to link 2 premises with 1 conclusion :\n2 or more, the « premises », lead to a « conclusion ».\nAristote was the first to explain it in Organon.\nA known exemple is : « Every human is mortal, Socrates is human ; so Socrates is mortel » :\nThe 2 premises (said « major » and « minor ») are propositions given and supposed right,\nSyllogism allow to establish a formal validity for the conclusion, which is right if the premises are right.",
-    "text2": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, hic,\nincidunt obcaecati dolor assumenda fuga possimus culpa nulla, ea et\ndolorem vitae aliquam officiis quos maiores aspernatur repellendus? Ad,\n cupiditate?"
+    "text1": "A syllogism is a logic construct allowing to link 2 premises with 1 conclusion :\n2 or more, the \"premises\", lead to a \"conclusion\"",
+    "text2": "Aristotle was the first to explain it in Organon.\nA known exemple is : \"Every human is mortal, Socrates is human ; so Socrates is mortal\".",
+    "text3" : "The 2 premises (said \"major\" and \"minor\") are propositions given and supposed right,\nSyllogism allow to establish a formal validity for the conclusion, which is right if the premises are right."
   },
   "navigation": {
     "language": "Lang",
