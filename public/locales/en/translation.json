@@ -45,7 +45,8 @@
       "figure": "Figure",
       "validity": "Validity",
       "validityhe": "Validity with Existential Hypothesis",
-      "is": "Interesting Syllogism"
+      "is": "Interesting Syllogism",
+      "is_description": "A syllogism is \"interesting\" if it is valid and it is not possible to substitute the conclusion by a stronger one (replacing a particular conclusion by a universal one)."
     },
     "quantifier": {
       "A": "All",

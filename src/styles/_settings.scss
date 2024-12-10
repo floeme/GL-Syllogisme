@@ -45,3 +45,14 @@ body {
 li {
     list-style-type: none;
 }
+
+.info::after {
+    content: '';
+    background-image: url(/images/info_icon.svg);
+    display: inline-block;
+    width: 1.25em;
+    height: 1.25em;
+    background-size: contain;
+    vertical-align: middle;
+    margin-left: 0.25em;
+}

@@ -45,7 +45,8 @@
       "figure": "Figure",
       "validity": "Valide",
       "validityhe": "Hypothèse d'existence valide",
-      "is": "Syllogisme intéressant"
+      "is": "Syllogisme intéressant",
+      "is_description": "Un syllogisme est dit « intéressant » s'il est valide et qu'il n'est pas possible de remplacer sa conclusion par une autre plus forte (en remplaçant son quantificateur particulier par un quantificateur universel)."
     },
     "quantifier": {
       "A": "Tout",

@@ -1,4 +1,7 @@
 import {useTranslation} from "react-i18next";
+import {Tooltip} from "react-tooltip";
+
+const INTERESTING_TOOLTIP_ID = "interesting-syllogism"
 
 export const SyllogismTable = () => {
 	const propositions = ["A", "E", "I", "O"]
@@ -155,7 +158,7 @@ export const SyllogismTable = () => {
 
 	const syllogisms = generateSyllogisms(256)
 
-	return (
+	return <>
 		<table className="syllogism-table">
 			<thead>
 			<tr>
@@ -165,7 +168,7 @@ export const SyllogismTable = () => {
 				<th>{t("figure")}</th>
 				<th>{t("validity")}</th>
 				<th>{t("validityhe")}</th>
-				<th>{t("is")}</th>
+				<th data-tooltip-id={INTERESTING_TOOLTIP_ID} className="info">{t("is")}</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -182,7 +185,11 @@ export const SyllogismTable = () => {
 			))}
 			</tbody>
 		</table>
-	)
+
+		<Tooltip id={INTERESTING_TOOLTIP_ID} style={{zIndex: 1, fontFamily: "sans-serif", maxWidth: "80vw"}}>
+			{t("is_description")}
+		</Tooltip>
+	</>
 }
 
 export default SyllogismTable
