@@ -117,6 +117,7 @@ export const Polysyllogism = () => {
     }
 
     const checkSyllogism = () => {
+        setResult(undefined)
         messageKO.splice(0)
         if (!validateInputs()) {
             syllogism.link = verb

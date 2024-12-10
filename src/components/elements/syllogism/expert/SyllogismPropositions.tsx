@@ -101,7 +101,6 @@ function SyllogismPropositions({
 
     const checkSyllogism = () => {
         messageKO.splice(0)
-        setMessageKO([...messageKO])
         setResult(undefined)
         if (!validateInputs()) {
             syllogism.link = verb
@@ -109,6 +108,8 @@ function SyllogismPropositions({
             setResult( checkRuu ?
                 check(syllogism, getAllRules(), true) : check(syllogism, [Rmt, Rlh, Rnn, Rn, Raa, Rpp, Rp], true))
         }
+
+        setMessageKO([...messageKO])
     }
 
     const clearSyllogism = () => {
