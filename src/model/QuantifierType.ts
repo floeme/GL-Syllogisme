@@ -32,6 +32,10 @@ export class QuantifierType {
         this.universal = universal;
     }
 
+    toString(): string {
+        return `${this.code} (${this.defaultName}, ${this.affirmative ? "affirmative" : "negative"}, ${this.universal ? "universal" : "particular"})`;
+    }
+
     static readonly A = new QuantifierType("A", "All", true, true);
     static readonly E = new QuantifierType("E", "None", false, true);
     static readonly I = new QuantifierType("I", "Some", true, false);
