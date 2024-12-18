@@ -42,7 +42,7 @@ export const Rmt: Rule = {
                         // If term is particular in both of its occurrences, the syllogism is invalid => Stop!
                         if (!u && !universal) {
                             const result = buildRuleResult(false, s.getPropositionCount() > 3);
-                            result.extras = term;
+                            result.extras = new Term(term.value); // TODO it appears that term is not an instance of Term!
                             return result;
                         }
                     }
@@ -77,13 +77,13 @@ export const Rlh: Rule = {
             if (isMinorUniversal && !rlh_checkTerm(s, minor)) {
                 // The minor term has universal quantity in the conclusion but not in its premise
                 const result = buildRuleResult(false);
-                result.extras = minor;
+                result.extras = new Term(minor.value); // TODO it appears that term is not an instance of Term!
                 return result;
             }
             if (isMajorUniversal && !rlh_checkTerm(s, major)) {
                 // The major term has universal quantity in the conclusion but not in its premise
                 const result = buildRuleResult(false);
-                result.extras = major;
+                result.extras = new Term(major.value); // TODO it appears that term is not an instance of Term!
                 return result;
             }
 
